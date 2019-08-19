@@ -1,33 +1,35 @@
-[![Build Status](https://travis-ci.org/carpentries/lesson-example.svg?branch=gh-pages)](https://travis-ci.org/carpentries/lesson-example)
+# Maintainers for Library Carpentry: R
+ 
+- [Clarke Iakovakis](https://github.com/ciakovx) (Lead)
+- [John Little](https://github.com/libjohn)
+- [Stéphane Guillou](https://github.com/stragu)
+- [Tim Dennis](https://github.com/jt14den)
 
-# Library Carpentry
+## Library Carpentry
 
-The Library Carpentry module '[R for Librarians](https://github.com/LibraryCarpentry/lc-r/)' is under current development. Please check out the issues for contributing to its development! 
+[Library Carpentry](https://librarycarpentry.org) is a software and data skills training programme for people working in library- and information-related roles. It builds on the work of [Software Carpentry](http://software-carpentry.org/) and [Data Carpentry](http://www.datacarpentry.org/). Library Carpentry is an official Lesson Program of [The Carpentries](https://carpentries.org/).
 
-## Background
+## License
 
-Library Carpentry is a software skills training programme aimed at library and information professions. It builds on the work of [Software Carpentry](http://software-carpentry.org/) and [Data Carpentry](http://www.datacarpentry.org/).
+All Software, Data, and Library Carpentry instructional material is made available under the [Creative Commons Attribution
+license](https://github.com/LibraryCarpentry/lc-r/blob/gh-pages/LICENSE.md).
 
-Library Carpentry is in the commons and for the commons. It is not tied to any institution of person. For more information on Library Carpentry, see our website [librarycarpentry.github.io](https://librarycarpentry.github.io/).
+## Contributing
 
-## Contribution
-
-There are many ways of contributing to Library Carpentry:
-
-- Join our [Gitter discussion forum](https://gitter.im/LibraryCarpentry/).
-- Follow updates on [Twitter](https://twitter.com/LibCarpentry).
-- Make a suggestion or correct an error by [raising an Issue](https://github.com/librarycarpentry/lc-shell/issues).
+There are many ways to discuss and contribute to Library Carpentry lessons. Visit the lesson [discussion page](https://librarycarpentry.org/lc-r/discuss/index.html) to learn more. Also see [Contributing](https://github.com/LibraryCarpentry/lc-r/blob/gh-pages/CONTRIBUTING.md).
 
 ## Code of Conduct
 
-All participants should agree to abide by the [Software Carpentry Code of Conduct](http://software-carpentry.org/conduct/).
+All participants should agree to abide by The Carpentries [Code of Conduct](https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html).
 
 ## Authors
 
-Library Carpentry is authored and maintained by the [community](https://github.com/librarycarpentry/lc-shell/network/members).
+Library Carpentry is authored and maintained through issues, commits, and pull requests from the community.
 
 ## Citation
 
-Please cite as:
+...
 
-Library Carpentry. Shell Intro for Librarians. June 2016. https://librarycarpentry.github.io/lc-shell/.
+## Checking and Previewing the Lesson
+
+To check and preview a lesson locally, see [http://carpentries.github.io/lesson-example/07-checking/index.html](http://carpentries.github.io/lesson-example/07-checking/index.html).
