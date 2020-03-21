@@ -224,7 +224,7 @@ library(tidyverse)  # loads the core tidyverse, including dplyr, readr, ggplot2,
 ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
 ✔ tibble  2.1.3     ✔ dplyr   0.8.3
 ✔ tidyr   0.8.3     ✔ stringr 1.4.0
-✔ readr   1.3.1     ✔ forcats 0.4.0
+✔ ggplot2 3.2.1     ✔ forcats 0.4.0
 ~~~
 {: .output}
 
@@ -245,27 +245,6 @@ and assign it to the `books` value.
 books <- read_csv("./data/books.csv")
 ~~~
 {: .language-r}
-
-
-
-~~~
-Parsed with column specification:
-cols(
-  CALL...BIBLIO. = col_character(),
-  X245.ab = col_character(),
-  X245.c = col_character(),
-  LOCATION = col_character(),
-  TOT.CHKOUT = col_double(),
-  LOUTDATE = col_character(),
-  SUBJECT = col_character(),
-  ISN = col_character(),
-  CALL...ITEM. = col_character(),
-  X008.Date.One = col_character(),
-  BCODE2 = col_character(),
-  BCODE1 = col_character()
-)
-~~~
-{: .output}
 
 You will see the message `Parsed with column specification`, followed by each
 column name and its data type. When you execute `read_csv` on a data file, it

@@ -24,9 +24,11 @@ source: Rmd
 ---
 
 ```{r, include=FALSE}
+source("../bin/download_data.R")
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
-source("../bin/download_data.R")
+library(readr)
+books2 <- read_csv("./data/books_reformatted.csv") 
 ```
 
 ## Getting set up
@@ -66,18 +68,17 @@ the tidyverse, but is not one of the core tidyverse packages loaded with
 `library(tidyverse)`, so it needs to be explicitly called. `lubridate` makes
 working with dates and times easier in R.
 
-We also load the `books_reformatted` data we saved in the previous
-lesson. We'll assign it to `books2`. 
-
 ```{r load-data, purl=FALSE, results='hold'}
 library(tidyverse)  # load the core tidyverse
 library(lubridate)  # load lubridate
-
-books2 <- read_csv("data_output/books_reformatted.csv")  # load the data and assign it to books
-
-books2 # inspect the data
 ```
 
+We also load the `books_reformatted` data we saved in the previous
+lesson. We'll assign it to `books2`. 
+
+```{r, purl=FALSE, eval=FALSE}
+books2 <- read_csv("data_output/books_reformatted.csv")  # load the data and assign it to books
+```
 
 ## Plotting with **`ggplot2`**
 
