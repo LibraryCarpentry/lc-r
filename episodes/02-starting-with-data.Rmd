@@ -24,9 +24,11 @@ exercises: 30
 ---
 
 ```{r, include=FALSE}
+source("../bin/download_data.R")
 source("../bin/chunk-options.R")
 knitr_fig_path("02-")
-source("../bin/download_data.R")
+library(readr)
+books <- read_csv("./data/books.csv")
 ```
 
 
@@ -212,7 +214,7 @@ library(tidyverse)  # loads the core tidyverse, including dplyr, readr, ggplot2,
 To get our sample data into our R session, we will use the `read_csv()` function
 and assign it to the `books` value.
 
-```{r, purl=FALSE}
+```{r, purl=FALSE, eval=FALSE}
 books <- read_csv("./data/books.csv")
 ```
 

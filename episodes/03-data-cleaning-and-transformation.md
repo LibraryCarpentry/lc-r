@@ -63,11 +63,11 @@ download.file("https://ndownloader.figshare.com/files/22031487",
 
 ### Load the `tidyverse` and data frame into your R session
 
-Load the `tidyverse` and the `books` data we saved in the previous lesson. 
+Load the `tidyverse` 
 
 
 ~~~
-library(tidyverse)  # load the tidyverse
+library(tidyverse)
 ~~~
 {: .language-r}
 
@@ -84,7 +84,7 @@ library(tidyverse)  # load the tidyverse
 ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
 ✔ tibble  2.1.3     ✔ dplyr   0.8.3
 ✔ tidyr   0.8.3     ✔ stringr 1.4.0
-✔ readr   1.3.1     ✔ forcats 0.4.0
+✔ ggplot2 3.2.1     ✔ forcats 0.4.0
 ~~~
 {: .output}
 
@@ -97,61 +97,13 @@ library(tidyverse)  # load the tidyverse
 ~~~
 {: .output}
 
+And the `books` data we saved in the previous lesson. 
 
 
 ~~~
 books <- read_csv("data/books.csv")  # load the data and assign it to books
 ~~~
 {: .language-r}
-
-
-
-~~~
-Parsed with column specification:
-cols(
-  CALL...BIBLIO. = col_character(),
-  X245.ab = col_character(),
-  X245.c = col_character(),
-  LOCATION = col_character(),
-  TOT.CHKOUT = col_double(),
-  LOUTDATE = col_character(),
-  SUBJECT = col_character(),
-  ISN = col_character(),
-  CALL...ITEM. = col_character(),
-  X008.Date.One = col_character(),
-  BCODE2 = col_character(),
-  BCODE1 = col_character()
-)
-~~~
-{: .output}
-
-
-
-~~~
-books # inspect the data
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 10,000 x 12
-   CALL...BIBLIO. X245.ab X245.c LOCATION TOT.CHKOUT LOUTDATE SUBJECT ISN  
-   <chr>          <chr>   <chr>  <chr>         <dbl> <chr>    <chr>   <chr>
- 1 001.94 Don 20… Bermud… writt… juv               6 11-21-2… Reader… 0789…
- 2 001.942 Bro 1… Invade… writt… juv               2 02-07-2… Reader… 0789…
- 3 027.073 App 2… Down C… by Ka… juv               3 10-16-2… Packho… 0060…
- 4 133.5 Hua 1999 The Ch… by Ch… juv               6 11-22-2… Astrol… 0060…
- 5 170 She 2000   Judge … illus… juv               7 04-10-2… Childr… 0060…
- 6 170.44 She 20… Judge … illus… juv               6 11-12-2… Conduc… 0060…
- 7 220.9505 Gil … A youn… retol… juv               4 12-01-2… Bible … 0060…
- 8 225.9505 McC … God's … retol… juv               2 08-06-2… Bible … 0689…
- 9 292.13 McC 20… Roman … retol… juv               4 04-03-2… Mythol… 0689…
-10 292.211 McC 1… Greek … retol… juv              13 11-16-2… Gods, … 0689…
-# … with 9,990 more rows, and 4 more variables: CALL...ITEM. <chr>,
-#   X008.Date.One <chr>, BCODE2 <chr>, BCODE1 <chr>
-~~~
-{: .output}
 
 ## Transforming data with `dplyr`
 

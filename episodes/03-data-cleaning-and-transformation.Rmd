@@ -29,9 +29,11 @@ source: Rmd
 ---
   
 ```{r, include=FALSE}
+source("../bin/download_data.R")
 source("../bin/chunk-options.R")
 knitr_fig_path("03-")
-source("../bin/download_data.R")
+library(readr)
+books <- read_csv("./data/books.csv")
 ```
 
 
@@ -63,14 +65,16 @@ download.file("https://ndownloader.figshare.com/files/22031487",
 
 ### Load the `tidyverse` and data frame into your R session
 
-Load the `tidyverse` and the `books` data we saved in the previous lesson. 
+Load the `tidyverse` 
 
 ```{r load-data, purl=FALSE}
-library(tidyverse)  # load the tidyverse
+library(tidyverse)
+```
 
+And the `books` data we saved in the previous lesson. 
+
+```{r, eval=FALSE, purl=FALSE}
 books <- read_csv("data/books.csv")  # load the data and assign it to books
-
-books # inspect the data
 ```
 
 ## Transforming data with `dplyr`
