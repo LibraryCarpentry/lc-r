@@ -69,7 +69,7 @@ working with dates and times easier in R.
 We also load the `books_reformatted` data we saved in the previous
 lesson. We'll assign it to `books2`. 
 
-```{r load-data, purl=FALSE}
+```{r load-data, purl=FALSE, results='hold'}
 library(tidyverse)  # load the core tidyverse
 library(lubridate)  # load lubridate
 
