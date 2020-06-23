@@ -123,7 +123,7 @@ The following object is masked from 'package:base':
 {: .output}
 
 We also load the `books_reformatted` data we saved in the previous
-lesson. We'll assign it to `books2`. 
+lesson. We'll assign it to `books2`.
 
 
 ~~~
@@ -172,7 +172,7 @@ Let's create a `booksPlot` and limit our visualization to only items in `subColl
 
 
 ~~~
-# create a new data frame 
+# create a new data frame
 booksPlot <- books2 %>%
   filter(subCollection == "general collection" | subCollection == "juvenile" | subCollection == "k-12 materials",
          !is.na(call_class))
@@ -181,7 +181,7 @@ booksPlot <- books2 %>%
 
 
 
-**`ggplot2`** 
+**`ggplot2`**
 **`ggplot2`** functions like data in the 'long' format, i.e., a column for every
 dimension, and a row for every observation. Well-structured data will save you
 lots of time when making figures with **`ggplot2`**
@@ -196,7 +196,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 ```
 
 Use the `ggplot()` function and bind the plot to a specific data frame using the
-`data` argument. 
+`data` argument.
 
 
 
@@ -214,7 +214,7 @@ aesthetic and adding `geoms`.
 
 Define a mapping (using the aesthetic (`aes()`) function), by selecting the
 variables to be plotted and specifying how to present them in the graph, e.g. as
-x/y positions or characteristics such as size, shape, color, etc. 
+x/y positions or characteristics such as size, shape, color, etc.
 
 
 ~~~
@@ -253,8 +253,8 @@ To add a geom to the plot use the `+` operator.
 
 ~~~
 # add a bar geom and set call_class as the x axis
-ggplot(data = booksPlot, mapping = aes(x = call_class)) + 
-  geom_bar()  
+ggplot(data = booksPlot, mapping = aes(x = call_class)) +
+  geom_bar()
 ~~~
 {: .language-r}
 
@@ -289,8 +289,8 @@ on.
 
 
 ~~~
-ggplot(data = booksPlot, mapping = aes(x = tot_chkout)) + 
-  geom_histogram()  
+ggplot(data = booksPlot, mapping = aes(x = tot_chkout)) +
+  geom_histogram()
 ~~~
 {: .language-r}
 
@@ -306,7 +306,7 @@ ggplot(data = booksPlot, mapping = aes(x = tot_chkout)) +
 As we have seen in previous lessons, the overwhelming majority of books have a
 small amount of usage, so the plot is heavily skewed. As anyone who has done
 collection analysis has encountered, this is a very common issue. It can be
-addressed in two ways: 
+addressed in two ways:
 
 First, add a `binwidth` argument to `aes()`. In a histogram, each bin contains
 the number of occurrences of items in the data set that are contained within
@@ -359,14 +359,14 @@ table(booksPlot$tot_chkout)
 
 ~~~
 
-   0    1    2    3    4    5    6    7    8    9   10   11   12   13   14 
-2348  875  638  464  362  282  199  146  118   97   84   50   41   46   40 
-  15   16   17   18   19   20   21   22   23   24   25   26   27   28   29 
-  33   17   20   26   17   14   12    7   15    7    8    6    6    3    3 
-  30   31   32   33   34   35   36   38   39   40   41   43   47   61   63 
-   2    4    1    5    4    3    2    2    3    1    1    1    1    1    2 
-  69   79  106  113 
-   1    1    1    1 
+   0    1    2    3    4    5    6    7    8    9   10   11   12   13   14
+2348  875  638  464  362  282  199  146  118   97   84   50   41   46   40
+  15   16   17   18   19   20   21   22   23   24   25   26   27   28   29
+  33   17   20   26   17   14   12    7   15    7    8    6    6    3    3
+  30   31   32   33   34   35   36   38   39   40   41   43   47   61   63
+   2    4    1    5    4    3    2    2    3    1    1    1    1    1    2
+  69   79  106  113
+   1    1    1    1
 ~~~
 {: .output}
 
@@ -381,7 +381,7 @@ This same exact data can be visualized in a couple different ways by replacing t
 
 ~~~
 # create a density plot
-ggplot(data = booksPlot) +  
+ggplot(data = booksPlot) +
   geom_density(aes(x = tot_chkout)) +
   scale_y_log10() +
   scale_x_log10()
@@ -406,7 +406,7 @@ Warning: Removed 2348 rows containing non-finite values (stat_density).
 
 ~~~
 # create a frequency polygon
-ggplot(data = booksPlot) +  
+ggplot(data = booksPlot) +
   geom_freqpoly(aes(x = tot_chkout), binwidth = 30) +
   scale_y_log10()
 ~~~
@@ -431,7 +431,7 @@ it to `booksHighUsage`
 
 ~~~
 # filter booksPlot to include only items with over 10 checkouts
-booksHighUsage <- booksPlot %>%  
+booksHighUsage <- booksPlot %>%
   filter(!is.na(tot_chkout),
                 tot_chkout > 10)
 ~~~
@@ -444,9 +444,9 @@ still so much skew that I retain the logarithmic scale on the y axis with
 
 ~~~
 # scatter plot high usage books by call number class
-ggplot(data = booksHighUsage,  
+ggplot(data = booksHighUsage,
        aes(x = call_class, y = tot_chkout)) +
-  geom_point() + 
+  geom_point() +
   scale_y_log10()
 ~~~
 {: .language-r}
@@ -455,12 +455,12 @@ ggplot(data = booksHighUsage,
 
 Again, notice the scale on the y axis. We can obseve a few items of interest here: No items in the D, J, M, and Z class have more than 30 checkouts. An item in the E class has the most checkouts with over 100, but, as noted above, this includes Easy books classified with `E`, not just items with Library of Congress `E` classification (United States history) an issue we'll look at further down.
 
-Just as with univariate plots, we can use different geoms to view various aspects of the data, which in turn reveal different patterns. 
+Just as with univariate plots, we can use different geoms to view various aspects of the data, which in turn reveal different patterns.
 
 
 ~~~
 # boxplot plot high usage books by call number class
-ggplot(data = booksHighUsage, 
+ggplot(data = booksHighUsage,
        aes(x = call_class, y = tot_chkout)) +
   geom_boxplot() +
   scale_y_log10()
@@ -498,24 +498,24 @@ hidden?
 > (of the density of points) is drawn.
 >
 > - Replace the box plot with a violin plot; see `geom_violin()`.
-> 
+>
 > > ## Solution
 > >
-> > 
+> >
 > > ~~~
 > > ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
 > >   geom_violin(alpha = 0) +
 > >   geom_jitter(alpha = 0.5, color = "tomato")
 > > ~~~
 > > {: .language-r}
-> > 
+> >
 > > <img src="../fig/rmd-04-violin-plot-1.png" title="plot of chunk violin-plot" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
 > - Add color to the `geom_jitter` argument on your boxplot according to the item `subCollection`. *Hint:* If you get the error `object 'subCollection' not found` or `invalid color name 'subCollection'` then consider `color` as an aesthetic mapping.
 >
 > > ## Solution
-> > 
+> >
 > > ~~~
 > > ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
 > > geom_violin(alpha = 0) +
@@ -523,7 +523,7 @@ hidden?
 > > scale_y_log10()
 > > ~~~
 > > {: .language-r}
-> > 
+> >
 > > <img src="../fig/rmd-04-boxplot-exercise-subcollection-1.png" title="plot of chunk boxplot-exercise-subcollection" alt="plot of chunk boxplot-exercise-subcollection" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
@@ -533,7 +533,7 @@ hidden?
 > - Still using the `booksHighUsage` data, create a boxplot for `tot_chkout` for each `subCollection`. Overlay the boxplot layer on a jitter layer to show actual measurements. Keep the `scale_y_log10` argument.
 >
 > > ## Solution
-> > 
+> >
 > > ~~~
 > > ggplot(data = booksHighUsage, aes(x = subCollection, y = tot_chkout)) +
 > >  geom_boxplot(alpha = 0) +
@@ -541,7 +541,7 @@ hidden?
 > >  scale_y_log10()
 > > ~~~
 > > {: .language-r}
-> > 
+> >
 > > <img src="../fig/rmd-04-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
@@ -566,11 +566,11 @@ associate the name of the aesthetic (`color`) to the name of the variable
 
 
 ~~~
-ggplot(data = booksHighUsage, 
+ggplot(data = booksHighUsage,
        aes(x = call_class,
            y = tot_chkout,
            color = subCollection)) +
-  geom_point() + 
+  geom_point() +
   scale_y_log10()
 ~~~
 {: .language-r}
@@ -580,7 +580,7 @@ ggplot(data = booksHighUsage,
 `ggplot()` automatically assigns a unique level of the aesthetic to each unique
 value of the variable (this is called *scaling*). Now we reveal indeed that
 youth materials make up a large number of high usage items in both the E and the
-P class. 
+P class.
 
 Use `fill()` with `geom_bar()` to create a stacked bar plot to visualize
 frequency. Again, this reinforced the fact that most of the `E` and `P`
@@ -713,19 +713,19 @@ large number of sub-collections that we had sampled, as a large number of
 side-by-side bars will become more difficult to read.
 
 **`ggplot2`** has a special technique called *faceting* that allows the user to
-split one plot into multiple plots based on a factor included in the dataset. 
+split one plot into multiple plots based on a factor included in the dataset.
 
 There are two types of `facet` functions:
 
-* `facet_wrap()` arranges a one-dimensional sequence of panels to allow them to cleanly 
-fit on one page. 
-* `facet_grid()` allows you to form a matrix of rows and columns of panels. 
+* `facet_wrap()` arranges a one-dimensional sequence of panels to allow them to cleanly
+fit on one page.
+* `facet_grid()` allows you to form a matrix of rows and columns of panels.
 
-Both geometries allow to to specify faceting variables specified within `vars()`. 
-For example, `facet_wrap(facets = vars(facet_variable))` or 
-`facet_grid(rows = vars(row_variable), cols = vars(col_variable))`. 
+Both geometries allow to to specify faceting variables specified within `vars()`.
+For example, `facet_wrap(facets = vars(facet_variable))` or
+`facet_grid(rows = vars(row_variable), cols = vars(col_variable))`.
 
-Here we use `facet_wrap()` to make a time series plot for each subCollection 
+Here we use `facet_wrap()` to make a time series plot for each subCollection
 
 
 ~~~
@@ -745,8 +745,8 @@ to make the axis text diagonal. More on `theme()` below.
 
 ~~~
 ggplot(data = books2, aes(x = subCollection)) +
-  geom_bar() +  
-  facet_wrap(vars(format)) + 
+  geom_bar() +
+  facet_wrap(vars(format)) +
   scale_y_log10() +
   theme(axis.text.x = element_text(angle = 60, hjust = 1))
 ~~~
@@ -765,43 +765,43 @@ you are simply getting to know your data, that's OK.
 > ### Challenge
 >
 > Use the `books2` data to create a bar plot that depicts the number of items in
-each sub-collection, faceted by format. 
+each sub-collection, faceted by format.
 > Add the scale_y_log10() argument to
-create a logarithmic scale for easier visibility. 
+create a logarithmic scale for easier visibility.
 > Add the following theme
 argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
 = 60, hjust = 1))`
-> 
-> 
+>
+>
 > ~~~
 > ggplot(data = books2, aes(x = subCollection)) +
->  geom_bar() +  
->  facet_wrap(vars(format)) + 
+>  geom_bar() +
+>  facet_wrap(vars(format)) +
 >  scale_y_log10() +
 >  theme(axis.text.x = element_text(angle = 60, hjust = 1))
 > ~~~
 > {: .language-r}
-> 
+>
 > <img src="../fig/rmd-04-average-weight-time-series-1.png" title="plot of chunk average-weight-time-series" alt="plot of chunk average-weight-time-series" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
 ## **`ggplot2`** themes
 
-Usually plots with white background look more readable when printed. 
-Every single component of a `ggplot` graph can be customized using the generic 
-`theme()` function. However, there are pre-loaded themes 
-available that change the overall appearance of the graph without much effort. 
+Usually plots with white background look more readable when printed.
+Every single component of a `ggplot` graph can be customized using the generic
+`theme()` function. However, there are pre-loaded themes
+available that change the overall appearance of the graph without much effort.
 
-For example, we can change our graph to have a simpler white background 
+For example, we can change our graph to have a simpler white background
 using the `theme_bw()` function:
 
 
 ~~~
-# 
+#
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
-  facet_wrap(facets = vars(subCollection)) + 
+  facet_wrap(facets = vars(subCollection)) +
   theme_bw()
 ~~~
 {: .language-r}
@@ -818,7 +818,7 @@ point to create a new hand-crafted theme.
 The
 [ggthemes](https://jrnold.github.io/ggthemes/reference/index.html) package
 provides a wide variety of options.
-The [**`ggplot2`** extensions website](https://www.ggplot2-exts.org) provides a list
+The [**`ggplot2`** extensions website](https://exts.ggplot2.tidyverse.org/) provides a list
 of packages that extend the capabilities of **`ggplot2`**, including additional
 themes.
 
@@ -836,7 +836,7 @@ informative than 'pubyear_ymd' and 'n' and add a title to the figure:
 # add labels
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
-  facet_wrap(facets = vars(subCollection)) + 
+  facet_wrap(facets = vars(subCollection)) +
   theme_bw() +
     labs(title = "Number of High Usage Books per Year of Publication, by Sub-Collection",
         x = "Year of publication",
@@ -866,7 +866,7 @@ gray_theme <- theme(axis.text.x = element_text(color = "gray20", size = 12, angl
 # pass the gray theme to a plot
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
-  facet_wrap(facets = vars(subCollection)) + 
+  facet_wrap(facets = vars(subCollection)) +
   gray_theme +
   labs(title = "Number of High Usage Books per Year of Publication, \n by Sub-Collection",
         x = "Year of publication",
@@ -880,31 +880,31 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 > ### Challenge
 >
 > Use the `booksPlot` data to create a plot that depicts how the total number of checkouts
-> changes based on year of publication. 
-> 
+> changes based on year of publication.
+>
 > First, create a data frame `yearly_checkouts` That meets the following conditions:
-> * `filter()` to exclude `NA` values 
+> * `filter()` to exclude `NA` values
 > * `filter()` between "1989-01-01" and "2002-01-01"
 > * `group_by()` the publication year (make sure to use the special Date pubyear value we created)
 > * `summarize()` to create a new value `checkouts_sum` that represents the `sum()` of total checkouts per publication year
-> 
+>
 > Then, create a `ggplot` that visualizes the sum of item checkouts by year of
 publication. Add one of the themes listed above.
 > > ## Solution
-> > 
+> >
 > > ~~~
-> > yearly_checkouts <- booksPlot %>% 
+> > yearly_checkouts <- booksPlot %>%
 > >  filter(!is.na(pubyear_ymd),
 > >         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
 > >  group_by(pubyear_ymd) %>%
 > >  summarize(checkouts_sum = sum(tot_chkout))
-> > 
+> >
 > > ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum)) +
 > >  geom_line() +
 > >  theme_bw()
 > > ~~~
 > > {: .language-r}
-> > 
+> >
 > > <img src="../fig/rmd-04-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
@@ -930,7 +930,7 @@ Make sure you have the `fig_output/` folder in your working directory.
 ~~~
 yearly_counts_plot <- ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
-  facet_wrap(facets = vars(subCollection)) + 
+  facet_wrap(facets = vars(subCollection)) +
   gray_theme +
   labs(title = "Number of High Usage Books per Year of Publication, \n by Sub-Collection",
         x = "Year of publication",
