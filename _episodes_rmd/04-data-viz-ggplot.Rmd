@@ -52,9 +52,12 @@ script. Click the save icon on your toolbar and save your script as
 download the original and the reformatted `books` data:
 
 ```{r create-dirs, eval=FALSE}
-dir.create("data")
-dir.create("data_output")
-dir.create("fig_output")
+library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
+dir_create("data")
+dir_create("data_output")
+dir_create("fig_output")
+download.file("https://ndownloader.figshare.com/files/22031487",
+              "data/books.csv", mode = "wb")
 download.file("https://ndownloader.figshare.com/files/22031487",
               "data/books.csv", mode = "wb")
 download.file("https://ndownloader.figshare.com/files/22051506",
