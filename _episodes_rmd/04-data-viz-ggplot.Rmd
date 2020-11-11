@@ -125,7 +125,9 @@ Let's create a `booksPlot` and limit our visualization to only items in `subColl
 ```{r, purl=FALSE}
 # create a new data frame
 booksPlot <- books2 %>%
-  filter(subCollection == "general collection" | subCollection == "juvenile" | subCollection == "k-12 materials",
+  filter(subCollection == "general collection" | 
+           subCollection == "juvenile" | 
+           subCollection == "k-12 materials",
          !is.na(call_class))
 ```
 
