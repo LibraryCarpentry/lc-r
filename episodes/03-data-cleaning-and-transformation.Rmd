@@ -347,6 +347,25 @@ books <- books %>%
 
 We see the error message `NAs introduced by coercion`. This is because non-numerical variables become `NA` and the remainder become integers.
 
+## Pattern matching
+
+Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:  
+
+1. Remove the trailing slash in the title column
+2. Modify the punctuation separating the title from a subtitle
+
+Note:  If the final product of this data will be imported into an ILS, you may not want to alter the MARC specific punctuation.  All other audiences will appreciate the text normalizing steps.
+
+Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
+
+```{r}
+books %>% 
+  mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
+  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
+  select(title_modified, title)
+```
+
+
 ## Putting it all together with %>%
 
 The [Pipe
