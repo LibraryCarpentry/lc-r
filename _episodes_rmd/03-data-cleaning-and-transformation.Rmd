@@ -331,8 +331,8 @@ of the `callnumber` variable (the call number class) and put it into a new colum
 `call_class`. 
 
 ```{r mutate, comment=NA}
-booksLC <- mutate(books
-                  , call_class = str_sub(callnumber, 1, 1))
+booksLC <- mutate(books,
+                  call_class = str_sub(callnumber, 1, 1))
 ```
 
 There are two numbers because you must specify a start and an end value--here,
