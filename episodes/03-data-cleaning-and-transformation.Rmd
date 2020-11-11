@@ -114,7 +114,7 @@ print the names of the sample `books` dataset you can see that some of the
 vector names are not particularly helpful:
 
 ```{r renaming1, purl=FALSE}
-names(books)  # print names of the books data frame to the console
+glimpse(books)  # print names of the books data frame to the console
 ```
 
 There are many ways to rename variables in R, but the `rename()` function
