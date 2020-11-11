@@ -435,6 +435,21 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection), position = "dodge")
 ```
 
+The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.   
+
+```{r}
+ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
+  geom_bar()
+```
+
+Another visualization issue is labeling.  In many cultures, long labels are easier to read horizontally.  Our goal is to flip the x-axis and reorient the x-axis labels into a horizontal presentation.  To accomplish this, flip the axis coordinates with the `coord_flip()` function.  When we flip the axes it's important to reverse the sorted categorical order.  Do this with `forcats::fct_rev()`.
+
+```{r}
+ggplot(data = booksHighUsage, aes(x = fct_rev(fct_infreq(call_class)))) +
+  geom_bar() +
+  coord_flip()
+```
+
 ### Plotting time series data
 
 Let's calculate number of counts per year for each format for items published
