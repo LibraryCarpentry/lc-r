@@ -539,17 +539,16 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
     facet_wrap(facets = vars(subCollection))
 ```
 
-We can use `facet_wrap()` as a way of getting a look at how our data
-breaks down across multiple variables. Here we look at the number of formats per
-sub-collection. Note that we also need to add an argument to `theme()` in order
-to make the axis text diagonal. More on `theme()` below.
+We can use `facet_wrap()` as a way of seeing the categories within a variables. Look at the number of formats per
+sub-collection. 
 
-```{r, purl=FALSE}
-ggplot(data = books2, aes(x = subCollection)) +
+```{r purl=FALSE}
+ggplot(data = books2, aes(x = fct_rev(fct_infreq(subCollection)))) +
   geom_bar() +
-  facet_wrap(vars(format)) +
+  facet_wrap(~ format, nrow = 2) +
   scale_y_log10() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  coord_flip() +
+  labs(x = "Library subcollection", y = "")
 ```
 
 While this may not be the most beautiful plot, these kinds of exercises can be
