@@ -200,7 +200,7 @@ are overwriting the `books$subCollection` variable.
 
 ```{r, comment=FALSE}
 # first print to the console all of the unique values you will need to recode
-unique(books$subCollection)
+distinct(books, subCollection)
 
 books$subCollection <- recode(books$subCollection,
                                       "-" = "general collection",
