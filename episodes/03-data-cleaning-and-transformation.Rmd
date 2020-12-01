@@ -56,9 +56,10 @@ script. Click the save icon on your toolbar and save your script as
 * Copy and paste the below lines of code to create three new subdirectories and download the data:
 
 ```{r create-dirs, eval=FALSE}
-dir.create("data")
-dir.create("data_output")
-dir.create("fig_output")
+library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
+dir_create("data")
+dir_create("data_output")
+dir_create("fig_output")
 download.file("https://ndownloader.figshare.com/files/22031487",
               "data/books.csv", mode = "wb")
 ```
@@ -113,7 +114,7 @@ print the names of the sample `books` dataset you can see that some of the
 vector names are not particularly helpful:
 
 ```{r renaming1, purl=FALSE}
-names(books)  # print names of the books data frame to the console
+glimpse(books)  # print names of the books data frame to the console
 ```
 
 There are many ways to rename variables in R, but the `rename()` function
@@ -199,7 +200,7 @@ are overwriting the `books$subCollection` variable.
 
 ```{r, comment=FALSE}
 # first print to the console all of the unique values you will need to recode
-unique(books$subCollection)
+distinct(books, subCollection)
 
 books$subCollection <- recode(books$subCollection,
                                       "-" = "general collection",
@@ -330,8 +331,8 @@ of the `callnumber` variable (the call number class) and put it into a new colum
 `call_class`. 
 
 ```{r mutate, comment=NA}
-booksLC <- mutate(books
-                  , call_class = str_sub(callnumber, 1, 1))
+booksLC <- mutate(books,
+                  call_class = str_sub(callnumber, 1, 1))
 ```
 
 There are two numbers because you must specify a start and an end value--here,
@@ -345,6 +346,25 @@ books <- books %>%
 ```
 
 We see the error message `NAs introduced by coercion`. This is because non-numerical variables become `NA` and the remainder become integers.
+
+## Pattern matching
+
+Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:  
+
+1. Remove the trailing slash in the title column
+2. Modify the punctuation separating the title from a subtitle
+
+Note:  If the final product of this data will be imported into an ILS, you may not want to alter the MARC specific punctuation.  All other audiences will appreciate the text normalizing steps.
+
+Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
+
+```{r}
+books %>% 
+  mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
+  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
+  select(title_modified, title)
+```
+
 
 ## Putting it all together with %>%
 
