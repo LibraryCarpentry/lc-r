@@ -628,8 +628,6 @@ kable(operators) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-**Insert table**
-
 A common task is to search for certain strings in a vector.  One could use the
 "or" operator `|` to test for equality to multiple values, but this can quickly
 become tedious. The function `%in%` allows you to test if any of the elements of
@@ -705,7 +703,6 @@ on your own methodological questions.
 >     ```
 > 2. Use the function `median()` to calculate the median of the `rooms` vector.
 >
-> 3. Use R to figure out how many households in the set use more than 2 rooms for sleeping.
 >
 > > ## Solution
 > > ```{r, answer=TRUE}
