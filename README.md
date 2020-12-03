@@ -4,6 +4,7 @@
 - [John Little](https://github.com/libjohn)
 - [Stéphane Guillou](https://github.com/stragu)
 - [Tim Dennis](https://github.com/jt14den)
+- [Sarah Lin](https://github.com/sarahemlin)
 
 ## Library Carpentry
 
