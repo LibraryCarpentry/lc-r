@@ -126,7 +126,7 @@ needs, but these should form the backbone of your working directory.
 ### The working directory
 
 The working directory is an important concept to understand. It is the place
-on your compuiter where R will look for and save files. When you write code for
+on your computer where R will look for and save files. When you write code for
 your project, your scripts should refer to files in relation to the root of your working
 directory and only to files within this structure.
 
