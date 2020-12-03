@@ -703,6 +703,7 @@ on your own methodological questions.
 >     ```
 > 2. Use the function `median()` to calculate the median of the `rooms` vector.
 >
+> 3. Use R to figure out how many households in the room variable have more than 2 rooms.
 >
 > > ## Solution
 > > ```{r, answer=TRUE}
