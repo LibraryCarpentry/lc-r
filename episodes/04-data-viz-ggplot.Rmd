@@ -52,9 +52,12 @@ script. Click the save icon on your toolbar and save your script as
 download the original and the reformatted `books` data:
 
 ```{r create-dirs, eval=FALSE}
-dir.create("data")
-dir.create("data_output")
-dir.create("fig_output")
+library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
+dir_create("data")
+dir_create("data_output")
+dir_create("fig_output")
+download.file("https://ndownloader.figshare.com/files/22031487",
+              "data/books.csv", mode = "wb")
 download.file("https://ndownloader.figshare.com/files/22031487",
               "data/books.csv", mode = "wb")
 download.file("https://ndownloader.figshare.com/files/22051506",
@@ -122,7 +125,9 @@ Let's create a `booksPlot` and limit our visualization to only items in `subColl
 ```{r, purl=FALSE}
 # create a new data frame
 booksPlot <- books2 %>%
-  filter(subCollection == "general collection" | subCollection == "juvenile" | subCollection == "k-12 materials",
+  filter(subCollection == "general collection" | 
+           subCollection == "juvenile" | 
+           subCollection == "k-12 materials",
          !is.na(call_class))
 ```
 
@@ -430,6 +435,21 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection), position = "dodge")
 ```
 
+The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.   
+
+```{r}
+ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
+  geom_bar()
+```
+
+Another visualization issue is labeling.  In many cultures, long labels are easier to read horizontally.  Our goal is to flip the x-axis and reorient the x-axis labels into a horizontal presentation.  To accomplish this, flip the axis coordinates with the `coord_flip()` function.  When we flip the axes it's important to reverse the sorted categorical order.  Do this with `forcats::fct_rev()`.
+
+```{r}
+ggplot(data = booksHighUsage, aes(x = fct_rev(fct_infreq(call_class)))) +
+  geom_bar() +
+  coord_flip()
+```
+
 ### Plotting time series data
 
 Let's calculate number of counts per year for each format for items published
@@ -519,17 +539,16 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
     facet_wrap(facets = vars(subCollection))
 ```
 
-We can use `facet_wrap()` as a way of getting a look at how our data
-breaks down across multiple variables. Here we look at the number of formats per
-sub-collection. Note that we also need to add an argument to `theme()` in order
-to make the axis text diagonal. More on `theme()` below.
+We can use `facet_wrap()` as a way of seeing the categories within a variables. Look at the number of formats per
+sub-collection. 
 
-```{r, purl=FALSE}
-ggplot(data = books2, aes(x = subCollection)) +
+```{r purl=FALSE}
+ggplot(data = books2, aes(x = fct_rev(fct_infreq(subCollection)))) +
   geom_bar() +
-  facet_wrap(vars(format)) +
+  facet_wrap(~ format, nrow = 2) +
   scale_y_log10() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  coord_flip() +
+  labs(x = "Library subcollection", y = "")
 ```
 
 While this may not be the most beautiful plot, these kinds of exercises can be
