@@ -1,8 +1,8 @@
 ---
 title: Setup
 ---
-  
-    Learners must have R and RStudio installed on their computers. They also need 
+
+Learners must have R and RStudio installed on their computers. They also need 
 to be able to install a number of R packages, create directories, and download 
 files.
 
