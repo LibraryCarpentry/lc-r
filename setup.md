@@ -1,7 +1,8 @@
 
-<div id="r-setup">
-  <h3>R Setup</h3>
-  <p>
+---
+title: Setup
+---
+  
     Learners must have R and RStudio installed on their computers. They also need 
 to be able to install a number of R packages, create directories, and download 
 files.
@@ -92,5 +93,4 @@ but if you wish to do so you can
 [Credits](https://datacarpentry.org/R-ecology-lesson/#Install_R_and_RStudio)
 
 
-  </p>
-</div>
+
