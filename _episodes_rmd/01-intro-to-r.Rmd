@@ -228,7 +228,7 @@ objects in `c()` using quotation marks. To remove all objects, use `rm(list =
 ls())` or click the broom icon in the Environment Pane, next to "Import
 Dataset."
 
-```{r, purl=FALSE}
+```{r, purl=FALSE, eval=FALSE}
 x <- 5
 y <- 10
 z <- 15
