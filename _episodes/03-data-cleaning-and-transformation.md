@@ -53,9 +53,10 @@ script. Click the save icon on your toolbar and save your script as
 
 
 ~~~
-dir.create("data")
-dir.create("data_output")
-dir.create("fig_output")
+library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
+dir_create("data")
+dir_create("data_output")
+dir_create("fig_output")
 download.file("https://ndownloader.figshare.com/files/22031487",
               "data/books.csv", mode = "wb")
 ~~~
@@ -74,24 +75,24 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 ~~~
 {: .output}
 
 
 
 ~~~
-✔ ggplot2 3.2.1     ✔ purrr   0.3.2
-✔ tibble  2.1.3     ✔ dplyr   0.8.3
-✔ tidyr   0.8.3     ✔ stringr 1.4.0
-✔ ggplot2 3.2.1     ✔ forcats 0.4.0
+✔ ggplot2 3.3.3     ✔ dplyr   1.0.2
+✔ tibble  3.0.4     ✔ stringr 1.4.0
+✔ tidyr   1.1.2     ✔ forcats 0.5.0
+✔ purrr   0.3.4     
 ~~~
 {: .output}
 
 
 
 ~~~
-── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ~~~
@@ -142,16 +143,27 @@ vector names are not particularly helpful:
 
 
 ~~~
-names(books)  # print names of the books data frame to the console
+glimpse(books)  # print names of the books data frame to the console
 ~~~
 {: .language-r}
 
 
 
 ~~~
- [1] "CALL...BIBLIO." "X245.ab"        "X245.c"         "LOCATION"      
- [5] "TOT.CHKOUT"     "LOUTDATE"       "SUBJECT"        "ISN"           
- [9] "CALL...ITEM."   "X008.Date.One"  "BCODE2"         "BCODE1"        
+Rows: 10,000
+Columns: 12
+$ CALL...BIBLIO. <chr> "001.94 Don 2000", "001.942 Bro 1999", "027.073 App 20…
+$ X245.ab        <chr> "Bermuda Triangle /", "Invaders from outer space :|rea…
+$ X245.c         <chr> "written by Andrew Donkin.", "written by Philip Brooks…
+$ LOCATION       <chr> "juv", "juv", "juv", "juv", "juv", "juv", "juv", "juv"…
+$ TOT.CHKOUT     <dbl> 6, 2, 3, 6, 7, 6, 4, 2, 4, 13, 6, 7, 3, 22, 2, 9, 4, 8…
+$ LOUTDATE       <chr> "11-21-2013 9:44", "02-07-2004 15:29", "10-16-2007 10:…
+$ SUBJECT        <chr> "Readers (Elementary)|Bermuda Triangle -- Juvenile lit…
+$ ISN            <chr> "0789454165 (hbk.)~0789454157 (pbk.)", "0789439999 (ha…
+$ CALL...ITEM.   <chr> "001.94 Don 2000", "001.942 Bro 1999", "027.073 App 20…
+$ X008.Date.One  <chr> "2000", "1999", "2001", "1999", "2000", "2001", "2001"…
+$ BCODE2         <chr> "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",…
+$ BCODE1         <chr> "j", "j", "j", "j", "j", "j", "j", "j", "j", "j", "j",…
 ~~~
 {: .output}
 
@@ -241,14 +253,22 @@ in the sample dataset provided to you, the `sub_collection` (formerly `BCODE1`)
 and `format` (formerly `BCODE2`) variables contain single characters.
 
 <figure>
-<img src="../fig/BCODE1.PNG" title="Sub-Collection (formerly BCODE1) export from Sierra" alt="Sub-Collection (formerly BCODE1) export from Sierra" style="display: block; margin: auto;" />
+
+~~~
+Error in knitr::include_graphics("../fig/BCODE1.PNG"): Cannot find the file(s): "../fig/BCODE1.PNG"
+~~~
+{: .error}
 <figcaption>
 Sub-Collection (formerly BCODE1) export from Sierra
 </figcaption>
 </figure>
 
 <figure>
-<img src="../fig/BCODE2.PNG" title="Format (formerly BCODE2) export from Sierra" alt="Format (formerly BCODE2) export from Sierra" style="display: block; margin: auto;" />
+
+~~~
+Error in knitr::include_graphics("../fig/BCODE2.PNG"): Cannot find the file(s): "../fig/BCODE2.PNG"
+~~~
+{: .error}
 <figcaption>
 Format (formerly BCODE2) export from Sierra
 </figcaption>
@@ -262,14 +282,26 @@ are overwriting the `books$subCollection` variable.
 
 ~~~
 # first print to the console all of the unique values you will need to recode
-unique(books$subCollection)
+distinct(books, subCollection)
 ~~~
 {: .language-r}
 
 
 
 ~~~
-FALSE  [1] "j" "b" "u" "r" "-" "s" "c" "z" "a" "t"
+FALSE # A tibble: 10 x 1
+FALSE    subCollection
+FALSE    <chr>        
+FALSE  1 j            
+FALSE  2 b            
+FALSE  3 u            
+FALSE  4 r            
+FALSE  5 -            
+FALSE  6 s            
+FALSE  7 c            
+FALSE  8 z            
+FALSE  9 a            
+FALSE 10 t
 ~~~
 {: .output}
 
@@ -444,18 +476,18 @@ booksTitleCheckouts
 
 ~~~
 # A tibble: 10,000 x 2
-   title                                                         tot_chkout
-   <chr>                                                              <dbl>
- 1 Bermuda Triangle /                                                     6
- 2 Invaders from outer space :|real-life stories of UFOs /                2
- 3 Down Cut Shin Creek :|the pack horse librarians of Kentucky /          3
- 4 The Chinese book of animal powers /                                    6
- 5 Judge Judy Sheindlin's Win or lose by how you choose! /                7
- 6 Judge Judy Sheindlin's You can't judge a book by its cover :…          6
- 7 A young child's Bible /                                                4
- 8 God's Kingdom :|stories from the New Testament /                       2
- 9 Roman myths /                                                          4
-10 Greek gods and goddesses /                                            13
+   title                                                              tot_chkout
+   <chr>                                                                   <dbl>
+ 1 Bermuda Triangle /                                                          6
+ 2 Invaders from outer space :|real-life stories of UFOs /                     2
+ 3 Down Cut Shin Creek :|the pack horse librarians of Kentucky /               3
+ 4 The Chinese book of animal powers /                                         6
+ 5 Judge Judy Sheindlin's Win or lose by how you choose! /                     7
+ 6 Judge Judy Sheindlin's You can't judge a book by its cover :|cool…          6
+ 7 A young child's Bible /                                                     4
+ 8 God's Kingdom :|stories from the New Testament /                            2
+ 9 Roman myths /                                                               4
+10 Greek gods and goddesses /                                                 13
 # … with 9,990 more rows
 ~~~
 {: .output}
@@ -489,20 +521,20 @@ booksHighestChkout
 
 ~~~
 # A tibble: 10,000 x 11
-   callnumber title author tot_chkout loutdate subject isbn  callnumber2
-   <chr>      <chr> <chr>       <dbl> <chr>    <chr>   <chr> <chr>      
- 1 E Cro 2000 Clic… by Do…        113 01-23-2… Cows -… 0689… E Cro 2000 
- 2 PZ7.W6367… The … by Da…        106 03-07-2… Pigs -… 0618… 398.2452 W…
- 3 <NA>       Cook… Janet…        103 03-13-2… Cake -… 0152… E Ste 1999 
- 4 PZ7.D5455… Beca… Kate …         79 03-27-2… Dogs -… 0763… Fic Dic 20…
- 5 PZ7.C6775… Upto… Bryan…         69 02-05-2… Harlem… 9780… E Col 2000 
- 6 <NA>       <NA>  <NA>           64 08-23-2… <NA>    <NA>  #1  ENC. C…
- 7 F379.N59 … Thro… Ruby …         63 11-01-2… Bridge… 0590… 920 Bri 19…
- 8 PZ7.C9413… Bud,… Chris…         63 04-03-2… Runawa… 0385… Fic Cur 19…
- 9 E Mar 1992 Brow… by Bi…         61 02-16-2… Color … 0805… E Mar 1992 
-10 PZ7.P338 … A ye… Richa…         47 03-26-2… Grandm… 0803… Fic Pec 20…
-# … with 9,990 more rows, and 3 more variables: pubyear <chr>,
-#   format <chr>, subCollection <chr>
+   callnumber title author tot_chkout loutdate subject isbn  callnumber2 pubyear
+   <chr>      <chr> <chr>       <dbl> <chr>    <chr>   <chr> <chr>       <chr>  
+ 1 E Cro 2000 Clic… by Do…        113 01-23-2… Cows -… 0689… E Cro 2000  2000   
+ 2 PZ7.W6367… The … by Da…        106 03-07-2… Pigs -… 0618… 398.2452 W… 2001   
+ 3 <NA>       Cook… Janet…        103 03-13-2… Cake -… 0152… E Ste 1999  1999   
+ 4 PZ7.D5455… Beca… Kate …         79 03-27-2… Dogs -… 0763… Fic Dic 20… 2000   
+ 5 PZ7.C6775… Upto… Bryan…         69 02-05-2… Harlem… 9780… E Col 2000  2000   
+ 6 <NA>       <NA>  <NA>           64 08-23-2… <NA>    <NA>  #1  ENC. C… <NA>   
+ 7 F379.N59 … Thro… Ruby …         63 11-01-2… Bridge… 0590… 920 Bri 19… 1999   
+ 8 PZ7.C9413… Bud,… Chris…         63 04-03-2… Runawa… 0385… Fic Cur 19… 1999   
+ 9 E Mar 1992 Brow… by Bi…         61 02-16-2… Color … 0805… E Mar 1992  1992   
+10 PZ7.P338 … A ye… Richa…         47 03-26-2… Grandm… 0803… Fic Pec 20… 2000   
+# … with 9,990 more rows, and 2 more variables: format <chr>,
+#   subCollection <chr>
 ~~~
 {: .output}
 
@@ -523,8 +555,8 @@ of the `callnumber` variable (the call number class) and put it into a new colum
 
 
 ~~~
-booksLC <- mutate(books
-                  , call_class = str_sub(callnumber, 1, 1))
+booksLC <- mutate(books,
+                  call_class = str_sub(callnumber, 1, 1))
 ~~~
 {: .language-r}
 
@@ -543,11 +575,61 @@ books <- books %>%
 
 
 ~~~
-Warning: NAs introduced by coercion
+Warning: Problem with `mutate()` input `pubyear`.
+ℹ NAs introduced by coercion
+ℹ Input `pubyear` is `as.integer(pubyear)`.
 ~~~
-{: .error}
+{: .warning}
+
+
+
+~~~
+Warning in mask$eval_all_mutate(dots[[i]]): NAs introduced by coercion
+~~~
+{: .warning}
 
 We see the error message `NAs introduced by coercion`. This is because non-numerical variables become `NA` and the remainder become integers.
+
+## Pattern matching
+
+Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:  
+
+1. Remove the trailing slash in the title column
+2. Modify the punctuation separating the title from a subtitle
+
+Note:  If the final product of this data will be imported into an ILS, you may not want to alter the MARC specific punctuation.  All other audiences will appreciate the text normalizing steps.
+
+Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
+
+
+~~~
+books %>% 
+  mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
+  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
+  select(title_modified, title)
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 10,000 x 2
+   title_modified                            title                              
+   <chr>                                     <chr>                              
+ 1 "Bermuda Triangle "                       Bermuda Triangle /                 
+ 2 "Invaders from outer space: real-life st… Invaders from outer space :|real-l…
+ 3 "Down Cut Shin Creek: the pack horse lib… Down Cut Shin Creek :|the pack hor…
+ 4 "The Chinese book of animal powers "      The Chinese book of animal powers /
+ 5 "Judge Judy Sheindlin's Win or lose by h… Judge Judy Sheindlin's Win or lose…
+ 6 "Judge Judy Sheindlin's You can't judge … Judge Judy Sheindlin's You can't j…
+ 7 "A young child's Bible "                  A young child's Bible /            
+ 8 "God's Kingdom: stories from the New Tes… God's Kingdom :|stories from the N…
+ 9 "Roman myths "                            Roman myths /                      
+10 "Greek gods and goddesses "               Greek gods and goddesses /         
+# … with 9,990 more rows
+~~~
+{: .output}
+
 
 ## Putting it all together with %>%
 
@@ -646,6 +728,13 @@ books %>%
 
 
 ~~~
+`summarise()` ungrouping output (override with `.groups` argument)
+~~~
+{: .output}
+
+
+
+~~~
 # A tibble: 10 x 2
    format       mean_checkouts
    <chr>                 <dbl>
@@ -676,6 +765,13 @@ books %>%
   arrange(desc(sum_tot_chkout))
 ~~~
 {: .language-r}
+
+
+
+~~~
+`summarise()` ungrouping output (override with `.groups` argument)
+~~~
+{: .output}
 
 
 

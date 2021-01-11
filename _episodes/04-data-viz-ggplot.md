@@ -49,9 +49,12 @@ download the original and the reformatted `books` data:
 
 
 ~~~
-dir.create("data")
-dir.create("data_output")
-dir.create("fig_output")
+library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
+dir_create("data")
+dir_create("data_output")
+dir_create("fig_output")
+download.file("https://ndownloader.figshare.com/files/22031487",
+              "data/books.csv", mode = "wb")
 download.file("https://ndownloader.figshare.com/files/22031487",
               "data/books.csv", mode = "wb")
 download.file("https://ndownloader.figshare.com/files/22051506",
@@ -75,24 +78,24 @@ library(tidyverse)  # load the core tidyverse
 
 
 ~~~
-── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 ~~~
 {: .output}
 
 
 
 ~~~
-✔ ggplot2 3.2.1     ✔ purrr   0.3.2
-✔ tibble  2.1.3     ✔ dplyr   0.8.3
-✔ tidyr   0.8.3     ✔ stringr 1.4.0
-✔ ggplot2 3.2.1     ✔ forcats 0.4.0
+✔ ggplot2 3.3.3     ✔ dplyr   1.0.2
+✔ tibble  3.0.4     ✔ stringr 1.4.0
+✔ tidyr   1.1.2     ✔ forcats 0.5.0
+✔ purrr   0.3.4     
 ~~~
 {: .output}
 
 
 
 ~~~
-── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ~~~
@@ -116,9 +119,9 @@ Attaching package: 'lubridate'
 
 
 ~~~
-The following object is masked from 'package:base':
+The following objects are masked from 'package:base':
 
-    date
+    date, intersect, setdiff, union
 ~~~
 {: .output}
 
@@ -174,7 +177,9 @@ Let's create a `booksPlot` and limit our visualization to only items in `subColl
 ~~~
 # create a new data frame
 booksPlot <- books2 %>%
-  filter(subCollection == "general collection" | subCollection == "juvenile" | subCollection == "k-12 materials",
+  filter(subCollection == "general collection" | 
+           subCollection == "juvenile" | 
+           subCollection == "k-12 materials",
          !is.na(call_class))
 ~~~
 {: .language-r}
@@ -329,14 +334,14 @@ ggplot(data = booksPlot) +
 ~~~
 Warning: Transformation introduced infinite values in continuous y-axis
 ~~~
-{: .error}
+{: .warning}
 
 
 
 ~~~
 Warning: Removed 2 rows containing missing values (geom_bar).
 ~~~
-{: .error}
+{: .warning}
 
 <img src="../fig/rmd-04-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 
@@ -359,14 +364,14 @@ table(booksPlot$tot_chkout)
 
 ~~~
 
-   0    1    2    3    4    5    6    7    8    9   10   11   12   13   14
-2348  875  638  464  362  282  199  146  118   97   84   50   41   46   40
-  15   16   17   18   19   20   21   22   23   24   25   26   27   28   29
-  33   17   20   26   17   14   12    7   15    7    8    6    6    3    3
-  30   31   32   33   34   35   36   38   39   40   41   43   47   61   63
-   2    4    1    5    4    3    2    2    3    1    1    1    1    1    2
-  69   79  106  113
-   1    1    1    1
+   0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15 
+2348  875  638  464  362  282  199  146  118   97   84   50   41   46   40   33 
+  16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31 
+  17   20   26   17   14   12    7   15    7    8    6    6    3    3    2    4 
+  32   33   34   35   36   38   39   40   41   43   47   61   63   69   79  106 
+   1    5    4    3    2    2    3    1    1    1    1    1    2    1    1    1 
+ 113 
+   1 
 ~~~
 {: .output}
 
@@ -393,14 +398,14 @@ ggplot(data = booksPlot) +
 ~~~
 Warning: Transformation introduced infinite values in continuous x-axis
 ~~~
-{: .error}
+{: .warning}
 
 
 
 ~~~
 Warning: Removed 2348 rows containing non-finite values (stat_density).
 ~~~
-{: .error}
+{: .warning}
 
 <img src="../fig/rmd-04-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
 
@@ -417,7 +422,7 @@ ggplot(data = booksPlot) +
 ~~~
 Warning: Transformation introduced infinite values in continuous y-axis
 ~~~
-{: .error}
+{: .warning}
 
 <img src="../fig/rmd-04-unnamed-chunk-10-2.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
 
@@ -501,21 +506,21 @@ hidden?
 >
 > > ## Solution
 > >
-> >
+> > 
 > > ~~~
 > > ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
 > >   geom_violin(alpha = 0) +
 > >   geom_jitter(alpha = 0.5, color = "tomato")
 > > ~~~
 > > {: .language-r}
-> >
+> > 
 > > <img src="../fig/rmd-04-violin-plot-1.png" title="plot of chunk violin-plot" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
 > - Add color to the `geom_jitter` argument on your boxplot according to the item `subCollection`. *Hint:* If you get the error `object 'subCollection' not found` or `invalid color name 'subCollection'` then consider `color` as an aesthetic mapping.
 >
 > > ## Solution
-> >
+> > 
 > > ~~~
 > > ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
 > > geom_violin(alpha = 0) +
@@ -523,7 +528,7 @@ hidden?
 > > scale_y_log10()
 > > ~~~
 > > {: .language-r}
-> >
+> > 
 > > <img src="../fig/rmd-04-boxplot-exercise-subcollection-1.png" title="plot of chunk boxplot-exercise-subcollection" alt="plot of chunk boxplot-exercise-subcollection" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
@@ -533,7 +538,7 @@ hidden?
 > - Still using the `booksHighUsage` data, create a boxplot for `tot_chkout` for each `subCollection`. Overlay the boxplot layer on a jitter layer to show actual measurements. Keep the `scale_y_log10` argument.
 >
 > > ## Solution
-> >
+> > 
 > > ~~~
 > > ggplot(data = booksHighUsage, aes(x = subCollection, y = tot_chkout)) +
 > >  geom_boxplot(alpha = 0) +
@@ -541,7 +546,7 @@ hidden?
 > >  scale_y_log10()
 > > ~~~
 > > {: .language-r}
-> >
+> > 
 > > <img src="../fig/rmd-04-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
@@ -608,6 +613,29 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
 {: .language-r}
 
 <img src="../fig/rmd-04-barplot-dodge-1.png" title="plot of chunk barplot-dodge" alt="plot of chunk barplot-dodge" width="612" style="display: block; margin: auto;" />
+
+The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.   
+
+
+~~~
+ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
+  geom_bar()
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-04-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
+
+Another visualization issue is labeling.  In many cultures, long labels are easier to read horizontally.  Our goal is to flip the x-axis and reorient the x-axis labels into a horizontal presentation.  To accomplish this, flip the axis coordinates with the `coord_flip()` function.  When we flip the axes it's important to reverse the sorted categorical order.  Do this with `forcats::fct_rev()`.
+
+
+~~~
+ggplot(data = booksHighUsage, aes(x = fct_rev(fct_infreq(call_class)))) +
+  geom_bar() +
+  coord_flip()
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-04-unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="612" style="display: block; margin: auto;" />
 
 ### Plotting time series data
 
@@ -689,7 +717,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, group = subCo
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-19-1.png" title="plot of chunk unnamed-chunk-19" alt="plot of chunk unnamed-chunk-19" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="612" style="display: block; margin: auto;" />
 
 We will be able to distinguish sub-collections in the plot if we add colors
 (using `color` also automatically groups the data):
@@ -737,22 +765,21 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 
 <img src="../fig/rmd-04-first-facet-1.png" title="plot of chunk first-facet" alt="plot of chunk first-facet" width="612" style="display: block; margin: auto;" />
 
-We can use `facet_wrap()` as a way of getting a look at how our data
-breaks down across multiple variables. Here we look at the number of formats per
-sub-collection. Note that we also need to add an argument to `theme()` in order
-to make the axis text diagonal. More on `theme()` below.
+We can use `facet_wrap()` as a way of seeing the categories within a variables. Look at the number of formats per
+sub-collection. 
 
 
 ~~~
-ggplot(data = books2, aes(x = subCollection)) +
+ggplot(data = books2, aes(x = fct_rev(fct_infreq(subCollection)))) +
   geom_bar() +
-  facet_wrap(vars(format)) +
+  facet_wrap(~ format, nrow = 2) +
   scale_y_log10() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+  coord_flip() +
+  labs(x = "Library subcollection", y = "")
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-20-1.png" title="plot of chunk unnamed-chunk-20" alt="plot of chunk unnamed-chunk-20" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
 
 While this may not be the most beautiful plot, these kinds of exercises can be
 helpful for data exploration. We learn that there are books in all
@@ -772,7 +799,7 @@ create a logarithmic scale for easier visibility.
 argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
 = 60, hjust = 1))`
 >
->
+> 
 > ~~~
 > ggplot(data = books2, aes(x = subCollection)) +
 >  geom_bar() +
@@ -781,7 +808,7 @@ argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
 >  theme(axis.text.x = element_text(angle = 60, hjust = 1))
 > ~~~
 > {: .language-r}
->
+> 
 > <img src="../fig/rmd-04-average-weight-time-series-1.png" title="plot of chunk average-weight-time-series" alt="plot of chunk average-weight-time-series" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
@@ -806,7 +833,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" width="612" style="display: block; margin: auto;" />
 
 In addition to `theme_bw()`, which changes the plot background to white, **`ggplot2`**
 comes with several other themes which can be useful to quickly change the look
@@ -844,7 +871,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
 
 Note that it is also possible to change the fonts of your plots. If you are on
 Windows, you may have to install
@@ -874,7 +901,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="612" style="display: block; margin: auto;" />
 
 
 > ### Challenge
@@ -891,21 +918,33 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 > Then, create a `ggplot` that visualizes the sum of item checkouts by year of
 publication. Add one of the themes listed above.
 > > ## Solution
-> >
+> > 
 > > ~~~
 > > yearly_checkouts <- booksPlot %>%
 > >  filter(!is.na(pubyear_ymd),
 > >         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
 > >  group_by(pubyear_ymd) %>%
 > >  summarize(checkouts_sum = sum(tot_chkout))
-> >
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > `summarise()` ungrouping output (override with `.groups` argument)
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
 > > ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum)) +
 > >  geom_line() +
 > >  theme_bw()
 > > ~~~
 > > {: .language-r}
-> >
-> > <img src="../fig/rmd-04-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
+> > 
+> > <img src="../fig/rmd-04-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 

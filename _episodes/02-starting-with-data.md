@@ -214,24 +214,24 @@ library(tidyverse)  # loads the core tidyverse, including dplyr, readr, ggplot2,
 
 
 ~~~
-── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
 ~~~
 {: .output}
 
 
 
 ~~~
-✔ ggplot2 3.2.1     ✔ purrr   0.3.2
-✔ tibble  2.1.3     ✔ dplyr   0.8.3
-✔ tidyr   0.8.3     ✔ stringr 1.4.0
-✔ ggplot2 3.2.1     ✔ forcats 0.4.0
+✔ ggplot2 3.3.3     ✔ dplyr   1.0.2
+✔ tibble  3.0.4     ✔ stringr 1.4.0
+✔ tidyr   1.1.2     ✔ forcats 0.5.0
+✔ purrr   0.3.4     
 ~~~
 {: .output}
 
 
 
 ~~~
-── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ~~~
