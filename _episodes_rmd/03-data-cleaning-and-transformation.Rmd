@@ -269,9 +269,6 @@ You can then check the summary statistics of checkouts for books with more than 
 
 ```{r, comment=FALSE, purl=FALSE}
 summary(bookCheckouts$tot_chkout)
-booksJuv <- filter(books,
-                   format == "book",
-                   subCollection ==  "juvenile")
 ```
 
 > ## Filtering with `filter()`
