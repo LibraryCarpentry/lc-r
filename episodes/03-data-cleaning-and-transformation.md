@@ -395,11 +395,6 @@ FALSE   1.000   2.000   3.000   5.281   6.000 113.000
 
 
 ~~~
-booksJuv <- filter(books,
-                   format == "book",
-                   subCollection ==  "juvenile")
-~~~
-{: .language-r}
 
 > ## Filtering with `filter()`
 >
