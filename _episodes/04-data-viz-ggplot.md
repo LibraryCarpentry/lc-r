@@ -78,16 +78,16 @@ library(tidyverse)  # load the core tidyverse
 
 
 ~~~
-── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 ~~~
 {: .output}
 
 
 
 ~~~
-✔ ggplot2 3.3.3     ✔ dplyr   1.0.2
-✔ tibble  3.0.4     ✔ stringr 1.4.0
-✔ tidyr   1.1.2     ✔ forcats 0.5.0
+✔ ggplot2 3.3.3     ✔ dplyr   1.0.5
+✔ tibble  3.1.0     ✔ stringr 1.4.0
+✔ tidyr   1.1.3     ✔ forcats 0.5.1
 ✔ purrr   0.3.4     
 ~~~
 {: .output}
@@ -925,19 +925,7 @@ publication. Add one of the themes listed above.
 > >         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
 > >  group_by(pubyear_ymd) %>%
 > >  summarize(checkouts_sum = sum(tot_chkout))
-> > ~~~
-> > {: .language-r}
 > > 
-> > 
-> > 
-> > ~~~
-> > `summarise()` ungrouping output (override with `.groups` argument)
-> > ~~~
-> > {: .output}
-> > 
-> > 
-> > 
-> > ~~~
 > > ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum)) +
 > >  geom_line() +
 > >  theme_bw()
