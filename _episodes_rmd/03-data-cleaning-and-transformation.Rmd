@@ -269,9 +269,6 @@ You can then check the summary statistics of checkouts for books with more than 
 
 ```{r, comment=FALSE, purl=FALSE}
 summary(bookCheckouts$tot_chkout)
-booksJuv <- filter(books,
-                   format == "book",
-                   subCollection ==  "juvenile")
 ```
 
 If you want to filter on multiple conditions within the same variable, use the `%in%` operator combined with a vector of all the values you wish to include within `c()`. For example, you may want to include only items in the format `serial` and `microform`:
