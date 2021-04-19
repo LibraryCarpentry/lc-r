@@ -304,7 +304,7 @@ provides a convenient way to reorder variables.
 
 ```{r select, comment=NA}
 # specify the variables you want to keep by name
-booksTitleCheckouts <- dplyr::select(books, title, tot_chkout)
+booksTitleCheckouts <- select(books, title, tot_chkout)
 booksTitleCheckouts
 
 # specify the variables you want to remove with a -
