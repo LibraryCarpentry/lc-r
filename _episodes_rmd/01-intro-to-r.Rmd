@@ -109,9 +109,9 @@ frequently.
 
 ## Evaluating Expressions
 
-If you now type `time_minutes` into the console, and press Enter on your keyboard, R will
+If you now type `y` into the console, and press Enter on your keyboard, R will
 *evaluate* the expression. In this case, R will *print* the elements that are
-assigned to `time_minutes` (the number 5). We can do this easily since y only has one
+assigned to `y` (the number 5). We can do this easily since y only has one
 element, but if you do this with a large dataset loaded into R, it will overload
 your console because it will print the entire thing. The `[1]` indicates that
 the number 5 is the first element of this vector.

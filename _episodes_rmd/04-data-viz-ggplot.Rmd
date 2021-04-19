@@ -569,14 +569,13 @@ create a logarithmic scale for easier visibility.
 argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
 = 60, hjust = 1))`
 >
-> > ## Solution
-> > ```{r average-weight-time-series, answer=TRUE, purl=FALSE}
-> > ggplot(data = books2, aes(x = subCollection)) +
-> > geom_bar() +
-> > facet_wrap(vars(format)) +
-> > scale_y_log10() +
-> > theme(axis.text.x = element_text(angle = 60, hjust = 1))
-> > ```
+> ```{r average-weight-time-series, answer=TRUE, purl=FALSE}
+> ggplot(data = books2, aes(x = subCollection)) +
+>  geom_bar() +
+>  facet_wrap(vars(format)) +
+>  scale_y_log10() +
+>  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+>```
 > {: .solution}
 {: .challenge}
 
