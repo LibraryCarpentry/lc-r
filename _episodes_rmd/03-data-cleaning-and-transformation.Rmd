@@ -341,8 +341,7 @@ we start with the first character, and end with the first character.
 `mutate()` is also helpful to coerce a column from one data type to another. For example, we can see there are some errors in the `pubyear` variable--some dates are `19zz` or `uuuu`. As a result, this variable was read in as a `character` rather than an `integer`. 
 
 ```{r, comment=NA}
-books <- books %>%
-  mutate(pubyear = as.integer(pubyear))
+books <- mutate(books, pubyear = as.integer(pubyear))
 ```
 
 We see the error message `NAs introduced by coercion`. This is because non-numerical variables become `NA` and the remainder become integers.
