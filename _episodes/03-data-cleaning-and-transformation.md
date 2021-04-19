@@ -424,12 +424,11 @@ FALSE   1.000   2.000   3.000   5.281   6.000 113.000
 ~~~
 {: .output}
 
+If you want to filter on multiple conditions within the same variable, use the `%in%` operator combined with a vector of all the values you wish to include within `c()`. For example, you may want to include only items in the format `serial` and `microform`:
 
 
 ~~~
-booksJuv <- filter(books,
-                   format == "book",
-                   subCollection ==  "juvenile")
+serial_microform <- filter(books, format %in% c("serial", "microform"))
 ~~~
 {: .language-r}
 
@@ -467,7 +466,7 @@ provides a convenient way to reorder variables.
 
 ~~~
 # specify the variables you want to keep by name
-booksTitleCheckouts <- dplyr::select(books, title, tot_chkout)
+booksTitleCheckouts <- select(books, title, tot_chkout)
 booksTitleCheckouts
 ~~~
 {: .language-r}
@@ -567,8 +566,7 @@ we start with the first character, and end with the first character.
 
 
 ~~~
-books <- books %>%
-  mutate(pubyear = as.integer(pubyear))
+books <- mutate(books, pubyear = as.integer(pubyear))
 ~~~
 {: .language-r}
 
@@ -682,7 +680,7 @@ myBooks
 > > 
 > > ~~~
 > > booksKids <- books %>%
-> >       filter(subCollection == "juvenile",
+> >       filter(subCollection %in% c("juvenile", "k-12 materials"),
 > >       format == "book") %>%
 > >     select(title, callnumber, tot_chkout, pubyear) %>%
 > >     arrange(desc(tot_chkout))
