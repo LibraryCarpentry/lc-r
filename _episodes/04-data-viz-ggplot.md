@@ -799,17 +799,18 @@ create a logarithmic scale for easier visibility.
 argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
 = 60, hjust = 1))`
 >
-> 
-> ~~~
-> ggplot(data = books2, aes(x = subCollection)) +
->  geom_bar() +
->  facet_wrap(vars(format)) +
->  scale_y_log10() +
->  theme(axis.text.x = element_text(angle = 60, hjust = 1))
-> ~~~
-> {: .language-r}
-> 
-> <img src="../fig/rmd-04-average-weight-time-series-1.png" title="plot of chunk average-weight-time-series" alt="plot of chunk average-weight-time-series" width="612" style="display: block; margin: auto;" />
+> > ## Solution
+> > 
+> > ~~~
+> > ggplot(data = books2, aes(x = subCollection)) +
+> > geom_bar() +
+> > facet_wrap(vars(format)) +
+> > scale_y_log10() +
+> > theme(axis.text.x = element_text(angle = 60, hjust = 1))
+> > ~~~
+> > {: .language-r}
+> > 
+> > <img src="../fig/rmd-04-average-weight-time-series-1.png" title="plot of chunk average-weight-time-series" alt="plot of chunk average-weight-time-series" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
