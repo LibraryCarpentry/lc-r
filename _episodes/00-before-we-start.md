@@ -501,5 +501,5 @@ Parts of this episode have been inspired by the following:
 
 * ["Before We Start"](https://datacarpentry.org/r-socialsci/00-intro/index.html) R for Social Scientists Carpentry Lesson. CC BY 4.0.
 * Roger Peng's [Computing for Data Analysis videos](https://www.youtube.com/playlist?list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ)
-* Lisa Federer's [Introduction to R for Non-Programmers](http://nihlibrary.campusguides.com/dataservices/intro_to_r)
+* Lisa Federer's [Introduction to R for Non-Programmers](archived at https://web.archive.org/web/20180726071634/http://nihlibrary.campusguides.com/dataservices/intro_to_r)
 * Brad Boehmke's [Intro to R Bootcamp](https://uc-r.github.io/r_bootcamp)
