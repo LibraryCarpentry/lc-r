@@ -274,6 +274,12 @@ booksJuv <- filter(books,
                    subCollection ==  "juvenile")
 ```
 
+If you want to filter on multiple conditions within the same variable, use the `%in%` operator combined with a vector of all the values you wish to include within `c()`. For example, you may want to include only items in the format `serial` and `microform`:
+
+```{r, comment=FALSE, purl=FALSE}
+serial_microform <- filter(books, format %in% c("serial", "microform"))
+```
+
 > ## Filtering with `filter()`
 >
 > 1. Use `filter()` to create a data frame called `booksJuv` consisting of `format` books and `subCollection` juvenile materials. 
@@ -402,7 +408,7 @@ myBooks
 > > ## Solution
 > > ```{r, answer=TRUE}
 > > booksKids <- books %>%
-      filter(subCollection == "juvenile",
+      filter(subCollection %in% c("juvenile", "k-12 materials"),
       format == "book") %>%
     select(title, callnumber, tot_chkout, pubyear) %>%
     arrange(desc(tot_chkout))
