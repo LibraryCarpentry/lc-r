@@ -437,8 +437,7 @@ You could also have installed the **`tidyverse`** packages by running this comma
 ### Learning R
 1. `swirl` is a package you can install in R to learn about R and data science
 interactively. Just type `install.packages("swirl")` into your R console, load
-the package by typing `library("swirl")`, and then type `swirl()`. Read more at
-<http://swirlstats.com/>.
+the package by typing `library("swirl")`, and then type `swirl()`. Read more at <http://swirlstats.com/>.
 
 2. [Try R](http://tryr.codeschool.com/) is a browser-based interactive tutorial
 developed by Code School.
