@@ -82,7 +82,7 @@ up to date:
   [for MacOS](https://cran.r-project.org/bin/macosx/),
   or [for Linux](https://cran.r-project.org/bin/linux/)
 * To update RStudio to the latest version, open RStudio and click on 
-  `Help > Check for updates`. If a new version is available, quit RStudio, 
+  `Help" > Check for updates`. If a new version is available, quit RStudio, 
   follow the instruction on screen.
   
 Note: It is not necessary to remove old versions of R from your system, 
