@@ -269,12 +269,9 @@ You can then check the summary statistics of checkouts for books with more than 
 
 ```{r, comment=FALSE, purl=FALSE}
 summary(bookCheckouts$tot_chkout)
-```
-
-If you want to filter on multiple conditions within the same variable, use the `%in%` operator combined with a vector of all the values you wish to include within `c()`. For example, you may want to include only items in the format `serial` and `microform`:
-
-```{r, comment=FALSE, purl=FALSE}
-serial_microform <- filter(books, format %in% c("serial", "microform"))
+booksJuv <- filter(books,
+                   format == "book",
+                   subCollection ==  "juvenile")
 ```
 
 > ## Filtering with `filter()`
@@ -301,7 +298,7 @@ provides a convenient way to reorder variables.
 
 ```{r select, comment=NA}
 # specify the variables you want to keep by name
-booksTitleCheckouts <- select(books, title, tot_chkout)
+booksTitleCheckouts <- dplyr::select(books, title, tot_chkout)
 booksTitleCheckouts
 
 # specify the variables you want to remove with a -
@@ -344,7 +341,8 @@ we start with the first character, and end with the first character.
 `mutate()` is also helpful to coerce a column from one data type to another. For example, we can see there are some errors in the `pubyear` variable--some dates are `19zz` or `uuuu`. As a result, this variable was read in as a `character` rather than an `integer`. 
 
 ```{r, comment=NA}
-books <- mutate(books, pubyear = as.integer(pubyear))
+books <- books %>%
+  mutate(pubyear = as.integer(pubyear))
 ```
 
 We see the error message `NAs introduced by coercion`. This is because non-numerical variables become `NA` and the remainder become integers.
@@ -405,7 +403,7 @@ myBooks
 > > ## Solution
 > > ```{r, answer=TRUE}
 > > booksKids <- books %>%
-      filter(subCollection %in% c("juvenile", "k-12 materials"),
+      filter(subCollection == "juvenile",
       format == "book") %>%
     select(title, callnumber, tot_chkout, pubyear) %>%
     arrange(desc(tot_chkout))

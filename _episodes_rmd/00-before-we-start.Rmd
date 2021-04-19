@@ -370,18 +370,25 @@ bioinformatics.
 
 ## Installing Packages
 
-Installing CRAN packages can be done from the Packages tab in the Navigation
-tab, or from the RStudio console. Click the Packages tab in the Navigation Pane,
-then click Install and search for the package you're looking for. You can also
-use the `install.packages()` function directly in the console. Run
-`help(install.packages)` to learn more about how to do it this way.
+Installing CRAN packages can be done from the RStudio console. Click the
+Packages tab in the Navigation Pane, then click Install and search for the
+package you're looking for. You can also use the `install.packages()` function
+directly in the console. Run `help(install.packages)` to learn more about how to
+do it this way.
+
+
+Additional packages can be installed from the ‘packages’ tab.
+On the packages tab, click the ‘Install’ icon and start typing the
+name of the package you want in the text box. As you type, packages
+matching your starting characters will be displayed in a drop-down
+list so that you can select them.
 
 <figure>
 ```{r install-packages, echo=FALSE, fig.cap="Click on the Packages tab in the Navigation Pane to download packages from CRAN."}	
 knitr::include_graphics("../fig/R_00_Rstudio_03.png")
 ```
 <figcaption>
-Screenshot of the Packages tab in the Navigation Pane, used to download packages from CRAN. 
+Click on the Packages tab in the Navigation Pane to download packages from CRAN. 
 </figcaption>
 </figure>
 
@@ -430,7 +437,8 @@ You could also have installed the **`tidyverse`** packages by running this comma
 ### Learning R
 1. `swirl` is a package you can install in R to learn about R and data science
 interactively. Just type `install.packages("swirl")` into your R console, load
-the package by typing `library("swirl")`, and then type `swirl()`. Read more at [swirl](http://swirlstats.com/).
+the package by typing `library("swirl")`, and then type `swirl()`. Read more at
+<http://swirlstats.com/>.
 
 2. [Try R](http://tryr.codeschool.com/) is a browser-based interactive tutorial
 developed by Code School.
@@ -493,5 +501,5 @@ Parts of this episode have been inspired by the following:
 
 * ["Before We Start"](https://datacarpentry.org/r-socialsci/00-intro/index.html) R for Social Scientists Carpentry Lesson. CC BY 4.0.
 * Roger Peng's [Computing for Data Analysis videos](https://www.youtube.com/playlist?list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ)
-* Lisa Federer's [Introduction to R for Non-Programmers](archived at https://www.nihlibrary.nih.gov/training/introduction-r-data-wrangling-5)
+* Lisa Federer's [Introduction to R for Non-Programmers](http://nihlibrary.campusguides.com/dataservices/intro_to_r)
 * Brad Boehmke's [Intro to R Bootcamp](https://uc-r.github.io/r_bootcamp)
