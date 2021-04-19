@@ -374,17 +374,10 @@ package you're looking for. You can also use the `install.packages()` function
 directly in the console. Run `help(install.packages)` to learn more about how to
 do it this way.
 
-
-Additional packages can be installed from the ‘packages’ tab.
-On the packages tab, click the ‘Install’ icon and start typing the
-name of the package you want in the text box. As you type, packages
-matching your starting characters will be displayed in a drop-down
-list so that you can select them.
-
 <figure>
 <img src="../fig/R_00_Rstudio_03.png" title="Click on the Packages tab in the Navigation Pane to download packages from CRAN." alt="Click on the Packages tab in the Navigation Pane to download packages from CRAN." style="display: block; margin: auto;" />
 <figcaption>
-Click on the Packages tab in the Navigation Pane to download packages from CRAN. 
+Screenshot of the Packages tab in the Navigation Pane, used to download packages from CRAN. 
 </figcaption>
 </figure>
 
@@ -435,8 +428,7 @@ You could also have installed the **`tidyverse`** packages by running this comma
 ### Learning R
 1. `swirl` is a package you can install in R to learn about R and data science
 interactively. Just type `install.packages("swirl")` into your R console, load
-the package by typing `library("swirl")`, and then type `swirl()`. Read more at
-<http://swirlstats.com/>.
+the package by typing `library("swirl")`, and then type `swirl()`. Read more at [swirl](http://swirlstats.com/).
 
 2. [Try R](http://tryr.codeschool.com/) is a browser-based interactive tutorial
 developed by Code School.
