@@ -85,8 +85,8 @@ library(tidyverse)  # load the core tidyverse
 
 
 ~~~
-✔ ggplot2 3.3.3     ✔ dplyr   1.0.5
-✔ tibble  3.1.1     ✔ stringr 1.4.0
+✔ ggplot2 3.3.3     ✔ dplyr   1.0.6
+✔ tibble  3.1.2     ✔ stringr 1.4.0
 ✔ tidyr   1.1.3     ✔ forcats 0.5.1
 ✔ purrr   0.3.4     
 ~~~
