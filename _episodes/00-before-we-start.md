@@ -31,7 +31,7 @@ Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) (CC BY
 
 `R` is more of a programming language than just a statistics program. It was
 started by Robert Gentleman and Ross Ihaka from the University of Auckland in 1995. They [described it
-as](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/JeffreyHorner/JCGSR.pdf) "a
+as](https://doi.org/10.2307/1390807) "a
 language for data analysis and graphics." You can use R to create, import, and
 scrape data from the web; clean and reshape it; visualize it; run statistical
 analysis and modeling operations on it; text and data mine it; and much more.
