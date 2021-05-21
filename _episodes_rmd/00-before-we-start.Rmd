@@ -158,16 +158,15 @@ By using R or any advanced data analysis platform (such as Python), libraries
 can harness data in order to:
 
 * Clean messy data from the ILS & vendors
-    + multiple repeated fields
-    + clean ISBNs, ISSNs, other identifiers
-    + detect data errors & anomalies
-    + normalize names (e.g. databases, ebooks, serials)
-    + create custom subsets
+    + Clean ISBNs, ISSNs, other identifiers
+    + Detect data errors & anomalies
+    + Normalize names (e.g. databases, ebooks, serials)
+    + Create custom subsets
 * Merge and analyze data, e.g.
-    + holdings and usage data from the same vendor
-    + print book & ebook holdings
+    + Holdings and usage data from the same vendor
+    + Print book & ebook holdings
     + COUNTER statistics
-    + institutional data
+    + Institutional data
 * Recode variables 
 * Manipulate dates and times
 * Create visualizations
