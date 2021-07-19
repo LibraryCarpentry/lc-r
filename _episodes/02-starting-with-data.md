@@ -221,7 +221,7 @@ library(tidyverse)  # loads the core tidyverse, including dplyr, readr, ggplot2,
 
 
 ~~~
-✔ ggplot2 3.3.3     ✔ dplyr   1.0.6
+✔ ggplot2 3.3.5     ✔ dplyr   1.0.7
 ✔ tibble  3.1.2     ✔ stringr 1.4.0
 ✔ tidyr   1.1.3     ✔ forcats 0.5.1
 ✔ purrr   0.3.4     
@@ -304,7 +304,7 @@ data is read using `read_csv()`, it is stored in an object of class `tbl_df`,
 
 ## Inspecting data frames
 
-When calling a `tbl_df` object (like `interviews` here), there is already a lot of information about our data frame being displayed such as the number of rows, the number of columns, the names of the columns, and as we just saw the class of data stored in each column. However, there are functions to extract this information from data frames.  Here is a non-exhaustive list of some of these
+When calling a `tbl_df` object (like `books` here), there is already a lot of information about our data frame being displayed such as the number of rows, the number of columns, the names of the columns, and as we just saw the class of data stored in each column. However, there are functions to extract this information from data frames.  Here is a non-exhaustive list of some of these
 functions. Let's try them out!
 
 * Size:

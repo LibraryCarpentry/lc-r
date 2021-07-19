@@ -85,7 +85,7 @@ library(tidyverse)  # load the core tidyverse
 
 
 ~~~
-✔ ggplot2 3.3.3     ✔ dplyr   1.0.6
+✔ ggplot2 3.3.5     ✔ dplyr   1.0.7
 ✔ tibble  3.1.2     ✔ stringr 1.4.0
 ✔ tidyr   1.1.3     ✔ forcats 0.5.1
 ✔ purrr   0.3.4     
@@ -514,6 +514,17 @@ hidden?
 > > ~~~
 > > {: .language-r}
 > > 
+> > 
+> > 
+> > ~~~
+> > Warning: Groups with fewer than two data points have been dropped.
+> > Warning: Groups with fewer than two data points have been dropped.
+> > Warning: Groups with fewer than two data points have been dropped.
+> > Warning: Groups with fewer than two data points have been dropped.
+> > Warning: Groups with fewer than two data points have been dropped.
+> > ~~~
+> > {: .warning}
+> > 
 > > <img src="../fig/rmd-04-violin-plot-1.png" title="plot of chunk violin-plot" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
@@ -528,6 +539,17 @@ hidden?
 > > scale_y_log10()
 > > ~~~
 > > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > Warning: Groups with fewer than two data points have been dropped.
+> > Warning: Groups with fewer than two data points have been dropped.
+> > Warning: Groups with fewer than two data points have been dropped.
+> > Warning: Groups with fewer than two data points have been dropped.
+> > Warning: Groups with fewer than two data points have been dropped.
+> > ~~~
+> > {: .warning}
 > > 
 > > <img src="../fig/rmd-04-boxplot-exercise-subcollection-1.png" title="plot of chunk boxplot-exercise-subcollection" alt="plot of chunk boxplot-exercise-subcollection" width="612" style="display: block; margin: auto;" />
 > {: .solution}
