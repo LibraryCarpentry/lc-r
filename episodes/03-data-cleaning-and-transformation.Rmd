@@ -281,7 +281,7 @@ serial_microform <- filter(books, format %in% c("serial", "microform"))
 >
 > 1. Use `filter()` to create a data frame called `booksJuv` consisting of `format` books and `subCollection` juvenile materials. 
 >
-> 2. Use `mean()` to check the average number of checkouts for the `booksKids` data frame.
+> 2. Use `mean()` to check the average number of checkouts for the `booksJuv` data frame.
 >
 > > ## Solution
 > > ```{r, answer=TRUE}
@@ -400,7 +400,7 @@ myBooks
   * `select()` only title, call number, total checkouts, and publication year
   * `arrange()` by total checkouts in descending order
 >
-> 2. Use `mean()` to check the average number of checkouts for the `booksJuv` data frame.
+> 2. Use `mean()` to check the average number of checkouts for the `booksKids` data frame.
 >
 > > ## Solution
 > > ```{r, answer=TRUE}
@@ -409,6 +409,7 @@ myBooks
       format == "book") %>%
     select(title, callnumber, tot_chkout, pubyear) %>%
     arrange(desc(tot_chkout))
+    mean(booksKids$tot_chkout)
 > > ```
 > {: .solution}
 {: .challenge}
