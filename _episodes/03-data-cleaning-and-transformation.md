@@ -674,7 +674,7 @@ myBooks
   * `select()` only title, call number, total checkouts, and publication year
   * `arrange()` by total checkouts in descending order
 >
-> 2. Use `mean()` to check the average number of checkouts for the `booksJuv` data frame.
+> 2. Use `mean()` to check the average number of checkouts for the `booksKids` data frame.
 >
 > > ## Solution
 > > 
@@ -684,8 +684,16 @@ myBooks
 > >       format == "book") %>%
 > >     select(title, callnumber, tot_chkout, pubyear) %>%
 > >     arrange(desc(tot_chkout))
+> >     mean(booksKids$tot_chkout)
 > > ~~~
 > > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > [1] 9.336331
+> > ~~~
+> > {: .output}
 > {: .solution}
 {: .challenge}
 

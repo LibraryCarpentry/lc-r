@@ -263,20 +263,17 @@ time_minutes <- 30
 
 > ## Exercise
 >
-> Create two variables `length` and `width` and assign them values. It should be
-noted that R Studio might add "()" after width and if you leave the parentheses
-you will get unexpected results. This is why you might see other programmers
-abbreviate common words.
-> Create a third variable `area` and give it a value based on the current values of `length` and `width`.
-> Show that changing the values of either `length` and `width` does not affect the value of `area`.
+> Create two variables `my_length` and `my_width` and assign them any numeric values you want.
+> Create a third variable `my_area` and give it a value based on the the multiplication of `my_length` and `my_width`.
+> Show that changing the values of either `my_length` and `my_width` does not affect the value of `my_area`.
 > 
 > > ## Solution
 > > 
 > > 
 > > ~~~
-> > length <- 2.5
-> > width <- 3.2
-> > area <- length * width
+> > my_length <- 2.5
+> > my_width <- 3.2
+> > my_area <- my_length * my_width
 > > area
 > > ~~~
 > > {: .language-r}
@@ -284,18 +281,18 @@ abbreviate common words.
 > > 
 > > 
 > > ~~~
-> > [1] 8
+> > Error in eval(expr, envir, enclos): object 'area' not found
 > > ~~~
-> > {: .output}
+> > {: .error}
 > > 
 > > 
 > > 
 > > ~~~
-> > # change the values of length and width
-> > length <- 7.0
-> > width <- 6.5
-> > # the value of area isn't changed
-> > area
+> > # change the values of my_length and my_width
+> > my_length <- 7.0
+> > my_width <- 6.5
+> > # the value of my_area isn't changed
+> > my_area
 > > ~~~
 > > {: .language-r}
 > > 
@@ -624,9 +621,6 @@ beginning, again saving the result back into `author`.
 We can do this over and over again to grow a vector, or assemble a dataset.
 As we program, this may be useful to add results that we are collecting or
 calculating.
-
-Use this to open a tab in the Script Pane (upper left) to view your data. This
-is helpful if you have a very long vector you need to browse.
 
 An **atomic vector** is the simplest R **data type** and is a linear vector of a
 single type. Above, we saw 2 of the 6 main **atomic vector** types  that R uses:
