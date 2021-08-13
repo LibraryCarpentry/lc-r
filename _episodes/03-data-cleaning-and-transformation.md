@@ -188,9 +188,10 @@ books <- rename(books,
 > ## Side note:
 >
 > Where does `X245.ab` come from? That is the MARC field 245|ab. However,
-because R variables cannot start with a number, R automatically inserted and X,
-and because pipes | are not allowed in variable names, R replaced it with a
-period. {: .callout}
+> because R variables cannot start with a number, R automatically inserted an X,
+> and because pipes | are not allowed in variable names, R replaced it with a
+> period. 
+{: .callout}
 
 
 
