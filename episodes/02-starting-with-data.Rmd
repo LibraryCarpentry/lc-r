@@ -140,7 +140,7 @@ Using RStudio projects makes this easy and ensures that your working directory
 is set up properly. If you need to check it, you can use `getwd()`. If for some
 reason your working directory is not what it should be, you can change it in the
 RStudio interface by navigating in the file browser to where your working directory
-should be, by clicking on the blue gear icon "More", and selecting "Set As Working
+should be, then by clicking on the blue gear icon "More", and selecting "Set As Working
 Directory". Alternatively, you can use `setwd("/path/to/working/directory")` to
 reset your working directory. However, your scripts should not include this line,
 because it will fail on someone else's computer.
