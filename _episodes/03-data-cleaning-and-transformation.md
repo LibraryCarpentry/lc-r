@@ -83,7 +83,7 @@ library(tidyverse)
 
 ~~~
 ✔ ggplot2 3.3.5     ✔ dplyr   1.0.7
-✔ tibble  3.1.3     ✔ stringr 1.4.0
+✔ tibble  3.1.4     ✔ stringr 1.4.0
 ✔ tidyr   1.1.3     ✔ forcats 0.5.1
 ✔ purrr   0.3.4     
 ~~~
