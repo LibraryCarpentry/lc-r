@@ -24,7 +24,6 @@ questions:
 - What is a function and how can we pass arguments to functions?
 - How can values be initially assigned to variables of different data types?
 - How can a vector be created What are the available data types?
-- How can subsets be extracted from vectors?
 - How does R treat missing values?
 - How can we deal with missing values in R?
 source: Rmd
@@ -485,7 +484,7 @@ hierarchy, whereby some types get preferentially coerced into other types. This
 hierarchy is: logical < integer < numeric < complex < character < list.
 
 You can also *coerce* a vector to be a specific data type with `as.character()`,
-`as.logical()`, `as.numeric`, etc. For example, to coerce a number to a
+`as.logical()`, `as.numeric()`, etc. For example, to coerce a number to a
 character:
 
 ```{r, purl=FALSE}
