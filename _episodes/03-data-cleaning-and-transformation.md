@@ -82,8 +82,8 @@ library(tidyverse)
 
 
 ~~~
-✔ ggplot2 3.3.3     ✔ dplyr   1.0.6
-✔ tibble  3.1.2     ✔ stringr 1.4.0
+✔ ggplot2 3.3.5     ✔ dplyr   1.0.7
+✔ tibble  3.1.4     ✔ stringr 1.4.0
 ✔ tidyr   1.1.3     ✔ forcats 0.5.1
 ✔ purrr   0.3.4     
 ~~~
@@ -188,9 +188,10 @@ books <- rename(books,
 > ## Side note:
 >
 > Where does `X245.ab` come from? That is the MARC field 245|ab. However,
-because R variables cannot start with a number, R automatically inserted and X,
-and because pipes | are not allowed in variable names, R replaced it with a
-period. {: .callout}
+> because R variables cannot start with a number, R automatically inserted an X,
+> and because pipes | are not allowed in variable names, R replaced it with a
+> period. 
+{: .callout}
 
 
 
@@ -214,7 +215,7 @@ books
 
 
 ~~~
-# A tibble: 10,000 x 12
+# A tibble: 10,000 × 12
    callnumber  title    author    location tot_chkout loutdate  subject   isbn  
    <chr>       <chr>    <chr>     <chr>         <dbl> <chr>     <chr>     <chr> 
  1 001.94 Don… Bermuda… written … juv               6 11-21-20… Readers … 07894…
@@ -289,7 +290,7 @@ distinct(books, subCollection)
 
 
 ~~~
-FALSE # A tibble: 10 x 1
+FALSE # A tibble: 10 × 1
 FALSE    subCollection
 FALSE    <chr>        
 FALSE  1 j            
@@ -326,7 +327,7 @@ books
 
 
 ~~~
-FALSE # A tibble: 10,000 x 12
+FALSE # A tibble: 10,000 × 12
 FALSE    callnumber  title    author    location tot_chkout loutdate  subject   isbn  
 FALSE    <chr>       <chr>    <chr>     <chr>         <dbl> <chr>     <chr>     <chr> 
 FALSE  1 001.94 Don… Bermuda… written … juv               6 11-21-20… Readers … 07894…
@@ -474,7 +475,7 @@ booksTitleCheckouts
 
 
 ~~~
-# A tibble: 10,000 x 2
+# A tibble: 10,000 × 2
    title                                                              tot_chkout
    <chr>                                                                   <dbl>
  1 Bermuda Triangle /                                                          6
@@ -519,7 +520,7 @@ booksHighestChkout
 
 
 ~~~
-# A tibble: 10,000 x 11
+# A tibble: 10,000 × 11
    callnumber title author tot_chkout loutdate subject isbn  callnumber2 pubyear
    <chr>      <chr> <chr>       <dbl> <chr>    <chr>   <chr> <chr>       <chr>  
  1 E Cro 2000 Clic… by Do…        113 01-23-2… Cows -… 0689… E Cro 2000  2000   
@@ -602,7 +603,7 @@ books %>%
 
 
 ~~~
-# A tibble: 10,000 x 2
+# A tibble: 10,000 × 2
    title_modified                            title                              
    <chr>                                     <chr>                              
  1 "Bermuda Triangle "                       Bermuda Triangle /                 
@@ -649,7 +650,7 @@ myBooks
 
 
 ~~~
-# A tibble: 6,983 x 2
+# A tibble: 6,983 × 2
    title                                      tot_chkout
    <chr>                                           <dbl>
  1 Click, clack, moo :|cows that type /              113
@@ -674,7 +675,7 @@ myBooks
   * `select()` only title, call number, total checkouts, and publication year
   * `arrange()` by total checkouts in descending order
 >
-> 2. Use `mean()` to check the average number of checkouts for the `booksJuv` data frame.
+> 2. Use `mean()` to check the average number of checkouts for the `booksKids` data frame.
 >
 > > ## Solution
 > > 
@@ -684,8 +685,16 @@ myBooks
 > >       format == "book") %>%
 > >     select(title, callnumber, tot_chkout, pubyear) %>%
 > >     arrange(desc(tot_chkout))
+> >     mean(booksKids$tot_chkout)
 > > ~~~
 > > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > [1] 9.336331
+> > ~~~
+> > {: .output}
 > {: .solution}
 {: .challenge}
 
@@ -717,7 +726,7 @@ books %>%
 
 
 ~~~
-# A tibble: 10 x 2
+# A tibble: 10 × 2
    format       mean_checkouts
    <chr>                 <dbl>
  1 book                3.23   
@@ -751,7 +760,7 @@ books %>%
 
 
 ~~~
-# A tibble: 34 x 3
+# A tibble: 34 × 3
    call_class count sum_tot_chkout
    <chr>      <int>          <dbl>
  1 E            487           3114
