@@ -533,7 +533,7 @@ For example, `facet_wrap(facets = vars(facet_variable))` or
 
 Here we use `facet_wrap()` to make a time series plot for each subCollection
 
-```{r first-facet, purl=FALSE}
+```{r first-facet, fig.alt = "Three line plots, one each for general collection, juvenile, and K-12 sub-collection materials, showing the relationship of count of books to publication year", purl=FALSE}
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
     geom_line() +
     facet_wrap(facets = vars(subCollection))
