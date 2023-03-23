@@ -110,10 +110,10 @@ aspect of your graph to convey most effectively the message from your data.
 
 
 Thousands of people use R daily. Many of them are willing to help you through
-mailing lists and websites such as [Stack Overflow](https://stackoverflow.com/), 
-or on the [RStudio community](https://community.rstudio.com/). Questions which 
+mailing lists and websites such as [Stack Overflow](https://stackoverflow.com/),
+or on the [RStudio community](https://community.rstudio.com/). Questions which
 are backed up with [short, reproducible code
-snippets](https://www.tidyverse.org/help/) are more likely to attract 
+snippets](https://www.tidyverse.org/help/) are more likely to attract
 knowledgeable responses.
 
 
@@ -137,13 +137,7 @@ freely available to extend R's native capabilities.
 
 
 
-<figure>
-<img src="../fig/r+rstudio-analogy.jpg" alt="RStudio extends what R can do, and makes it easier to write R code and interact with R." style="display: block; margin: auto;" />
-<figcaption>
-RStudio extends what R can do, and makes it easier to write R code and interact
-with R. <a href="https://commons.wikimedia.org/w/index.php?curid=2447462">Left photo credit</a>; <a href="https://commons.wikimedia.org/w/index.php?curid=44599363">right photo credit</a>. 
-</figcaption>
-</figure>
+<img src="../fig/r+rstudio-analogy.jpg" alt="Two images of a DMC Delorian: left is a standard model and on the right is one that has been modified into the time machine from 'Back To The Future'" style="display: block; margin: auto;" />
 
 ### R and librarianship
 
@@ -165,12 +159,12 @@ can harness data in order to:
     + Print book & ebook holdings
     + COUNTER statistics
     + Institutional data
-* Recode variables 
+* Recode variables
 * Manipulate dates and times
 * Create visualizations
 * Provide data reference services
 * Access data via APIs, including Crossref, Unpaywall, ORCID, and Sherpa-ROMeO
-* Write documents to communicate findings 
+* Write documents to communicate findings
 
 
 ## Knowing your way around RStudio
@@ -184,13 +178,13 @@ The RStudio IDE is also available with a commercial license and priority email
 support from RStudio, Inc.
 
 We will use the RStudio IDE to write code, navigate the files on our computer,
-inspect the variables we create, and visualize the plots we generate. RStudio 
-can also be used for other things (e.g., version control, developing packages, 
-writing Shiny apps) that we will not cover during the workshop. 
+inspect the variables we create, and visualize the plots we generate. RStudio
+can also be used for other things (e.g., version control, developing packages,
+writing Shiny apps) that we will not cover during the workshop.
 
 One of the advantages of using RStudio is that all the information
-you need to write code is available in a single window. Additionally, RStudio 
-provides many shortcuts, autocompletion, and highlighting for the major file 
+you need to write code is available in a single window. Additionally, RStudio
+provides many shortcuts, autocompletion, and highlighting for the major file
 types you use while developing in R. RStudio makes typing easier and less
 error-prone.
 
@@ -200,16 +194,16 @@ error-prone.
 It is good practice to keep a set of related data, analyses, and text
 self-contained in a single folder called the **working directory**. All of the
 scripts within this folder can then use *relative paths* to files. Relative paths
-indicate where inside the project a file is located (as opposed to absolute paths, 
+indicate where inside the project a file is located (as opposed to absolute paths,
 which point to where a file is on a specific computer). Working this way makes it
 a lot easier to move your project around on your computer and share it with
 others without having to directly modify file paths in the individual scripts.
 
 RStudio provides a helpful set of tools to do this through its "Projects"
 interface, which not only creates a working directory for you but also remembers
-its location (allowing you to quickly navigate to it). The interface also 
-(optionally) preserves custom settings and open files to make it easier to 
-resume work after a break. 
+its location (allowing you to quickly navigate to it). The interface also
+(optionally) preserves custom settings and open files to make it easier to
+resume work after a break.
 
 
 ### Create a new project
@@ -222,17 +216,16 @@ will be your **working directory** for the rest of the day.
 * Create a new file where we will type our scripts. Go to File > New File > R
 script. Click the save icon on your toolbar and save your script as
 "`script.R`".
-  
-### The RStudio Interface  
+
+### The RStudio Interface
+
 Let's take a quick tour of RStudio.
 
-<figure>
-<img src="../fig/RStudioPanes.png" alt="R Studio" style="display: block; margin: auto;" />
-</figure>
+<img src="../fig/RStudioPanes.png" alt="screenshot of RStudio with labels of the four panes as described below" style="display: block; margin: auto;" />
 
 RStudio is divided into four "panes". The placement of these
 panes and their content can be customized (see menu, Tools -> Global Options ->
-Pane Layout).  
+Pane Layout).
 
 The Default Layout is:
 - **Console Pane** (bottom left)
@@ -243,7 +236,7 @@ enter some code. Code that you type directly in the console will not be saved,
 though it is available in the History Pane. You can try it out by typing `2 + 2`
 into the console.
 
-- **Script Pane** (top left) 
+- **Script Pane** (top left)
 This is sort of like a text editor, or a place to draft and save code. You then
 tell RStudio to run the line of code, or multiple lines of code, and you can see
 it appear in the console as it is running. Then save the script as a .R file for
@@ -373,12 +366,7 @@ package you're looking for. You can also use the `install.packages()` function
 directly in the console. Run `help(install.packages)` to learn more about how to
 do it this way.
 
-<figure>
-<img src="../fig/R_00_Rstudio_03.png" alt="Click on the Packages tab in the Navigation Pane to download packages from CRAN." style="display: block; margin: auto;" />
-<figcaption>
-Screenshot of the Packages tab in the Navigation Pane, used to download packages from CRAN. 
-</figcaption>
-</figure>
+<img src="../fig/R_00_Rstudio_03.png" alt="install packages pane showing an entry for installing the 'tidyverse' package" style="display: block; margin: auto;" />
 
 At the bottom of the Install Packages window is a check box to
 ‘Install’ dependencies. This is ticked by default, which is usually
@@ -391,10 +379,10 @@ dependencies’ option makes sure that this happens.
 > ## Exercise
 >
 > Use the install option from the packages tab to install the ‘tidyverse’ package.
-> 
+>
 > > ## Solution
 > > From the packages tab, click ‘Install’ from the toolbar and type ‘tidyverse’ into the textbox, then click ‘install’.
-> > The ‘tidyverse’ package is really a package of packages, including 'ggplot2' and 'dplyr', both of which require other packages to run correctly. All of these packages will be installed automatically. 
+> > The ‘tidyverse’ package is really a package of packages, including 'ggplot2' and 'dplyr', both of which require other packages to run correctly. All of these packages will be installed automatically.
 > > Depending on what packages have previously been installed in your R environment, the install of ‘tidyverse’ could be very quick or could take several minutes.
 > > As the install proceeds, messages relating to its progress will be written to the console. You will be able to see all of the packages which are actually being installed.
 > {: .solution}
@@ -444,12 +432,12 @@ Coursera](https://www.coursera.org/learn/r-programming) by Roger Peng.
 
 6. Books:
 * [R For Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund & Hadley
-Wickham [free] 
+Wickham [free]
 * [An Introduction to Data Cleaning with
 R](https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf)
-by Edwin de Jonge & Mark van der Loo [free] 
+by Edwin de Jonge & Mark van der Loo [free]
 * [YaRrr! The Pirate's Guide to
-R](https://bookdown.org/ndphillips/YaRrr/) by Nathaniel D. Phillips [free] 
+R](https://bookdown.org/ndphillips/YaRrr/) by Nathaniel D. Phillips [free]
 * Springer's [Use R!](https://link.springer.com/bookseries/6991) series [not free]
 is mostly specialized, but it has some excellent introductions including Alain
 F. Zuur et al.'s [A Beginner's Guide to

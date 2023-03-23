@@ -29,7 +29,7 @@ teaching: 50
 exercises: 30
 source: Rmd
 ---
-  
+
 
 
 
@@ -53,7 +53,7 @@ script. Click the save icon on your toolbar and save your script as
 
 
 ~~~
-library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
+library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R.
 dir_create("data")
 dir_create("data_output")
 dir_create("fig_output")
@@ -64,7 +64,7 @@ download.file("https://ndownloader.figshare.com/files/22031487",
 
 ### Load the `tidyverse` and data frame into your R session
 
-Load the `tidyverse` 
+Load the `tidyverse`
 
 
 ~~~
@@ -87,7 +87,7 @@ library(tidyverse)
 ~~~
 {: .output}
 
-And the `books` data we saved in the previous lesson. 
+And the `books` data we saved in the previous lesson.
 
 
 ~~~
@@ -167,7 +167,7 @@ renamed to `title`.
 
 
 ~~~
-# rename the . Make sure you return (<-) the output to your 
+# rename the . Make sure you return (<-) the output to your
 # variable, otherwise it will just print it to the console
 books <- rename(books,
                 title = X245.ab)
@@ -179,7 +179,7 @@ books <- rename(books,
 > Where does `X245.ab` come from? That is the MARC field 245|ab. However,
 > because R variables cannot start with a number, R automatically inserted an X,
 > and because pipes | are not allowed in variable names, R replaced it with a
-> period. 
+> period.
 {: .callout}
 
 
@@ -243,27 +243,17 @@ It is often necessary to recode or reclassify values in your data. For example,
 in the sample dataset provided to you, the `sub_collection` (formerly `BCODE1`)
 and `format` (formerly `BCODE2`) variables contain single characters.
 
-<figure>
 
 ~~~
 Error in knitr::include_graphics("../fig/BCODE1.PNG"): Cannot find the file(s): "../fig/BCODE1.PNG"
 ~~~
 {: .error}
-<figcaption>
-Sub-Collection (formerly BCODE1) export from Sierra
-</figcaption>
-</figure>
 
-<figure>
 
 ~~~
 Error in knitr::include_graphics("../fig/BCODE2.PNG"): Cannot find the file(s): "../fig/BCODE2.PNG"
 ~~~
 {: .error}
-<figcaption>
-Format (formerly BCODE2) export from Sierra
-</figcaption>
-</figure>
 
 You can do this easily using the `recode()` function, also in the `dplyr`
 package. Unlike `rename()`, the old value comes first here. Also notice that we
@@ -310,7 +300,7 @@ books$subCollection <- recode(books$subCollection,
                                       t = "theses",
                                       a = "archives",
                                       z = "reserves")
-books 
+books
 ~~~
 {: .language-r}
 
@@ -426,7 +416,7 @@ serial_microform <- filter(books, format %in% c("serial", "microform"))
 
 > ## Filtering with `filter()`
 >
-> 1. Use `filter()` to create a data frame called `booksJuv` consisting of `format` books and `subCollection` juvenile materials. 
+> 1. Use `filter()` to create a data frame called `booksJuv` consisting of `format` books and `subCollection` juvenile materials.
 >
 > 2. Use `mean()` to check the average number of checkouts for the `booksJuv` data frame.
 >
@@ -449,7 +439,7 @@ serial_microform <- filter(books, format %in% c("serial", "microform"))
 > {: .solution}
 {: .challenge}
 
-  
+
 ## Selecting variables
 
 The `select()` function allows you to keep or remove specific columns It also
@@ -496,7 +486,7 @@ booksReordered <- select(books, title, tot_chkout, loutdate, everything())
 
 
 ## Ordering data
-The `arrange()` function in the `dplyr` package allows you to sort your data by alphabetical or numerical order. 
+The `arrange()` function in the `dplyr` package allows you to sort your data by alphabetical or numerical order.
 
 
 ~~~
@@ -542,7 +532,7 @@ booksChkoutYear <- arrange(books, desc(tot_chkout), desc(pubyear))
 The `mutate()` function allows you to create new variables. Here, we use the
 `str_sub()` function from the `stringr` package to extract the first character
 of the `callnumber` variable (the call number class) and put it into a new column called
-`call_class`. 
+`call_class`.
 
 
 ~~~
@@ -554,7 +544,7 @@ booksLC <- mutate(books,
 There are two numbers because you must specify a start and an end value--here,
 we start with the first character, and end with the first character.
 
-`mutate()` is also helpful to coerce a column from one data type to another. For example, we can see there are some errors in the `pubyear` variable--some dates are `19zz` or `uuuu`. As a result, this variable was read in as a `character` rather than an `integer`. 
+`mutate()` is also helpful to coerce a column from one data type to another. For example, we can see there are some errors in the `pubyear` variable--some dates are `19zz` or `uuuu`. As a result, this variable was read in as a `character` rather than an `integer`.
 
 
 ~~~
@@ -624,7 +614,7 @@ myBooks
 > ## Playing with pipes `%>%`
 >
 > 1. Create a new data frame `booksKids` with these conditions:
-> * `filter()` to include `subCollection` juvenile & k-12 materials and `format` books. 
+> * `filter()` to include `subCollection` juvenile & k-12 materials and `format` books.
   * `select()` only title, call number, total checkouts, and publication year
   * `arrange()` by total checkouts in descending order
 >
@@ -664,7 +654,7 @@ the `group_by()` function.
 `group_by()` is often used together with `summarize()`, which collapses each
 group into a single-row summary of that group.  `group_by()` takes as arguments
 the column names that contain the **categorical** variables for which you want
-to calculate the summary statistics. 
+to calculate the summary statistics.
 
 So to compute the average checkouts by format:
 
@@ -700,7 +690,7 @@ Books and maps have the highest, and as we would expect, databases, online video
 Here is a more complex example:
 
 ~~~
-books %>% 
+books %>%
   filter(format == "book") %>%
   mutate(call_class = str_sub(callnumber, 1, 1)) %>%
   group_by(call_class) %>%
@@ -736,7 +726,7 @@ Let's break this down step by step:
 * We then create a new column with `mutate()` called `call_class` by using the
 `str_sub()` function to keep the first character of the `call_number` variable
 * We then `group_by()` our newly created `call_class` variable
-* We then create two summary columns by using `summarize()` 
+* We then create two summary columns by using `summarize()`
   - take the number `n()` of items per `call_class` and assign it to a column called `count`
   - take the the `sum()` of `tot_chkout` per `call_class` and assign the result to a column called `sum_tot_chkout`
 * Finally, we arrange `sum_tot_chkout` in descending order, so we can see the
@@ -744,7 +734,7 @@ class with the most total checkouts. We can see it is the `E` class (History of 
 
 ## Pattern matching
 
-Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:  
+Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:
 
 1. Remove the trailing slash in the title column
 2. Modify the punctuation separating the title from a subtitle
@@ -755,7 +745,7 @@ Read more about [matching patterns with regular expressions](https://r4ds.had.co
 
 
 ~~~
-books %>% 
+books %>%
   mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
   mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
   select(title_modified, title)
@@ -862,9 +852,9 @@ write_csv(books_reformatted, "./data_output/books_reformatted.csv")
 {: .language-r}
 
 # Help with dplyr
-  
-* Read more about `dplyr` at <https://dplyr.tidyverse.org/>. 
-* In your console, after loading `library(dplyr)`, run `vignette("dplyr")` to read an extremely helpful explanation of how to use it. 
+
+* Read more about `dplyr` at <https://dplyr.tidyverse.org/>.
+* In your console, after loading `library(dplyr)`, run `vignette("dplyr")` to read an extremely helpful explanation of how to use it.
 * See the [http://r4ds.had.co.nz/transform.html]("Data Transformation" chapter) in Garrett Grolemund and Hadley Wickham's book *R for Data Science.*
 * Watch this Data School video: [https://www.youtube.com/watch?v=jWjqLW-u3hc](Hands-on dplyr tutorial for faster data manipulation in R.)
 

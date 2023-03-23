@@ -1,5 +1,5 @@
 current directory: /home/runner/work/lc-r/lc-r/.vendor/bundle/ruby/2.7.0/gems/racc-1.6.2/ext/racc/cparse
-/opt/hostedtoolcache/Ruby/2.7.7/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.7/x64/lib/ruby/2.7.0 -r ./siteconf20230323-6067-n1pp3w.rb extconf.rb
+/opt/hostedtoolcache/Ruby/2.7.7/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.7/x64/lib/ruby/2.7.0 -r ./siteconf20230323-3986-1viip5v.rb extconf.rb
 checking for rb_block_call()... yes
 checking for rb_ary_subseq()... yes
 creating Makefile
@@ -127,5 +127,5 @@ Makefile:257: warning: overriding recipe for target '.m.S'
 :257: warning: ignoring old recipe for target '.m.S'
 Makefile:261: warning: overriding recipe for target 'cparse.so'
 :261: warning: ignoring old recipe for target 'cparse.so'
-/usr/bin/install -c -m 0755 cparse.so ./.gem.20230323-6067-1in5qnd/racc
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20230323-3986-1h8vfy3/racc
 make[1]: Leaving directory '/home/runner/work/lc-r/lc-r/.vendor/bundle/ruby/2.7.0/gems/racc-1.6.2/ext/racc/cparse'
