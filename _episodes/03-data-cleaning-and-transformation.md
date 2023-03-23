@@ -18,7 +18,7 @@ objectives:
 - "Use `summarize`, `group_by`, and `count` to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results."
 - "Describe the concept of a wide and a long table format and for which purpose those formats are useful."
 - "Describe what key-value pairs are."
-- "Reshape a data frame from long to wide format and back with the `spread` and `gather` commands from the **`tidyr`** package."
+- "Reshape a data frame from long to wide format and back with the `pivot_wider` and `pivot_longer` commands from the **`tidyr`** package."
 - "Export a data frame to a csv file."
 questions:
 - "How can I select specific rows and/or columns from a data frame?"
@@ -75,26 +75,15 @@ library(tidyverse)
 
 
 ~~~
-── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-~~~
-{: .output}
-
-
-
-~~~
-✔ ggplot2 3.3.5     ✔ dplyr   1.0.7
-✔ tibble  3.1.4     ✔ stringr 1.4.0
-✔ tidyr   1.1.3     ✔ forcats 0.5.1
-✔ purrr   0.3.4     
-~~~
-{: .output}
-
-
-
-~~~
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.1     ✔ purrr     1.0.1
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ~~~
 {: .output}
 
@@ -216,20 +205,21 @@ books
 
 ~~~
 # A tibble: 10,000 × 12
-   callnumber  title    author    location tot_chkout loutdate  subject   isbn  
-   <chr>       <chr>    <chr>     <chr>         <dbl> <chr>     <chr>     <chr> 
- 1 001.94 Don… Bermuda… written … juv               6 11-21-20… Readers … 07894…
- 2 001.942 Br… Invader… written … juv               2 02-07-20… Readers … 07894…
- 3 027.073 Ap… Down Cu… by Kathi… juv               3 10-16-20… Packhors… 00602…
- 4 133.5 Hua … The Chi… by Chung… juv               6 11-22-20… Astrolog… 00602…
- 5 170 She 20… Judge J… illustra… juv               7 04-10-20… Children… 00602…
- 6 170.44 She… Judge J… illustra… juv               6 11-12-20… Conduct … 00602…
- 7 220.9505 G… A young… retold b… juv               4 12-01-20… Bible st… 00602…
- 8 225.9505 M… God's K… retold b… juv               2 08-06-20… Bible st… 06898…
- 9 292.13 McC… Roman m… retold b… juv               4 04-03-20… Mytholog… 06898…
-10 292.211 Mc… Greek g… retold b… juv              13 11-16-20… Gods, Gr… 06898…
-# … with 9,990 more rows, and 4 more variables: CALL...ITEM. <chr>,
-#   pubyear <chr>, format <chr>, subCollection <chr>
+   callnumber        title     author location tot_chkout loutdate subject isbn 
+   <chr>             <chr>     <chr>  <chr>         <dbl> <chr>    <chr>   <chr>
+ 1 001.94 Don 2000   Bermuda … writt… juv               6 11-21-2… Reader… 0789…
+ 2 001.942 Bro 1999  Invaders… writt… juv               2 02-07-2… Reader… 0789…
+ 3 027.073 App 2001  Down Cut… by Ka… juv               3 10-16-2… Packho… 0060…
+ 4 133.5 Hua 1999    The Chin… by Ch… juv               6 11-22-2… Astrol… 0060…
+ 5 170 She 2000      Judge Ju… illus… juv               7 04-10-2… Childr… 0060…
+ 6 170.44 She 2001   Judge Ju… illus… juv               6 11-12-2… Conduc… 0060…
+ 7 220.9505 Gil 2001 A young … retol… juv               4 12-01-2… Bible … 0060…
+ 8 225.9505 McC 1999 God's Ki… retol… juv               2 08-06-2… Bible … 0689…
+ 9 292.13 McC 2001   Roman my… retol… juv               4 04-03-2… Mythol… 0689…
+10 292.211 McC 1998  Greek go… retol… juv              13 11-16-2… Gods, … 0689…
+# ℹ 9,990 more rows
+# ℹ 4 more variables: CALL...ITEM. <chr>, pubyear <chr>, format <chr>,
+#   subCollection <chr>
 ~~~
 {: .output}
 
@@ -328,20 +318,21 @@ books
 
 ~~~
 FALSE # A tibble: 10,000 × 12
-FALSE    callnumber  title    author    location tot_chkout loutdate  subject   isbn  
-FALSE    <chr>       <chr>    <chr>     <chr>         <dbl> <chr>     <chr>     <chr> 
-FALSE  1 001.94 Don… Bermuda… written … juv               6 11-21-20… Readers … 07894…
-FALSE  2 001.942 Br… Invader… written … juv               2 02-07-20… Readers … 07894…
-FALSE  3 027.073 Ap… Down Cu… by Kathi… juv               3 10-16-20… Packhors… 00602…
-FALSE  4 133.5 Hua … The Chi… by Chung… juv               6 11-22-20… Astrolog… 00602…
-FALSE  5 170 She 20… Judge J… illustra… juv               7 04-10-20… Children… 00602…
-FALSE  6 170.44 She… Judge J… illustra… juv               6 11-12-20… Conduct … 00602…
-FALSE  7 220.9505 G… A young… retold b… juv               4 12-01-20… Bible st… 00602…
-FALSE  8 225.9505 M… God's K… retold b… juv               2 08-06-20… Bible st… 06898…
-FALSE  9 292.13 McC… Roman m… retold b… juv               4 04-03-20… Mytholog… 06898…
-FALSE 10 292.211 Mc… Greek g… retold b… juv              13 11-16-20… Gods, Gr… 06898…
-FALSE # … with 9,990 more rows, and 4 more variables: callnumber2 <chr>,
-FALSE #   pubyear <chr>, format <chr>, subCollection <chr>
+FALSE    callnumber        title     author location tot_chkout loutdate subject isbn 
+FALSE    <chr>             <chr>     <chr>  <chr>         <dbl> <chr>    <chr>   <chr>
+FALSE  1 001.94 Don 2000   Bermuda … writt… juv               6 11-21-2… Reader… 0789…
+FALSE  2 001.942 Bro 1999  Invaders… writt… juv               2 02-07-2… Reader… 0789…
+FALSE  3 027.073 App 2001  Down Cut… by Ka… juv               3 10-16-2… Packho… 0060…
+FALSE  4 133.5 Hua 1999    The Chin… by Ch… juv               6 11-22-2… Astrol… 0060…
+FALSE  5 170 She 2000      Judge Ju… illus… juv               7 04-10-2… Childr… 0060…
+FALSE  6 170.44 She 2001   Judge Ju… illus… juv               6 11-12-2… Conduc… 0060…
+FALSE  7 220.9505 Gil 2001 A young … retol… juv               4 12-01-2… Bible … 0060…
+FALSE  8 225.9505 McC 1999 God's Ki… retol… juv               2 08-06-2… Bible … 0689…
+FALSE  9 292.13 McC 2001   Roman my… retol… juv               4 04-03-2… Mythol… 0689…
+FALSE 10 292.211 McC 1998  Greek go… retol… juv              13 11-16-2… Gods, … 0689…
+FALSE # ℹ 9,990 more rows
+FALSE # ℹ 4 more variables: callnumber2 <chr>, pubyear <chr>, format <chr>,
+FALSE #   subCollection <chr>
 ~~~
 {: .output}
 
@@ -488,7 +479,7 @@ booksTitleCheckouts
  8 God's Kingdom :|stories from the New Testament /                            2
  9 Roman myths /                                                               4
 10 Greek gods and goddesses /                                                 13
-# … with 9,990 more rows
+# ℹ 9,990 more rows
 ~~~
 {: .output}
 
@@ -533,8 +524,8 @@ booksHighestChkout
  8 PZ7.C9413… Bud,… Chris…         63 04-03-2… Runawa… 0385… Fic Cur 19… 1999   
  9 E Mar 1992 Brow… by Bi…         61 02-16-2… Color … 0805… E Mar 1992  1992   
 10 PZ7.P338 … A ye… Richa…         47 03-26-2… Grandm… 0803… Fic Pec 20… 2000   
-# … with 9,990 more rows, and 2 more variables: format <chr>,
-#   subCollection <chr>
+# ℹ 9,990 more rows
+# ℹ 2 more variables: format <chr>, subCollection <chr>
 ~~~
 {: .output}
 
@@ -574,57 +565,19 @@ books <- mutate(books, pubyear = as.integer(pubyear))
 
 
 ~~~
-Warning in mask$eval_all_mutate(quo): NAs introduced by coercion
+Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `pubyear = as.integer(pubyear)`.
+Caused by warning:
+! NAs introduced by coercion
 ~~~
 {: .warning}
 
 We see the error message `NAs introduced by coercion`. This is because non-numerical variables become `NA` and the remainder become integers.
 
-## Pattern matching
-
-Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:  
-
-1. Remove the trailing slash in the title column
-2. Modify the punctuation separating the title from a subtitle
-
-Note:  If the final product of this data will be imported into an ILS, you may not want to alter the MARC specific punctuation.  All other audiences will appreciate the text normalizing steps.
-
-Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
-
-
-~~~
-books %>% 
-  mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
-  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
-  select(title_modified, title)
-~~~
-{: .language-r}
-
-
-
-~~~
-# A tibble: 10,000 × 2
-   title_modified                            title                              
-   <chr>                                     <chr>                              
- 1 "Bermuda Triangle "                       Bermuda Triangle /                 
- 2 "Invaders from outer space: real-life st… Invaders from outer space :|real-l…
- 3 "Down Cut Shin Creek: the pack horse lib… Down Cut Shin Creek :|the pack hor…
- 4 "The Chinese book of animal powers "      The Chinese book of animal powers /
- 5 "Judge Judy Sheindlin's Win or lose by h… Judge Judy Sheindlin's Win or lose…
- 6 "Judge Judy Sheindlin's You can't judge … Judge Judy Sheindlin's You can't j…
- 7 "A young child's Bible "                  A young child's Bible /            
- 8 "God's Kingdom: stories from the New Tes… God's Kingdom :|stories from the N…
- 9 "Roman myths "                            Roman myths /                      
-10 "Greek gods and goddesses "               Greek gods and goddesses /         
-# … with 9,990 more rows
-~~~
-{: .output}
-
 
 ## Putting it all together with %>%
 
-The [Pipe
-Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%` is
+The [Pipe Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%` is
 loaded with the `tidyverse`. It takes the output of one statement and makes it
 the input of the next statement. You can think of it as "then" in natural
 language. So instead of making a bunch of intermediate data frames and
@@ -663,7 +616,7 @@ myBooks
  8 Brown bear, brown bear, what do you see? /         61
  9 A year down yonder /                               47
 10 Wemberly worried /                                 43
-# … with 6,973 more rows
+# ℹ 6,973 more rows
 ~~~
 {: .output}
 
@@ -773,7 +726,7 @@ books %>%
  8 R            193            981
  9 L            358            862
 10 5             60            838
-# … with 24 more rows
+# ℹ 24 more rows
 ~~~
 {: .output}
 
@@ -788,6 +741,46 @@ Let's break this down step by step:
   - take the the `sum()` of `tot_chkout` per `call_class` and assign the result to a column called `sum_tot_chkout`
 * Finally, we arrange `sum_tot_chkout` in descending order, so we can see the
 class with the most total checkouts. We can see it is the `E` class (History of America), followed by `NA` (items with no call number data), followed by `H` (Social Sciences) and `P` (Language and Literature).
+
+## Pattern matching
+
+Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:  
+
+1. Remove the trailing slash in the title column
+2. Modify the punctuation separating the title from a subtitle
+
+Note:  If the final product of this data will be imported into an ILS, you may not want to alter the MARC specific punctuation.  All other audiences will appreciate the text normalizing steps.
+
+Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
+
+
+~~~
+books %>% 
+  mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
+  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
+  select(title_modified, title)
+~~~
+{: .language-r}
+
+
+
+~~~
+# A tibble: 10,000 × 2
+   title_modified                                                          title
+   <chr>                                                                   <chr>
+ 1 "Bermuda Triangle "                                                     Berm…
+ 2 "Invaders from outer space: real-life stories of UFOs "                 Inva…
+ 3 "Down Cut Shin Creek: the pack horse librarians of Kentucky "           Down…
+ 4 "The Chinese book of animal powers "                                    The …
+ 5 "Judge Judy Sheindlin's Win or lose by how you choose! "                Judg…
+ 6 "Judge Judy Sheindlin's You can't judge a book by its cover: cool rule… Judg…
+ 7 "A young child's Bible "                                                A yo…
+ 8 "God's Kingdom: stories from the New Testament "                        God'…
+ 9 "Roman myths "                                                          Roma…
+10 "Greek gods and goddesses "                                             Gree…
+# ℹ 9,990 more rows
+~~~
+{: .output}
 
 ## Exporting data
 
@@ -874,3 +867,6 @@ write_csv(books_reformatted, "./data_output/books_reformatted.csv")
 * In your console, after loading `library(dplyr)`, run `vignette("dplyr")` to read an extremely helpful explanation of how to use it. 
 * See the [http://r4ds.had.co.nz/transform.html]("Data Transformation" chapter) in Garrett Grolemund and Hadley Wickham's book *R for Data Science.*
 * Watch this Data School video: [https://www.youtube.com/watch?v=jWjqLW-u3hc](Hands-on dplyr tutorial for faster data manipulation in R.)
+
+
+# Wrangling dataframes with tidyr

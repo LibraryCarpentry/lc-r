@@ -138,7 +138,7 @@ freely available to extend R's native capabilities.
 
 
 <figure>
-<img src="../fig/r+rstudio-analogy.jpg" title="RStudio extends what R can do, and makes it easier to write R code and interact with R." alt="RStudio extends what R can do, and makes it easier to write R code and interact with R." style="display: block; margin: auto;" />
+<img src="../fig/r+rstudio-analogy.jpg" alt="RStudio extends what R can do, and makes it easier to write R code and interact with R." style="display: block; margin: auto;" />
 <figcaption>
 RStudio extends what R can do, and makes it easier to write R code and interact
 with R. <a href="https://commons.wikimedia.org/w/index.php?curid=2447462">Left photo credit</a>; <a href="https://commons.wikimedia.org/w/index.php?curid=44599363">right photo credit</a>. 
@@ -227,7 +227,7 @@ script. Click the save icon on your toolbar and save your script as
 Let's take a quick tour of RStudio.
 
 <figure>
-<img src="../fig/RStudioPanes.png" title="R Studio" alt="R Studio" style="display: block; margin: auto;" />
+<img src="../fig/RStudioPanes.png" alt="R Studio" style="display: block; margin: auto;" />
 </figure>
 
 RStudio is divided into four "panes". The placement of these
@@ -374,7 +374,7 @@ directly in the console. Run `help(install.packages)` to learn more about how to
 do it this way.
 
 <figure>
-<img src="../fig/R_00_Rstudio_03.png" title="Click on the Packages tab in the Navigation Pane to download packages from CRAN." alt="Click on the Packages tab in the Navigation Pane to download packages from CRAN." style="display: block; margin: auto;" />
+<img src="../fig/R_00_Rstudio_03.png" alt="Click on the Packages tab in the Navigation Pane to download packages from CRAN." style="display: block; margin: auto;" />
 <figcaption>
 Screenshot of the Packages tab in the Navigation Pane, used to download packages from CRAN. 
 </figcaption>

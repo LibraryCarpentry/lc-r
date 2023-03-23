@@ -78,26 +78,15 @@ library(tidyverse)  # load the core tidyverse
 
 
 ~~~
-── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-~~~
-{: .output}
-
-
-
-~~~
-✔ ggplot2 3.3.5     ✔ dplyr   1.0.7
-✔ tibble  3.1.4     ✔ stringr 1.4.0
-✔ tidyr   1.1.3     ✔ forcats 0.5.1
-✔ purrr   0.3.4     
-~~~
-{: .output}
-
-
-
-~~~
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.1     ✔ purrr     1.0.1
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ~~~
 {: .output}
 
@@ -107,23 +96,6 @@ library(tidyverse)  # load the core tidyverse
 library(lubridate)  # load lubridate
 ~~~
 {: .language-r}
-
-
-
-~~~
-
-Attaching package: 'lubridate'
-~~~
-{: .output}
-
-
-
-~~~
-The following objects are masked from 'package:base':
-
-    date, intersect, setdiff, union
-~~~
-{: .output}
 
 We also load the `books_reformatted` data we saved in the previous
 lesson. We'll assign it to `books2`.
@@ -210,7 +182,7 @@ ggplot(data = booksPlot)  # a blank canvas
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" width="612" style="display: block; margin: auto;" />
 
 Not very interesting. We need to add layers to it by defining a mapping
 aesthetic and adding `geoms`.
@@ -227,7 +199,7 @@ ggplot(data = booksPlot, mapping = aes(x = call_class)) # define the x axis aest
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" width="612" style="display: block; margin: auto;" />
 
 Here we define the x axes, but because we have not yet added any `geoms`, we still
 do not see any data being visualized.
@@ -263,7 +235,7 @@ ggplot(data = booksPlot, mapping = aes(x = call_class)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-6-1.png" alt="plot of chunk unnamed-chunk-6" width="612" style="display: block; margin: auto;" />
 
 We can see that there are about 1,500 books in the H class, 1,000 books in the P
 class, 700 books in the E class, etc. As we shall see, the number of E and F
@@ -306,7 +278,7 @@ ggplot(data = booksPlot, mapping = aes(x = tot_chkout)) +
 ~~~
 {: .output}
 
-<img src="../fig/rmd-04-unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" width="612" style="display: block; margin: auto;" />
 
 As we have seen in previous lessons, the overwhelming majority of books have a
 small amount of usage, so the plot is heavily skewed. As anyone who has done
@@ -339,11 +311,11 @@ Warning: Transformation introduced infinite values in continuous y-axis
 
 
 ~~~
-Warning: Removed 2 rows containing missing values (geom_bar).
+Warning: Removed 2 rows containing missing values (`geom_bar()`).
 ~~~
 {: .warning}
 
-<img src="../fig/rmd-04-unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" width="612" style="display: block; margin: auto;" />
 
 Notice the scale y axis now goes from 0-10, 10-100, 100-1000, and 1000-10000.
 This is called “logarithmic scale” and is based on orders of magnitude. We can
@@ -403,11 +375,11 @@ Warning: Transformation introduced infinite values in continuous x-axis
 
 
 ~~~
-Warning: Removed 2348 rows containing non-finite values (stat_density).
+Warning: Removed 2348 rows containing non-finite values (`stat_density()`).
 ~~~
 {: .warning}
 
-<img src="../fig/rmd-04-unnamed-chunk-10-1.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
 
 ~~~
 # create a frequency polygon
@@ -424,7 +396,7 @@ Warning: Transformation introduced infinite values in continuous y-axis
 ~~~
 {: .warning}
 
-<img src="../fig/rmd-04-unnamed-chunk-10-2.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-10-2.png" alt="plot of chunk unnamed-chunk-10" width="612" style="display: block; margin: auto;" />
 
 ## Bivariate geoms
 
@@ -456,7 +428,7 @@ ggplot(data = booksHighUsage,
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto;" />
 
 Again, notice the scale on the y axis. We can obseve a few items of interest here: No items in the D, J, M, and Z class have more than 30 checkouts. An item in the E class has the most checkouts with over 100, but, as noted above, this includes Easy books classified with `E`, not just items with Library of Congress `E` classification (United States history) an issue we'll look at further down.
 
@@ -472,7 +444,7 @@ ggplot(data = booksHighUsage,
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-13-1.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-13-1.png" alt="plot of chunk unnamed-chunk-13" width="612" style="display: block; margin: auto;" />
 
 By adding points to a boxplot, we can have a better idea of the number of
 measurements and of their distribution. Here we set the boxplot `alpha` to `0`,
@@ -489,7 +461,7 @@ ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-boxplot-with-points-1.png" title="plot of chunk boxplot-with-points" alt="plot of chunk boxplot-with-points" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-boxplot-with-points-1.png" alt="plot of chunk boxplot-with-points" width="612" style="display: block; margin: auto;" />
 
 Notice how the boxplot layer is behind the jitter layer? What do you need to
 change in the code to put the boxplot in front of the points such that it's not
@@ -518,14 +490,14 @@ hidden?
 > > 
 > > ~~~
 > > Warning: Groups with fewer than two data points have been dropped.
-> > Warning: Groups with fewer than two data points have been dropped.
-> > Warning: Groups with fewer than two data points have been dropped.
-> > Warning: Groups with fewer than two data points have been dropped.
-> > Warning: Groups with fewer than two data points have been dropped.
+> > Groups with fewer than two data points have been dropped.
+> > Groups with fewer than two data points have been dropped.
+> > Groups with fewer than two data points have been dropped.
+> > Groups with fewer than two data points have been dropped.
 > > ~~~
 > > {: .warning}
 > > 
-> > <img src="../fig/rmd-04-violin-plot-1.png" title="plot of chunk violin-plot" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-04-violin-plot-1.png" alt="plot of chunk violin-plot" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
 > - Add color to the `geom_jitter` argument on your boxplot according to the item `subCollection`. *Hint:* If you get the error `object 'subCollection' not found` or `invalid color name 'subCollection'` then consider `color` as an aesthetic mapping.
@@ -544,14 +516,14 @@ hidden?
 > > 
 > > ~~~
 > > Warning: Groups with fewer than two data points have been dropped.
-> > Warning: Groups with fewer than two data points have been dropped.
-> > Warning: Groups with fewer than two data points have been dropped.
-> > Warning: Groups with fewer than two data points have been dropped.
-> > Warning: Groups with fewer than two data points have been dropped.
+> > Groups with fewer than two data points have been dropped.
+> > Groups with fewer than two data points have been dropped.
+> > Groups with fewer than two data points have been dropped.
+> > Groups with fewer than two data points have been dropped.
 > > ~~~
 > > {: .warning}
 > > 
-> > <img src="../fig/rmd-04-boxplot-exercise-subcollection-1.png" title="plot of chunk boxplot-exercise-subcollection" alt="plot of chunk boxplot-exercise-subcollection" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-04-boxplot-exercise-subcollection-1.png" alt="plot of chunk boxplot-exercise-subcollection" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 >
 > So far, we've looked at the distribution of checkouts within call number ranges. Try
@@ -569,7 +541,7 @@ hidden?
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-04-unnamed-chunk-14-1.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-04-unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -602,7 +574,7 @@ ggplot(data = booksHighUsage,
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-15-1.png" title="plot of chunk unnamed-chunk-15" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-15-1.png" alt="plot of chunk unnamed-chunk-15" width="612" style="display: block; margin: auto;" />
 
 `ggplot()` automatically assigns a unique level of the aesthetic to each unique
 value of the variable (this is called *scaling*). Now we reveal indeed that
@@ -620,7 +592,7 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-16-1.png" alt="plot of chunk unnamed-chunk-16" width="612" style="display: block; margin: auto;" />
 
 Stacked bar charts are generally more difficult to read
 than side-by-side bars. We can separate the portions of the stacked bar that
@@ -634,7 +606,7 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-barplot-dodge-1.png" title="plot of chunk barplot-dodge" alt="plot of chunk barplot-dodge" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-barplot-dodge-1.png" alt="plot of chunk barplot-dodge" width="612" style="display: block; margin: auto;" />
 
 The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.   
 
@@ -645,7 +617,7 @@ ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-17-1.png" title="plot of chunk unnamed-chunk-17" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-17-1.png" alt="plot of chunk unnamed-chunk-17" width="612" style="display: block; margin: auto;" />
 
 Another visualization issue is labeling.  In many cultures, long labels are easier to read horizontally.  Our goal is to flip the x-axis and reorient the x-axis labels into a horizontal presentation.  To accomplish this, flip the axis coordinates with the `coord_flip()` function.  When we flip the axes it's important to reverse the sorted categorical order.  Do this with `forcats::fct_rev()`.
 
@@ -657,7 +629,7 @@ ggplot(data = booksHighUsage, aes(x = fct_rev(fct_infreq(call_class)))) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-18-1.png" title="plot of chunk unnamed-chunk-18" alt="plot of chunk unnamed-chunk-18" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-18-1.png" alt="plot of chunk unnamed-chunk-18" width="612" style="display: block; margin: auto;" />
 
 ### Plotting time series data
 
@@ -726,7 +698,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-first-time-series-1.png" title="plot of chunk first-time-series" alt="plot of chunk first-time-series" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-first-time-series-1.png" alt="plot of chunk first-time-series" width="612" style="display: block; margin: auto;" />
 
 Unfortunately, this does not work because we plotted data for all the sub-collections
 together. We need to tell ggplot to draw a line for each sub-collection by modifying
@@ -739,7 +711,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, group = subCo
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-21-1.png" title="plot of chunk unnamed-chunk-21" alt="plot of chunk unnamed-chunk-21" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-21-1.png" alt="plot of chunk unnamed-chunk-21" width="612" style="display: block; margin: auto;" />
 
 We will be able to distinguish sub-collections in the plot if we add colors
 (using `color` also automatically groups the data):
@@ -751,7 +723,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, color = subCo
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-time-series-with-colors-1.png" title="plot of chunk time-series-with-colors" alt="plot of chunk time-series-with-colors" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-time-series-with-colors-1.png" alt="plot of chunk time-series-with-colors" width="612" style="display: block; margin: auto;" />
 
 
 ### Add a third variable with facets
@@ -785,7 +757,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-first-facet-1.png" title="plot of chunk first-facet" alt="plot of chunk first-facet" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-first-facet-1.png" alt="Three line plots, one each for general collection, juvenile, and K-12 sub-collection materials, showing the relationship of count of books to publication year" width="612" style="display: block; margin: auto;" />
 
 We can use `facet_wrap()` as a way of seeing the categories within a variables. Look at the number of formats per
 sub-collection. 
@@ -801,7 +773,7 @@ ggplot(data = books2, aes(x = fct_rev(fct_infreq(subCollection)))) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-22-1.png" alt="plot of chunk unnamed-chunk-22" width="612" style="display: block; margin: auto;" />
 
 While this may not be the most beautiful plot, these kinds of exercises can be
 helpful for data exploration. We learn that there are books in all
@@ -832,7 +804,7 @@ argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-04-average-weight-time-series-1.png" title="plot of chunk average-weight-time-series" alt="plot of chunk average-weight-time-series" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-04-average-weight-time-series-1.png" alt="plot of chunk average-weight-time-series" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 
@@ -856,7 +828,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-23-1.png" title="plot of chunk unnamed-chunk-23" alt="plot of chunk unnamed-chunk-23" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-23-1.png" alt="plot of chunk unnamed-chunk-23" width="612" style="display: block; margin: auto;" />
 
 In addition to `theme_bw()`, which changes the plot background to white, **`ggplot2`**
 comes with several other themes which can be useful to quickly change the look
@@ -894,7 +866,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-24-1.png" title="plot of chunk unnamed-chunk-24" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-24-1.png" alt="plot of chunk unnamed-chunk-24" width="612" style="display: block; margin: auto;" />
 
 Note that it is also possible to change the fonts of your plots. If you are on
 Windows, you may have to install
@@ -924,7 +896,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-04-unnamed-chunk-25-1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="612" style="display: block; margin: auto;" />
+<img src="../fig/rmd-04-unnamed-chunk-25-1.png" alt="plot of chunk unnamed-chunk-25" width="612" style="display: block; margin: auto;" />
 
 
 > ### Challenge
@@ -955,7 +927,7 @@ publication. Add one of the themes listed above.
 > > ~~~
 > > {: .language-r}
 > > 
-> > <img src="../fig/rmd-04-unnamed-chunk-26-1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="612" style="display: block; margin: auto;" />
+> > <img src="../fig/rmd-04-unnamed-chunk-26-1.png" alt="plot of chunk unnamed-chunk-26" width="612" style="display: block; margin: auto;" />
 > {: .solution}
 {: .challenge}
 

@@ -16,7 +16,7 @@ objectives:
 - "Use `summarize`, `group_by`, and `count` to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results."
 - "Describe the concept of a wide and a long table format and for which purpose those formats are useful."
 - "Describe what key-value pairs are."
-- "Reshape a data frame from long to wide format and back with the `spread` and `gather` commands from the **`tidyr`** package."
+- "Reshape a data frame from long to wide format and back with the `pivot_wider` and `pivot_longer` commands from the **`tidyr`** package."
 - "Export a data frame to a csv file."
 questions:
 - "How can I select specific rows and/or columns from a data frame?"
@@ -136,9 +136,9 @@ books <- rename(books,
 > ## Side note:
 >
 > Where does `X245.ab` come from? That is the MARC field 245|ab. However,
-because R variables cannot start with a number, R automatically inserted an X,
-and because pipes | are not allowed in variable names, R replaced it with a
-period. 
+> because R variables cannot start with a number, R automatically inserted an X,
+> and because pipes | are not allowed in variable names, R replaced it with a
+> period. 
 {: .callout}
 
 
@@ -350,29 +350,10 @@ books <- mutate(books, pubyear = as.integer(pubyear))
 
 We see the error message `NAs introduced by coercion`. This is because non-numerical variables become `NA` and the remainder become integers.
 
-## Pattern matching
-
-Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:  
-
-1. Remove the trailing slash in the title column
-2. Modify the punctuation separating the title from a subtitle
-
-Note:  If the final product of this data will be imported into an ILS, you may not want to alter the MARC specific punctuation.  All other audiences will appreciate the text normalizing steps.
-
-Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
-
-```{r}
-books %>% 
-  mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
-  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
-  select(title_modified, title)
-```
-
 
 ## Putting it all together with %>%
 
-The [Pipe
-Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%` is
+The [Pipe Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%` is
 loaded with the `tidyverse`. It takes the output of one statement and makes it
 the input of the next statement. You can think of it as "then" in natural
 language. So instead of making a bunch of intermediate data frames and
@@ -463,6 +444,24 @@ Let's break this down step by step:
 * Finally, we arrange `sum_tot_chkout` in descending order, so we can see the
 class with the most total checkouts. We can see it is the `E` class (History of America), followed by `NA` (items with no call number data), followed by `H` (Social Sciences) and `P` (Language and Literature).
 
+## Pattern matching
+
+Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:  
+
+1. Remove the trailing slash in the title column
+2. Modify the punctuation separating the title from a subtitle
+
+Note:  If the final product of this data will be imported into an ILS, you may not want to alter the MARC specific punctuation.  All other audiences will appreciate the text normalizing steps.
+
+Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
+
+```{r}
+books %>% 
+  mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
+  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
+  select(title_modified, title)
+```
+
 ## Exporting data
 
 Now that you have learned how to use **`dplyr`** to extract information from
@@ -544,3 +543,6 @@ write_csv(books_reformatted, "./data_output/books_reformatted.csv")
 * In your console, after loading `library(dplyr)`, run `vignette("dplyr")` to read an extremely helpful explanation of how to use it. 
 * See the [http://r4ds.had.co.nz/transform.html]("Data Transformation" chapter) in Garrett Grolemund and Hadley Wickham's book *R for Data Science.*
 * Watch this Data School video: [https://www.youtube.com/watch?v=jWjqLW-u3hc](Hands-on dplyr tutorial for faster data manipulation in R.)
+
+
+# Wrangling dataframes with tidyr
