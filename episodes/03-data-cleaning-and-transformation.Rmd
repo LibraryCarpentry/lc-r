@@ -180,7 +180,7 @@ and `format` (formerly `BCODE2`) variables contain single characters.
 knitr::include_graphics("../fig/BCODE1.PNG")
 ```
 
-```{r, echo=FALSE, fig.cap="Format (formerly BCODE2) export from Sierra", fig. alt = "Screen capture of window that says 'Select Me' with items like 'Archives' and 'E-Book'"}
+```{r, echo=FALSE, fig.cap="Format (formerly BCODE2) export from Sierra", fig.alt = "Screen capture of window that says 'Select Me' with items like 'Archives' and 'E-Book'"}
 knitr::include_graphics("../fig/BCODE2.PNG")
 ```
 
