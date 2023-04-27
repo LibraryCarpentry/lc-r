@@ -241,14 +241,14 @@ in the sample dataset provided to you, the `sub_collection` (formerly `BCODE1`)
 and `format` (formerly `BCODE2`) variables contain single characters.
 
 <figure>
-<img src="../fig/BCODE1.PNG" title="Sub-Collection (formerly BCODE1) export from Sierra" alt="Sub-Collection (formerly BCODE1) export from Sierra" style="display: block; margin: auto;" />
+<img src="../fig/BCODE1.png" title="Sub-Collection (formerly BCODE1) export from Sierra" alt="Sub-Collection (formerly BCODE1) export from Sierra" style="display: block; margin: auto;" />
 <figcaption>
 Sub-Collection (formerly BCODE1) export from Sierra
 </figcaption>
 </figure>
 
 <figure>
-<img src="../fig/BCODE2.PNG" title="Format (formerly BCODE2) export from Sierra" alt="Format (formerly BCODE2) export from Sierra" style="display: block; margin: auto;" />
+<img src="../fig/BCODE2.png" title="Format (formerly BCODE2) export from Sierra" alt="Format (formerly BCODE2) export from Sierra" style="display: block; margin: auto;" />
 <figcaption>
 Format (formerly BCODE2) export from Sierra
 </figcaption>
