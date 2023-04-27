@@ -177,11 +177,11 @@ in the sample dataset provided to you, the `sub_collection` (formerly `BCODE1`)
 and `format` (formerly `BCODE2`) variables contain single characters.
 
 ```{r, echo=FALSE, fig.cap="Sub-Collection (formerly BCODE1) export from Sierra", fig.alt = "Screen capture of window that says 'Select Me' with categories like Archival collections and Reference"}
-knitr::include_graphics("../fig/BCODE1.PNG")
+knitr::include_graphics("../fig/BCODE1.png")
 ```
 
 ```{r, echo=FALSE, fig.cap="Format (formerly BCODE2) export from Sierra", fig.alt = "Screen capture of window that says 'Select Me' with items like 'Archives' and 'E-Book'"}
-knitr::include_graphics("../fig/BCODE2.PNG")
+knitr::include_graphics("../fig/BCODE2.png")
 ```
 
 You can do this easily using the `recode()` function, also in the `dplyr`

@@ -76,9 +76,9 @@ library(tidyverse)
 
 ~~~
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.1     ✔ purrr     1.0.1
+✔ dplyr     1.1.2     ✔ purrr     1.0.1
 ✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.1     ✔ tibble    3.2.1
+✔ ggplot2   3.4.2     ✔ tibble    3.2.1
 ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
@@ -243,17 +243,9 @@ It is often necessary to recode or reclassify values in your data. For example,
 in the sample dataset provided to you, the `sub_collection` (formerly `BCODE1`)
 and `format` (formerly `BCODE2`) variables contain single characters.
 
+<img src="../fig/BCODE1.png" alt="Screen capture of window that says 'Select Me' with categories like Archival collections and Reference" style="display: block; margin: auto;" />
 
-~~~
-Error in knitr::include_graphics("../fig/BCODE1.PNG"): Cannot find the file(s): "../fig/BCODE1.PNG"
-~~~
-{: .error}
-
-
-~~~
-Error in knitr::include_graphics("../fig/BCODE2.PNG"): Cannot find the file(s): "../fig/BCODE2.PNG"
-~~~
-{: .error}
+<img src="../fig/BCODE2.png" alt="Screen capture of window that says 'Select Me' with items like 'Archives' and 'E-Book'" style="display: block; margin: auto;" />
 
 You can do this easily using the `recode()` function, also in the `dplyr`
 package. Unlike `rename()`, the old value comes first here. Also notice that we
