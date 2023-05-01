@@ -243,17 +243,9 @@ It is often necessary to recode or reclassify values in your data. For example,
 in the sample dataset provided to you, the `sub_collection` (formerly `BCODE1`)
 and `format` (formerly `BCODE2`) variables contain single characters.
 
+<img src="../fig/BCODE1.png" alt="Screen capture of window that says 'Select Me' with categories like Archival collections and Reference" style="display: block; margin: auto;" />
 
-~~~
-Error in knitr::include_graphics("../fig/BCODE1.PNG"): Cannot find the file(s): "../fig/BCODE1.PNG"
-~~~
-{: .error}
-
-
-~~~
-Error in knitr::include_graphics("../fig/BCODE2.PNG"): Cannot find the file(s): "../fig/BCODE2.PNG"
-~~~
-{: .error}
+<img src="../fig/BCODE2.png" alt="Screen capture of window that says 'Select Me' with items like 'Archives' and 'E-Book'" style="display: block; margin: auto;" />
 
 You can do this easily using the `recode()` function, also in the `dplyr`
 package. Unlike `rename()`, the old value comes first here. Also notice that we
