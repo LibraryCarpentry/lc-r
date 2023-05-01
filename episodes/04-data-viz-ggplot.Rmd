@@ -1,32 +1,31 @@
 ---
-title: "Data Visualisation with ggplot2"
-keypoints:
-- "`ggplot2` is a flexible and useful tool for creating plots in R."
-- "The data set and coordinate system can be defined using the `ggplot` function."
-- "Additional layers, including geoms, are added using the `+` operator."
-- "Boxplots are useful for visualizing the distribution of a continuous variable."
-- "Barplot are useful for visualizing categorical data."
-- "Faceting allows you to generate multiple plots based on a categorical variable."
-objectives:
-- "Produce scatter plots, boxplots, and time series plots using ggplot."
-- "Set universal plot settings."
-- "Describe what faceting is and apply faceting in ggplot."
-- "Modify the aesthetics of an existing ggplot plot (including axis labels and color)."
-- "Build complex and customized plots from data in a data frame."
-questions:
-- "What are the components of a ggplot?"
-- "How do I create scatterplots, boxplots, and barplots?"
-- "How can I change the aesthetics (ex. colour, transparency) of my plot?"
-- "How can I create multiple plots at once?"
+title: Data Visualisation with ggplot2
 teaching: 80
 exercises: 35
 source: Rmd
 ---
 
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Produce scatter plots, boxplots, and time series plots using ggplot.
+- Set universal plot settings.
+- Describe what faceting is and apply faceting in ggplot.
+- Modify the aesthetics of an existing ggplot plot (including axis labels and color).
+- Build complex and customized plots from data in a data frame.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- What are the components of a ggplot?
+- How do I create scatterplots, boxplots, and barplots?
+- How can I change the aesthetics (ex. colour, transparency) of my plot?
+- How can I create multiple plots at once?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ```{r, include=FALSE}
 source("../bin/download_data.R")
-source("../bin/chunk-options.R")
-knitr_fig_path("04-")
 library(readr)
 books2 <- read_csv("./data/books_reformatted.csv")
 ```
@@ -40,16 +39,16 @@ If you have not already done so, open your R Project file (`library_carpentry.Rp
 **If you did not complete that step** then do the following. Only do this if you
 didn't complete it in previous lessons.
 
-* Under the `File` menu, click on `New project`, choose `New directory`, then
-`New project`
-* Enter the name `library_carpentry` for this new folder (or "directory"). This
-will be your **working directory** for the rest of the day.
-* Click on `Create project`
-* Create a new file where we will type our scripts. Go to File > New File > R
-script. Click the save icon on your toolbar and save your script as
-"`script.R`".
-* Copy and paste the below lines of code to create three new subdirectories and
-download the original and the reformatted `books` data:
+- Under the `File` menu, click on `New project`, choose `New directory`, then
+  `New project`
+- Enter the name `library_carpentry` for this new folder (or "directory"). This
+  will be your **working directory** for the rest of the day.
+- Click on `Create project`
+- Create a new file where we will type our scripts. Go to File > New File > R
+  script. Click the save icon on your toolbar and save your script as
+  "`script.R`".
+- Copy and paste the below lines of code to create three new subdirectories and
+  download the original and the reformatted `books` data:
 
 ```{r create-dirs, eval=FALSE}
 library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
@@ -71,7 +70,7 @@ the tidyverse, but is not one of the core tidyverse packages loaded with
 `library(tidyverse)`, so it needs to be explicitly called. `lubridate` makes
 working with dates and times easier in R.
 
-```{r load-data, purl=FALSE, results='hold'}
+```{r load-data, purl=FALSE, results="hold"}
 library(tidyverse)  # load the core tidyverse
 library(lubridate)  # load lubridate
 ```
@@ -89,8 +88,8 @@ Base R contains a number of functions for quick data visualization such as
 `plot()` for scatter plots, `barplot()`, `hist()` for histograms, and
 `boxplot()`. However, just as data manipulation is easier with `dplyr` than Base
 R, so data visualization is easier with `ggplot2` than Base R. `ggplot2` is a
-[“grammar” for data visualization](http://vita.had.co.nz/papers/layered-grammar.html) also created
-by Hadley Wickham, as an implementation of Leland Wilkinson’s [Grammar of Graphics](http://www.worldcat.org/oclc/934513040).
+["grammar" for data visualization](https://vita.had.co.nz/papers/layered-grammar.html) also created
+by Hadley Wickham, as an implementation of Leland Wilkinson's [Grammar of Graphics](https://www.worldcat.org/oclc/934513040).
 
 `ggplot` is a plotting package that makes it simple to create complex plots
 from data stored in a data frame. It provides a programmatic interface for
@@ -131,8 +130,6 @@ booksPlot <- books2 %>%
          !is.na(call_class))
 ```
 
-
-
 **`ggplot2`**
 **`ggplot2`** functions like data in the 'long' format, i.e., a column for every
 dimension, and a row for every observation. Well-structured data will save you
@@ -149,7 +146,6 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 
 Use the `ggplot()` function and bind the plot to a specific data frame using the
 `data` argument.
-
 
 ```{r, purl=FALSE}
 ggplot(data = booksPlot)  # a blank canvas
@@ -171,14 +167,14 @@ ggplot(data = booksPlot, mapping = aes(x = call_class)) # define the x axis aest
 Here we define the x axes, but because we have not yet added any `geoms`, we still
 do not see any data being visualized.
 
-Data is visualized in the canvas with “geometric shapes” such as bars and lines;
+Data is visualized in the canvas with "geometric shapes" such as bars and lines;
 what are called *geoms*. In your console, type `geom_` and press the tab key to
 see the geoms included–there are over 30. For example:
 
-* `geom_point()` for scatter plots, dot plots, etc.
-* `geom_boxplot()` for boxplots
-* `geom_bar()` for barplots
-* `geom_line()` for trend lines, time series, etc.
+- `geom_point()` for scatter plots, dot plots, etc.
+- `geom_boxplot()` for boxplots
+- `geom_bar()` for barplots
+- `geom_line()` for trend lines, time series, etc.
 
 Each geom takes a `mapping` argument within the `aes()` call. This is called the
 *aesthetic mapping argument*. In other words, inside the geom function is an
@@ -189,7 +185,7 @@ inside the data argument, and plots it accordingly.
 For example, in the below expression, the `call_class` variable is being mapped
 to the `x` axis in the geometric shape of a bar. In this example, the y axis
 (count) is not specified, nor is it a variable in the original dataset, but is
-the result of geom_bar() *binning* your data inside each call number class and
+the result of geom\_bar() *binning* your data inside each call number class and
 plotting the bin counts (the number of items falling into each bin).
 
 To add a geom to the plot use the `+` operator.
@@ -206,23 +202,27 @@ books are deceptively large, as easy books and fiction books both begin with E
 and are thus lumped into that category, though they are not of the E and F
 Library of Congress call number classification.
 
-> ## `ggplot` tips
->
-> - Anything you put in the `ggplot()` function can be seen by any geom layers
->   that you add (i.e., these are universal plot settings). This includes the x-
->   and y-axis mapping you set up in `aes()`.
-> - You can also specify mappings for a given geom independently of the mapping
->   defined globally in the `ggplot()` function.
-> - The `+` sign used to add new layers must be placed at the end of the line
->   containing the *previous* layer. If, instead, the `+` sign is added at the
->   beginning of the line containing the new layer, **`ggplot2`** will not add
->   the new layer and will return an error message.
-{: .callout}
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## `ggplot` tips
+
+- Anything you put in the `ggplot()` function can be seen by any geom layers
+  that you add (i.e., these are universal plot settings). This includes the x-
+  and y-axis mapping you set up in `aes()`.
+- You can also specify mappings for a given geom independently of the mapping
+  defined globally in the `ggplot()` function.
+- The `+` sign used to add new layers must be placed at the end of the line
+  containing the *previous* layer. If, instead, the `+` sign is added at the
+  beginning of the line containing the new layer, **`ggplot2`** will not add
+  the new layer and will return an error message.
+  
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Univariate geoms
 
-*“Univariate”* refers to a single variable. A histogram is a univariate plot: it
-shows the frequency counts of each value inside a single variable. Let’s say we
+*"Univariate"* refers to a single variable. A histogram is a univariate plot: it
+shows the frequency counts of each value inside a single variable. Let's say we
 want to visualize a frequency distibution of checkouts in the `booksPlot` data. In
 other words, how many items have 1 checkout? How many have 2 checkouts? And so
 on.
@@ -252,7 +252,7 @@ ggplot(data = booksPlot) +
 ```
 
 Notice the scale y axis now goes from 0-10, 10-100, 100-1000, and 1000-10000.
-This is called “logarithmic scale” and is based on orders of magnitude. We can
+This is called "logarithmic scale" and is based on orders of magnitude. We can
 therefore see that over 5,000 books (on the y axis) have between 0-10 checkouts
 (on the x axis), 1,000 books have 10-20 checkouts, and further down on the x
 axis, a handful of books have 60-70 checkouts, and a handful more have around
@@ -270,7 +270,7 @@ something similar.
 
 ### Changing the geom
 
-This same exact data can be visualized in a couple different ways by replacing the geom_histogram() function with either `geom_density()` (adding a logarithmic x scale) or `geom_freqpoly()`:
+This same exact data can be visualized in a couple different ways by replacing the geom\_histogram() function with either `geom_density()` (adding a logarithmic x scale) or `geom_freqpoly()`:
 
 ```{r, purl=FALSE}
 # create a density plot
@@ -340,50 +340,63 @@ Notice how the boxplot layer is behind the jitter layer? What do you need to
 change in the code to put the boxplot in front of the points such that it's not
 hidden?
 
-> ## Plotting Exercise
->
-> Boxplots are useful summaries, but hide the *shape* of the distribution. For
-> example, if the distribution is bimodal, we would not see it in a
-> boxplot. An alternative to the boxplot is the violin plot, where the shape
-> (of the density of points) is drawn.
->
-> - Replace the box plot with a violin plot; see `geom_violin()`.
->
-> > ## Solution
-> >
-> > ```{r violin-plot}
-> > ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
-> >   geom_violin(alpha = 0) +
-> >   geom_jitter(alpha = 0.5, color = "tomato")
-> > ```
-> {: .solution}
->
-> - Add color to the `geom_jitter` argument on your boxplot according to the item `subCollection`. *Hint:* If you get the error `object 'subCollection' not found` or `invalid color name 'subCollection'` then consider `color` as an aesthetic mapping.
->
-> > ## Solution
-> > ```{r boxplot-exercise-subcollection}
-> > ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
-> > geom_violin(alpha = 0) +
-> > geom_jitter(alpha = 0.5, aes(color = subCollection)) +
-> > scale_y_log10()
-> > ```
-> {: .solution}
->
-> So far, we've looked at the distribution of checkouts within call number ranges. Try
-> making a new plot to explore the distribution of checkouts within another variable.
->
-> - Still using the `booksHighUsage` data, create a boxplot for `tot_chkout` for each `subCollection`. Overlay the boxplot layer on a jitter layer to show actual measurements. Keep the `scale_y_log10` argument.
->
-> > ## Solution
-> > ```{r}
-> > ggplot(data = booksHighUsage, aes(x = subCollection, y = tot_chkout)) +
-> >  geom_boxplot(alpha = 0) +
-> >  geom_jitter(alpha = 0.5, color = "tomato") +
-> >  scale_y_log10()
-> > ```
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
 
+## Plotting Exercise
+
+Boxplots are useful summaries, but hide the *shape* of the distribution. For
+example, if the distribution is bimodal, we would not see it in a
+boxplot. An alternative to the boxplot is the violin plot, where the shape
+(of the density of points) is drawn.
+
+- Replace the box plot with a violin plot; see `geom_violin()`.
+
+:::::::::::::::  solution
+
+## Solution
+
+```{r violin-plot}
+ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
+  geom_violin(alpha = 0) +
+  geom_jitter(alpha = 0.5, color = "tomato")
+```
+
+:::::::::::::::::::::::::
+
+- Add color to the `geom_jitter` argument on your boxplot according to the item `subCollection`. *Hint:* If you get the error `object 'subCollection' not found` or `invalid color name 'subCollection'` then consider `color` as an aesthetic mapping.
+
+:::::::::::::::  solution
+
+## Solution
+
+```{r boxplot-exercise-subcollection}
+ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
+geom_violin(alpha = 0) +
+geom_jitter(alpha = 0.5, aes(color = subCollection)) +
+scale_y_log10()
+```
+
+:::::::::::::::::::::::::
+
+So far, we've looked at the distribution of checkouts within call number ranges. Try
+making a new plot to explore the distribution of checkouts within another variable.
+
+- Still using the `booksHighUsage` data, create a boxplot for `tot_chkout` for each `subCollection`. Overlay the boxplot layer on a jitter layer to show actual measurements. Keep the `scale_y_log10` argument.
+
+:::::::::::::::  solution
+
+## Solution
+
+```{r}
+ggplot(data = booksHighUsage, aes(x = subCollection, y = tot_chkout)) +
+ geom_boxplot(alpha = 0) +
+ geom_jitter(alpha = 0.5, color = "tomato") +
+ scale_y_log10()
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Add a third variable
 
@@ -435,7 +448,7 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection), position = "dodge")
 ```
 
-The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.   
+The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.
 
 ```{r}
 ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
@@ -509,7 +522,6 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, color = subCo
   geom_line()
 ```
 
-
 ### Add a third variable with facets
 
 Rather than creating a single plot with side-by-side bars for each
@@ -523,9 +535,9 @@ split one plot into multiple plots based on a factor included in the dataset.
 
 There are two types of `facet` functions:
 
-* `facet_wrap()` arranges a one-dimensional sequence of panels to allow them to cleanly
-fit on one page.
-* `facet_grid()` allows you to form a matrix of rows and columns of panels.
+- `facet_wrap()` arranges a one-dimensional sequence of panels to allow them to cleanly
+  fit on one page.
+- `facet_grid()` allows you to form a matrix of rows and columns of panels.
 
 Both geometries allow to to specify faceting variables specified within `vars()`.
 For example, `facet_wrap(facets = vars(facet_variable))` or
@@ -533,16 +545,16 @@ For example, `facet_wrap(facets = vars(facet_variable))` or
 
 Here we use `facet_wrap()` to make a time series plot for each subCollection
 
-```{r first-facet, fig.alt = "Three line plots, one each for general collection, juvenile, and K-12 sub-collection materials, showing the relationship of count of books to publication year", purl=FALSE}
+```{r first-facet, fig.alt="Three line plots, one each for general collection, juvenile, and K-12 sub-collection materials, showing the relationship of count of books to publication year", purl=FALSE}
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
     geom_line() +
     facet_wrap(facets = vars(subCollection))
 ```
 
 We can use `facet_wrap()` as a way of seeing the categories within a variables. Look at the number of formats per
-sub-collection. 
+sub-collection.
 
-```{r purl=FALSE}
+```{r, purl=FALSE}
 ggplot(data = books2, aes(x = fct_rev(fct_infreq(subCollection)))) +
   geom_bar() +
   facet_wrap(~ format, nrow = 2) +
@@ -559,26 +571,32 @@ surface information about your data that are otherwise difficult to parse.
 Sometimes they may not meet all the rules for creating beautiful data, but when
 you are simply getting to know your data, that's OK.
 
-> ### Challenge
->
-> Use the `books2` data to create a bar plot that depicts the number of items in
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+### Challenge
+
+Use the `books2` data to create a bar plot that depicts the number of items in
 each sub-collection, faceted by format.
-> Add the scale_y_log10() argument to
+Add the scale\_y\_log10() argument to
 create a logarithmic scale for easier visibility.
-> Add the following theme
-argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
-= 60, hjust = 1))`
->
-> > ## Solution
-> > ```{r average-weight-time-series, answer=TRUE, purl=FALSE}
-> > ggplot(data = books2, aes(x = subCollection)) +
-> > geom_bar() +
-> > facet_wrap(vars(format)) +
-> > scale_y_log10() +
-> > theme(axis.text.x = element_text(angle = 60, hjust = 1))
-> > ```
-> {: .solution}
-{: .challenge}
+Add the following theme
+argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle = 60, hjust = 1))`
+
+:::::::::::::::  solution
+
+## Solution
+
+```{r average-weight-time-series, answer=TRUE, purl=FALSE}
+ggplot(data = books2, aes(x = subCollection)) +
+geom_bar() +
+facet_wrap(vars(format)) +
+scale_y_log10() +
+theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## **`ggplot2`** themes
 
@@ -601,7 +619,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 In addition to `theme_bw()`, which changes the plot background to white, **`ggplot2`**
 comes with several other themes which can be useful to quickly change the look
 of your visualization. The complete list of themes is available
-at <https://ggplot2.tidyverse.org/reference/ggtheme.html>. `theme_minimal()` and
+at [https://ggplot2.tidyverse.org/reference/ggtheme.html](https://ggplot2.tidyverse.org/reference/ggtheme.html). `theme_minimal()` and
 `theme_light()` are popular, and `theme_void()` can be useful as a starting
 point to create a new hand-crafted theme.
 
@@ -619,7 +637,7 @@ think of ways you could improve your plots.
 
 For example, by default, the axes labels on a plot are determined by the name of
 the variable being plotted. We can change names of axes to something more
-informative than 'pubyear_ymd' and 'n' and add a title to the figure:
+informative than 'pubyear\_ymd' and 'n' and add a title to the figure:
 
 ```{r, purl=FALSE}
 # add labels
@@ -658,35 +676,42 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
         y = "Number of books")
 ```
 
+:::::::::::::::::::::::::::::::::::::::  challenge
 
-> ### Challenge
->
-> Use the `booksPlot` data to create a plot that depicts how the total number of checkouts
-> changes based on year of publication.
->
-> First, create a data frame `yearly_checkouts` That meets the following conditions:
-> * `filter()` to exclude `NA` values
-> * `filter()` between "1989-01-01" and "2002-01-01"
-> * `group_by()` the publication year (make sure to use the special Date pubyear value we created)
-> * `summarize()` to create a new value `checkouts_sum` that represents the `sum()` of total checkouts per publication year
->
-> Then, create a `ggplot` that visualizes the sum of item checkouts by year of
+### Challenge
+
+Use the `booksPlot` data to create a plot that depicts how the total number of checkouts
+changes based on year of publication.
+
+First, create a data frame `yearly_checkouts` That meets the following conditions:
+
+- `filter()` to exclude `NA` values
+- `filter()` between "1989-01-01" and "2002-01-01"
+- `group_by()` the publication year (make sure to use the special Date pubyear value we created)
+- `summarize()` to create a new value `checkouts_sum` that represents the `sum()` of total checkouts per publication year
+
+Then, create a `ggplot` that visualizes the sum of item checkouts by year of
 publication. Add one of the themes listed above.
-> > ## Solution
-> > ```{r}
-> > yearly_checkouts <- booksPlot %>%
-> >  filter(!is.na(pubyear_ymd),
-> >         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
-> >  group_by(pubyear_ymd) %>%
-> >  summarize(checkouts_sum = sum(tot_chkout))
-> >
-> > ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum)) +
-> >  geom_line() +
-> >  theme_bw()
-> > ```
-> {: .solution}
-{: .challenge}
 
+:::::::::::::::  solution
+
+## Solution
+
+```{r}
+yearly_checkouts <- booksPlot %>%
+ filter(!is.na(pubyear_ymd),
+        pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
+ group_by(pubyear_ymd) %>%
+ summarize(checkouts_sum = sum(tot_chkout))
+
+ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum)) +
+ geom_line() +
+ theme_bw()
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Save and export
 
@@ -703,7 +728,6 @@ environment, such as `yearly_counts_plot`.
 
 Make sure you have the `fig_output/` folder in your working directory.
 
-
 ```{r, eval=FALSE}
 yearly_counts_plot <- ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
@@ -716,18 +740,33 @@ yearly_counts_plot <- ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd
 ggsave("fig_output/yearly_counts_plot.png", yearly_counts_plot, width = 15, height = 10)
 ```
 
+:::::::::::::::::::::::::::::::::::::::  challenge
 
-> ## Exercise
->
-> With all of this information in hand, please take another five minutes to
-> either improve one of the plots generated in this exercise or create a
-> beautiful graph of your own. Use the RStudio [**`ggplot2`** cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
-> for inspiration. Here are some ideas:
->
-> * See if you can make the bars white with black outline.
-> * Try using a different color palette (see
->   [http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)).
-{: .challenge}
+## Exercise
+
+With all of this information in hand, please take another five minutes to
+either improve one of the plots generated in this exercise or create a
+beautiful graph of your own. Use the RStudio [**`ggplot2`** cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
+for inspiration. Here are some ideas:
+
+- See if you can make the bars white with black outline.
+- Try using a different color palette (see
+  [http://www.cookbook-r.com/Graphs/Colors\_(ggplot2)/](https://www.cookbook-r.com/Graphs/Colors_\(ggplot2\)/)).
+  
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-{% include links.md %}
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- `ggplot2` is a flexible and useful tool for creating plots in R.
+- The data set and coordinate system can be defined using the `ggplot` function.
+- Additional layers, including geoms, are added using the `+` operator.
+- Boxplots are useful for visualizing the distribution of a continuous variable.
+- Barplot are useful for visualizing categorical data.
+- Faceting allows you to generate multiple plots based on a categorical variable.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+

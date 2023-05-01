@@ -1,10 +1,9 @@
 ---
-layout: lesson
-root: .  # Is the only page that doesn't follow the pattern /:path/index.html
-permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
+permalink: index.html
+site: sandpaper::sandpaper_site
 ---
 
-{% include gh_variables.html %}
+{% include gh\_variables.html %}
 
 This lesson is designed for librarians and library professionals with little or no prior experience with R to be more acquainted with the programming language. Having a level of familiarity with R is beneficial in assisting users with requests regarding the cleaning, formatting, and visualization with data along for librarians and library professionals themselves when it comes to data they intend to use and analyze for their internal workflows.
 
@@ -17,10 +16,14 @@ By the end of this lesson, learners will be able to:
 3. Employ functions in the `dplyr` package to perform data cleaning and transformation.
 4. Use the `ggplot2` package to create various types of plots and to change aesthetic features of plots.
 
-> ## Prerequisites 
->
-> These lessons assume no prior knowledge of the skills or tools, but working through this lesson requires working copies of R and RStudio.
->
-{: .prereq}
+::::::::::::::::::::::::::::::::::::::::::  prereq
 
-{% include links.md %}
+## Prerequisites
+
+These lessons assume no prior knowledge of the skills or tools, but working through this lesson requires working copies of R and RStudio.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+

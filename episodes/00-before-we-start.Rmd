@@ -1,31 +1,35 @@
 ---
-title: "Before we Start"
-keypoints:
-- "Use RStudio to write and run R programs."
-- "Use `install.packages()` to install packages (libraries)."
-objectives:
-- "Navigate the RStudio interface."
-- "Install additional packages using the packages tab."
-- "Install additional packages using R code."
-questions:
-- "What is R and why learn it?"
-- "How to find your way around RStudio?"
-- "How to interact with R?"
-- "How to install packages?"
+title: Before we Start
 source: Rmd
 teaching: 25
 exercises: 15
 ---
 
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Navigate the RStudio interface.
+- Install additional packages using the packages tab.
+- Install additional packages using R code.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- What is R and why learn it?
+- How to find your way around RStudio?
+- How to interact with R?
+- How to install packages?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ```{r, include=FALSE}
-source("../bin/chunk-options.R")
 ```
 
 This episode is adapted from [Before We
 Start](https://datacarpentry.org/r-socialsci/00-intro/index.html) from the R for
 Social Scientists Carpentry lesson, licensed under a [Creative Commons
 Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) (CC BY
-4.0).
+4\.0).
 
 ## What is R? What is RStudio?
 
@@ -38,7 +42,6 @@ analysis and modeling operations on it; text and data mine it; and much more.
 The term "`R`" is used to refer to both the programming language and the
 software that interprets the scripts written using it.
 
-
 [RStudio](https://rstudio.com) is a user interface for working with R. It is
 called an Integrated Development Environment (IDE): a piece of software that
 provides tools to make programming easier.  RStudio acts as a sort of wrapper
@@ -47,7 +50,6 @@ limiting. RStudio makes it easier to import datasets, create and write scripts,
 and makes using R much more effective. RStudio is also free and open source. To
 function correctly, RStudio needs R and therefore both need to be installed on
 your computer.
-
 
 ## Why learn R?
 
@@ -77,7 +79,6 @@ statistical tests in your manuscript are updated automatically.
 An increasing number of journals and funding agencies expect analyses to be
 reproducible, so knowing R will give you an edge with these requirements.
 
-
 ### R is interdisciplinary and extensible
 
 With 10,000+ packages that can be installed to extend its capabilities, R
@@ -85,7 +86,6 @@ provides a framework that allows you to combine statistical approaches from many
 scientific disciplines to best suit the analytical framework you need to analyze your
 data. For instance, R has packages for image analysis, GIS, time series, population
 genetics, and a lot more.
-
 
 ### R works on data of all shapes and sizes
 
@@ -99,15 +99,12 @@ types that make handling of missing data and statistical factors convenient.
 R can connect to spreadsheets, databases, and many other data formats, on your
 computer or on the web.
 
-
 ### R produces high-quality graphics
 
 The plotting functionalities in R are endless, and allow you to adjust any
 aspect of your graph to convey most effectively the message from your data.
 
-
 ### R has a large and welcoming community
-
 
 Thousands of people use R daily. Many of them are willing to help you through
 mailing lists and websites such as [Stack Overflow](https://stackoverflow.com/),
@@ -115,8 +112,6 @@ or on the [RStudio community](https://community.rstudio.com/). Questions which
 are backed up with [short, reproducible code
 snippets](https://www.tidyverse.org/help/) are more likely to attract
 knowledgeable responses.
-
-
 
 ### Not only is R free, but it is also open-source and cross-platform
 
@@ -128,17 +123,12 @@ transparency, there is less chance for mistakes, and if you (or someone else)
 find some, you can report and fix bugs. As a result, R users have created
 thousands of packages and software to enhance user experience and functionality.
 
-
-
 Because R is open source and is supported by a large community of developers and
 users, there is a very large selection of third-party add-on packages which are
 freely available to extend R's native capabilities.
 
-
-
-
-```{r rstudio-analogy, echo=FALSE, fig.cap="RStudio extends what R can do, and makes it easier to write R code and interact with R. [Left photo credit](https://commons.wikimedia.org/w/index.php?curid=2447462); [right photo credit](https://commons.wikimedia.org/w/index.php?curid=44599363).", fig.alt = "Two images of a DMC Delorian: left is a standard model and on the right is one that has been modified into the time machine from 'Back To The Future'"}
-knitr::include_graphics("../fig/r+rstudio-analogy.jpg")
+```{r rstudio-analogy, echo=FALSE, fig.cap="RStudio extends what R can do, and makes it easier to write R code and interact with R. [Left photo credit](https://commons.wikimedia.org/w/index.php?curid=2447462); [right photo credit](https://commons.wikimedia.org/w/index.php?curid=44599363).", fig.alt="Two images of a DMC Delorian: left is a standard model and on the right is one that has been modified into the time machine from 'Back To The Future'"}
+knitr::include_graphics("fig/r+rstudio-analogy.jpg")
 ```
 
 ### R and librarianship
@@ -151,23 +141,22 @@ information literacy instruction, research support, accessing bibliographic meta
 By using R or any advanced data analysis platform (such as Python), libraries
 can harness data in order to:
 
-* Clean messy data from the ILS & vendors
-    + Clean ISBNs, ISSNs, other identifiers
-    + Detect data errors & anomalies
-    + Normalize names (e.g. databases, ebooks, serials)
-    + Create custom subsets
-* Merge and analyze data, e.g.
-    + Holdings and usage data from the same vendor
-    + Print book & ebook holdings
-    + COUNTER statistics
-    + Institutional data
-* Recode variables
-* Manipulate dates and times
-* Create visualizations
-* Provide data reference services
-* Access data via APIs, including Crossref, Unpaywall, ORCID, and Sherpa-ROMeO
-* Write documents to communicate findings
-
+- Clean messy data from the ILS \& vendors
+  - Clean ISBNs, ISSNs, other identifiers
+  - Detect data errors \& anomalies
+  - Normalize names (e.g. databases, ebooks, serials)
+  - Create custom subsets
+- Merge and analyze data, e.g.
+  - Holdings and usage data from the same vendor
+  - Print book \& ebook holdings
+  - COUNTER statistics
+  - Institutional data
+- Recode variables
+- Manipulate dates and times
+- Create visualizations
+- Provide data reference services
+- Access data via APIs, including Crossref, Unpaywall, ORCID, and Sherpa-ROMeO
+- Write documents to communicate findings
 
 ## Knowing your way around RStudio
 
@@ -190,7 +179,6 @@ provides many shortcuts, autocompletion, and highlighting for the major file
 types you use while developing in R. RStudio makes typing easier and less
 error-prone.
 
-
 ## Getting set up
 
 It is good practice to keep a set of related data, analyses, and text
@@ -207,24 +195,23 @@ its location (allowing you to quickly navigate to it). The interface also
 (optionally) preserves custom settings and open files to make it easier to
 resume work after a break.
 
-
 ### Create a new project
 
-* Under the `File` menu, click on `New project`, choose `New directory`, then
-`New project`
-* Enter the name `library_carpentry` for this new folder (or "directory"). This
-will be your **working directory** for the rest of the day.
-* Click on `Create project`
-* Create a new file where we will type our scripts. Go to File > New File > R
-script. Click the save icon on your toolbar and save your script as
-"`script.R`".
+- Under the `File` menu, click on `New project`, choose `New directory`, then
+  `New project`
+- Enter the name `library_carpentry` for this new folder (or "directory"). This
+  will be your **working directory** for the rest of the day.
+- Click on `Create project`
+- Create a new file where we will type our scripts. Go to File > New File > R
+  script. Click the save icon on your toolbar and save your script as
+  "`script.R`".
 
 ### The RStudio Interface
 
 Let's take a quick tour of RStudio.
 
-```{r rstudio-panes, echo=FALSE, fig.cap="R Studio", fig.alt = "screenshot of RStudio with labels of the four panes as described below"}
-knitr::include_graphics("../fig/RStudioPanes.png")
+```{r rstudio-panes, echo=FALSE, fig.cap="R Studio", fig.alt="screenshot of RStudio with labels of the four panes as described below"}
+knitr::include_graphics("fig/RStudioPanes.png")
 ```
 
 RStudio is divided into four "panes". The placement of these
@@ -232,36 +219,37 @@ panes and their content can be customized (see menu, Tools -> Global Options ->
 Pane Layout).
 
 The Default Layout is:
+
 - **Console Pane** (bottom left)
-If you were just using the basic R interface, without RStudio, this is all you
-would see. You use this to type in a command and press enter to immediately
-evaluate it. It includes a `>` symbol and a blinking cursor prompting you to
-enter some code. Code that you type directly in the console will not be saved,
-though it is available in the History Pane. You can try it out by typing `2 + 2`
-into the console.
+  If you were just using the basic R interface, without RStudio, this is all you
+  would see. You use this to type in a command and press enter to immediately
+  evaluate it. It includes a `>` symbol and a blinking cursor prompting you to
+  enter some code. Code that you type directly in the console will not be saved,
+  though it is available in the History Pane. You can try it out by typing `2 + 2`
+  into the console.
 
 - **Script Pane** (top left)
-This is sort of like a text editor, or a place to draft and save code. You then
-tell RStudio to run the line of code, or multiple lines of code, and you can see
-it appear in the console as it is running. Then save the script as a .R file for
-future use, or to share with others.
+  This is sort of like a text editor, or a place to draft and save code. You then
+  tell RStudio to run the line of code, or multiple lines of code, and you can see
+  it appear in the console as it is running. Then save the script as a .R file for
+  future use, or to share with others.
 
 - **Environment/History Pane** (top right)
-This will display the objects that you've read into what is called the "global
-environment." When you read a file into R, or manually create an R object, it
-enters into the computer's working memory. When we manipulate or run operations
-on that data, it isn't written to a file until we tell it to. It is kept here in
-the RStudio environment. The History tab displays all commands that have been
-executed in the console.
+  This will display the objects that you've read into what is called the "global
+  environment." When you read a file into R, or manually create an R object, it
+  enters into the computer's working memory. When we manipulate or run operations
+  on that data, it isn't written to a file until we tell it to. It is kept here in
+  the RStudio environment. The History tab displays all commands that have been
+  executed in the console.
 
 - **Navigation Pane** (bottom right)
-This pane has multiple functions:
-
-    * **Files:** Navigate to files saved on your computer and in your working directory
-    * **Plots:** View plots (e.g. charts and graphs) you have created
-    * **Packages:** view add-on packages you have installed, or install new packages
-    * **Help:** Read help pages for R functions
-    * **Viewer:** View local web content
+  This pane has multiple functions:
+  
+  - **Files:** Navigate to files saved on your computer and in your working directory
+  - **Plots:** View plots (e.g. charts and graphs) you have created
+  - **Packages:** view add-on packages you have installed, or install new packages
+  - **Help:** Read help pages for R functions
+  - **Viewer:** View local web content
 
 ## Interacting with R
 
@@ -270,7 +258,6 @@ follow, and then we tell the computer to follow those instructions. We write, or
 *code*, instructions in R because it is a common language that both the computer
 and we can understand.
 
-
 There are two main ways of interacting with R: by using the console or by using
 script files (plain text files that contain your code). The console pane (in
 RStudio, the bottom left panel) is the place where commands written in the R
@@ -278,7 +265,6 @@ language can be typed and executed immediately by the computer. It is also where
 the results will be shown for commands that have been executed. You can type
 commands directly into the console and press <kbd>Enter</kbd> to execute those commands,
 but they will be forgotten when you close the session.
-
 
 The *prompt* is the blinking cursor in the console pane prompting you to take
 action, in the lower-left corner of R Studio. If R is ready to accept commands,
@@ -290,12 +276,12 @@ results and come back with a new `>` prompt to wait for new commands. We type
 *execute* or *run*) those commands.
 
 You can use R like a calculator:
+
 ```{r console, comment=NA, eval=FALSE}
 2 + 2    # Type 2 + 2 in the console to run the command
 ```
 
 While in the console, you can press the up and down keys on your keyboard to cycle through previously executed commands.
-
 
 Because we want our code and workflow to be reproducible, it is better to type
 the commands we want in the script editor and save the script. This way, there
@@ -319,8 +305,6 @@ console.  RStudio provides the <kbd>Ctrl</kbd> + <kbd>1</kbd> and
 <kbd>Ctrl</kbd> + <kbd>2</kbd> shortcuts allow you to jump between the
 script and the console panes.
 
-
-
 If R is still waiting for you to enter more text,
 the console will show a `+` prompt. It means that you haven't finished entering
 a complete command. This is likely because you have not 'closed' a parenthesis or
@@ -330,10 +314,6 @@ When this happens, and you thought you finished typing your command, click
 inside the console window andx press <kbd>Esc</kbd>; this will cancel the
 incomplete command and return you to the `>` prompt. You can then proofread
 the command(s) you entered and correct the error.
-
-
-
-
 
 ## Installing additional packages using the packages tab
 
@@ -369,41 +349,50 @@ directly in the console. Run `help(install.packages)` to learn more about how to
 do it this way.
 
 ```{r install-packages, echo=FALSE, fig.cap="Click on the Packages tab in the Navigation Pane to download packages from CRAN.", fig.alt="install packages pane showing an entry for installing the 'tidyverse' package"}
-knitr::include_graphics("../fig/R_00_Rstudio_03.png")
+knitr::include_graphics("fig/R_00_Rstudio_03.png")
 ```
 
 At the bottom of the Install Packages window is a check box to
-‘Install’ dependencies. This is ticked by default, which is usually
+‘Install' dependencies. This is ticked by default, which is usually
 what you want. Packages can (and do) make use of functionality
 built into other packages, so for the functionality contained in
 the package you are installing to work properly, there may be other
 packages which have to be installed with them. The ‘Install
-dependencies’ option makes sure that this happens.
+dependencies' option makes sure that this happens.
 
-> ## Exercise
->
-> Use the install option from the packages tab to install the ‘tidyverse’ package.
->
-> > ## Solution
-> > From the packages tab, click ‘Install’ from the toolbar and type ‘tidyverse’ into the textbox, then click ‘install’.
-> > The ‘tidyverse’ package is really a package of packages, including 'ggplot2' and 'dplyr', both of which require other packages to run correctly. All of these packages will be installed automatically.
-> > Depending on what packages have previously been installed in your R environment, the install of ‘tidyverse’ could be very quick or could take several minutes.
-> > As the install proceeds, messages relating to its progress will be written to the console. You will be able to see all of the packages which are actually being installed.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+Use the install option from the packages tab to install the ‘tidyverse' package.
+
+:::::::::::::::  solution
+
+## Solution
+
+From the packages tab, click ‘Install' from the toolbar and type ‘tidyverse' into the textbox, then click ‘install'.
+The ‘tidyverse' package is really a package of packages, including 'ggplot2' and 'dplyr', both of which require other packages to run correctly. All of these packages will be installed automatically.
+Depending on what packages have previously been installed in your R environment, the install of ‘tidyverse' could be very quick or could take several minutes.
+As the install proceeds, messages relating to its progress will be written to the console. You will be able to see all of the packages which are actually being installed.
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Because the install process accesses the CRAN repository, you
 will need an Internet connection to install packages.
 
 It is also possible to install packages from other repositories, as
-well as Github or the local file system, but we won’t be looking at these options in this lesson.
+well as Github or the local file system, but we won't be looking at these options in this lesson.
 
 ## Installing additional packages using R code
 
 If you were watching the console window when you started the
-install of ‘tidyverse’, you may have noticed that the line
+install of ‘tidyverse', you may have noticed that the line
 
-```{r, eval = FALSE}
+```{r, eval=FALSE}
 install.packages("tidyverse")
 ```
 
@@ -411,47 +400,49 @@ was written to the console before the start of the installation messages.
 
 You could also have installed the **`tidyverse`** packages by running this command directly in the R console.
 
-
 ## R Resources
 
 ### Learning R
-1. `swirl` is a package you can install in R to learn about R and data science
-interactively. Just type `install.packages("swirl")` into your R console, load
-the package by typing `library("swirl")`, and then type `swirl()`. Read more at [swirl](http://swirlstats.com/).
 
-2. [Try R](http://tryr.codeschool.com/) is a browser-based interactive tutorial
-developed by Code School.
+1. `swirl` is a package you can install in R to learn about R and data science
+  interactively. Just type `install.packages("swirl")` into your R console, load
+  the package by typing `library("swirl")`, and then type `swirl()`. Read more at [swirl](https://swirlstats.com/).
+
+2. [Try R](https://tryr.codeschool.com/) is a browser-based interactive tutorial
+  developed by Code School.
 
 3. Anthony Damico's
-[twotorials](https://www.youtube.com/playlist?list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC)
-are a series of 2 minute videos demonstrating several basic tasks in R.
+  [twotorials](https://www.youtube.com/playlist?list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC)
+  are a series of 2 minute videos demonstrating several basic tasks in R.
 
-4. [Cookbook for R](http://www.cookbook-r.com/) by Winston Change provides
-solutions to common tasks and problems in analyzing data.
+4. [Cookbook for R](https://www.cookbook-r.com/) by Winston Change provides
+  solutions to common tasks and problems in analyzing data.
 
 5. If you're up for a challenge, try the free [R Programming MOOC in
-Coursera](https://www.coursera.org/learn/r-programming) by Roger Peng.
+  Coursera](https://www.coursera.org/learn/r-programming) by Roger Peng.
 
 6. Books:
-* [R For Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund & Hadley
-Wickham [free]
-* [An Introduction to Data Cleaning with
-R](https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf)
-by Edwin de Jonge & Mark van der Loo [free]
-* [YaRrr! The Pirate's Guide to
-R](https://bookdown.org/ndphillips/YaRrr/) by Nathaniel D. Phillips [free]
-* Springer's [Use R!](https://link.springer.com/bookseries/6991) series [not free]
-is mostly specialized, but it has some excellent introductions including Alain
-F. Zuur et al.'s [A Beginner's Guide to
-R](https://link.springer.com/book/10.1007/978-0-387-93837-0) and Phil Spector's
-[Data Manipulation in
-R](https://link.springer.com/book/10.1007/978-0-387-74731-6).
+
+- [R For Data Science](https://r4ds.had.co.nz/) by Garrett Grolemund \& Hadley
+  Wickham [free]
+- [An Introduction to Data Cleaning with
+  R](https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf)
+  by Edwin de Jonge \& Mark van der Loo [free]
+- [YaRrr! The Pirate's Guide to
+  R](https://bookdown.org/ndphillips/YaRrr/) by Nathaniel D. Phillips [free]
+- Springer's [Use R!](https://link.springer.com/bookseries/6991) series [not free]
+  is mostly specialized, but it has some excellent introductions including Alain
+  F. Zuur et al.'s [A Beginner's Guide to
+  R](https://link.springer.com/book/10.1007/978-0-387-93837-0) and Phil Spector's
+  [Data Manipulation in
+  R](https://link.springer.com/book/10.1007/978-0-387-74731-6).
 
 ### Data
 
 If you need some data to play with, type `data()` in the console for a list of
 data sets. To load a dataset, type it like this: `data(mtcars)`. Type
 `help(mtcars)` to learn more about it. You can then perform operations, e.g.
+
 ```{r dataloading, comment=NA, eval=F}
 head(mtcars)
 nrow(mtcars)
@@ -459,26 +450,37 @@ mean(mtcars$mpg)
 sixCylinder <- mtcars[mtcars$cyl == 6, ]
 ```
 
-See also rdatamining.com's [list of free datasets](http://www.rdatamining.com/resources/data).
+See also rdatamining.com's [list of free datasets](https://www.rdatamining.com/resources/data).
 
 ### Cheat Sheets
 
-* [Base R Cheat Sheet](https://paulvanderlaken.files.wordpress.com/2017/08/base-r-cheetsheat.pdf) by Mhairi McNeill
-* [Data Transformation with dplyr Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) by RStudio
-* [Data Wrangling with dplyr and tidyr Cheat Sheet](https://paulvanderlaken.files.wordpress.com/2017/08/ddplyr-cheatsheet-data-wrangling-plyr.pdf) by RStudio
-* [Complete list of RStudio cheatsheets](https://github.com/rstudio/cheatsheets/)
+- [Base R Cheat Sheet](https://paulvanderlaken.files.wordpress.com/2017/08/base-r-cheetsheat.pdf) by Mhairi McNeill
+- [Data Transformation with dplyr Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) by RStudio
+- [Data Wrangling with dplyr and tidyr Cheat Sheet](https://paulvanderlaken.files.wordpress.com/2017/08/ddplyr-cheatsheet-data-wrangling-plyr.pdf) by RStudio
+- [Complete list of RStudio cheatsheets](https://github.com/rstudio/cheatsheets/)
 
 ### Style guides
+
 Use these resources to write cleaner code, according to established style conventions
 
-* Hadley Wickham's [Style Guide](http://adv-r.had.co.nz/Style.html)
-* Google's [R Style Guide](https://google.github.io/styleguide/Rguide.xml)
-* Tip: highlight code in your script pane and press **Ctrl/Cmd + I** on your keyboard to automatically fix the indents
+- Hadley Wickham's [Style Guide](https://adv-r.had.co.nz/Style.html)
+- Google's [R Style Guide](https://google.github.io/styleguide/Rguide.xml)
+- Tip: highlight code in your script pane and press **Ctrl/Cmd + I** on your keyboard to automatically fix the indents
 
 ## Credit
+
 Parts of this episode have been inspired by the following:
 
-* ["Before We Start"](https://datacarpentry.org/r-socialsci/00-intro/index.html) R for Social Scientists Carpentry Lesson. CC BY 4.0.
-* Roger Peng's [Computing for Data Analysis videos](https://www.youtube.com/playlist?list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ)
-* Lisa Federer's [Introduction to R for Non-Programmers](archived at https://web.archive.org/web/20180726071634/http://nihlibrary.campusguides.com/dataservices/intro_to_r)
-* Brad Boehmke's [Intro to R Bootcamp](https://uc-r.github.io/r_bootcamp)
+- ["Before We Start"](https://datacarpentry.org/r-socialsci/00-intro/index.html) R for Social Scientists Carpentry Lesson. CC BY 4.0.
+- Roger Peng's [Computing for Data Analysis videos](https://www.youtube.com/playlist?list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ)
+- Lisa Federer's [Introduction to R for Non-Programmers](archived at [https://web.archive.org/web/20180726071634/http://nihlibrary.campusguides.com/dataservices/intro\_to\_r](https://web.archive.org/web/20180726071634/http://nihlibrary.campusguides.com/dataservices/intro_to_r))
+- Brad Boehmke's [Intro to R Bootcamp](https://uc-r.github.io/r_bootcamp)
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Use RStudio to write and run R programs.
+- Use `install.packages()` to install packages (libraries).
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+

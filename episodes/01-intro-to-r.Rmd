@@ -1,15 +1,12 @@
 ---
-title: "Introduction to R"
-keypoints:
-- Use the assignment operator <- to assign values to objects. You can now manipulate
-  that object in R
-- R contains a number of functions you use to do something with your data. Functions
-  automate more complicated sets of commands. Many functions are predefined, or can
-  be made available by importing R packages
-- A vector is a sequence of elements of the same type. All data in a vector must be
-  of the same type--character, numeric (or double), integer, and logical. Create vectors
-  with c(). Use [ ] to subset values from vectors.
-objectives:
+title: Introduction to R
+source: Rmd
+teaching: 50
+exercises: 30
+---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
 - Assign values to objects in R.
 - Learn how to name objects.
 - Use comments to inform script.
@@ -18,8 +15,12 @@ objectives:
 - Inspect the content of vectors and manipulate their content.
 - Subset and extract values from vectors.
 - Analyze vectors with missing data.
-- 'Define the following terms as they relate to R: object, vector, assign, call, function.'
-questions:
+- Define the following terms as they relate to R: object, vector, assign, call, function.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
 - What is an object?
 - What is a function and how can we pass arguments to functions?
 - How can values be initially assigned to variables of different data types?
@@ -27,16 +28,11 @@ questions:
 - How can subsets be extracted from vectors?
 - How does R treat missing values?
 - How can we deal with missing values in R?
-source: Rmd
-teaching: 50
-exercises: 30
----
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, include=FALSE}
-source("../bin/chunk-options.R")
-knitr_fig_path("01-")
 ```
-
 
 ## Creating objects in R
 
@@ -48,8 +44,8 @@ You can get output from R simply by typing math in the console:
 sqrt(36) # take the square root of 36
 ```
 
-However, to do useful and interesting things, we need to assign _values_ to
-_objects_. To create an object, we need to give it a name followed by the
+However, to do useful and interesting things, we need to assign *values* to
+*objects*. To create an object, we need to give it a name followed by the
 assignment operator `<-`, and the value we want to give it:
 
 ```{r, purl=FALSE}
@@ -60,52 +56,55 @@ time_minutes <- 5        # assign the number 5 to the object time_minutes
 the left. Here we are creating a symbol called `time_minutes` and *assigning* it
 the numeric value 5. Some R users would say "`time_minutes` *gets* 5."
 `time_minutes` is now a *numeric vector* with one element. Or you could say
-`time_minutes` is a numeric vector, and the first element is the number 5. 
+`time_minutes` is a numeric vector, and the first element is the number 5.
 
 When you assign something to a symbol, nothing happens in the console, but in
 the Environment pane in the upper right, you will notice a new object,
 `time_minutes`.
 
-In RStudio, typing <kbd>Alt</kbd> + <kbd>-</kbd> (push <kbd>Alt</kbd> at the
-same time as the <kbd>-</kbd> key) will write `<- ` in a single keystroke in a
-PC, while typing <kbd>Option</kbd> + <kbd>-</kbd> (push <kbd>Option</kbd> at the
-same time as the <kbd>-</kbd> key) does the same in a Mac.
+In RStudio, typing <kbd>Alt</kbd> + <kbd>\-</kbd> (push <kbd>Alt</kbd> at the
+same time as the <kbd>\-</kbd> key) will write `<- ` in a single keystroke in a
+PC, while typing <kbd>Option</kbd> + <kbd>\-</kbd> (push <kbd>Option</kbd> at the
+same time as the <kbd>\-</kbd> key) does the same in a Mac.
 
 Objects can be given any name such as `x`, `checkouts`, or `isbn`. You want your
 object names to be explicit and not too long. Here are some tips for assigning
 values:
 
-* **Do not use names of functions that already exist in R:** There are some
-names that cannot be used because they are the names of fundamental functions in
-R (e.g., `if`, `else`, `for`, see
-[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
-for a complete list. In general, even if it's allowed, it's best to not use
-other function names (e.g., `c`, `T`, `mean`, `data`, `df`, `weights`). If in
-doubt, check the help to see if the name is already in use.
-* **R is case sensitive**: `age` is different from `Age` and `y` is different
-from `Y`.
-* **No blank spaces or symbols other than underscores**: R users get around this
-in a couple of ways, either through capitalization (e.g. `myData`) or
-underscores (e.g. `my_data`). It's also best to avoid dots (`.`) within an
-object name as in `my.dataset`. There are many functions in R with dots in their
-names for historical reasons, but dots have a special meaning in R (for methods)
-and other programming languages.
-* **Do not begin with numbers or symbols**: `2x` is not valid, but `x2` is.
-* **Be descriptive, but make your variable names short**: It's good practice to
-be descriptive with your variable names. If you're loading in a lot of data,
-choosing `myData` or `x` as a name may not be as helpful as, say, `ebookUsage`.
-Finally, keep your variable names short, since you will likely be typing them in
-frequently.
+- **Do not use names of functions that already exist in R:** There are some
+  names that cannot be used because they are the names of fundamental functions in
+  R (e.g., `if`, `else`, `for`, see
+  [here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
+  for a complete list. In general, even if it's allowed, it's best to not use
+  other function names (e.g., `c`, `T`, `mean`, `data`, `df`, `weights`). If in
+  doubt, check the help to see if the name is already in use.
+- **R is case sensitive**: `age` is different from `Age` and `y` is different
+  from `Y`.
+- **No blank spaces or symbols other than underscores**: R users get around this
+  in a couple of ways, either through capitalization (e.g. `myData`) or
+  underscores (e.g. `my_data`). It's also best to avoid dots (`.`) within an
+  object name as in `my.dataset`. There are many functions in R with dots in their
+  names for historical reasons, but dots have a special meaning in R (for methods)
+  and other programming languages.
+- **Do not begin with numbers or symbols**: `2x` is not valid, but `x2` is.
+- **Be descriptive, but make your variable names short**: It's good practice to
+  be descriptive with your variable names. If you're loading in a lot of data,
+  choosing `myData` or `x` as a name may not be as helpful as, say, `ebookUsage`.
+  Finally, keep your variable names short, since you will likely be typing them in
+  frequently.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Objects vs. variables
+
+What are known as `objects` in `R` are known as `variables` in many other
+programming languages. Depending on the context, `object` and `variable` can
+have drastically different meanings. However, in this lesson, the two words
+are used synonymously. For more information see:
+[https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
 
 
-> ## Objects vs. variables
->
-> What are known as `objects` in `R` are known as `variables` in many other
-> programming languages. Depending on the context, `object` and `variable` can
-> have drastically different meanings. However, in this lesson, the two words
-> are used synonymously. For more information see:
-> [https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
-{: .callout}
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Evaluating Expressions
 
@@ -155,41 +154,54 @@ Then change `time_minutes` to 30:
 time_minutes <- 30
 ```
 
-> ## Exercise
-> 
-> What do you think is the current content of the object `time_seconds`? 600 or
-> 1800?
->
-> > ## Solution
-> >
-> > The value of `time_seconds` is still 600 because you have not
-> > re-run the line `time_seconds <- 60 * time_minutes` since
-> > changing the value of `time_minutes`.
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
 
-> ## Exercise
->
-> Create two variables `my_length` and `my_width` and assign them any numeric values you want.
-> Create a third variable `my_area` and give it a value based on the the multiplication of `my_length` and `my_width`.
-> Show that changing the values of either `my_length` and `my_width` does not affect the value of `my_area`.
-> 
-> > ## Solution
-> > 
-> > ```{r}
-> > my_length <- 2.5
-> > my_width <- 3.2
-> > my_area <- my_length * my_width
-> > area
-> > # change the values of my_length and my_width
-> > my_length <- 7.0
-> > my_width <- 6.5
-> > # the value of my_area isn't changed
-> > my_area
-> > ```
-> > 
-> {: .solution}
-{: .challenge}
+## Exercise
+
+What do you think is the current content of the object `time_seconds`? 600 or
+1800?
+
+:::::::::::::::  solution
+
+## Solution
+
+The value of `time_seconds` is still 600 because you have not
+re-run the line `time_seconds <- 60 * time_minutes` since
+changing the value of `time_minutes`.
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+Create two variables `my_length` and `my_width` and assign them any numeric values you want.
+Create a third variable `my_area` and give it a value based on the the multiplication of `my_length` and `my_width`.
+Show that changing the values of either `my_length` and `my_width` does not affect the value of `my_area`.
+
+:::::::::::::::  solution
+
+## Solution
+
+```{r}
+my_length <- 2.5
+my_width <- 3.2
+my_area <- my_length * my_width
+area
+# change the values of my_length and my_width
+my_length <- 7.0
+my_width <- 6.5
+# the value of my_area isn't changed
+my_area
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Comments
 
@@ -219,10 +231,10 @@ to select the whole line), then press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
 <kbd>C</kbd>.
 
 ## Removing objects from the environment
+
 To remove an object from your R environment, use the `rm()` function. Remove
 multiple objects with `rm(list = c("add", "objects", "here))`, adding the
-objects in `c()` using quotation marks. To remove all objects, use `rm(list =
-ls())` or click the broom icon in the Environment Pane, next to "Import
+objects in `c()` using quotation marks. To remove all objects, use `rm(list = ls())` or click the broom icon in the Environment Pane, next to "Import
 Dataset."
 
 ```{r, purl=FALSE, eval=FALSE}
@@ -233,7 +245,6 @@ rm(x)  # remove x
 rm(list =c("y", "z"))  # remove y and z
 rm(list = ls())  # remove all objects
 ```
-
 
 ## Functions and their arguments
 
@@ -250,7 +261,6 @@ you can type in `sum(3, 4)`. In this case, the arguments must be a number, and
 the return value (the output) is the sum of those numbers. An example of a
 function call is:
 
-
 ```{r, eval=FALSE, purl=FALSE}
 sum(3, 4)
 ```
@@ -260,7 +270,7 @@ is a function, it will print `TRUE` to the console.
 
 Functions can be nested within each other. For example, `sqrt()` takes the
 square root of the number provided in the function call. Therefore you can run
-`sum(sqrt(9), 4)` to take the sum of the square root of 9 and add it to 4. 
+`sum(sqrt(9), 4)` to take the sum of the square root of 9 and add it to 4.
 
 Typing a question mark before a function will pull the help page up in the
 Navigation Pane in the lower right. Type `?sum` to view the help page for the
@@ -268,7 +278,7 @@ Navigation Pane in the lower right. Type `?sum` to view the help page for the
 of the function, how it is to be used, and the arguments.
 
 In the case of `sum()`, the ellipses `. . .` represent an unlimited number of
-numeric elements. 
+numeric elements.
 
 ```{r, eval=FALSE, purl=FALSE}
 is.function(sum)        # check to see if sum() is a function
@@ -314,14 +324,16 @@ call, and to specify the names of all optional arguments.  If you don't, someone
 reading your code might have to look up the definition of a function with
 unfamiliar arguments to understand what you're doing.
 
-> ## Exercise
->
-> Type in `?round` at the console and then look at the output in the Help pane.
-> What other functions exist that are similar to `round`?
-> How do you use the `digits` parameter in the round function?
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+Type in `?round` at the console and then look at the output in the Help pane.
+What other functions exist that are similar to `round`?
+How do you use the `digits` parameter in the round function?
 
 
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Vectors and data types
 
@@ -409,11 +421,11 @@ single type. Above, we saw 2 of the 6 main **atomic vector** types  that R uses:
 blocks that all R objects are built from. The other 4 **atomic vector** types
 are:
 
-* `"logical"` for `TRUE` and `FALSE` (the boolean data type)
-* `"integer"` for integer numbers (e.g., `2L`, the `L` indicates to R that it's an integer)
-* `"complex"` to represent complex numbers with real and imaginary parts (e.g.,
-`1 + 4i`) and that's all we're going to say about them
-* `"raw"` for bitstreams that we won't discuss further
+- `"logical"` for `TRUE` and `FALSE` (the boolean data type)
+- `"integer"` for integer numbers (e.g., `2L`, the `L` indicates to R that it's an integer)
+- `"complex"` to represent complex numbers with real and imaginary parts (e.g.,
+  `1 + 4i`) and that's all we're going to say about them
+- `"raw"` for bitstreams that we won't discuss further
 
 You can check the type of your vector using the `typeof()` function and
 inputting your vector as the argument.
@@ -422,67 +434,78 @@ Vectors are one of the many **data structures** that R uses. Other important
 ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`),
 factors (`factor`) and arrays (`array`).
 
-> ## Exercise
->
->
-> We’ve seen that atomic vectors can be of type character, numeric (or double),
->   integer, and logical. But what happens if we try to mix these types in a
->   single vector?
->
-> > ## Solution
-> >
-> > R implicitly converts them to all be the same type.
-> {: .solution}
->
-> What will happen in each of these examples? (hint: use `typeof()`
-> to check the data type of your objects):
->
->  ```{r, results="hide"}
->  num_char <- c(1, 2, 3, "a")
->  num_logical <- c(1, 2, 3, TRUE)
->  char_logical <- c("a", "b", "c", TRUE)
->  tricky <- c(1, 2, 3, "4")
->  ```
->
->
-> Why do you think it happens?
->
-> > ## Solution
-> >
-> >  Vectors can be of only one data type. R tries to
-> > convert (coerce) the content of this vector to find a "common
-> > denominator" that doesn't lose any information.
-> {: .solution}
->
->
-> How many values in `combined_logical` are `"TRUE"` (as a character) in the
-> following example:
->
-> ```{r, results="hide"}
-> num_logical <- c(1, 2, 3, TRUE)
-> char_logical <- c("a", "b", "c", TRUE)
-> combined_logical <- c(num_logical, char_logical)
->  ```
-> &nbsp;
->
-> > ## Solution
-> >
-> > Only one. There is no memory of past data types, and the coercion
-> > happens the
-> > first time the vector is evaluated. Therefore, the `TRUE` in
-> > `num_logical`
-> > gets converted into a `1` before it gets converted into `"1"` in
-> > `combined_logical`.
-> {: .solution}
->
->
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+We've seen that atomic vectors can be of type character, numeric (or double),
+integer, and logical. But what happens if we try to mix these types in a
+single vector?
+
+:::::::::::::::  solution
+
+## Solution
+
+R implicitly converts them to all be the same type.
+
+
+:::::::::::::::::::::::::
+
+What will happen in each of these examples? (hint: use `typeof()`
+to check the data type of your objects):
+
+```{r, results="hide"}
+num_char <- c(1, 2, 3, "a")
+num_logical <- c(1, 2, 3, TRUE)
+char_logical <- c("a", "b", "c", TRUE)
+tricky <- c(1, 2, 3, "4")
+```
+
+Why do you think it happens?
+
+:::::::::::::::  solution
+
+## Solution
+
+Vectors can be of only one data type. R tries to
+convert (coerce) the content of this vector to find a "common
+denominator" that doesn't lose any information.
+
+
+:::::::::::::::::::::::::
+
+How many values in `combined_logical` are `"TRUE"` (as a character) in the
+following example:
+
+```{r, results="hide"}
+num_logical <- c(1, 2, 3, TRUE)
+char_logical <- c("a", "b", "c", TRUE)
+combined_logical <- c(num_logical, char_logical)
+```
+
+ 
+
+:::::::::::::::  solution
+
+## Solution
+
+Only one. There is no memory of past data types, and the coercion
+happens the
+first time the vector is evaluated. Therefore, the `TRUE` in
+`num_logical`
+gets converted into a `1` before it gets converted into `"1"` in
+`combined_logical`.
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 You've probably noticed that objects of different types get converted into a
 single, shared type within a vector. In R, we call converting objects from one
-class into another class _coercion_. These conversions happen according to a
+class into another class *coercion*. These conversions happen according to a
 hierarchy, whereby some types get preferentially coerced into other types. This
-hierarchy is: logical < integer < numeric < complex < character < list.
+hierarchy is: logical \< integer \< numeric \< complex \< character \< list.
 
 You can also *coerce* a vector to be a specific data type with `as.character()`,
 `as.logical()`, `as.numeric()`, etc. For example, to coerce a number to a
@@ -505,11 +528,10 @@ We can also call `class()`
 class(x)
 ```
 
-And if we try to add a number to `x`, we will get an error message `non-numeric
-argument to binary operator`--in other words, x is `non-numeric` and cannot be
+And if we try to add a number to `x`, we will get an error message `non-numeric argument to binary operator`\--in other words, x is `non-numeric` and cannot be
 added to a number.
 
-```{r, purl=FALSE,eval=FALSE}
+```{r, purl=FALSE, eval=FALSE}
 x + 5
 ```
 
@@ -521,25 +543,27 @@ the `state` data, which is built into R and includes data related to the 50
 states of the U.S.A. Type `?state` to see the included datasets. `state.name` is
 a built in vector in R of all U.S. states:
 
-```{r, results='show', purl=FALSE}
+```{r, results="show", purl=FALSE}
 state.name
 state.name[1]
 ```
 
 You can use the `:` colon to create a vector of consecutive numbers.
-```{r, results='show', purl=FALSE}
+
+```{r, results="show", purl=FALSE}
 state.name[1:5] 
 ```
 
 If the numbers are not consecutive, you must use the `c()` function:
-```{r, results='show', purl=FALSE}
+
+```{r, results="show", purl=FALSE}
 state.name[c(1, 10, 20)]
 ```
 
 We can also repeat the indices to create an object with more elements than the
 original one:
 
-```{r, results='show', purl=FALSE}
+```{r, results="show", purl=FALSE}
 state.name[c(1, 2, 3, 2, 1, 3)]
 ```
 
@@ -553,7 +577,7 @@ simpler for computers to do.
 Another common way of subsetting is by using a logical vector. `TRUE` will
 select the element with the same index, while `FALSE` will not:
 
-```{r, results='show', purl=FALSE}
+```{r, results="show", purl=FALSE}
 five_states <- state.name[1:5]
 five_states[c(TRUE, FALSE, TRUE, FALSE, TRUE)]
 ```
@@ -563,7 +587,7 @@ other functions or logical tests. `state.area` is a vector of state areas in
 square miles. We can use the `<` operator to return a logical vector with TRUE
 for the indices that meet the condition:
 
-```{r, results='show', purl=FALSE}
+```{r, results="show", purl=FALSE}
 state.area < 10000
 state.area[state.area < 10000]
 ```
@@ -575,7 +599,8 @@ expression subsets `state.name` to include only those names where the value is
 
 You can also specify character values. `state.region` gives the region that each
 state belongs to:
-```{r, results='show', purl=FALSE}
+
+```{r, results="show", purl=FALSE}
 state.region == "Northeast"
 state.name[state.region == "Northeast"]
 ```
@@ -587,7 +612,7 @@ Sometimes you need to do multiple logical tests (think Boolean logic). You can
 combine multiple tests using `|` (at least one of the conditions is true, OR) or
 `&` (both conditions are true, AND). Use `help(Logic)` to read the help file.
 
-```{r logical, comment=NA, results='asis', echo=F, eval=FALSE}
+```{r logical, comment=NA, results="asis", echo=F, eval=FALSE}
 multiple <- data.frame("operator" = c("&", "|", "!", "any", "all")
                        , "function" = c("boolean AND", "boolean OR", "boolean NOT", "ANY true", "ALL true")
                        , stringsAsFactors = F)
@@ -596,8 +621,7 @@ kable(multiple) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
-
-```{r, results='show', purl=FALSE}
+```{r, results="show", purl=FALSE}
 state.name[state.area < 10000 | state.region == "Northeast"]
 state.name[state.area < 10000 & state.region == "Northeast"]
 ```
@@ -614,7 +638,7 @@ R contains a number of operators you can use to compare values. Use
 are used for evaluating equality (because one equals sign (`=`) is used for
 assigning variables).
 
-```{r logical1, comment=NA, results='asis', echo=F, eval=FALSE}
+```{r logical1, comment=NA, results="asis", echo=F, eval=FALSE}
 operators <- tibble("operator" = c("<", ">", "==", "<=", ">=", "!=", "%in%", "is.na", "!is.na"),
                     "function" = c("Less Than", "Greater Than", "Equal To", "Less Than or Equal To", "Greater Than or Equal To", "Not Equal To", "Has A Match In", "Is NA", "Is Not NA"))
 
@@ -627,7 +651,7 @@ A common task is to search for certain strings in a vector.  One could use the
 become tedious. The function `%in%` allows you to test if any of the elements of
 a search vector are found:
 
-```{r, results='show', purl=FALSE}
+```{r, results="show", purl=FALSE}
 west_coast <- c("California", "Oregon", "Washington")
 state.name[state.name == "California" | state.name == "Oregon" | state.name == "Washington"]
 state.name %in% west_coast
@@ -658,7 +682,6 @@ If your data include missing values, you may want to become familiar with the
 functions `is.na()`, `na.omit()`, and `complete.cases()`. See below for
 examples.
 
-
 ```{r, purl=FALSE}
 ## Use any() to check if any values are missing
 any(is.na(rooms))
@@ -683,39 +706,55 @@ You can also use `!is.na(rooms)`, which is exactly the same as
 !c(TRUE, FALSE)
 ```
 
-
 How you deal with missing data in your analysis is a decision you will have to
 make--do you remove it entirely? Do you replace it with zeros? That will depend
 on your own methodological questions.
 
-> ## Exercise
->
-> 1. Using this vector of rooms, create a new vector with the NAs removed.
->
->     ```r
->     rooms <- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)
->     ```
-> 2. Use the function `median()` to calculate the median of the `rooms` vector.
->
-> 3. Use R to figure out how many households in the room variable have more than 2 rooms.
->
-> > ## Solution
-> > ```{r, answer=TRUE}
-> > rooms <- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)
-> > rooms_no_na <- rooms[!is.na(rooms)]
-> > # or
-> > rooms_no_na <- na.omit(rooms)
-> > # 2.
-> > median(rooms, na.rm = TRUE)
-> > # 3.
-> > rooms_above_2 <- rooms_no_na[rooms_no_na > 2]
-> > length(rooms_above_2)
-> > ```
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+1. Using this vector of rooms, create a new vector with the NAs removed.
+  
+  ```r
+  rooms <- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)
+  ```
+
+2. Use the function `median()` to calculate the median of the `rooms` vector.
+
+3. Use R to figure out how many households in the room variable have more than 2 rooms.
+
+:::::::::::::::  solution
+
+## Solution
+
+```{r, answer=TRUE}
+rooms <- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)
+rooms_no_na <- rooms[!is.na(rooms)]
+# or
+rooms_no_na <- na.omit(rooms)
+# 2.
+median(rooms, na.rm = TRUE)
+# 3.
+rooms_above_2 <- rooms_no_na[rooms_no_na > 2]
+length(rooms_above_2)
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Now that we have learned how to write scripts, and the basics of R's data
 structures, we are ready to start working with the library catalog dataset and learn about data frames.
 
 
-{% include links.md %}
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Use the assignment operator \<- to assign values to objects. You can now manipulate that object in R
+- R contains a number of functions you use to do something with your data. Functions automate more complicated sets of commands. Many functions are predefined, or can be made available by importing R packages
+- A vector is a sequence of elements of the same type. All data in a vector must be of the same type--character, numeric (or double), integer, and logical. Create vectors with c(). Use \[ \] to subset values from vectors.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
