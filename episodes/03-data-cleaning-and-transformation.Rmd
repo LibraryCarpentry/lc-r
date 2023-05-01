@@ -31,7 +31,7 @@ source: Rmd
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, include=FALSE}
-source("../bin/download_data.R")
+source("files/download_data.R")
 library(readr)
 books <- read_csv("./data/books.csv")
 ```
@@ -275,29 +275,23 @@ If you want to filter on multiple conditions within the same variable, use the `
 serial_microform <- filter(books, format %in% c("serial", "microform"))
 ```
 
-> ### Filtering with `filter()`
-> 
-> 1. Use `filter()` to create a data frame called `booksJuv` consisting of `format` books and `subCollection` juvenile materials.
-> 
-> 2. Use `mean()` to check the average number of checkouts for the `booksJuv` data frame.
-> 
-> > ### Solution
-> > 
-> > ```{r, answer=TRUE}
-> > booksJuv <- filter(books,
-> > ```
-
-```
-               format == "book",
-               subCollection ==  "juvenile")
-mean(booksJuv$tot_chkout)
-```
-
 :::::::::::::::::::::::::::::::::::::::  challenge
+
+### Filtering with `filter()`
+
+1. Use `filter()` to create a data frame called `booksJuv` consisting of `format` books and `subCollection` juvenile materials.
+
+2. Use `mean()` to check the average number of checkouts for the `booksJuv` data frame.
 
 :::::::::::::::  solution
 
-```
+### Solution
+
+```{r, answer=TRUE}
+booksJuv <- filter(books,
+               format == "book",
+               subCollection ==  "juvenile")
+mean(booksJuv$tot_chkout)
 ```
 
 :::::::::::::::::::::::::
@@ -382,36 +376,29 @@ myBooks <- books %>%
 myBooks
 ```
 
-> ### Playing with pipes `%>%`
-> 
-> 1. Create a new data frame `booksKids` with these conditions:
-> 
-> - `filter()` to include `subCollection` juvenile \& k-12 materials and `format` books.
+:::::::::::::::::::::::::::::::::::::::  challenge
 
+### Playing with pipes `%>%`
+
+1. Create a new data frame `booksKids` with these conditions:
+
+- `filter()` to include `subCollection` juvenile \& k-12 materials and `format` books.
 - `select()` only title, call number, total checkouts, and publication year
 - `arrange()` by total checkouts in descending order
 
-> 2. Use `mean()` to check the average number of checkouts for the `booksKids` data frame.
-> 
-> > ### Solution
-> > 
-> > ```{r, answer=TRUE}
-> > booksKids <- books %>%
-> > ```
+2. Use `mean()` to check the average number of checkouts for the `booksKids` data frame.
 
-```
+:::::::::::::::  solution
+
+### Solution
+
+```{r, answer=TRUE}
+booksKids <- books %>%
   filter(subCollection %in% c("juvenile", "k-12 materials"),
   format == "book") %>%
 select(title, callnumber, tot_chkout, pubyear) %>%
 arrange(desc(tot_chkout))
 mean(booksKids$tot_chkout)
-```
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-:::::::::::::::  solution
-
-```
 ```
 
 :::::::::::::::::::::::::

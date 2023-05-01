@@ -25,7 +25,7 @@ source: Rmd
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, include=FALSE}
-source("../bin/download_data.R")
+source("files/download_data.R")
 library(readr)
 books2 <- read_csv("./data/books_reformatted.csv")
 ```
