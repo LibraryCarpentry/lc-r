@@ -14,7 +14,7 @@ carpentry: 'lc'
 title: 'Introduction to R'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: 
+created: '2019-05-30'
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries'
@@ -27,7 +27,7 @@ life_cycle: 'alpha'
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/fishtree-attempt/lc-r/'
+source: 'https://github.com/librarycarpentry/lc-r'
 
 # Default branch of your lesson
 branch: 'main'
@@ -80,7 +80,6 @@ profiles:
 # sandpaper and varnish versions) should live
 
 
-url: https://preview.carpentries.org/lc-r
+url: 'https://librarycarpentry.github.io/lc-r'
 analytics: carpentries
 lang: en
-workbench-beta: 'true'
