@@ -1,75 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://librarycarpentry.github.io/lc-r00-before-we-start.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/00-before-we-start.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-r01-intro-to-r.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/01-intro-to-r.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-r02-starting-with-data.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/02-starting-with-data.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-r03-data-cleaning-and-transformation.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/03-data-cleaning-and-transformation.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-r04-data-viz-ggplot.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/04-data-viz-ggplot.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-r404.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/404.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rCODE_OF_CONDUCT.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rLICENSE.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rdiscuss.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/aio.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rindex.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/discuss.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/00-before-we-start.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/images.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/01-intro-to-r.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/index.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/02-starting-with-data.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/00-before-we-start.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/03-data-cleaning-and-transformation.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/01-intro-to-r.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/04-data-viz-ggplot.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/02-starting-with-data.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/404.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/03-data-cleaning-and-transformation.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/CODE_OF_CONDUCT.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/04-data-viz-ggplot.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/LICENSE.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/404.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/discuss.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/index.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/profiles.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/aio.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rinstructor/reference.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/discuss.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rprofiles.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/images.html</loc>
   </url>
   <url>
-    <loc>https://librarycarpentry.github.io/lc-rreference.html</loc>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://librarycarpentry.github.io/lc-r/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://librarycarpentry.github.io/lc-r/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://librarycarpentry.github.io/lc-r/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://librarycarpentry.github.io/lc-r/reference.html</loc>
   </url>
 </urlset>
