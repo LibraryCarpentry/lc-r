@@ -175,7 +175,7 @@
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
-        Data cleaning &amp; transformation with dplyr
+        4. Data cleaning &amp; transformation with dplyr
         </span>
       </button>
     </div><!--/div.accordion-header-->
@@ -465,12 +465,12 @@ renamed to <code>title</code>.</p>
 <span><span class="va">books</span> <span class="op">&lt;-</span> <span class="fu">rename</span><span class="op">(</span><span class="va">books</span>,</span>
 <span>                title <span class="op">=</span> <span class="va">X245.ab</span><span class="op">)</span></span></code></pre>
 </div>
-<div id="callout1" class="callout callout">
+<div id="side-note" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="side-note" class="callout-inner">
-<h3 class="callout-title">Side note:<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Side note:<a class="anchor" aria-label="anchor" href="#side-note"></a>
 </h3>
 <div class="callout-content">
 <p>Where does <code>X245.ab</code> come from? That is the MARC field
@@ -518,12 +518,12 @@ variable names, R replaced it with a period.</p>
 # ℹ 4 more variables: CALL...ITEM. &lt;chr&gt;, pubyear &lt;chr&gt;, format &lt;chr&gt;,
 #   subCollection &lt;chr&gt;</code></pre>
 </div>
-<div id="challenge1" class="callout challenge">
+<div id="rename-call...item." class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="rename-call...item." class="callout-inner">
-<h3 class="callout-title">Rename <code>CALL...ITEM.</code><a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Rename <code>CALL...ITEM.</code><a class="anchor" aria-label="anchor" href="#rename-call...item."></a>
 </h3>
 <div class="callout-content">
 <ol style="list-style-type: decimal"><li>Use <code>rename()</code> to rename the <code>CALL...ITEM.</code>
@@ -539,7 +539,7 @@ end of the <code>CALL...ITEM.</code> value</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -718,12 +718,12 @@ you may want to include only items in the format <code>serial</code> and
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">serial_microform</span> <span class="op">&lt;-</span> <span class="fu">filter</span><span class="op">(</span><span class="va">books</span>, <span class="va">format</span> <span class="op">%in%</span> <span class="fu">c</span><span class="op">(</span><span class="st">"serial"</span>, <span class="st">"microform"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<div id="challenge2" class="callout challenge">
+<div id="filtering-with-filter" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="filtering-with-filter" class="callout-inner">
-<h3 class="callout-title">Filtering with <code>filter()</code><a class="anchor" aria-label="anchor" href="#challenge2"></a>
+<h3 class="callout-title">Filtering with <code>filter()</code><a class="anchor" aria-label="anchor" href="#filtering-with-filter"></a>
 </h3>
 <div class="callout-content">
 <ol style="list-style-type: decimal"><li><p>Use <code>filter()</code> to create a data frame called
@@ -741,7 +741,7 @@ for the <code>booksJuv</code> data frame.</p></li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -930,12 +930,12 @@ rearranged from most to least checkouts.</p>
 10 Wemberly worried /                                 43
 # ℹ 6,973 more rows</code></pre>
 </div>
-<div id="challenge3" class="callout challenge">
+<div id="playing-with-pipes" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="playing-with-pipes" class="callout-inner">
-<h3 class="callout-title">Playing with pipes <code>%&gt;%</code><a class="anchor" aria-label="anchor" href="#challenge3"></a>
+<h3 class="callout-title">Playing with pipes <code>%&gt;%</code><a class="anchor" aria-label="anchor" href="#playing-with-pipes"></a>
 </h3>
 <div class="callout-content">
 <ol style="list-style-type: decimal"><li>Create a new data frame <code>booksKids</code> with these
@@ -960,7 +960,7 @@ the <code>booksKids</code> data frame.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1270,9 +1270,9 @@ with subsets of data.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.16" class="external-link">sandpaper (0.11.16)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.2" class="external-link">sandpaper (0.12.2)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
-      and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
+      and <a href="https://github.com/carpentries/varnish/tree/0.2.17" class="external-link">varnish (0.2.17)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1294,7 +1294,7 @@ with subsets of data.</li>
   "identifier": "https://librarycarpentry.github.io/lc-r/03-data-cleaning-and-transformation.html",
   "dateCreated": "2019-05-30",
   "dateModified": "2023-05-01",
-  "datePublished": "2023-05-16"
+  "datePublished": "2023-05-30"
 }
 
   </script><script>

@@ -166,7 +166,7 @@
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
-        Starting with Data
+        3. Starting with Data
         </span>
       </button>
     </div><!--/div.accordion-header-->
@@ -443,13 +443,13 @@ Working Directory”. Alternatively, you can use
 <code>setwd("/path/to/working/directory")</code> to reset your working
 directory. However, your scripts should not include this line, because
 it will fail on someone else’s computer.</p>
-<div id="callout1" class="callout callout">
+<div id="setting-your-working-directory-with-setwd" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="setting-your-working-directory-with-setwd" class="callout-inner">
 <h3 class="callout-title">Setting your working directory with
-<code>setwd()</code><a class="anchor" aria-label="anchor" href="#callout1"></a>
+<code>setwd()</code><a class="anchor" aria-label="anchor" href="#setting-your-working-directory-with-setwd"></a>
 </h3>
 <div class="callout-content">
 <p>Some points to note about setting your working directory:</p>
@@ -559,12 +559,12 @@ for a column manually by using the <code>col_types</code> argument in
 <p>You should now have an R object called <code>books</code> in the
 Environment pane: 10000 observations of 12 variables. We will be using
 this data file in the next module.</p>
-<div id="callout2" class="callout callout">
+<div id="note" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="note" class="callout-inner">
-<h3 class="callout-title">Note<a class="anchor" aria-label="anchor" href="#callout2"></a>
+<h3 class="callout-title">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h3>
 <div class="callout-content">
 <p><code>read_csv()</code> assumes that fields are delineated by commas,
@@ -842,12 +842,12 @@ FALSE  TRUE
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">booksNoNA</span> <span class="op">&lt;-</span> <span class="fu">na.omit</span><span class="op">(</span><span class="va">books</span><span class="op">)</span>  <span class="co"># Return only observations that have no missing values</span></span></code></pre>
 </div>
-<hr><div id="challenge1" class="callout challenge">
+<hr><div id="exercise" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
 </h3>
 <div class="callout-content">
 <ol style="list-style-type: decimal"><li><p>Call <code>View(books)</code> to examine the data frame. Use the
@@ -972,9 +972,9 @@ logic). Use <code>help(Logic)</code> to read the help file.</p>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.16" class="external-link">sandpaper (0.11.16)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.2" class="external-link">sandpaper (0.12.2)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
-      and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
+      and <a href="https://github.com/carpentries/varnish/tree/0.2.17" class="external-link">varnish (0.2.17)</a>.</p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -996,7 +996,7 @@ logic). Use <code>help(Logic)</code> to read the help file.</p>
   "identifier": "https://librarycarpentry.github.io/lc-r/02-starting-with-data.html",
   "dateCreated": "2019-05-30",
   "dateModified": "2023-05-01",
-  "datePublished": "2023-05-16"
+  "datePublished": "2023-05-30"
 }
 
   </script><script>
