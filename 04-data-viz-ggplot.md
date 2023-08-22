@@ -54,8 +54,6 @@ dir_create("data_output")
 dir_create("fig_output")
 download.file("https://ndownloader.figshare.com/files/22031487",
               "data/books.csv", mode = "wb")
-download.file("https://ndownloader.figshare.com/files/22031487",
-              "data/books.csv", mode = "wb")
 download.file("https://ndownloader.figshare.com/files/22051506",
               "data_output/books_reformatted.csv", mode = "wb")
 ```
