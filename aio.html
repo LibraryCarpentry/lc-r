@@ -15,7 +15,7 @@
         extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
       },
       tex2jax: {
-        inlineMath: [ ['$','$'], ['\\(', '\\)']],
+        inlineMath: [['\\(', '\\)']],
         displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
         processEscapes: true
       }
@@ -714,7 +714,7 @@ that this happens.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>From the packages tab, click ‘Install’ from the toolbar and type
 ‘tidyverse’ into the textbox, then click ‘install’. The ‘tidyverse’
@@ -3273,7 +3273,7 @@ end of the <code>CALL...ITEM.</code> value</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3480,7 +3480,7 @@ for the <code>booksJuv</code> data frame.</p></li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3709,7 +3709,7 @@ the <code>booksKids</code> data frame.</li>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4006,7 +4006,7 @@ with subsets of data.</li>
 </div>
 </section></section><section id="aio-04-data-viz-ggplot"><p>Content from <a href="04-data-viz-ggplot.html">Data Visualisation with ggplot2</a></p>
 <hr>
-<p> Last updated on 2023-08-22 | 
+<p> Last updated on 2023-08-29 | 
         
         <a href="https://github.com/librarycarpentry/lc-r/edit/main/episodes/04-data-viz-ggplot.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4083,8 +4083,6 @@ subdirectories and download the original and the reformatted
 <span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span></span>
 <span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data_output"</span><span class="op">)</span></span>
 <span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"fig_output"</span><span class="op">)</span></span>
-<span><span class="fu">download.file</span><span class="op">(</span><span class="st">"https://ndownloader.figshare.com/files/22031487"</span>,</span>
-<span>              <span class="st">"data/books.csv"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
 <span><span class="fu">download.file</span><span class="op">(</span><span class="st">"https://ndownloader.figshare.com/files/22031487"</span>,</span>
 <span>              <span class="st">"data/books.csv"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
 <span><span class="fu">download.file</span><span class="op">(</span><span class="st">"https://ndownloader.figshare.com/files/22051506"</span>,</span>
@@ -5144,7 +5142,7 @@ categorical variable.</li>
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper" class="external-link">sandpaper (0.12.5)</a>,
         <a href="https://github.com/carpentries/pegboard/tree/0.5.3" class="external-link">pegboard (0.5.3)</a>,
-      and <a href="https://github.com/carpentries/varnish/tree/0.2.17" class="external-link">varnish (0.2.17)</a>.</p>
+      and <a href="https://github.com/carpentries/varnish/tree/0.2.18" class="external-link">varnish (0.2.18)</a>.</p>
 			</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -5166,8 +5164,8 @@ categorical variable.</li>
   "url": "https://librarycarpentry.github.io/lc-r/aio.html",
   "identifier": "https://librarycarpentry.github.io/lc-r/aio.html",
   "dateCreated": "2019-05-30",
-  "dateModified": "2023-08-22",
-  "datePublished": "2023-08-22"
+  "dateModified": "2023-08-29",
+  "datePublished": "2023-08-29"
 }
 
   </script><script>
