@@ -19,7 +19,6 @@ authors:
 date-released: "2024-09-27"
 version: "1.0.0"
 url: "https://librarycarpentry.org/lc-r"
-doi: "10.5281/zenodo.1234567"  # Replace with the real DOI
 license: "CC-BY-4.0"
 keywords:
   - R
