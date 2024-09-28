@@ -1,11 +1,14 @@
 # Maintainers for Library Carpentry: R
 
-- [Clarke Iakovakis](https://github.com/ciakovx) (Lead)
+- [Jia Qi Beh](https://github.com/jqbeh)
+- [Tim Dennis](https://github.com/jt14den)
+
+## Past Maintainers 
+
+- [Clarke Iakovakis](https://github.com/ciakovx)
 - [John Little](https://github.com/libjohn)
 - [Stéphane Guillou](https://github.com/stragu)
-- [Tim Dennis](https://github.com/jt14den)
 - [Sarah Lin](https://github.com/sarahemlin)
-- [Jia Qi Beh](https://github.com/jqbeh)
 
 ## Library Carpentry
 
@@ -24,13 +27,6 @@ There are many ways to discuss and contribute to Library Carpentry lessons. Visi
 
 All participants should agree to abide by The Carpentries [Code of Conduct](https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html).
 
-## Authors
-
-Library Carpentry is authored and maintained through issues, commits, and pull requests from the community.
-
-## Citation
-
-...
 
 ## Checking and Previewing the Lesson
 
