@@ -279,7 +279,7 @@ results and come back with a new `>` prompt to wait for new commands. We type
 You can use R like a calculator:
 
 
-```r
+``` r
 2 + 2    # Type 2 + 2 in the console to run the command
 ```
 
@@ -396,7 +396,7 @@ If you were watching the console window when you started the
 install of ‘tidyverse', you may have noticed that the line
 
 
-```r
+``` r
 install.packages("tidyverse")
 ```
 
@@ -448,7 +448,7 @@ data sets. To load a dataset, type it like this: `data(mtcars)`. Type
 `help(mtcars)` to learn more about it. You can then perform operations, e.g.
 
 
-```r
+``` r
 head(mtcars)
 nrow(mtcars)
 mean(mtcars$mpg)

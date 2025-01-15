@@ -51,7 +51,7 @@ If you have not already done so, open your R Project file (`library_carpentry.Rp
 - Copy and paste the below lines of code to create three new subdirectories and download the data:
 
 
-```r
+``` r
 library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R.
 dir_create("data")
 dir_create("data_output")
@@ -65,16 +65,16 @@ download.file("https://ndownloader.figshare.com/files/22031487",
 Load the `tidyverse`
 
 
-```r
+``` r
 library(tidyverse)
 ```
 
-```{.output}
+``` output
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ purrr     1.0.1
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ dplyr     1.1.4     ✔ purrr     1.0.2
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -84,7 +84,7 @@ library(tidyverse)
 And the `books` data we saved in the previous lesson.
 
 
-```r
+``` r
 books <- read_csv("data/books.csv")  # load the data and assign it to books
 ```
 
@@ -123,11 +123,11 @@ print the names of the sample `books` dataset you can see that some of the
 vector names are not particularly helpful:
 
 
-```r
+``` r
 glimpse(books)  # print names of the books data frame to the console
 ```
 
-```{.output}
+``` output
 Rows: 10,000
 Columns: 12
 $ CALL...BIBLIO. <chr> "001.94 Don 2000", "001.942 Bro 1999", "027.073 App 200…
@@ -154,7 +154,7 @@ we are overwriting the previous `books` value with the new one, with `X245.ab`
 renamed to `title`.
 
 
-```r
+``` r
 # rename the . Make sure you return (<-) the output to your
 # variable, otherwise it will just print it to the console
 books <- rename(books,
@@ -174,7 +174,7 @@ period.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-```r
+``` r
 # rename multiple variables at once
 books <- rename(books,
                 author = X245.c,
@@ -190,7 +190,7 @@ books <- rename(books,
 books
 ```
 
-```{.output}
+``` output
 # A tibble: 10,000 × 12
    callnumber        title     author location tot_chkout loutdate subject isbn 
    <chr>             <chr>     <chr>  <chr>         <dbl> <chr>    <chr>   <chr>
@@ -220,7 +220,7 @@ books
 ### Solution
 
 
-```r
+``` r
 books <- rename(books,
                 callnumber2 = CALL...ITEM.)
 ```
@@ -250,12 +250,12 @@ package. Unlike `rename()`, the old value comes first here. Also notice that we
 are overwriting the `books$subCollection` variable.
 
 
-```r
+``` r
 # first print to the console all of the unique values you will need to recode
 distinct(books, subCollection)
 ```
 
-```{.output}
+``` output
 FALSE # A tibble: 10 × 1
 FALSE    subCollection
 FALSE    <chr>        
@@ -271,7 +271,7 @@ FALSE  9 a
 FALSE 10 t
 ```
 
-```r
+``` r
 books$subCollection <- recode(books$subCollection,
                                       "-" = "general collection",
                                       u = "government documents",
@@ -286,7 +286,7 @@ books$subCollection <- recode(books$subCollection,
 books
 ```
 
-```{.output}
+``` output
 FALSE # A tibble: 10,000 × 12
 FALSE    callnumber        title     author location tot_chkout loutdate subject isbn 
 FALSE    <chr>             <chr>     <chr>  <chr>         <dbl> <chr>    <chr>   <chr>
@@ -309,7 +309,7 @@ Do the same for the `format` column. Note that you must put `"5"` and `"4"` into
 quotation marks for the function to operate correctly.
 
 
-```r
+``` r
 books$format <- recode(books$format,
                               a = "book",
                               e = "serial",
@@ -336,7 +336,7 @@ those items where the format is books. Notice that we use two equal signs `==`
 as the logical operator:
 
 
-```r
+``` r
 booksOnly <- filter(books, format == "book") # filter books to return only those items where the format is books
 ```
 
@@ -345,7 +345,7 @@ filter to include only books, then of the results, we include only items that
 have more than zero checkouts.
 
 
-```r
+``` r
 bookCheckouts <- filter(books,
                         format == "book",
                         tot_chkout > 0)
@@ -354,22 +354,22 @@ bookCheckouts <- filter(books,
 How many items were removed? You can find out functionally with:
 
 
-```r
+``` r
 nrow(books) - nrow(bookCheckouts)
 ```
 
-```{.output}
+``` output
 FALSE [1] 5733
 ```
 
 You can then check the summary statistics of checkouts for books with more than zero checkouts. Notice how different these numbers are from the previous lesson, when we kept zero in. The median is now 3 and the mean is 5.
 
 
-```r
+``` r
 summary(bookCheckouts$tot_chkout)
 ```
 
-```{.output}
+``` output
 FALSE    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 FALSE   1.000   2.000   3.000   5.281   6.000 113.000
 ```
@@ -377,7 +377,7 @@ FALSE   1.000   2.000   3.000   5.281   6.000 113.000
 If you want to filter on multiple conditions within the same variable, use the `%in%` operator combined with a vector of all the values you wish to include within `c()`. For example, you may want to include only items in the format `serial` and `microform`:
 
 
-```r
+``` r
 serial_microform <- filter(books, format %in% c("serial", "microform"))
 ```
 
@@ -394,14 +394,14 @@ serial_microform <- filter(books, format %in% c("serial", "microform"))
 ### Solution
 
 
-```r
+``` r
 booksJuv <- filter(books,
                format == "book",
                subCollection ==  "juvenile")
 mean(booksJuv$tot_chkout)
 ```
 
-```{.output}
+``` output
 [1] 10.41404
 ```
 
@@ -415,13 +415,13 @@ The `select()` function allows you to keep or remove specific columns It also
 provides a convenient way to reorder variables.
 
 
-```r
+``` r
 # specify the variables you want to keep by name
 booksTitleCheckouts <- select(books, title, tot_chkout)
 booksTitleCheckouts
 ```
 
-```{.output}
+``` output
 # A tibble: 10,000 × 2
    title                                                              tot_chkout
    <chr>                                                                   <dbl>
@@ -438,7 +438,7 @@ booksTitleCheckouts
 # ℹ 9,990 more rows
 ```
 
-```r
+``` r
 # specify the variables you want to remove with a -
 books <- select(books, -location)
 
@@ -451,7 +451,7 @@ booksReordered <- select(books, title, tot_chkout, loutdate, everything())
 The `arrange()` function in the `dplyr` package allows you to sort your data by alphabetical or numerical order.
 
 
-```r
+``` r
 booksTitleArrange <- arrange(books, title)
 
 # use desc() to sort a variable in descending order
@@ -459,7 +459,7 @@ booksHighestChkout <- arrange(books, desc(tot_chkout))
 booksHighestChkout
 ```
 
-```{.output}
+``` output
 # A tibble: 10,000 × 11
    callnumber title author tot_chkout loutdate subject isbn  callnumber2 pubyear
    <chr>      <chr> <chr>       <dbl> <chr>    <chr>   <chr> <chr>       <chr>  
@@ -477,7 +477,7 @@ booksHighestChkout
 # ℹ 2 more variables: format <chr>, subCollection <chr>
 ```
 
-```r
+``` r
 # order data based on multiple variables (e.g. sort first by checkout, then by publication year)
 booksChkoutYear <- arrange(books, desc(tot_chkout), desc(pubyear))
 ```
@@ -490,7 +490,7 @@ of the `callnumber` variable (the call number class) and put it into a new colum
 `call_class`.
 
 
-```r
+``` r
 booksLC <- mutate(books,
                   call_class = str_sub(callnumber, 1, 1))
 ```
@@ -501,11 +501,11 @@ we start with the first character, and end with the first character.
 `mutate()` is also helpful to coerce a column from one data type to another. For example, we can see there are some errors in the `pubyear` variable--some dates are `19zz` or `uuuu`. As a result, this variable was read in as a `character` rather than an `integer`.
 
 
-```r
+``` r
 books <- mutate(books, pubyear = as.integer(pubyear))
 ```
 
-```{.warning}
+``` warning
 Warning: There was 1 warning in `mutate()`.
 ℹ In argument: `pubyear = as.integer(pubyear)`.
 Caused by warning:
@@ -530,7 +530,7 @@ columns are selected, and finally the data is rearranged from most to least
 checkouts.
 
 
-```r
+``` r
 myBooks <- books %>%
   filter(format == "book") %>%
   select(title, tot_chkout) %>%
@@ -538,7 +538,7 @@ myBooks <- books %>%
 myBooks
 ```
 
-```{.output}
+``` output
 # A tibble: 6,983 × 2
    title                                      tot_chkout
    <chr>                                           <dbl>
@@ -572,7 +572,7 @@ myBooks
 ### Solution
 
 
-```r
+``` r
 booksKids <- books %>%
   filter(subCollection %in% c("juvenile", "k-12 materials"),
   format == "book") %>%
@@ -581,7 +581,7 @@ arrange(desc(tot_chkout))
 mean(booksKids$tot_chkout)
 ```
 
-```{.output}
+``` output
 [1] 9.336331
 ```
 
@@ -606,13 +606,13 @@ to calculate the summary statistics.
 So to compute the average checkouts by format:
 
 
-```r
+``` r
 books %>%
   group_by(format) %>%
   summarize(mean_checkouts = mean(tot_chkout))
 ```
 
-```{.output}
+``` output
 # A tibble: 10 × 2
    format       mean_checkouts
    <chr>                 <dbl>
@@ -633,7 +633,7 @@ Books and maps have the highest, and as we would expect, databases, online video
 Here is a more complex example:
 
 
-```r
+``` r
 books %>%
   filter(format == "book") %>%
   mutate(call_class = str_sub(callnumber, 1, 1)) %>%
@@ -643,7 +643,7 @@ books %>%
   arrange(desc(sum_tot_chkout))
 ```
 
-```{.output}
+``` output
 # A tibble: 34 × 3
    call_class count sum_tot_chkout
    <chr>      <int>          <dbl>
@@ -685,14 +685,14 @@ Note:  If the final product of this data will be imported into an ILS, you may n
 Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
 
 
-```r
+``` r
 books %>%
   mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
   mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
   select(title_modified, title)
 ```
 
-```{.output}
+``` output
 # A tibble: 10,000 × 2
    title_modified                                                          title
    <chr>                                                                   <chr>
@@ -731,7 +731,7 @@ In preparation for our next lesson on plotting, we are going to create a
 version of the dataset with most of the changes we made above. We will first read in the original, then make all the changes with pipes.
 
 
-```r
+``` r
 books_reformatted <- read_csv("./data/books.csv") %>%
   rename(title = X245.ab,
          author = X245.c,
@@ -780,7 +780,7 @@ varable `call_class`.
 We now write it to a CSV and put it in the `data/output` sub-directory:
 
 
-```r
+``` r
 write_csv(books_reformatted, "./data_output/books_reformatted.csv")
 ```
 

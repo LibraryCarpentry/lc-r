@@ -47,7 +47,7 @@ didn't complete it in previous lessons.
   download the original and the reformatted `books` data:
 
 
-```r
+``` r
 library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R. 
 dir_create("data")
 dir_create("data_output")
@@ -66,23 +66,23 @@ the tidyverse, but is not one of the core tidyverse packages loaded with
 working with dates and times easier in R.
 
 
-```r
+``` r
 library(tidyverse)  # load the core tidyverse
 ```
 
-```{.output}
+``` output
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ purrr     1.0.1
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ dplyr     1.1.4     ✔ purrr     1.0.2
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 ```
 
-```r
+``` r
 library(lubridate)  # load lubridate
 ```
 
@@ -90,7 +90,7 @@ We also load the `books_reformatted` data we saved in the previous
 lesson. We'll assign it to `books2`.
 
 
-```r
+``` r
 books2 <- read_csv("data_output/books_reformatted.csv")  # load the data and assign it to books
 ```
 
@@ -134,7 +134,7 @@ object, then call `print()`to view the plot in the Navigation Pane.
 Let's create a `booksPlot` and limit our visualization to only items in `subCollection` general collection, juvenile, and k-12, and filter out items with `NA` in `call_class`. We do this by using the <kbd>|</kbd> key on the keyboard to specify a boolean OR, and use the `!is.na()` function to keep only those items that are NOT `NA` in the `call_class` column.
 
 
-```r
+``` r
 # create a new data frame
 booksPlot <- books2 %>%
   filter(subCollection == "general collection" | 
@@ -161,7 +161,7 @@ Use the `ggplot()` function and bind the plot to a specific data frame using the
 `data` argument.
 
 
-```r
+``` r
 ggplot(data = booksPlot)  # a blank canvas
 ```
 
@@ -177,7 +177,7 @@ variables to be plotted and specifying how to present them in the graph, e.g. as
 x/y positions or characteristics such as size, shape, color, etc.
 
 
-```r
+``` r
 ggplot(data = booksPlot, mapping = aes(x = call_class)) # define the x axis aesthetic
 ```
 
@@ -210,7 +210,7 @@ plotting the bin counts (the number of items falling into each bin).
 To add a geom to the plot use the `+` operator.
 
 
-```r
+``` r
 # add a bar geom and set call_class as the x axis
 ggplot(data = booksPlot, mapping = aes(x = call_class)) +
   geom_bar()
@@ -250,12 +250,12 @@ other words, how many items have 1 checkout? How many have 2 checkouts? And so
 on.
 
 
-```r
+``` r
 ggplot(data = booksPlot, mapping = aes(x = tot_chkout)) +
   geom_histogram()
 ```
 
-```{.output}
+``` output
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
@@ -275,18 +275,19 @@ illustrate the stories in your data."
 Second, change the scales of the `y` axes by adding another argument to ggplot:
 
 
-```r
+``` r
 ggplot(data = booksPlot) +
   geom_histogram(aes(x = tot_chkout), binwidth = 10) +
   scale_y_log10()
 ```
 
-```{.warning}
-Warning: Transformation introduced infinite values in continuous y-axis
+``` warning
+Warning in scale_y_log10(): log-10 transformation introduced infinite values.
 ```
 
-```{.warning}
-Warning: Removed 2 rows containing missing values (`geom_bar()`).
+``` warning
+Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_bar()`).
 ```
 
 <img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
@@ -301,11 +302,11 @@ axis, a handful of books have 60-70 checkouts, and a handful more have around
 We can check this with `table()`:
 
 
-```r
+``` r
 table(booksPlot$tot_chkout)
 ```
 
-```{.output}
+``` output
 
    0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15 
 2348  875  638  464  362  282  199  146  118   97   84   50   41   46   40   33 
@@ -326,7 +327,7 @@ something similar.
 This same exact data can be visualized in a couple different ways by replacing the geom\_histogram() function with either `geom_density()` (adding a logarithmic x scale) or `geom_freqpoly()`:
 
 
-```r
+``` r
 # create a density plot
 ggplot(data = booksPlot) +
   geom_density(aes(x = tot_chkout)) +
@@ -334,25 +335,26 @@ ggplot(data = booksPlot) +
   scale_x_log10()
 ```
 
-```{.warning}
-Warning: Transformation introduced infinite values in continuous x-axis
+``` warning
+Warning in scale_x_log10(): log-10 transformation introduced infinite values.
 ```
 
-```{.warning}
-Warning: Removed 2348 rows containing non-finite values (`stat_density()`).
+``` warning
+Warning: Removed 2348 rows containing non-finite outside the scale range
+(`stat_density()`).
 ```
 
 <img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
 
-```r
+``` r
 # create a frequency polygon
 ggplot(data = booksPlot) +
   geom_freqpoly(aes(x = tot_chkout), binwidth = 30) +
   scale_y_log10()
 ```
 
-```{.warning}
-Warning: Transformation introduced infinite values in continuous y-axis
+``` warning
+Warning in scale_y_log10(): log-10 transformation introduced infinite values.
 ```
 
 <img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-10-2.png" style="display: block; margin: auto;" />
@@ -365,7 +367,7 @@ checkouts, which we will do with `filter()` from the `dplyr` package and assign
 it to `booksHighUsage`
 
 
-```r
+``` r
 # filter booksPlot to include only items with over 10 checkouts
 booksHighUsage <- booksPlot %>%
   filter(!is.na(tot_chkout),
@@ -377,7 +379,7 @@ still so much skew that I retain the logarithmic scale on the y axis with
 `scale_y_log10()`.
 
 
-```r
+``` r
 # scatter plot high usage books by call number class
 ggplot(data = booksHighUsage,
        aes(x = call_class, y = tot_chkout)) +
@@ -392,7 +394,7 @@ Again, notice the scale on the y axis. We can obseve a few items of interest her
 Just as with univariate plots, we can use different geoms to view various aspects of the data, which in turn reveal different patterns.
 
 
-```r
+``` r
 # boxplot plot high usage books by call number class
 ggplot(data = booksHighUsage,
        aes(x = call_class, y = tot_chkout)) +
@@ -409,7 +411,7 @@ called `geom_jitter()`, which will introduce a little bit of randomness into the
 position of our points. We set the `color` of these points to `"tomato"`.
 
 
-```r
+``` r
 ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
   geom_boxplot(alpha = 0) +
   geom_jitter(alpha = 0.5, color = "tomato") +
@@ -438,18 +440,23 @@ boxplot. An alternative to the boxplot is the violin plot, where the shape
 ## Solution
 
 
-```r
+``` r
 ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
   geom_violin(alpha = 0) +
   geom_jitter(alpha = 0.5, color = "tomato")
 ```
 
-```{.warning}
-Warning: Groups with fewer than two data points have been dropped.
-Groups with fewer than two data points have been dropped.
-Groups with fewer than two data points have been dropped.
-Groups with fewer than two data points have been dropped.
-Groups with fewer than two data points have been dropped.
+``` warning
+Warning: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
+Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
+Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
+Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
+Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
 ```
 
 <img src="fig/04-data-viz-ggplot-rendered-violin-plot-1.png" style="display: block; margin: auto;" />
@@ -463,19 +470,24 @@ Groups with fewer than two data points have been dropped.
 ## Solution
 
 
-```r
+``` r
 ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
 geom_violin(alpha = 0) +
 geom_jitter(alpha = 0.5, aes(color = subCollection)) +
 scale_y_log10()
 ```
 
-```{.warning}
-Warning: Groups with fewer than two data points have been dropped.
-Groups with fewer than two data points have been dropped.
-Groups with fewer than two data points have been dropped.
-Groups with fewer than two data points have been dropped.
-Groups with fewer than two data points have been dropped.
+``` warning
+Warning: Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
+Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
+Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
+Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
+Groups with fewer than two datapoints have been dropped.
+ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
 ```
 
 <img src="fig/04-data-viz-ggplot-rendered-boxplot-exercise-subcollection-1.png" style="display: block; margin: auto;" />
@@ -492,7 +504,7 @@ making a new plot to explore the distribution of checkouts within another variab
 ## Solution
 
 
-```r
+``` r
 ggplot(data = booksHighUsage, aes(x = subCollection, y = tot_chkout)) +
  geom_boxplot(alpha = 0) +
  geom_jitter(alpha = 0.5, color = "tomato") +
@@ -523,7 +535,7 @@ associate the name of the aesthetic (`color`) to the name of the variable
 (`subCollection`) inside `aes()`:
 
 
-```r
+``` r
 ggplot(data = booksHighUsage,
        aes(x = call_class,
            y = tot_chkout,
@@ -544,7 +556,7 @@ frequency. Again, this reinforced the fact that most of the `E` and `P`
 classification are youth materials.
 
 
-```r
+``` r
 ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection))
 ```
@@ -557,7 +569,7 @@ correspond to each village and put them side-by-side by using the `position`
 argument for `geom_bar()` and setting it to "dodge".
 
 
-```r
+``` r
 ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection), position = "dodge")
 ```
@@ -567,7 +579,7 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
 The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.
 
 
-```r
+``` r
 ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
   geom_bar()
 ```
@@ -577,7 +589,7 @@ ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
 Another visualization issue is labeling.  In many cultures, long labels are easier to read horizontally.  Our goal is to flip the x-axis and reorient the x-axis labels into a horizontal presentation.  To accomplish this, flip the axis coordinates with the `coord_flip()` function.  When we flip the axes it's important to reverse the sorted categorical order.  Do this with `forcats::fct_rev()`.
 
 
-```r
+``` r
 ggplot(data = booksHighUsage, aes(x = fct_rev(fct_infreq(call_class)))) +
   geom_bar() +
   coord_flip()
@@ -599,22 +611,22 @@ books per year.
 We will do this by calling `mutate()` to create a new variable `pubyear_ymd`.
 
 
-```r
+``` r
 booksPlot <- booksPlot %>%
   mutate(pubyear_ymd = ymd(pubyear, truncated = 2))  # convert pubyear to a Date object with ymd()
 
 class(booksPlot$pubyear)  # integer
 ```
 
-```{.output}
+``` output
 [1] "numeric"
 ```
 
-```r
+``` r
 class(booksPlot$pubyear_ymd)  # Date
 ```
 
-```{.output}
+``` output
 [1] "Date"
 ```
 
@@ -624,7 +636,7 @@ that the date must fall between that range. We then need to group the data and
 count records within each group.
 
 
-```r
+``` r
 yearly_counts <- booksPlot %>%
   filter(!is.na(pubyear_ymd),
          pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
@@ -635,7 +647,7 @@ Time series data can be visualized as a line plot with years on the x axis and c
 on the y axis:
 
 
-```r
+``` r
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
      geom_line()
 ```
@@ -647,7 +659,7 @@ together. We need to tell ggplot to draw a line for each sub-collection by modif
 the aesthetic function to include `group = subCollection`:
 
 
-```r
+``` r
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, group = subCollection)) +
     geom_line()
 ```
@@ -658,7 +670,7 @@ We will be able to distinguish sub-collections in the plot if we add colors
 (using `color` also automatically groups the data):
 
 
-```r
+``` r
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, color = subCollection)) +
   geom_line()
 ```
@@ -689,7 +701,7 @@ For example, `facet_wrap(facets = vars(facet_variable))` or
 Here we use `facet_wrap()` to make a time series plot for each subCollection
 
 
-```r
+``` r
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
     geom_line() +
     facet_wrap(facets = vars(subCollection))
@@ -701,7 +713,7 @@ We can use `facet_wrap()` as a way of seeing the categories within a variables. 
 sub-collection.
 
 
-```r
+``` r
 ggplot(data = books2, aes(x = fct_rev(fct_infreq(subCollection)))) +
   geom_bar() +
   facet_wrap(~ format, nrow = 2) +
@@ -736,7 +748,7 @@ argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
 ## Solution
 
 
-```r
+``` r
 ggplot(data = books2, aes(x = subCollection)) +
 geom_bar() +
 facet_wrap(vars(format)) +
@@ -761,7 +773,7 @@ For example, we can change our graph to have a simpler white background
 using the `theme_bw()` function:
 
 
-```r
+``` r
 #
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
@@ -795,7 +807,7 @@ the variable being plotted. We can change names of axes to something more
 informative than 'pubyear\_ymd' and 'n' and add a title to the figure:
 
 
-```r
+``` r
 # add labels
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
@@ -818,7 +830,7 @@ theme to your plot. This can be helpful to keep your `ggplot()` calls less
 cluttered. Here we create a `gray_theme` :
 
 
-```r
+``` r
 # create the gray theme
 gray_theme <- theme(axis.text.x = element_text(color = "gray20", size = 12, angle = 45, hjust = 0.5, vjust = 0.5),
                     axis.text.y = element_text(color = "gray20", size = 12),
@@ -859,7 +871,7 @@ publication. Add one of the themes listed above.
 ## Solution
 
 
-```r
+``` r
 yearly_checkouts <- booksPlot %>%
  filter(!is.na(pubyear_ymd),
         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
@@ -893,7 +905,7 @@ environment, such as `yearly_counts_plot`.
 Make sure you have the `fig_output/` folder in your working directory.
 
 
-```r
+``` r
 yearly_counts_plot <- ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
   facet_wrap(facets = vars(subCollection)) +

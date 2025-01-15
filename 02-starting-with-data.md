@@ -178,7 +178,7 @@ clicking on the "New Folder" button in the file pane (bottom right), or directly
 from R by typing at console:
 
 
-```r
+``` r
 dir.create("data")
 dir.create("data_output")
 dir.create("fig_output")
@@ -192,7 +192,7 @@ pasting this in your terminal (your instructor can place this chunk of code in
 the Etherpad):
 
 
-```r
+``` r
 download.file("https://ndownloader.figshare.com/files/22031487",
               "data/books.csv", mode = "wb")
 ```
@@ -208,16 +208,16 @@ idiosyncrasies that were improved upon in the `readr` package, which is
 installed and loaded with `tidyverse`.
 
 
-```r
+``` r
 library(tidyverse)  # loads the core tidyverse, including dplyr, readr, ggplot2, purrr
 ```
 
-```{.output}
+``` output
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ purrr     1.0.1
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ dplyr     1.1.4     ✔ purrr     1.0.2
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -228,7 +228,7 @@ To get our sample data into our R session, we will use the `read_csv()` function
 and assign it to the `books` value.
 
 
-```r
+``` r
 books <- read_csv("./data/books.csv")
 ```
 
@@ -327,11 +327,11 @@ beginning of the session, you also loaded `purrr`. Here we call `class()` on
 for each variable.
 
 
-```r
+``` r
 map_chr(books, class)
 ```
 
-```{.output}
+``` output
 CALL...BIBLIO.        X245.ab         X245.c       LOCATION     TOT.CHKOUT 
    "character"    "character"    "character"    "character"      "numeric" 
       LOUTDATE        SUBJECT            ISN   CALL...ITEM.  X008.Date.One 
@@ -351,7 +351,7 @@ followed by column numbers. However, note that different ways of specifying
 these coordinates lead to results with different classes.
 
 
-```r
+``` r
 ## first element in the first column of the data frame (as a vector)
 books[1, 1]
 ## first element in the 6th column (as a vector)
@@ -373,11 +373,11 @@ head_books <- books[1:6, ]
 The dollar sign `$` is used to distinguish a specific variable (column, in Excel-speak) in a data frame:
 
 
-```r
+``` r
 head(books$X245.ab)  # print the first six book titles
 ```
 
-```{.output}
+``` output
 [1] "Bermuda Triangle /"                                                                  
 [2] "Invaders from outer space :|real-life stories of UFOs /"                             
 [3] "Down Cut Shin Creek :|the pack horse librarians of Kentucky /"                       
@@ -386,12 +386,12 @@ head(books$X245.ab)  # print the first six book titles
 [6] "Judge Judy Sheindlin's You can't judge a book by its cover :|cool rules for school /"
 ```
 
-```r
+``` r
 # print the mean number of checkouts
 mean(books$TOT.CHKOUT)
 ```
 
-```{.output}
+``` output
 [1] 2.2847
 ```
 
@@ -400,22 +400,22 @@ mean(books$TOT.CHKOUT)
 Use `unique()` to see all the distinct values in a variable:
 
 
-```r
+``` r
 unique(books$BCODE2)
 ```
 
-```{.output}
+``` output
  [1] "a" "w" "s" "m" "e" "4" "k" "5" "n" "o"
 ```
 
 Take that one step further with `table()` to get quick frequency counts on a variable:
 
 
-```r
+``` r
 table(books$BCODE2)  # frequency counts on a variable
 ```
 
-```{.output}
+``` output
 
    4    5    a    e    k    m    n    o    s    w 
    1    3 6983   68    3  109    2   21 1988  822 
@@ -424,11 +424,11 @@ table(books$BCODE2)  # frequency counts on a variable
 You can combine `table()` with relational operators:
 
 
-```r
+``` r
 table(books$TOT.CHKOUT > 50)  # how many books have 50 or more checkouts?
 ```
 
-```{.output}
+``` output
 
 FALSE  TRUE 
  9991     9 
@@ -437,7 +437,7 @@ FALSE  TRUE
 `duplicated()` will give you the a logical vector of duplicated values.
 
 
-```r
+``` r
 duplicated(books$ISN)  # a TRUE/FALSE vector of duplicated values in the ISN column
 !duplicated(books$ISN)  # you can put an exclamation mark before it to get non-duplicated values
 table(duplicated(books$ISN))  # run a table of duplicated values
@@ -449,19 +449,19 @@ which(duplicated(books$ISN))  # get row numbers of duplicated values
 You may also need to know the number of missing values:
 
 
-```r
+``` r
 sum(is.na(books))  # How many total missing values?
 ```
 
-```{.output}
+``` output
 [1] 14509
 ```
 
-```r
+``` r
 colSums(is.na(books))  # Total missing values per column
 ```
 
-```{.output}
+``` output
 CALL...BIBLIO.        X245.ab         X245.c       LOCATION     TOT.CHKOUT 
            561             12           2801              0              0 
       LOUTDATE        SUBJECT            ISN   CALL...ITEM.  X008.Date.One 
@@ -470,17 +470,17 @@ CALL...BIBLIO.        X245.ab         X245.c       LOCATION     TOT.CHKOUT
              0              0 
 ```
 
-```r
+``` r
 table(is.na(books$ISN))  # use table() and is.na() in combination
 ```
 
-```{.output}
+``` output
 
 FALSE  TRUE 
  7066  2934 
 ```
 
-```r
+``` r
 booksNoNA <- na.omit(books)  # Return only observations that have no missing values
 ```
 

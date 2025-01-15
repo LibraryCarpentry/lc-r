@@ -38,27 +38,27 @@ exercises: 30
 You can get output from R simply by typing math in the console:
 
 
-```r
+``` r
 3 + 5
 ```
 
-```{.output}
+``` output
 [1] 8
 ```
 
-```r
+``` r
 7 * 2   # multiply 7 by 2
 ```
 
-```{.output}
+``` output
 [1] 14
 ```
 
-```r
+``` r
 sqrt(36) # take the square root of 36
 ```
 
-```{.output}
+``` output
 [1] 6
 ```
 
@@ -67,7 +67,7 @@ However, to do useful and interesting things, we need to assign *values* to
 assignment operator `<-`, and the value we want to give it:
 
 
-```r
+``` r
 time_minutes <- 5        # assign the number 5 to the object time_minutes
 ```
 
@@ -139,28 +139,28 @@ can force R to print the value by using parentheses or by typing
 the object name:
 
 
-```r
+``` r
 time_minutes <- 5    # doesn't print anything
 (time_minutes <- 5)  # putting parenthesis around the call prints the value of y
 ```
 
-```{.output}
+``` output
 [1] 5
 ```
 
-```r
+``` r
 time_minutes         # so does typing the name of the object
 ```
 
-```{.output}
+``` output
 [1] 5
 ```
 
-```r
+``` r
 print(time_minutes)  # so does using the print() function.
 ```
 
-```{.output}
+``` output
 [1] 5
 ```
 
@@ -168,23 +168,23 @@ Now that R has `time_minutes` in memory, we can do arithmetic with it. For
 instance, we may want to convert it into seconds (60 seconds in 1 minute):
 
 
-```r
+``` r
 60 * time_minutes
 ```
 
-```{.output}
+``` output
 [1] 300
 ```
 
 We can also change an object's value by assigning it a new one:
 
 
-```r
+``` r
 time_minutes <- 10
 60 * time_minutes
 ```
 
-```{.output}
+``` output
 [1] 600
 ```
 
@@ -193,14 +193,14 @@ assigning a value to one object does not change the values of other objects  For
 example, let's store the time in seconds in a new object, `time_seconds`:
 
 
-```r
+``` r
 time_seconds <- 60 * time_minutes
 ```
 
 Then change `time_minutes` to 30:
 
 
-```r
+``` r
 time_minutes <- 30
 ```
 
@@ -238,18 +238,18 @@ Show that changing the values of either `my_length` and `my_width` does not affe
 ## Solution
 
 
-```r
+``` r
 my_length <- 2.5
 my_width <- 3.2
 my_area <- my_length * my_width
 area
 ```
 
-```{.error}
-Error in eval(expr, envir, enclos): object 'area' not found
+``` error
+Error: object 'area' not found
 ```
 
-```r
+``` r
 # change the values of my_length and my_width
 my_length <- 7.0
 my_width <- 6.5
@@ -257,7 +257,7 @@ my_width <- 6.5
 my_area
 ```
 
-```{.output}
+``` output
 [1] 8
 ```
 
@@ -280,13 +280,13 @@ reproducible research. See the Software Carpentry lesson on [R for Reproducible
 Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/).
 
 
-```r
+``` r
 time_minutes <- 5    # time in minutes
 time_seconds <- 60 * time_minutes	# convert to seconds
 time_seconds				# print time in seconds
 ```
 
-```{.output}
+``` output
 [1] 300
 ```
 
@@ -305,7 +305,7 @@ objects in `c()` using quotation marks. To remove all objects, use `rm(list = ls
 Dataset."
 
 
-```r
+``` r
 x <- 5
 y <- 10
 z <- 15
@@ -330,7 +330,7 @@ the return value (the output) is the sum of those numbers. An example of a
 function call is:
 
 
-```r
+``` r
 sum(3, 4)
 ```
 
@@ -350,7 +350,7 @@ In the case of `sum()`, the ellipses `. . .` represent an unlimited number of
 numeric elements.
 
 
-```r
+``` r
 is.function(sum)        # check to see if sum() is a function
 sum(3, 4, 5, 6, 7)      # sum takes an unlimited number (. . .) of numeric elements
 ```
@@ -371,11 +371,11 @@ By default, `na.rm` is set to `FALSE`, so evaluating a sum with missing
 values will return `NA`:
 
 
-```r
+``` r
 sum(3, 4, NA)                # 
 ```
 
-```{.output}
+``` output
 [1] NA
 ```
 
@@ -385,11 +385,11 @@ as the `NA` value remains. 3 + 4 + `NA` is `NA`.
 But setting the argument `na.rm` to `TRUE` will remove the `NA`:
 
 
-```r
+``` r
 sum(3, 4, NA, na.rm = TRUE)
 ```
 
-```{.output}
+``` output
 [1] 7
 ```
 
@@ -434,12 +434,12 @@ For example we can create a vector of checkouts for a collection of books and
 assign it to a new object `checkouts`:
 
 
-```r
+``` r
 checkouts <- c(25, 15, 18)
 checkouts
 ```
 
-```{.output}
+``` output
 [1] 25 15 18
 ```
 
@@ -447,7 +447,7 @@ A vector can also contain characters. For example, we can have
 a vector of the book titles (`title`) and authors (`author`):
 
 
-```r
+``` r
 title <- c("Macbeth","Dracula","1984")
 ```
 
@@ -459,11 +459,11 @@ There are many functions that allow you to inspect the content of a vector.
 `length()` tells you how many elements are in a particular vector:
 
 
-```r
+``` r
 length(checkouts)  # print the number of values in the checkouts vector
 ```
 
-```{.output}
+``` output
 [1] 3
 ```
 
@@ -472,19 +472,19 @@ of data. The function `class()` indicates the class (the type of element) of an
 object:
 
 
-```r
+``` r
 class(checkouts)
 ```
 
-```{.output}
+``` output
 [1] "numeric"
 ```
 
-```r
+``` r
 class(title)
 ```
 
-```{.output}
+``` output
 [1] "character"
 ```
 
@@ -494,33 +494,33 @@ including the data type, the number of elements, and a printout of the first few
 elements.
 
 
-```r
+``` r
 str(checkouts)
 ```
 
-```{.output}
+``` output
  num [1:3] 25 15 18
 ```
 
-```r
+``` r
 str(title)
 ```
 
-```{.output}
+``` output
  chr [1:3] "Macbeth" "Dracula" "1984"
 ```
 
 You can use the `c()` function to add other elements to your vector:
 
 
-```r
+``` r
 author <- "Stoker"
 author <- c(author, "Orwell") # add to the end of the vector
 author <- c("Shakespeare", author)
 author
 ```
 
-```{.output}
+``` output
 [1] "Shakespeare" "Stoker"      "Orwell"     
 ```
 
@@ -573,7 +573,7 @@ What will happen in each of these examples? (hint: use `typeof()`
 to check the data type of your objects):
 
 
-```r
+``` r
 num_char <- c(1, 2, 3, "a")
 num_logical <- c(1, 2, 3, TRUE)
 char_logical <- c("a", "b", "c", TRUE)
@@ -597,7 +597,7 @@ How many values in `combined_logical` are `"TRUE"` (as a character) in the
 following example:
 
 
-```r
+``` r
 num_logical <- c(1, 2, 3, TRUE)
 char_logical <- c("a", "b", "c", TRUE)
 combined_logical <- c(num_logical, char_logical)
@@ -632,7 +632,7 @@ You can also *coerce* a vector to be a specific data type with `as.character()`,
 character:
 
 
-```r
+``` r
 x <- as.character(200)
 ```
 
@@ -640,22 +640,22 @@ We can test this in a few ways: if we print `x` to the console, we see quotation
 marks around it, letting us know it is a character:
 
 
-```r
+``` r
 x
 ```
 
-```{.output}
+``` output
 [1] "200"
 ```
 
 We can also call `class()`
 
 
-```r
+``` r
 class(x)
 ```
 
-```{.output}
+``` output
 [1] "character"
 ```
 
@@ -663,7 +663,7 @@ And if we try to add a number to `x`, we will get an error message `non-numeric 
 added to a number.
 
 
-```r
+``` r
 x + 5
 ```
 
@@ -676,11 +676,11 @@ states of the U.S.A. Type `?state` to see the included datasets. `state.name` is
 a built in vector in R of all U.S. states:
 
 
-```r
+``` r
 state.name
 ```
 
-```{.output}
+``` output
  [1] "Alabama"        "Alaska"         "Arizona"        "Arkansas"      
  [5] "California"     "Colorado"       "Connecticut"    "Delaware"      
  [9] "Florida"        "Georgia"        "Hawaii"         "Idaho"         
@@ -696,33 +696,33 @@ state.name
 [49] "Wisconsin"      "Wyoming"       
 ```
 
-```r
+``` r
 state.name[1]
 ```
 
-```{.output}
+``` output
 [1] "Alabama"
 ```
 
 You can use the `:` colon to create a vector of consecutive numbers.
 
 
-```r
+``` r
 state.name[1:5] 
 ```
 
-```{.output}
+``` output
 [1] "Alabama"    "Alaska"     "Arizona"    "Arkansas"   "California"
 ```
 
 If the numbers are not consecutive, you must use the `c()` function:
 
 
-```r
+``` r
 state.name[c(1, 10, 20)]
 ```
 
-```{.output}
+``` output
 [1] "Alabama"  "Georgia"  "Maryland"
 ```
 
@@ -730,11 +730,11 @@ We can also repeat the indices to create an object with more elements than the
 original one:
 
 
-```r
+``` r
 state.name[c(1, 2, 3, 2, 1, 3)]
 ```
 
-```{.output}
+``` output
 [1] "Alabama" "Alaska"  "Arizona" "Alaska"  "Alabama" "Arizona"
 ```
 
@@ -749,12 +749,12 @@ Another common way of subsetting is by using a logical vector. `TRUE` will
 select the element with the same index, while `FALSE` will not:
 
 
-```r
+``` r
 five_states <- state.name[1:5]
 five_states[c(TRUE, FALSE, TRUE, FALSE, TRUE)]
 ```
 
-```{.output}
+``` output
 [1] "Alabama"    "Arizona"    "California"
 ```
 
@@ -764,11 +764,11 @@ square miles. We can use the `<` operator to return a logical vector with TRUE
 for the indices that meet the condition:
 
 
-```r
+``` r
 state.area < 10000
 ```
 
-```{.output}
+``` output
  [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE
 [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
 [25] FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -776,11 +776,11 @@ state.area < 10000
 [49] FALSE FALSE
 ```
 
-```r
+``` r
 state.area[state.area < 10000]
 ```
 
-```{.output}
+``` output
 [1] 5009 2057 6450 8257 9304 7836 1214 9609
 ```
 
@@ -793,11 +793,11 @@ You can also specify character values. `state.region` gives the region that each
 state belongs to:
 
 
-```r
+``` r
 state.region == "Northeast"
 ```
 
-```{.output}
+``` output
  [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
 [13] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE
 [25] FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
@@ -805,11 +805,11 @@ state.region == "Northeast"
 [49] FALSE FALSE
 ```
 
-```r
+``` r
 state.name[state.region == "Northeast"]
 ```
 
-```{.output}
+``` output
 [1] "Connecticut"   "Maine"         "Massachusetts" "New Hampshire"
 [5] "New Jersey"    "New York"      "Pennsylvania"  "Rhode Island" 
 [9] "Vermont"      
@@ -825,21 +825,21 @@ combine multiple tests using `|` (at least one of the conditions is true, OR) or
 
 
 
-```r
+``` r
 state.name[state.area < 10000 | state.region == "Northeast"]
 ```
 
-```{.output}
+``` output
  [1] "Connecticut"   "Delaware"      "Hawaii"        "Maine"        
  [5] "Massachusetts" "New Hampshire" "New Jersey"    "New York"     
  [9] "Pennsylvania"  "Rhode Island"  "Vermont"      
 ```
 
-```r
+``` r
 state.name[state.area < 10000 & state.region == "Northeast"]
 ```
 
-```{.output}
+``` output
 [1] "Connecticut"   "Massachusetts" "New Hampshire" "New Jersey"   
 [5] "Rhode Island"  "Vermont"      
 ```
@@ -864,20 +864,20 @@ become tedious. The function `%in%` allows you to test if any of the elements of
 a search vector are found:
 
 
-```r
+``` r
 west_coast <- c("California", "Oregon", "Washington")
 state.name[state.name == "California" | state.name == "Oregon" | state.name == "Washington"]
 ```
 
-```{.output}
+``` output
 [1] "California" "Oregon"     "Washington"
 ```
 
-```r
+``` r
 state.name %in% west_coast
 ```
 
-```{.output}
+``` output
  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -885,11 +885,11 @@ state.name %in% west_coast
 [49] FALSE FALSE
 ```
 
-```r
+``` r
 state.name[state.name %in% west_coast]
 ```
 
-```{.output}
+``` output
 [1] "California" "Oregon"     "Washington"
 ```
 
@@ -906,36 +906,36 @@ can add the argument `na.rm=TRUE` to calculate the result while ignoring the
 missing values.
 
 
-```r
+``` r
 rooms <- c(2, 1, 1, NA, 4)
 mean(rooms)
 ```
 
-```{.output}
+``` output
 [1] NA
 ```
 
-```r
+``` r
 max(rooms)
 ```
 
-```{.output}
+``` output
 [1] NA
 ```
 
-```r
+``` r
 mean(rooms, na.rm = TRUE)
 ```
 
-```{.output}
+``` output
 [1] 2
 ```
 
-```r
+``` r
 max(rooms, na.rm = TRUE)
 ```
 
-```{.output}
+``` output
 [1] 4
 ```
 
@@ -944,50 +944,50 @@ functions `is.na()`, `na.omit()`, and `complete.cases()`. See below for
 examples.
 
 
-```r
+``` r
 ## Use any() to check if any values are missing
 any(is.na(rooms))
 ```
 
-```{.output}
+``` output
 [1] TRUE
 ```
 
-```r
+``` r
 ## Use table() to tell you how many are missing vs. not missing
 table(is.na(rooms))
 ```
 
-```{.output}
+``` output
 
 FALSE  TRUE 
     4     1 
 ```
 
-```r
+``` r
 ## Identify those elements that are not missing values.
 complete.cases(rooms)
 ```
 
-```{.output}
+``` output
 [1]  TRUE  TRUE  TRUE FALSE  TRUE
 ```
 
-```r
+``` r
 ## Identify those elements that are missing values.
 is.na(rooms)
 ```
 
-```{.output}
+``` output
 [1] FALSE FALSE FALSE  TRUE FALSE
 ```
 
-```r
+``` r
 ## Extract those elements that are not missing values.
 rooms[complete.cases(rooms)]
 ```
 
-```{.output}
+``` output
 [1] 2 1 1 4
 ```
 
@@ -995,11 +995,11 @@ You can also use `!is.na(rooms)`, which is exactly the same as
 `complete.cases(rooms)`. The exclamation mark indicates logical negation.
 
 
-```r
+``` r
 !c(TRUE, FALSE)
 ```
 
-```{.output}
+``` output
 [1] FALSE  TRUE
 ```
 
@@ -1026,7 +1026,7 @@ on your own methodological questions.
 ## Solution
 
 
-```r
+``` r
 rooms <- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)
 rooms_no_na <- rooms[!is.na(rooms)]
 # or
@@ -1035,17 +1035,17 @@ rooms_no_na <- na.omit(rooms)
 median(rooms, na.rm = TRUE)
 ```
 
-```{.output}
+``` output
 [1] 1
 ```
 
-```r
+``` r
 # 3.
 rooms_above_2 <- rooms_no_na[rooms_no_na > 2]
 length(rooms_above_2)
 ```
 
-```{.output}
+``` output
 [1] 4
 ```
 
