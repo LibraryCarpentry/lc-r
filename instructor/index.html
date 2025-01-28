@@ -197,12 +197,19 @@
                   <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         Summary and Schedule
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#learning-objectives">Learning Objectives</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -303,7 +310,6 @@
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Schedule</h1>
       
 
-<p>{% include gh_variables.html %}</p>
 <p>This lesson is designed for librarians and library professionals with
 little or no prior experience with R to be more acquainted with the
 programming language. Having a level of familiarity with R is beneficial
@@ -320,7 +326,8 @@ such as data visualization, deploying of web applications, and creating
 reproducible documentation. Given the extensive applications of R, we
 will solely be focusing on importing, cleaning, and visualizing
 data.</p>
-<p>By the end of this lesson, learners will be able to:</p>
+<section><h2 class="section-heading" id="learning-objectives">Learning Objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a></h2>
+<hr class="half-width"><p>By the end of this lesson, learners will be able to:</p>
 <ol style="list-style-type: decimal"><li>Describe what R is and use the basic components of the R Studio
 software environment.</li>
 <li>Apply functions to import data into R and to format data.</li>
@@ -335,15 +342,15 @@ plots and to change aesthetic features of plots.</li>
 <div id="prerequisites" class="callout-inner">
 <h3 class="callout-title">Prerequisites</h3>
 <div class="callout-content">
-<p>These lessons assume no prior knowledge of the skills or tools, but
-working through this lesson requires working copies of R and
-RStudio.</p>
+<ul><li>No prior knowledge is required, but learners need to install R and
+RStudio along with some packages before the lesson.</li>
+<li>Familiarity with installation procedures on different operating
+systems (Windows, MacOS, Linux) is expected to avoid technical issues
+during the lesson.</li>
+</ul></div>
 </div>
 </div>
-</div>
-
-
-      <section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
+</section><section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
           </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 00m
 </td>
