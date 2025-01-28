@@ -12,6 +12,7 @@ If they are using their own computers this should be no problem,
 but if the computer is managed by their organization's IT department
 they might need help from an IT administrator.
 
+
 ### Install R and RStudio
 
 R and RStudio are two separate pieces of software:
@@ -24,7 +25,9 @@ R and RStudio are two separate pieces of software:
 If you don't already have R and RStudio installed, follow the instructions for
 your operating system below. You have to install R before you install RStudio.
 
-#### Windows
+::::::::::::::::::::: group-tab
+
+### Windows
 
 - Download R from the
   [CRAN website](https://cran.r-project.org/bin/windows/base/release.htm).
@@ -36,10 +39,8 @@ your operating system below. You have to install R before you install RStudio.
 - Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
 
-##### MacOS
-
-- Download R from
-  the [CRAN website](https://cran.r-project.org/bin/macosx/).
+### Mac
+- Download R from the [CRAN website](https://cran.r-project.org/bin/macosx/).
 - Select the `.pkg` file for the latest R version
 - Double click on the downloaded file to install R
 - It is also a good idea to install [XQuartz](https://www.xquartz.org/) (needed
@@ -51,7 +52,7 @@ your operating system below. You have to install R before you install RStudio.
 - Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
 
-##### Linux
+### Linux
 
 - Follow the instructions for your distribution
   from [CRAN](https://cloud.r-project.org/bin/linux), they provide information
@@ -66,6 +67,8 @@ your operating system below. You have to install R before you install RStudio.
   install it with your preferred method (e.g., with Debian/Ubuntu `sudo dpkg -i rstudio-x.yy.zzz-amd64.deb` at the terminal).
 - Once it's installed, open RStudio to make sure it works and you don't get any
   error messages.
+
+:::::::::::::::::::::::::::::::
 
 ### Update R and RStudio
 
