@@ -8,6 +8,7 @@ exercises: 15
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Navigate the RStudio interface.
+- Create an R project for project analysis.
 - Install additional packages using the packages tab.
 - Install additional packages using R code.
 
@@ -41,6 +42,11 @@ analysis and modeling operations on it; text and data mine it; and much more.
 The term "`R`" is used to refer to both the programming language and the
 software that interprets the scripts written using it.
 
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## RStudio: a user interface for R
+
 [RStudio](https://rstudio.com) is a user interface for working with R. It is
 called an Integrated Development Environment (IDE): a piece of software that
 provides tools to make programming easier.  RStudio acts as a sort of wrapper
@@ -50,9 +56,19 @@ and makes using R much more effective. RStudio is also free and open source. To
 function correctly, RStudio needs R and therefore both need to be installed on
 your computer.
 
+::::::::::::::::::::::::::::::::::::::::: 
+
+
+
 ## Why learn R?
 
-### R does not involve lots of pointing and clicking, and that's a good thing
+<div class="figure" style="text-align: center">
+<img src="fig/r+rstudio-analogy.jpg" alt="Two images of a DMC Delorian: left is a standard model and on the right is one that has been modified into the time machine from 'Back To The Future'"  />
+<p class="caption">RStudio extends what R can do, and makes it easier to write R code and interact with R. [Left photo credit](https://commons.wikimedia.org/w/index.php?curid=2447462); [right photo credit](https://commons.wikimedia.org/w/index.php?curid=44599363).</p>
+</div>
+
+
+#### **R does not involve lots of pointing and clicking, and that's a good thing.**
 
 The learning curve might be steeper than with other software, but with R, the
 results of your analysis do not rely on remembering a succession of pointing
@@ -66,7 +82,7 @@ code you write can be inspected by someone else who can give you feedback and
 spot mistakes. It  forces you to have a deeper understanding of what you are
 doing, and facilitates your learning and comprehension of the methods you use.
 
-### R code is great for reproducibility
+#### **R code is great for reproducibility.**
 
 Reproducibility is when someone else (including your future self) can obtain the
 same results from the same dataset when using the same analysis.
@@ -78,7 +94,7 @@ statistical tests in your manuscript are updated automatically.
 An increasing number of journals and funding agencies expect analyses to be
 reproducible, so knowing R will give you an edge with these requirements.
 
-### R is interdisciplinary and extensible
+#### **R is interdisciplinary and extensible.**
 
 With 10,000+ packages that can be installed to extend its capabilities, R
 provides a framework that allows you to combine statistical approaches from many
@@ -86,7 +102,7 @@ scientific disciplines to best suit the analytical framework you need to analyze
 data. For instance, R has packages for image analysis, GIS, time series, population
 genetics, and a lot more.
 
-### R works on data of all shapes and sizes
+#### **R works on data of all shapes and sizes.**
 
 The skills you learn with R scale easily with the size of your dataset. Whether
 your dataset has hundreds or millions of lines, it won't make much difference to
@@ -98,12 +114,12 @@ types that make handling of missing data and statistical factors convenient.
 R can connect to spreadsheets, databases, and many other data formats, on your
 computer or on the web.
 
-### R produces high-quality graphics
+#### **R produces high-quality graphics.**
 
 The plotting functionalities in R are endless, and allow you to adjust any
 aspect of your graph to convey most effectively the message from your data.
 
-### R has a large and welcoming community
+#### **R has a large and welcoming community.**
 
 Thousands of people use R daily. Many of them are willing to help you through
 mailing lists and websites such as [Stack Overflow](https://stackoverflow.com/),
@@ -112,7 +128,7 @@ are backed up with [short, reproducible code
 snippets](https://www.tidyverse.org/help/) are more likely to attract
 knowledgeable responses.
 
-### Not only is R free, but it is also open-source and cross-platform
+#### **Not only is R free, but it is also open-source and cross-platform.**
 
 R is also free and open source, distributed under the terms of the [GNU General
 Public License.](https://www.gnu.org/licenses/gpl-3.0.en.html). This means it is
@@ -126,20 +142,20 @@ Because R is open source and is supported by a large community of developers and
 users, there is a very large selection of third-party add-on packages which are
 freely available to extend R's native capabilities.
 
-<div class="figure" style="text-align: center">
-<img src="fig/r+rstudio-analogy.jpg" alt="Two images of a DMC Delorian: left is a standard model and on the right is one that has been modified into the time machine from 'Back To The Future'"  />
-<p class="caption">RStudio extends what R can do, and makes it easier to write R code and interact with R. [Left photo credit](https://commons.wikimedia.org/w/index.php?curid=2447462); [right photo credit](https://commons.wikimedia.org/w/index.php?curid=44599363).</p>
-</div>
+:::::::::::::::::::::::::::::::::::::::::  challenge
 
-### R and librarianship
+### Discussion: R for librarianship
 
 For at least the last decade, librarians have been grappling with the ways that
 the "data deluge" affects our work on multiple levels--collection development,
 analyzing usage of the library website/space/collections, reference services,
 information literacy instruction, research support, accessing bibliographic metadata from third parties, and more.
 
-By using R or any advanced data analysis platform (such as Python), libraries
-can harness data in order to:
+Discuss some examples on how R or RStudio is useful for librarians.
+
+:::::::::::::::: solution
+
+## Solution
 
 - Clean messy data from the ILS \& vendors
   - Clean ISBNs, ISSNs, other identifiers
@@ -158,7 +174,13 @@ can harness data in order to:
 - Access data via APIs, including Crossref, Unpaywall, ORCID, and Sherpa-ROMeO
 - Write documents to communicate findings
 
-## Knowing your way around RStudio
+::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::
+
+
+
+## About RStudio
 
 Let's start by learning about [RStudio](https://www.rstudio.com/), which is an
 Integrated Development Environment (IDE) for working with R.
@@ -179,34 +201,7 @@ provides many shortcuts, autocompletion, and highlighting for the major file
 types you use while developing in R. RStudio makes typing easier and less
 error-prone.
 
-## Getting set up
-
-It is good practice to keep a set of related data, analyses, and text
-self-contained in a single folder called the **working directory**. All of the
-scripts within this folder can then use *relative paths* to files. Relative paths
-indicate where inside the project a file is located (as opposed to absolute paths,
-which point to where a file is on a specific computer). Working this way makes it
-a lot easier to move your project around on your computer and share it with
-others without having to directly modify file paths in the individual scripts.
-
-RStudio provides a helpful set of tools to do this through its "Projects"
-interface, which not only creates a working directory for you but also remembers
-its location (allowing you to quickly navigate to it). The interface also
-(optionally) preserves custom settings and open files to make it easier to
-resume work after a break.
-
-### Create a new project
-
-- Under the `File` menu, click on `New project`, choose `New directory`, then
-  `New project`
-- Enter the name `library_carpentry` for this new folder (or "directory"). This
-  will be your **working directory** for the rest of the day.
-- Click on `Create project`
-- Create a new file where we will type our scripts. Go to File > New File > R
-  script. Click the save icon on your toolbar and save your script as
-  "`script.R`".
-
-### The RStudio Interface
+## The RStudio Interface
 
 Let's take a quick tour of RStudio.
 
@@ -221,29 +216,24 @@ Pane Layout).
 
 The Default Layout is:
 
-- **Console Pane** (bottom left)
+- **Script Pane**:
+  This is sort of like a text editor, where you write and save a code. You can save
+  the script as a .R file for future use and sharing, or run the code to generate 
+  an output.
+
+- **Console Pane**
   If you were just using the basic R interface, without RStudio, this is all you
-  would see. You use this to type in a command and press enter to immediately
-  evaluate it. It includes a `>` symbol and a blinking cursor prompting you to
-  enter some code. Code that you type directly in the console will not be saved,
-  though it is available in the History Pane. You can try it out by typing `2 + 2`
-  into the console.
+  would see. The Console is where your scripts are executed. To execute a code, you
+  can either run it from the Script Pane or type your code directly into the Console 
+  (you will see a blinking cursor `>` prompting you to enter some code.
 
-- **Script Pane** (top left)
-  This is sort of like a text editor, or a place to draft and save code. You then
-  tell RStudio to run the line of code, or multiple lines of code, and you can see
-  it appear in the console as it is running. Then save the script as a .R file for
-  future use, or to share with others.
-
-- **Environment/History Pane** (top right)
+- **Environment/History Pane**:
   This will display the objects that you've read into what is called the "global
   environment." When you read a file into R, or manually create an R object, it
-  enters into the computer's working memory. When we manipulate or run operations
-  on that data, it isn't written to a file until we tell it to. It is kept here in
-  the RStudio environment. The History tab displays all commands that have been
-  executed in the console.
+  enters into the computer's working memory. The History tab displays all commands 
+  that have been executed in the console.
 
-- **Navigation Pane** (bottom right)
+- **Navigation Pane**
   This pane has multiple functions:
   
   - **Files:** Navigate to files saved on your computer and in your working directory
@@ -251,6 +241,59 @@ The Default Layout is:
   - **Packages:** view add-on packages you have installed, or install new packages
   - **Help:** Read help pages for R functions
   - **Viewer:** View local web content
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Tip: Saving your R code
+
+To save your R codes and reuse them in the future, write and run your code from the 
+Script Pane and save them as a .R file. This ensures your code is reproducible and that
+there is a complete record of what we did, and anyone (including our future selves) can 
+easily replicate the results on their computer.
+
+Alternatively, you can run temporary 'test' codes in the Console Pane -- these will not 
+be saved but are available in the History Pane. 
+
+Use the shortcuts <kbd>Ctrl</kbd> + <kbd>1</kbd> and <kbd>Ctrl</kbd> + <kbd>2</kbd> to 
+jump between the Script and Console Panes.
+
+:::::::::::::::::::::::::::::::::::::::::
+
+
+
+### Create a new project
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## RStudio project
+
+An **RStudio project (.Rproj)** allows you to save all of the data, analyses, packages, 
+etc. related to a specific analysis project into a single **working directory**. 
+
+All of the scripts within this folder can then use *relative paths* to files. Relative 
+paths indicate where inside the project a file is located (as opposed to *absolute 
+paths*, which point to where a file is on a specific computer). 
+
+Working this way makes it a lot easier to move your project around on your computer 
+and share it with others without having to directly modify file paths in the individual 
+scripts.
+
+:::::::::::::::::::::::::::::::::::::::::
+
+
+To create a new project, follow the instructions below.
+
+1. Under the <kbd>File</kbd> menu, click on <kbd>New project</kbd>. 
+
+2. Select <kbd>New directory</kbd>, then `New project`.
+
+3. Enter your new project name e.g. my_project. This will be your **working 
+   directory** for the rest of the day.
+
+4. Finally, click on <kbd>Create project</kbd>. Create a new file where we will type 
+   our scripts. Go to `File > New File > R` script. Click the save icon on 
+   your toolbar and save your script as "`script.R`".
+
 
 ## Interacting with R
 
@@ -267,14 +310,21 @@ the results will be shown for commands that have been executed. You can type
 commands directly into the console and press <kbd>Enter</kbd> to execute those commands,
 but they will be forgotten when you close the session.
 
-The *prompt* is the blinking cursor in the console pane prompting you to take
-action, in the lower-left corner of R Studio. If R is ready to accept commands,
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## The prompt
+
+The **prompt (`>`)** is the blinking cursor in the console pane that prompts you to take
+action, in the lower-left corner of R Studio. If R is ready to accept a **command**,
 the R console shows a `>` prompt. If R receives a command (by typing,
 copy-pasting, or sent from the script editor using <kbd>Ctrl</kbd> +
 <kbd>Enter</kbd>), R will try to execute it and, when ready, will show the
 results and come back with a new `>` prompt to wait for new commands. We type
 *commands* into the prompt, and press the Enter key to *evaluate* (also called
 *execute* or *run*) those commands.
+
+:::::::::::::::::::::::::::::::::::::::::  
+
 
 You can use R like a calculator:
 
@@ -283,7 +333,15 @@ You can use R like a calculator:
 2 + 2    # Type 2 + 2 in the console to run the command
 ```
 
-While in the console, you can press the up and down keys on your keyboard to cycle through previously executed commands.
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+Tip: Moving your cursor
+
+In the console, you can press the up and down keys on your keyboard to cycle through 
+previously executed commands.
+
+:::::::::::::::::::::::::::::::::::::::::
+
 
 Because we want our code and workflow to be reproducible, it is better to type
 the commands we want in the script editor and save the script. This way, there
@@ -292,63 +350,60 @@ can easily replicate the results on their computer.
 
 RStudio allows you to execute commands directly from the script editor by using
 the <kbd>Ctrl</kbd> + <kbd>Enter</kbd> shortcut (on Mac, <kbd>Cmd</kbd> +
-<kbd>Return</kbd> will work). The command on the current line in the
-script (indicated by the cursor) or all of the commands in
-selected text will be sent to the console and executed when you press
-<kbd>Ctrl</kbd> + <kbd>Enter</kbd>. If there is information in the console
-you do not need anymore, you can clear it with <kbd>Ctrl</kbd> + <kbd>L</kbd>.
+<kbd>Return</kbd> will work). 
+
+The command on the current line in the script (indicated by the cursor) or all of the commands in selected text will be sent to the console and executed when you press <kbd>Ctrl</kbd> + <kbd>Enter</kbd>. If there is information in the console you do not need anymore, you can clear it with <kbd>Ctrl</kbd> + <kbd>L</kbd>. 
+
 You can find other keyboard shortcuts in this
 [RStudio cheatsheet about the RStudio IDE](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf).
 
-At some point in your analysis, you may want to check the content of a variable
-or the structure of an object without necessarily keeping a record of it in
-your script. You can type these commands and execute them directly in the
-console.  RStudio provides the <kbd>Ctrl</kbd> + <kbd>1</kbd> and
-<kbd>Ctrl</kbd> + <kbd>2</kbd> shortcuts allow you to jump between the
-script and the console panes.
+:::::::::::::::::::::::::::::::::::::::::  callout
 
-If R is still waiting for you to enter more text,
-the console will show a `+` prompt. It means that you haven't finished entering
-a complete command. This is likely because you have not 'closed' a parenthesis or
-quotation, i.e. you don't have the same number of left-parentheses as
-right-parentheses or the same number of opening and closing quotation marks.
-When this happens, and you thought you finished typing your command, click
-inside the console window andx press <kbd>Esc</kbd>; this will cancel the
-incomplete command and return you to the `>` prompt. You can then proofread
-the command(s) you entered and correct the error.
+## Tip: Incomplete commands
 
-## Installing additional packages using the packages tab
+If R recognises that a command is incomplete, a `+` prompt will appear 
+in the console. This means that R is still waiting for you to enter more text.
+
+Usually, this occurs because you have not 'closed' a parenthesis or
+quotation. When this happens, click on the console and press <kbd>Esc</kbd>; this 
+will cancel the incomplete command and return you to the `>` prompt. You can then 
+proofread the command(s) you entered and correct the error.
+
+:::::::::::::::::::::::::::::::::::::::::  
+
+
+## Installing R packages
 
 When you download R it already has a number of functions built in: these
 encompass what is called **Base R.** However, many R users write their own
 **libraries** of functions, package them together in **R Packages**, and provide
-them to the R community at no charge. This extends the capacity of R and allows
-us to do much more. In many cases, they improve on the Base R functions by
-making them easier and more straightforward to use. In the course of this lesson
-we will be making use of several of these packages, such as `ggplot2` and
-`dplyr`.
+them to the R community at no charge. Some examples include the <kbd>dplyr</kbd> 
+and <kbd>ggplot2</kbd> packages, which we will learn more in the coming chapters.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## The CRAN repository
 
 The [Comprehensive R Archive Network
 (CRAN)](https://cran.r-project.org/web/packages/available_packages_by_name.html)
 is the main repository for R packages, and that organization maintains [strict
 standards](https://cran.r-project.org/web/packages/policies.html) in order for a
 package to be listed--for example, it must include clear descriptions of the
-functions, and it must not track or tamper with the user's R session. See [this
-page from
-RStudio](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages)
-for a good list of useful R packages. In addition to CRAN, R users can make
-their code and packages available from [GitHub](https://github.com/trending/r).
-Finally, some communities host their own collections of R packages, such as
-[Bioconductor](https://bioconductor.org/) for computational biology and
-bioinformatics.
+functions, and it must not track or tamper with the user's R session. 
 
-## Installing Packages
+See [this page from RStudio](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages) for a good list of useful R packages. In addition to CRAN, R users can make their code and packages available from [GitHub](https://github.com/trending/r) or
+[Bioconductor](https://bioconductor.org/) (for computational biology and
+bioinformatics).
 
-Installing CRAN packages can be done from the RStudio console. Click the
-Packages tab in the Navigation Pane, then click Install and search for the
-package you're looking for. You can also use the `install.packages()` function
-directly in the console. Run `help(install.packages)` to learn more about how to
-do it this way.
+:::::::::::::::::::::::::::::::::::::::::  
+
+<br>
+
+
+### **Installing packages using the Packages tab**
+
+Installing CRAN packages can be done from the <kbd>Packages</kbd> tab in the Navigation 
+Pane. Click `Install` and type in the name of the package you're looking for.
 
 <div class="figure" style="text-align: center">
 <img src="fig/R_00_Rstudio_03.png" alt="install packages pane showing an entry for installing the 'tidyverse' package"  />
@@ -375,6 +430,7 @@ Use the install option from the packages tab to install the ‘tidyverse' packag
 
 From the packages tab, click ‘Install' from the toolbar and type ‘tidyverse' into the textbox, then click ‘install'.
 The ‘tidyverse' package is really a package of packages, including 'ggplot2' and 'dplyr', both of which require other packages to run correctly. All of these packages will be installed automatically.
+
 Depending on what packages have previously been installed in your R environment, the install of ‘tidyverse' could be very quick or could take several minutes.
 As the install proceeds, messages relating to its progress will be written to the console. You will be able to see all of the packages which are actually being installed.
 
@@ -384,13 +440,10 @@ As the install proceeds, messages relating to its progress will be written to th
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Because the install process accesses the CRAN repository, you
-will need an Internet connection to install packages.
+<br>
 
-It is also possible to install packages from other repositories, as
-well as Github or the local file system, but we won't be looking at these options in this lesson.
 
-## Installing additional packages using R code
+### **Installing packages using R code**
 
 If you were watching the console window when you started the
 install of ‘tidyverse', you may have noticed that the line
@@ -402,11 +455,19 @@ install.packages("tidyverse")
 
 was written to the console before the start of the installation messages.
 
-You could also have installed the **`tidyverse`** packages by running this command directly in the R console.
+You could also have installed the **`tidyverse`** packages by running this command directly in the R console. Run `help(install.packages)` to learn more about how to do it this way.
+
+Because the install process accesses the CRAN repository, you will need an 
+Internet connection to install packages.
+
+It is also possible to install packages from other repositories, as well as Github 
+or the local file system, but we won't be looking at these options in this lesson.
+
+
 
 ## R Resources
 
-### Learning R
+### **Learning R**
 
 1. `swirl` is a package you can install in R to learn about R and data science
   interactively. Just type `install.packages("swirl")` into your R console, load
@@ -441,7 +502,18 @@ You could also have installed the **`tidyverse`** packages by running this comma
   [Data Manipulation in
   R](https://link.springer.com/book/10.1007/978-0-387-74731-6).
 
-### Data
+7. Other Carpentries R lesson:
+
+- [SWC – Programming with R](https://swcarpentry.github.io/r-novice-inflammation/)
+- [SWC – R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder)
+- [LC - Introduction to R and litsearchr (pre-alpha)](https://carpentries-incubator.github.io/lc-litsearchr/)
+- [Data Analysis and Visualization in R for Ecologists](https://datacarpentry.org/R-ecology-lesson/)
+- [Introduction to R and RStudio for Genomics](https://datacarpentry.org/genomics-r-intro/)
+
+<br>
+
+
+### **Datasets**
 
 If you need some data to play with, type `data()` in the console for a list of
 data sets. To load a dataset, type it like this: `data(mtcars)`. Type
@@ -457,14 +529,23 @@ sixCylinder <- mtcars[mtcars$cyl == 6, ]
 
 See also rdatamining.com's [list of free datasets](https://www.rdatamining.com/resources/data).
 
-### Cheat Sheets
+<br>
+
+### **Cheat Sheets**
+
+List of R Cheat Sheets:
 
 - [Base R Cheat Sheet](https://paulvanderlaken.files.wordpress.com/2017/08/base-r-cheetsheat.pdf) by Mhairi McNeill
 - [Data Transformation with dplyr Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) by RStudio
 - [Data Wrangling with dplyr and tidyr Cheat Sheet](https://paulvanderlaken.files.wordpress.com/2017/08/ddplyr-cheatsheet-data-wrangling-plyr.pdf) by RStudio
 - [Complete list of RStudio cheatsheets](https://github.com/rstudio/cheatsheets/)
 
-### Style guides
+You can find more cheat sheets in RStudio by going to the <kbd>Help<kbd> panel then 
+clicking on the <kbc>Cheat Sheets</kbd> dropdown menu.
+
+<br>
+
+### **Style guides**
 
 Use these resources to write cleaner code, according to established style conventions
 
@@ -483,8 +564,9 @@ Parts of this episode have been inspired by the following:
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
+- Navigate round RStudio and create an `Rproj` file.
 - Use RStudio to write and run R programs.
-- Use `install.packages()` to install packages (libraries).
+- Install packages using the Packages tab or the `install.packages()` command.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
