@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this lesson in your work, please cite it as below."
+title: "Library Carpentry: R"
+authors:
+  - family-names: "Dennis"
+    given-names: "Tim"
+    orcid: "https://orcid.org/0000-0001-6632-3812"  
+  - family-names: "Beh"
+    given-names: "Jia Qi"
+    orcid: "https://orcid.org/000-0002-9311-5928"  
+  - family-names: "Iakovakis"
+    given-names: "Clarke"
+  - family-names: "Little"
+    given-names: "John"
+  - family-names: "Guillou"
+    given-names: "Stéphane"
+  - family-names: "Lin"
+    given-names: "Sarah"
+date-released: "2024-09-27"
+version: "1.0.0"
+url: "https://librarycarpentry.org/lc-r"
+license: "CC-BY-4.0"
+keywords:
+  - R
+  - data cleaning
+  - data visualization
+  - ggplot2
+  - dplyr
+  - librarians
+  - data science
+  - open science
+abstract: >
+  This lesson, part of the Library Carpentry series, introduces R programming to librarians and library professionals. It focuses on data cleaning, transformation, and visualization using tools like `dplyr` and `ggplot2`, and aims to equip learners with essential data science skills.
