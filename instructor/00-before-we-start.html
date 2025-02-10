@@ -218,12 +218,10 @@
       <div class="accordion-body">
         <ul><li><a href="#what-is-r-what-is-rstudio">What is R? What is RStudio?</a></li>
 <li><a href="#why-learn-r">Why learn R?</a></li>
-<li><a href="#knowing-your-way-around-rstudio">Knowing your way around RStudio</a></li>
-<li><a href="#getting-set-up">Getting set up</a></li>
+<li><a href="#about-rstudio">About RStudio</a></li>
+<li><a href="#the-rstudio-interface">The RStudio Interface</a></li>
 <li><a href="#interacting-with-r">Interacting with R</a></li>
-<li><a href="#installing-additional-packages-using-the-packages-tab">Installing additional packages using the packages tab</a></li>
-<li><a href="#installing-packages">Installing Packages</a></li>
-<li><a href="#installing-additional-packages-using-r-code">Installing additional packages using R code</a></li>
+<li><a href="#installing-r-packages">Installing R packages</a></li>
 <li><a href="#r-resources">R Resources</a></li>
 <li><a href="#credit">Credit</a></li>
         </ul></div><!--/div.accordion-body-->
@@ -326,7 +324,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Before we Start</h1>
-        <p>Last updated on 2025-02-05 |
+        <p>Last updated on 2025-02-10 |
 
         <a href="https://github.com/librarycarpentry/lc-r/edit/main/episodes/00-before-we-start.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -359,6 +357,7 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul><li>Navigate the RStudio interface.</li>
+<li>Create an R project for project analysis.</li>
 <li>Install additional packages using the packages tab.</li>
 <li>Install additional packages using R code.</li>
 </ul></div>
@@ -380,6 +379,13 @@ statistical analysis and modeling operations on it; text and data mine
 it; and much more. The term “<code>R</code>” is used to refer to both
 the programming language and the software that interprets the scripts
 written using it.</p>
+<div id="rstudio-a-user-interface-for-r" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="rstudio-a-user-interface-for-r" class="callout-inner">
+<h3 class="callout-title">RStudio: a user interface for R</h3>
+<div class="callout-content">
 <p><a href="https://rstudio.com" class="external-link">RStudio</a> is a user interface for
 working with R. It is called an Integrated Development Environment
 (IDE): a piece of software that provides tools to make programming
@@ -389,10 +395,18 @@ easier to import datasets, create and write scripts, and makes using R
 much more effective. RStudio is also free and open source. To function
 correctly, RStudio needs R and therefore both need to be installed on
 your computer.</p>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="why-learn-r">Why learn R?<a class="anchor" aria-label="anchor" href="#why-learn-r"></a></h2>
-<hr class="half-width"><div class="section level3">
-<h3 id="r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing">R does not involve lots of pointing and clicking, and that’s a good
-thing<a class="anchor" aria-label="anchor" href="#r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing"></a></h3>
+<hr class="half-width"><figure style="text-align: center"><img src="../fig/r+rstudio-analogy.jpg" alt="Two images of a DMC Delorian: left is a standard model and on the right is one that has been modified into the time machine from 'Back To The Future'" class="figure mx-auto d-block"><figcaption>
+RStudio extends what R can do, and makes it easier to write R code and
+interact with R. <a href="https://commons.wikimedia.org/w/index.php?curid=2447462" class="external-link">Left
+photo credit</a>; <a href="https://commons.wikimedia.org/w/index.php?curid=44599363" class="external-link">right
+photo credit</a>.
+</figcaption></figure><div class="section level4">
+<h4 id="r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing-"><strong>R does not involve lots of pointing and clicking, and that’s
+a good thing.</strong><a class="anchor" aria-label="anchor" href="#r-does-not-involve-lots-of-pointing-and-clicking-and-thats-a-good-thing-"></a></h4>
 <p>The learning curve might be steeper than with other software, but
 with R, the results of your analysis do not rely on remembering a
 succession of pointing and clicking, but instead on a series of written
@@ -406,8 +420,8 @@ feedback and spot mistakes. It forces you to have a deeper understanding
 of what you are doing, and facilitates your learning and comprehension
 of the methods you use.</p>
 </div>
-<div class="section level3">
-<h3 id="r-code-is-great-for-reproducibility">R code is great for reproducibility<a class="anchor" aria-label="anchor" href="#r-code-is-great-for-reproducibility"></a></h3>
+<div class="section level4">
+<h4 id="r-code-is-great-for-reproducibility-"><strong>R code is great for reproducibility.</strong><a class="anchor" aria-label="anchor" href="#r-code-is-great-for-reproducibility-"></a></h4>
 <p>Reproducibility is when someone else (including your future self) can
 obtain the same results from the same dataset when using the same
 analysis.</p>
@@ -419,8 +433,8 @@ automatically.</p>
 to be reproducible, so knowing R will give you an edge with these
 requirements.</p>
 </div>
-<div class="section level3">
-<h3 id="r-is-interdisciplinary-and-extensible">R is interdisciplinary and extensible<a class="anchor" aria-label="anchor" href="#r-is-interdisciplinary-and-extensible"></a></h3>
+<div class="section level4">
+<h4 id="r-is-interdisciplinary-and-extensible-"><strong>R is interdisciplinary and extensible.</strong><a class="anchor" aria-label="anchor" href="#r-is-interdisciplinary-and-extensible-"></a></h4>
 <p>With 10,000+ packages that can be installed to extend its
 capabilities, R provides a framework that allows you to combine
 statistical approaches from many scientific disciplines to best suit the
@@ -428,8 +442,8 @@ analytical framework you need to analyze your data. For instance, R has
 packages for image analysis, GIS, time series, population genetics, and
 a lot more.</p>
 </div>
-<div class="section level3">
-<h3 id="r-works-on-data-of-all-shapes-and-sizes">R works on data of all shapes and sizes<a class="anchor" aria-label="anchor" href="#r-works-on-data-of-all-shapes-and-sizes"></a></h3>
+<div class="section level4">
+<h4 id="r-works-on-data-of-all-shapes-and-sizes-"><strong>R works on data of all shapes and sizes.</strong><a class="anchor" aria-label="anchor" href="#r-works-on-data-of-all-shapes-and-sizes-"></a></h4>
 <p>The skills you learn with R scale easily with the size of your
 dataset. Whether your dataset has hundreds or millions of lines, it
 won’t make much difference to you.</p>
@@ -439,22 +453,22 @@ statistical factors convenient.</p>
 <p>R can connect to spreadsheets, databases, and many other data
 formats, on your computer or on the web.</p>
 </div>
-<div class="section level3">
-<h3 id="r-produces-high-quality-graphics">R produces high-quality graphics<a class="anchor" aria-label="anchor" href="#r-produces-high-quality-graphics"></a></h3>
+<div class="section level4">
+<h4 id="r-produces-high-quality-graphics-"><strong>R produces high-quality graphics.</strong><a class="anchor" aria-label="anchor" href="#r-produces-high-quality-graphics-"></a></h4>
 <p>The plotting functionalities in R are endless, and allow you to
 adjust any aspect of your graph to convey most effectively the message
 from your data.</p>
 </div>
-<div class="section level3">
-<h3 id="r-has-a-large-and-welcoming-community">R has a large and welcoming community<a class="anchor" aria-label="anchor" href="#r-has-a-large-and-welcoming-community"></a></h3>
+<div class="section level4">
+<h4 id="r-has-a-large-and-welcoming-community-"><strong>R has a large and welcoming community.</strong><a class="anchor" aria-label="anchor" href="#r-has-a-large-and-welcoming-community-"></a></h4>
 <p>Thousands of people use R daily. Many of them are willing to help you
 through mailing lists and websites such as <a href="https://stackoverflow.com/" class="external-link">Stack Overflow</a>, or on the <a href="https://community.rstudio.com/" class="external-link">RStudio community</a>. Questions
 which are backed up with <a href="https://www.tidyverse.org/help/" class="external-link">short, reproducible code
 snippets</a> are more likely to attract knowledgeable responses.</p>
 </div>
-<div class="section level3">
-<h3 id="not-only-is-r-free-but-it-is-also-open-source-and-cross-platform">Not only is R free, but it is also open-source and
-cross-platform<a class="anchor" aria-label="anchor" href="#not-only-is-r-free-but-it-is-also-open-source-and-cross-platform"></a></h3>
+<div class="section level4">
+<h4 id="not-only-is-r-free-but-it-is-also-open-source-and-cross-platform-"><strong>Not only is R free, but it is also open-source and
+cross-platform.</strong><a class="anchor" aria-label="anchor" href="#not-only-is-r-free-but-it-is-also-open-source-and-cross-platform-"></a></h4>
 <p>R is also free and open source, distributed under the terms of the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link">GNU General Public
 License.</a>. This means it is free to download and use the software for
 any purpose, modify it, and share it. Anyone can inspect the source code
@@ -466,22 +480,31 @@ software to enhance user experience and functionality.</p>
 developers and users, there is a very large selection of third-party
 add-on packages which are freely available to extend R’s native
 capabilities.</p>
-<figure style="text-align: center"><img src="../fig/r+rstudio-analogy.jpg" alt="Two images of a DMC Delorian: left is a standard model and on the right is one that has been modified into the time machine from 'Back To The Future'" class="figure mx-auto d-block"><figcaption>
-RStudio extends what R can do, and makes it easier to write R code and
-interact with R. <a href="https://commons.wikimedia.org/w/index.php?curid=2447462" class="external-link">Left
-photo credit</a>; <a href="https://commons.wikimedia.org/w/index.php?curid=44599363" class="external-link">right
-photo credit</a>.
-</figcaption></figure></div>
-<div class="section level3">
-<h3 id="r-and-librarianship">R and librarianship<a class="anchor" aria-label="anchor" href="#r-and-librarianship"></a></h3>
+<div id="discussion-r-for-librarianship" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="discussion-r-for-librarianship" class="callout-inner">
+<h3 class="callout-title">Discussion: R for librarianship</h3>
+<div class="callout-content">
 <p>For at least the last decade, librarians have been grappling with the
 ways that the “data deluge” affects our work on multiple
 levels–collection development, analyzing usage of the library
 website/space/collections, reference services, information literacy
 instruction, research support, accessing bibliographic metadata from
 third parties, and more.</p>
-<p>By using R or any advanced data analysis platform (such as Python),
-libraries can harness data in order to:</p>
+<p>Discuss some examples on how R or RStudio is useful for
+librarians.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
 <ul><li>Clean messy data from the ILS &amp; vendors
 <ul><li>Clean ISBNs, ISSNs, other identifiers</li>
 <li>Detect data errors &amp; anomalies</li>
@@ -502,7 +525,11 @@ libraries can harness data in order to:</p>
 Sherpa-ROMeO</li>
 <li>Write documents to communicate findings</li>
 </ul></div>
-</section><section><h2 class="section-heading" id="knowing-your-way-around-rstudio">Knowing your way around RStudio<a class="anchor" aria-label="anchor" href="#knowing-your-way-around-rstudio"></a></h2>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="about-rstudio">About RStudio<a class="anchor" aria-label="anchor" href="#about-rstudio"></a></h2>
 <hr class="half-width"><p>Let’s start by learning about <a href="https://www.rstudio.com/" class="external-link">RStudio</a>, which is an Integrated
 Development Environment (IDE) for working with R.</p>
 <p>The RStudio IDE open-source product is free under the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" class="external-link">Affero General
@@ -518,67 +545,32 @@ you need to write code is available in a single window. Additionally,
 RStudio provides many shortcuts, autocompletion, and highlighting for
 the major file types you use while developing in R. RStudio makes typing
 easier and less error-prone.</p>
-</section><section><h2 class="section-heading" id="getting-set-up">Getting set up<a class="anchor" aria-label="anchor" href="#getting-set-up"></a></h2>
-<hr class="half-width"><p>It is good practice to keep a set of related data, analyses, and text
-self-contained in a single folder called the <strong>working
-directory</strong>. All of the scripts within this folder can then use
-<em>relative paths</em> to files. Relative paths indicate where inside
-the project a file is located (as opposed to absolute paths, which point
-to where a file is on a specific computer). Working this way makes it a
-lot easier to move your project around on your computer and share it
-with others without having to directly modify file paths in the
-individual scripts.</p>
-<p>RStudio provides a helpful set of tools to do this through its
-“Projects” interface, which not only creates a working directory for you
-but also remembers its location (allowing you to quickly navigate to
-it). The interface also (optionally) preserves custom settings and open
-files to make it easier to resume work after a break.</p>
-<div class="section level3">
-<h3 id="create-a-new-project">Create a new project<a class="anchor" aria-label="anchor" href="#create-a-new-project"></a></h3>
-<ul><li>Under the <code>File</code> menu, click on <code>New project</code>,
-choose <code>New directory</code>, then <code>New project</code>
-</li>
-<li>Enter the name <code>library_carpentry</code> for this new folder
-(or “directory”). This will be your <strong>working directory</strong>
-for the rest of the day.</li>
-<li>Click on <code>Create project</code>
-</li>
-<li>Create a new file where we will type our scripts. Go to File &gt;
-New File &gt; R script. Click the save icon on your toolbar and save
-your script as “<code>script.R</code>”.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="the-rstudio-interface">The RStudio Interface<a class="anchor" aria-label="anchor" href="#the-rstudio-interface"></a></h3>
-<p>Let’s take a quick tour of RStudio.</p>
+</section><section><h2 class="section-heading" id="the-rstudio-interface">The RStudio Interface<a class="anchor" aria-label="anchor" href="#the-rstudio-interface"></a></h2>
+<hr class="half-width"><p>Let’s take a quick tour of RStudio.</p>
 <figure style="text-align: center"><img src="../fig/RStudioPanes.png" alt="screenshot of RStudio with labels of the four panes as described below" class="figure mx-auto d-block"><figcaption>
 R Studio
 </figcaption></figure><p>RStudio is divided into four “panes”. The placement of these panes
 and their content can be customized (see menu, Tools -&gt; Global
 Options -&gt; Pane Layout).</p>
 <p>The Default Layout is:</p>
-<ul><li><p><strong>Console Pane</strong> (bottom left) If you were just
-using the basic R interface, without RStudio, this is all you would see.
-You use this to type in a command and press enter to immediately
-evaluate it. It includes a <code>&gt;</code> symbol and a blinking
-cursor prompting you to enter some code. Code that you type directly in
-the console will not be saved, though it is available in the History
-Pane. You can try it out by typing <code>2 + 2</code> into the
-console.</p></li>
-<li><p><strong>Script Pane</strong> (top left) This is sort of like a
-text editor, or a place to draft and save code. You then tell RStudio to
-run the line of code, or multiple lines of code, and you can see it
-appear in the console as it is running. Then save the script as a .R
-file for future use, or to share with others.</p></li>
-<li><p><strong>Environment/History Pane</strong> (top right) This will
-display the objects that you’ve read into what is called the “global
-environment.” When you read a file into R, or manually create an R
-object, it enters into the computer’s working memory. When we manipulate
-or run operations on that data, it isn’t written to a file until we tell
-it to. It is kept here in the RStudio environment. The History tab
-displays all commands that have been executed in the console.</p></li>
+<ul><li><p><strong>Script Pane</strong>: This is sort of like a text editor,
+where you write and save a code. You can save the script as a .R file
+for future use and sharing, or run the code to generate an
+output.</p></li>
+<li><p><strong>Console Pane</strong> If you were just using the basic R
+interface, without RStudio, this is all you would see. The Console is
+where your scripts are executed. To execute a code, you can either run
+it from the Script Pane or type your code directly into the Console (you
+will see a blinking cursor <code>&gt;</code> prompting you to enter some
+code.</p></li>
+<li><p><strong>Environment/History Pane</strong>: This will display the
+objects that you’ve read into what is called the “global environment.”
+When you read a file into R, or manually create an R object, it enters
+into the computer’s working memory. The History tab displays all
+commands that have been executed in the console.</p></li>
 <li>
-<p><strong>Navigation Pane</strong> (bottom right) This pane has
-multiple functions:</p>
+<p><strong>Navigation Pane</strong> This pane has multiple
+functions:</p>
 <ul><li>
 <strong>Files:</strong> Navigate to files saved on your computer and
 in your working directory</li>
@@ -593,7 +585,59 @@ or install new packages</li>
 <li>
 <strong>Viewer:</strong> View local web content</li>
 </ul></li>
-</ul></div>
+</ul><div id="tip-saving-your-r-code" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="tip-saving-your-r-code" class="callout-inner">
+<h3 class="callout-title">Tip: Saving your R code</h3>
+<div class="callout-content">
+<p>To save your R codes and reuse them in the future, write and run your
+code from the Script Pane and save them as a .R file. This ensures your
+code is reproducible and that there is a complete record of what we did,
+and anyone (including our future selves) can easily replicate the
+results on their computer.</p>
+<p>Alternatively, you can run temporary ‘test’ codes in the Console Pane
+– these will not be saved but are available in the History Pane.</p>
+<p>Use the shortcuts <kbd>Ctrl</kbd> + <kbd>1</kbd> and <kbd>Ctrl</kbd>
++ <kbd>2</kbd> to jump between the Script and Console Panes.</p>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="create-a-new-project">Create a new project<a class="anchor" aria-label="anchor" href="#create-a-new-project"></a></h3>
+<div id="rstudio-project" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="rstudio-project" class="callout-inner">
+<h3 class="callout-title">RStudio project</h3>
+<div class="callout-content">
+<p>An <strong>RStudio project (.Rproj)</strong> allows you to save all
+of the data, analyses, packages, etc. related to a specific analysis
+project into a single <strong>working directory</strong>.</p>
+<p>All of the scripts within this folder can then use <em>relative
+paths</em> to files. Relative paths indicate where inside the project a
+file is located (as opposed to <em>absolute paths</em>, which point to
+where a file is on a specific computer).</p>
+<p>Working this way makes it a lot easier to move your project around on
+your computer and share it with others without having to directly modify
+file paths in the individual scripts.</p>
+</div>
+</div>
+</div>
+<p>To create a new project, follow the instructions below.</p>
+<ol style="list-style-type: decimal"><li><p>Under the <kbd>File</kbd> menu, click on <kbd>New
+project</kbd>.</p></li>
+<li><p>Select <kbd>New directory</kbd>, then
+<code>New project</code>.</p></li>
+<li><p>Enter your new project name e.g. my_project. This will be your
+<strong>working directory</strong> for the rest of the day.</p></li>
+<li><p>Finally, click on <kbd>Create project</kbd>. Create a new file
+where we will type our scripts. Go to
+<code>File &gt; New File &gt; R</code> script. Click the save icon on
+your toolbar and save your script as “<code>script.R</code>”.</p></li>
+</ol></div>
 </section><section><h2 class="section-heading" id="interacting-with-r">Interacting with R<a class="anchor" aria-label="anchor" href="#interacting-with-r"></a></h2>
 <hr class="half-width"><p>The basis of programming is that we write down instructions for the
 computer to follow, and then we tell the computer to follow those
@@ -607,9 +651,17 @@ by the computer. It is also where the results will be shown for commands
 that have been executed. You can type commands directly into the console
 and press <kbd>Enter</kbd> to execute those commands, but they will be
 forgotten when you close the session.</p>
-<p>The <em>prompt</em> is the blinking cursor in the console pane
-prompting you to take action, in the lower-left corner of R Studio. If R
-is ready to accept commands, the R console shows a <code>&gt;</code>
+<div id="the-prompt" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="the-prompt" class="callout-inner">
+<h3 class="callout-title">The prompt</h3>
+<div class="callout-content">
+<p>The <strong>prompt (<code>&gt;</code>)</strong> is the blinking
+cursor in the console pane that prompts you to take action, in the
+lower-left corner of R Studio. If R is ready to accept a
+<strong>command</strong>, the R console shows a <code>&gt;</code>
 prompt. If R receives a command (by typing, copy-pasting, or sent from
 the script editor using <kbd>Ctrl</kbd> + <kbd>Enter</kbd>), R will try
 to execute it and, when ready, will show the results and come back with
@@ -617,6 +669,9 @@ a new <code>&gt;</code> prompt to wait for new commands. We type
 <em>commands</em> into the prompt, and press the Enter key to
 <em>evaluate</em> (also called <em>execute</em> or <em>run</em>) those
 commands.</p>
+</div>
+</div>
+</div>
 <p>You can use R like a calculator:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -624,8 +679,19 @@ commands.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span> <span class="op">+</span> <span class="fl">2</span>    <span class="co"># Type 2 + 2 in the console to run the command</span></span></code></pre>
 </div>
-<p>While in the console, you can press the up and down keys on your
-keyboard to cycle through previously executed commands.</p>
+<div id="callout5" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>Tip: Moving your cursor</p>
+<p>In the console, you can press the up and down keys on your keyboard
+to cycle through previously executed commands.</p>
+</div>
+</div>
+</div>
 <p>Because we want our code and workflow to be reproducible, it is
 better to type the commands we want in the script editor and save the
 script. This way, there is a complete record of what we did, and anyone
@@ -633,57 +699,66 @@ script. This way, there is a complete record of what we did, and anyone
 computer.</p>
 <p>RStudio allows you to execute commands directly from the script
 editor by using the <kbd>Ctrl</kbd> + <kbd>Enter</kbd> shortcut (on Mac,
-<kbd>Cmd</kbd> + <kbd>Return</kbd> will work). The command on the
-current line in the script (indicated by the cursor) or all of the
-commands in selected text will be sent to the console and executed when
-you press <kbd>Ctrl</kbd> + <kbd>Enter</kbd>. If there is information in
-the console you do not need anymore, you can clear it with
-<kbd>Ctrl</kbd> + <kbd>L</kbd>. You can find other keyboard shortcuts in
-this <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf" class="external-link">RStudio
+<kbd>Cmd</kbd> + <kbd>Return</kbd> will work).</p>
+<p>The command on the current line in the script (indicated by the
+cursor) or all of the commands in selected text will be sent to the
+console and executed when you press <kbd>Ctrl</kbd> + <kbd>Enter</kbd>.
+If there is information in the console you do not need anymore, you can
+clear it with <kbd>Ctrl</kbd> + <kbd>L</kbd>.</p>
+<p>You can find other keyboard shortcuts in this <a href="https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf" class="external-link">RStudio
 cheatsheet about the RStudio IDE</a>.</p>
-<p>At some point in your analysis, you may want to check the content of
-a variable or the structure of an object without necessarily keeping a
-record of it in your script. You can type these commands and execute
-them directly in the console. RStudio provides the <kbd>Ctrl</kbd> +
-<kbd>1</kbd> and <kbd>Ctrl</kbd> + <kbd>2</kbd> shortcuts allow you to
-jump between the script and the console panes.</p>
-<p>If R is still waiting for you to enter more text, the console will
-show a <code>+</code> prompt. It means that you haven’t finished
-entering a complete command. This is likely because you have not
-‘closed’ a parenthesis or quotation, i.e. you don’t have the same number
-of left-parentheses as right-parentheses or the same number of opening
-and closing quotation marks. When this happens, and you thought you
-finished typing your command, click inside the console window andx press
+<div id="tip-incomplete-commands" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="tip-incomplete-commands" class="callout-inner">
+<h3 class="callout-title">Tip: Incomplete commands</h3>
+<div class="callout-content">
+<p>If R recognises that a command is incomplete, a <code>+</code> prompt
+will appear in the console. This means that R is still waiting for you
+to enter more text.</p>
+<p>Usually, this occurs because you have not ‘closed’ a parenthesis or
+quotation. When this happens, click on the console and press
 <kbd>Esc</kbd>; this will cancel the incomplete command and return you
 to the <code>&gt;</code> prompt. You can then proofread the command(s)
 you entered and correct the error.</p>
-</section><section><h2 class="section-heading" id="installing-additional-packages-using-the-packages-tab">Installing additional packages using the packages tab<a class="anchor" aria-label="anchor" href="#installing-additional-packages-using-the-packages-tab"></a></h2>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="installing-r-packages">Installing R packages<a class="anchor" aria-label="anchor" href="#installing-r-packages"></a></h2>
 <hr class="half-width"><p>When you download R it already has a number of functions built in:
 these encompass what is called <strong>Base R.</strong> However, many R
 users write their own <strong>libraries</strong> of functions, package
 them together in <strong>R Packages</strong>, and provide them to the R
-community at no charge. This extends the capacity of R and allows us to
-do much more. In many cases, they improve on the Base R functions by
-making them easier and more straightforward to use. In the course of
-this lesson we will be making use of several of these packages, such as
-<code>ggplot2</code> and <code>dplyr</code>.</p>
+community at no charge. Some examples include the <kbd>dplyr</kbd> and
+<kbd>ggplot2</kbd> packages, which we will learn more in the coming
+chapters.</p>
+<div id="the-cran-repository" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="the-cran-repository" class="callout-inner">
+<h3 class="callout-title">The CRAN repository</h3>
+<div class="callout-content">
 <p>The <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" class="external-link">Comprehensive
 R Archive Network (CRAN)</a> is the main repository for R packages, and
 that organization maintains <a href="https://cran.r-project.org/web/packages/policies.html" class="external-link">strict
 standards</a> in order for a package to be listed–for example, it must
 include clear descriptions of the functions, and it must not track or
-tamper with the user’s R session. See <a href="https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages" class="external-link">this
+tamper with the user’s R session.</p>
+<p>See <a href="https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages" class="external-link">this
 page from RStudio</a> for a good list of useful R packages. In addition
-to CRAN, R users can make their code and packages available from <a href="https://github.com/trending/r" class="external-link">GitHub</a>. Finally, some
-communities host their own collections of R packages, such as <a href="https://bioconductor.org/" class="external-link">Bioconductor</a> for computational
-biology and bioinformatics.</p>
-</section><section><h2 class="section-heading" id="installing-packages">Installing Packages<a class="anchor" aria-label="anchor" href="#installing-packages"></a></h2>
-<hr class="half-width"><p>Installing CRAN packages can be done from the RStudio console. Click
-the Packages tab in the Navigation Pane, then click Install and search
-for the package you’re looking for. You can also use the
-<code>install.packages()</code> function directly in the console. Run
-<code>help(install.packages)</code> to learn more about how to do it
-this way.</p>
+to CRAN, R users can make their code and packages available from <a href="https://github.com/trending/r" class="external-link">GitHub</a> or <a href="https://bioconductor.org/" class="external-link">Bioconductor</a> (for computational
+biology and bioinformatics).</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="section level3">
+<h3 id="installing-packages-using-the-packages-tab"><strong>Installing packages using the Packages tab</strong><a class="anchor" aria-label="anchor" href="#installing-packages-using-the-packages-tab"></a></h3>
+<p>Installing CRAN packages can be done from the <kbd>Packages</kbd> tab
+in the Navigation Pane. Click <code>Install</code> and type in the name
+of the package you’re looking for.</p>
 <figure style="text-align: center"><img src="../fig/R_00_Rstudio_03.png" alt="install packages pane showing an entry for installing the 'tidyverse' package" class="figure mx-auto d-block"><figcaption>
 Click on the Packages tab in the Navigation Pane to download packages
 from CRAN.
@@ -706,34 +781,32 @@ that this happens.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>From the packages tab, click ‘Install’ from the toolbar and type
 ‘tidyverse’ into the textbox, then click ‘install’. The ‘tidyverse’
 package is really a package of packages, including ‘ggplot2’ and
 ‘dplyr’, both of which require other packages to run correctly. All of
-these packages will be installed automatically. Depending on what
-packages have previously been installed in your R environment, the
-install of ‘tidyverse’ could be very quick or could take several
-minutes. As the install proceeds, messages relating to its progress will
-be written to the console. You will be able to see all of the packages
-which are actually being installed.</p>
+these packages will be installed automatically.</p>
+<p>Depending on what packages have previously been installed in your R
+environment, the install of ‘tidyverse’ could be very quick or could
+take several minutes. As the install proceeds, messages relating to its
+progress will be written to the console. You will be able to see all of
+the packages which are actually being installed.</p>
 </div>
 </div>
 </div>
 </div>
-<p>Because the install process accesses the CRAN repository, you will
-need an Internet connection to install packages.</p>
-<p>It is also possible to install packages from other repositories, as
-well as Github or the local file system, but we won’t be looking at
-these options in this lesson.</p>
-</section><section><h2 class="section-heading" id="installing-additional-packages-using-r-code">Installing additional packages using R code<a class="anchor" aria-label="anchor" href="#installing-additional-packages-using-r-code"></a></h2>
-<hr class="half-width"><p>If you were watching the console window when you started the install
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="installing-packages-using-r-code"><strong>Installing packages using R code</strong><a class="anchor" aria-label="anchor" href="#installing-packages-using-r-code"></a></h3>
+<p>If you were watching the console window when you started the install
 of ‘tidyverse’, you may have noticed that the line</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -745,10 +818,17 @@ of ‘tidyverse’, you may have noticed that the line</p>
 messages.</p>
 <p>You could also have installed the
 <strong><code>tidyverse</code></strong> packages by running this command
-directly in the R console.</p>
+directly in the R console. Run <code>help(install.packages)</code> to
+learn more about how to do it this way.</p>
+<p>Because the install process accesses the CRAN repository, you will
+need an Internet connection to install packages.</p>
+<p>It is also possible to install packages from other repositories, as
+well as Github or the local file system, but we won’t be looking at
+these options in this lesson.</p>
+</div>
 </section><section><h2 class="section-heading" id="r-resources">R Resources<a class="anchor" aria-label="anchor" href="#r-resources"></a></h2>
 <hr class="half-width"><div class="section level3">
-<h3 id="learning-r">Learning R<a class="anchor" aria-label="anchor" href="#learning-r"></a></h3>
+<h3 id="learning-r"><strong>Learning R</strong><a class="anchor" aria-label="anchor" href="#learning-r"></a></h3>
 <ol style="list-style-type: decimal"><li><p><code>swirl</code> is a package you can install in R to learn
 about R and data science interactively. Just type
 <code>install.packages("swirl")</code> into your R console, load the
@@ -780,9 +860,21 @@ R!</a> series [not free] is mostly specialized, but it has some
 excellent introductions including Alain F. Zuur et al.’s <a href="https://link.springer.com/book/10.1007/978-0-387-93837-0" class="external-link">A
 Beginner’s Guide to R</a> and Phil Spector’s <a href="https://link.springer.com/book/10.1007/978-0-387-74731-6" class="external-link">Data
 Manipulation in R</a>.</li>
-</ul></div>
+</ul><ol start="7" style="list-style-type: decimal"><li>Other Carpentries R lesson:</li>
+</ol><ul><li><a href="https://swcarpentry.github.io/r-novice-inflammation/" class="external-link">SWC –
+Programming with R</a></li>
+<li><a href="https://swcarpentry.github.io/r-novice-gapminder" class="external-link">SWC – R
+for Reproducible Scientific Analysis</a></li>
+<li><a href="https://carpentries-incubator.github.io/lc-litsearchr/" class="external-link">LC
+- Introduction to R and litsearchr (pre-alpha)</a></li>
+<li><a href="https://datacarpentry.org/R-ecology-lesson/" class="external-link">Data Analysis
+and Visualization in R for Ecologists</a></li>
+<li><a href="https://datacarpentry.org/genomics-r-intro/" class="external-link">Introduction
+to R and RStudio for Genomics</a></li>
+</ul><p><br></p>
+</div>
 <div class="section level3">
-<h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h3>
+<h3 id="datasets"><strong>Datasets</strong><a class="anchor" aria-label="anchor" href="#datasets"></a></h3>
 <p>If you need some data to play with, type <code>data()</code> in the
 console for a list of data sets. To load a dataset, type it like this:
 <code>data(mtcars)</code>. Type <code>help(mtcars)</code> to learn more
@@ -798,9 +890,11 @@ about it. You can then perform operations, e.g.</p>
 </div>
 <p>See also rdatamining.com’s <a href="https://www.rdatamining.com/resources/data" class="external-link">list of free
 datasets</a>.</p>
+<p><br></p>
 </div>
 <div class="section level3">
-<h3 id="cheat-sheets">Cheat Sheets<a class="anchor" aria-label="anchor" href="#cheat-sheets"></a></h3>
+<h3 id="cheat-sheets"><strong>Cheat Sheets</strong><a class="anchor" aria-label="anchor" href="#cheat-sheets"></a></h3>
+<p>List of R Cheat Sheets:</p>
 <ul><li>
 <a href="https://paulvanderlaken.files.wordpress.com/2017/08/base-r-cheetsheat.pdf" class="external-link">Base
 R Cheat Sheet</a> by Mhairi McNeill</li>
@@ -812,9 +906,13 @@ Transformation with dplyr Cheat Sheet</a> by RStudio</li>
 Wrangling with dplyr and tidyr Cheat Sheet</a> by RStudio</li>
 <li><a href="https://github.com/rstudio/cheatsheets/" class="external-link">Complete list of
 RStudio cheatsheets</a></li>
-</ul></div>
+</ul><p>You can find more cheat sheets in RStudio by going to the
+<kbd>Help<kbd> panel then clicking on the <kbc>Cheat Sheets</kbc></kbd>
+dropdown menu.</kbd></p>
+<p><br></p>
+</div>
 <div class="section level3">
-<h3 id="style-guides">Style guides<a class="anchor" aria-label="anchor" href="#style-guides"></a></h3>
+<h3 id="style-guides"><strong>Style guides</strong><a class="anchor" aria-label="anchor" href="#style-guides"></a></h3>
 <p>Use these resources to write cleaner code, according to established
 style conventions</p>
 <ul><li>Hadley Wickham’s <a href="https://adv-r.had.co.nz/Style.html" class="external-link">Style
@@ -847,9 +945,10 @@ R Bootcamp</a>
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>Use RStudio to write and run R programs.</li>
-<li>Use <code>install.packages()</code> to install packages
-(libraries).</li>
+<ul><li>Navigate round RStudio and create an <code>Rproj</code> file.</li>
+<li>Use RStudio to write and run R programs.</li>
+<li>Install packages using the Packages tab or the
+<code>install.packages()</code> command.</li>
 </ul></div>
 </div>
 </div>
@@ -911,8 +1010,8 @@ R Bootcamp</a>
   "url": "https://librarycarpentry.github.io/lc-r/instructor/00-before-we-start.html",
   "identifier": "https://librarycarpentry.github.io/lc-r/instructor/00-before-we-start.html",
   "dateCreated": "2019-05-30",
-  "dateModified": "2025-02-05",
-  "datePublished": "2025-02-05"
+  "dateModified": "2025-02-10",
+  "datePublished": "2025-02-10"
 }
 
   </script><script>
