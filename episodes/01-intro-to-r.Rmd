@@ -12,10 +12,11 @@ exercises: 30
 - Use comments to inform script.
 - Solve simple arithmetic operations in R.
 - Call functions and use arguments to change their default options.
-- Inspect the content of vectors and manipulate their content.
+- Where to get help with R functions and packages.
+- Recognise the different data types in R.
+- Create, inspect and manipulate the contents of a vector.
 - Subset and extract values from vectors.
 - Analyze vectors with missing data.
-- Define the following terms as they relate to R: object, vector, assign, call, function.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -24,6 +25,7 @@ exercises: 30
 - What is an object?
 - What is a function and how can we pass arguments to functions?
 - How can values be initially assigned to variables of different data types?
+- What are the different data types in R?
 - How can a vector be created What are the available data types?
 - How can subsets be extracted from vectors?
 - How does R treat missing values?
@@ -36,7 +38,20 @@ exercises: 30
 
 ## Creating objects in R
 
-You can get output from R simply by typing math in the console:
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Objects vs. variables
+
+What are known as `objects` in `R` are known as `variables` in many other
+programming languages. Depending on the context, `object` and `variable` can
+have drastically different meanings. However, in this lesson, the two words
+are used synonymously. For more information see:
+[https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+We will start by typing a simple mathematical operation in the console:
 
 ```{r, purl=FALSE}
 3 + 5
@@ -45,31 +60,43 @@ sqrt(36) # take the square root of 36
 ```
 
 However, to do useful and interesting things, we need to assign *values* to
-*objects*. To create an object, we need to give it a name followed by the
-assignment operator `<-`, and the value we want to give it:
+*objects*. 
+
+To create an object, we need to provide:
+- a name (e.g. 'first_number')
+- a value (e.g. '1')
+- the assignment operator ('\<-')
 
 ```{r, purl=FALSE}
 time_minutes <- 5        # assign the number 5 to the object time_minutes
 ```
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## The assignment operator `<-`
+
 `<-` is the assignment operator. It assigns values on the right to objects on
-the left. Here we are creating a symbol called `time_minutes` and *assigning* it
+the left. Here we are creating a symbol called `time_minutes` and assigning it
 the numeric value 5. Some R users would say "`time_minutes` *gets* 5."
-`time_minutes` is now a *numeric vector* with one element. Or you could say
-`time_minutes` is a numeric vector, and the first element is the number 5.
+`time_minutes` is now a *numeric vector* with one element.
+
+The ‘=’ works too, but is most commonly used in passing arguments to functions 
+(more on functions later). There are shortcuts for the R assignment operator:
+- Windows shortcut: <KBD>Alt</KBD>\+<KBD>\-</KBD>
+- Mac shortcut: <KBD>Option</KBD>\+<KBD>\-</KBD>
+
+:::::::::::::::::::::::::::::::::::::::::  
+
 
 When you assign something to a symbol, nothing happens in the console, but in
 the Environment pane in the upper right, you will notice a new object,
 `time_minutes`.
 
-In RStudio, typing <kbd>Alt</kbd> + <kbd>\-</kbd> (push <kbd>Alt</kbd> at the
-same time as the <kbd>\-</kbd> key) will write `<- ` in a single keystroke in a
-PC, while typing <kbd>Option</kbd> + <kbd>\-</kbd> (push <kbd>Option</kbd> at the
-same time as the <kbd>\-</kbd> key) does the same in a Mac.
+:::::::::::::::::::::::::::::::::::::::::  callout
 
-Objects can be given any name such as `x`, `checkouts`, or `isbn`. You want your
-object names to be explicit and not too long. Here are some tips for assigning
-values:
+## Tips on naming objects
+
+Here are some tips for naming objects in R:
 
 - **Do not use names of functions that already exist in R:** There are some
   names that cannot be used because they are the names of fundamental functions in
@@ -93,18 +120,8 @@ values:
   Finally, keep your variable names short, since you will likely be typing them in
   frequently.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+::::::::::::::::::::::::::::::::::::::::: 
 
-## Objects vs. variables
-
-What are known as `objects` in `R` are known as `variables` in many other
-programming languages. Depending on the context, `object` and `variable` can
-have drastically different meanings. However, in this lesson, the two words
-are used synonymously. For more information see:
-[https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Evaluating Expressions
 
@@ -175,6 +192,38 @@ changing the value of `time_minutes`.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+## Removing objects from the environment
+
+To remove an object from your R environment, use the `rm()` function. Remove
+multiple objects with `rm(list = c("add", "objects", "here))`, adding the
+objects in `c()` using quotation marks. 
+
+To remove all objects, use `rm(list = ls())` or click the broom icon in the 
+Environment Pane, next to "Import Dataset."
+
+```{r, purl=FALSE, eval=FALSE}
+x <- 5
+y <- 10
+z <- 15
+rm(x)  # remove x
+rm(list =c("y", "z"))  # remove y and z
+rm(list = ls())  # remove all objects
+```
+
+:::::::::::::::::::::::::::::::::::::::  callout
+
+## Tip: Use whitespace for readability
+
+The white spaces surrounding the assignment operator `<-` are unnecessary. 
+However, including them does make your code easier to read. There are several 
+style guides you can follow, and choosing one is up to you, but consistency is key!
+
+A style guide we recommend is the [Tidyverse style guide](https://style.tidyverse.org/).
+
+:::::::::::::::::::::::::::::::::::::::  
+
+
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Exercise
@@ -203,6 +252,7 @@ my_area
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
 ## Comments
 
 All programming languages allow the programmer to include comments in their
@@ -230,21 +280,6 @@ out one line, you can put the cursor at any location of that line (i.e. no need
 to select the whole line), then press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
 <kbd>C</kbd>.
 
-## Removing objects from the environment
-
-To remove an object from your R environment, use the `rm()` function. Remove
-multiple objects with `rm(list = c("add", "objects", "here))`, adding the
-objects in `c()` using quotation marks. To remove all objects, use `rm(list = ls())` or click the broom icon in the Environment Pane, next to "Import
-Dataset."
-
-```{r, purl=FALSE, eval=FALSE}
-x <- 5
-y <- 10
-z <- 15
-rm(x)  # remove x
-rm(list =c("y", "z"))  # remove y and z
-rm(list = ls())  # remove all objects
-```
 
 ## Functions and their arguments
 
@@ -285,6 +320,8 @@ is.function(sum)        # check to see if sum() is a function
 sum(3, 4, 5, 6, 7)      # sum takes an unlimited number (. . .) of numeric elements
 ```
 
+<br>
+
 ### Arguments
 
 Some functions take arguments which may either be specified by the user, or, if
@@ -324,16 +361,119 @@ call, and to specify the names of all optional arguments.  If you don't, someone
 reading your code might have to look up the definition of a function with
 unfamiliar arguments to understand what you're doing.
 
-:::::::::::::::::::::::::::::::::::::::  challenge
 
-## Exercise
+## Getting help
+
+You can check the current version of R by running:
+
+```{r}
+sessionInfo()
+```
+
+```
+R version 3.2.3 (2015-12-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 14.04.3 LTS
+
+locale:
+[1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8
+[4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8
+[7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base
+
+loaded via a namespace (and not attached):
+[1] tools_3.2.3     packrat_0.4.9-1
+```
+
+<br>
+
+### **Using the ? for Help files**
+
+R provide help files for functions. The general syntax to search for help 
+on any function is the ? or help() command:
+
+```{r}
+?function_name
+help(function_name)
+```
+
+For example, take a look at the ?summary() function.
+
+```{r}
+?summary()
+```
+
+This will load up a Help page on the bottom right panel in RStudio.
+
+Each help page is broken down into sections:
+
+- **Description**: An extended description of what the function does.
+- **Usage**: The arguments of the function and their default values (which can be changed).
+- **Arguments**: An explanation of the data each argument is expecting.
+- **Details**: Any important details to be aware of.
+- **Value**: The data the function returns.
+- **See Also**: Any related functions you might find useful.
+- **Examples**: Some examples for how to use the function.
+
+You can also call out the Help file for `special operators`.
+
+```{r}
+?"<-"
+?`<-`
+```
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Tip: Use TAB to see a list of arguments
+
+After typing out a function, you can call out a list of available arguments 
+for that particular function by pressing the <kbd>TAB<kbd> key within the function 
+brackets.
+
+:::::::::::::::::::::::::::::::::::::::: 
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+### Tip: Package vignettes
+
+Many packages come with “vignettes”--these are tutorials and extended 
+documentation. Without any arguments, vignette() will list all vignettes 
+for all installed packages; vignette(package="package-name") will list all 
+available vignettes for package-name, and vignette("vignette-name") will 
+open the specified vignette.
+
+:::::::::::::::::::::::::::::::::::::::: 
+
+<br>
+
+### **Using the ?? for a fuzzy search**
+
+If you’re not sure what package a function is in or how it’s specifically spelled, you can do a fuzzy search. 
+
+```{r}
+??function_name
+```
+
+A fuzzy search is when you search for an approximate string match. For example, you may want to look for a function that performs the chi-squared test:
+
+```{r}
+??chisquare
+```
+
+:::::::::::::::::::::::::::::::::::::::  discussion
+
+## Discussion
 
 Type in `?round` at the console and then look at the output in the Help pane.
 What other functions exist that are similar to `round`?
 How do you use the `digits` parameter in the round function?
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ## Vectors and data types
 
@@ -367,12 +507,23 @@ a vector of the book titles (`title`) and authors (`author`):
 title <- c("Macbeth","Dracula","1984")
 ```
 
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Tip: Using quotes
+
 The quotes around "Macbeth", etc. are essential here. Without the quotes R will
 assume there are objects called `Macbeth` and `Dracula` in the environment. As
 these objects don't yet exist in R's memory, there will be an error message.
 
+::::::::::::::::::::::::::::::::::::::::
+
+<br>
+
+### **Inspecting a vector**
+
 There are many functions that allow you to inspect the content of a vector.
-`length()` tells you how many elements are in a particular vector:
+
+For instance, `length()` tells you how many elements are in a particular vector:
 
 ```{r, purl=FALSE}
 length(checkouts)  # print the number of values in the checkouts vector
@@ -406,6 +557,16 @@ author <- c("Shakespeare", author)
 author
 ```
 
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Reminder
+
+To know what a function does, type `?function_name` into the console. 
+For example, you can type `?str` to read the description for the `str()` function.
+
+::::::::::::::::::::::::::::::::::::::::
+
+
 In the first line, we create a character vector `author` with a single value
 `"Stoker"`. In the second line, we add the value `"Orwell"` to it, and save the
 result back into `author`. Then we add the value `"Shakespeare"` to the
@@ -414,6 +575,14 @@ beginning, again saving the result back into `author`.
 We can do this over and over again to grow a vector, or assemble a dataset.
 As we program, this may be useful to add results that we are collecting or
 calculating.
+
+Vectors are one of the many **data structures** that R uses. Other important
+ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`),
+factors (`factor`) and arrays (`array`).
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Atomic vectors
 
 An **atomic vector** is the simplest R **data type** and is a linear vector of a
 single type. Above, we saw 2 of the 6 main **atomic vector** types  that R uses:
@@ -430,9 +599,8 @@ are:
 You can check the type of your vector using the `typeof()` function and
 inputting your vector as the argument.
 
-Vectors are one of the many **data structures** that R uses. Other important
-ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`),
-factors (`factor`) and arrays (`array`).
+::::::::::::::::::::::::::::::::::::::::
+
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -501,6 +669,11 @@ gets converted into a `1` before it gets converted into `"1"` in
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+<br>
+
+### **Coercion**
+
 You've probably noticed that objects of different types get converted into a
 single, shared type within a vector. In R, we call converting objects from one
 class into another class *coercion*. These conversions happen according to a
@@ -534,6 +707,7 @@ added to a number.
 ```{r, purl=FALSE, eval=FALSE}
 x + 5
 ```
+
 
 ## Subsetting vectors
 
@@ -572,7 +746,9 @@ start counting at 1, because that's what human beings typically do. Languages in
 the C family (including C++, Java, Perl, and Python) count from 0 because that's
 simpler for computers to do.
 
-### Conditional subsetting
+<br>
+
+### **Conditional subsetting**
 
 Another common way of subsetting is by using a logical vector. `TRUE` will
 select the element with the same index, while `FALSE` will not:
@@ -657,6 +833,7 @@ state.name[state.name == "California" | state.name == "Oregon" | state.name == "
 state.name %in% west_coast
 state.name[state.name %in% west_coast]
 ```
+
 
 ## Missing data
 
@@ -751,9 +928,13 @@ structures, we are ready to start working with the library catalog dataset and l
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Use the assignment operator \<- to assign values to objects. You can now manipulate that object in R
-- R contains a number of functions you use to do something with your data. Functions automate more complicated sets of commands. Many functions are predefined, or can be made available by importing R packages
-- A vector is a sequence of elements of the same type. All data in a vector must be of the same type--character, numeric (or double), integer, and logical. Create vectors with c(). Use \[ \] to subset values from vectors.
+- Assign values to object using the assignment operator \<-. Remove existing objects using the `rm()` function.
+- Add comments in R scripts using the `#` operator.
+- Define and use R functions and arguments.
+- Getting help with the `?`, `??` and `help()` functions.
+- Define the following terms as they relate to R: object, vector, assign, call, function.
+- Create or add new objects to a vector using the c() function. Subset vectors using `[]`.
+- Deal with missing data in vectors using the is.na(), na.omit(), and complete.cases() functions.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
