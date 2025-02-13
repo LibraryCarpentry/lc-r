@@ -522,7 +522,7 @@ mean(mtcars$mpg)
 sixCylinder <- mtcars[mtcars$cyl == 6, ]
 ```
 
-See also rdatamining.com's [list of free datasets](https://www.rdatamining.com/resources/data).
+See also rdatamining.com's [list of free datasets](https://www.rdatamining.com/resources/free-datasets).
 
 <br>
 
