@@ -113,6 +113,27 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 - use the `ggplot()` function and bind the plot to a specific data frame using
   the `data` argument
 
+::::::::::::::::::::::::::::::::::::::::::::; callout
+
+**Note on Aesthetic Mappings:**  
+In our basic template the `aes()` function is used inside `ggplot()`. 
+
+```r
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) + <GEOM_FUNCTION>()
+```
+
+This sets **global** aesthetics that apply to all layers you add later, such as, geoms and scales. You might sometimes see the aesthetics defined inside a specific geom function like so:
+
+```r
+ggplot(data = booksPlot) +
+  geom_histogram(aes(x = tot_chkout), binwidth = 10) +
+  scale_y_log10()
+```
+
+In this case, the aesthetic mapping is **local** to `geom_histogram()`. This approach lets you specify or override settings for that particular layer without affecting others. In short, using `aes()` globally means every layer inherits the same settings, while using it locally gives you the flexibility to tailor individual layers as needed.
+
+::::::::::
+
 When you run the `ggplot()` function, it plots directly to the Plots tab in the
 Navigation Pane (lower right). Alternatively, you can assign a plot to an R
 object, then call `print()`to view the plot in the Navigation Pane.
