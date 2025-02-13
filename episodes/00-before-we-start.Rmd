@@ -94,6 +94,8 @@ statistical tests in your manuscript are updated automatically.
 An increasing number of journals and funding agencies expect analyses to be
 reproducible, so knowing R will give you an edge with these requirements.
 
+This focus on reproducibility not only helps ensure that your data adheres to the FAIR (Findable, Accessible, Interoperable, Reusable) principles but is also paving the way for software to become FAIR. As more researchers demand transparency and shareability, using R positions your code and analyses to be easily found, accessed, and reused by others.
+
 #### **R is interdisciplinary and extensible.**
 
 With 10,000+ packages that can be installed to extend its capabilities, R
