@@ -2,7 +2,10 @@
 title: 'Glossary'
 ---
 
+
 ## Glossary
+
+{:auto_ids}
 assignment operator  
 : the symbol (commonly <-) used to assign a value to a variable in R.
 
