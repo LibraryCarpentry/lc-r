@@ -7,6 +7,7 @@ source: Rmd
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
+- Understand the basic syntax of the `ggplot` function.
 - Produce scatter plots, boxplots, and time series plots using ggplot.
 - Set universal plot settings.
 - Describe what faceting is and apply faceting in ggplot.
@@ -28,23 +29,11 @@ source: Rmd
 
 ## Getting set up
 
-### Set up your directories and data
+### **Set up your directories and data**
 
-If you have not already done so, open your R Project file (`library_carpentry.Rproj`) created in the `Before We Start` lesson.
+If you have not already done so, open your R Project file (`library_carpentry.Rproj`) created in the `Before We Start` lesson. Ensure that you have the following sub-directories in your Rproj: `data\`, `data_output\` and `fig_output\`. 
 
-**If you did not complete that step** then do the following. Only do this if you
-didn't complete it in previous lessons.
-
-- Under the `File` menu, click on `New project`, choose `New directory`, then
-  `New project`
-- Enter the name `library_carpentry` for this new folder (or "directory"). This
-  will be your **working directory** for the rest of the day.
-- Click on `Create project`
-- Create a new file where we will type our scripts. Go to File > New File > R
-  script. Click the save icon on your toolbar and save your script as
-  "`script.R`".
-- Copy and paste the below lines of code to create three new subdirectories and
-  download the original and the reformatted `books` data:
+Run the following code chunk to create the sub-directories and download the dataset.
 
 
 ``` r
@@ -58,12 +47,7 @@ download.file("https://ndownloader.figshare.com/files/22051506",
               "data_output/books_reformatted.csv", mode = "wb")
 ```
 
-### Load the `tidyverse` and data frame into your R session
-
-Load the `tidyverse` and the `lubridate` packages. `lubridate` is installed with
-the tidyverse, but is not one of the core tidyverse packages loaded with
-`library(tidyverse)`, so it needs to be explicitly called. `lubridate` makes
-working with dates and times easier in R.
+Then load the packages required for this lesson.
 
 
 ``` r
@@ -86,13 +70,17 @@ library(tidyverse)  # load the core tidyverse
 library(lubridate)  # load lubridate
 ```
 
+The`lubridate` package is installed with the tidyverse, but is not one of the core tidyverse packages loaded with `library(tidyverse)`, so it needs to be explicitly called. `lubridate` makes working with dates and times easier in R.
+
 We also load the `books_reformatted` data we saved in the previous
-lesson. We'll assign it to `books2`.
+lesson. Here, we'll assign it to `books2`. You can create the reformatted data by running the codes from [here](https://librarycarpentry.github.io/lc-r/03-data-cleaning-and-transformation.html#exporting-data) or by loading the saved CSV file from previous episode.
 
 
 ``` r
 books2 <- read_csv("data_output/books_reformatted.csv")  # load the data and assign it to books
 ```
+
+
 
 ## Plotting with **`ggplot2`**
 
@@ -111,6 +99,10 @@ change or if we decide to change from a bar plot to a scatterplot. This helps in
 creating publication quality plots with minimal amounts of adjustments and
 tweaking.
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Tips on plotting with ggplot2:
+
 `ggplot2` functions like data in the 'long' format, i.e., a column for every
 dimension, and a row for every observation. Well-structured data will save you
 lots of time when making figures with `ggplot2`
@@ -118,39 +110,34 @@ lots of time when making figures with `ggplot2`
 ggplot graphics are built step by step by adding new elements. Adding layers in
 this fashion allows for extensive flexibility and customization of plots.
 
+:::::::::::::::::::::::::::::::::::::::::  
+
+
 To build a ggplot, we will use the following basic template that can be used for different types of plots:
 
 ```
 ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 ```
 
-- use the `ggplot()` function and bind the plot to a specific data frame using
-  the `data` argument
+- The `data` argument is used to bind the plot to a specific data frame in `ggplot2`.
+- The `mapping` argument defines the variables mapped to various aesthetics of the plot, e.g. the x and y axis.
+- The `geom_function` argument defines the type of plot, e.g. barplot, scatter plot, boxplot.
 
 ::::::::::::::::::::::::::::::::::::::::::::; callout
 
-**Note on Aesthetic Mappings:**  
-In our basic template the `aes()` function is used inside `ggplot()`. 
+## `ggplot2` versus `ggplot`
 
-```r
-ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) + <GEOM_FUNCTION>()
-```
+People are sometimes confused between `ggplot2` and `ggplot`. The former refers to the name of the package, while the latter refers to the function that you run.
 
-This sets **global** aesthetics that apply to all layers you add later, such as, geoms and scales. You might sometimes see the aesthetics defined inside a specific geom function like so:
+:::::::::::::::::::::::::::::::::::::::::  
 
-```r
-ggplot(data = booksPlot) +
-  geom_histogram(aes(x = tot_chkout), binwidth = 10) +
-  scale_y_log10()
-```
-
-In this case, the aesthetic mapping is **local** to `geom_histogram()`. This approach lets you specify or override settings for that particular layer without affecting others. In short, using `aes()` globally means every layer inherits the same settings, while using it locally gives you the flexibility to tailor individual layers as needed.
-
-::::::::::
 
 When you run the `ggplot()` function, it plots directly to the Plots tab in the
 Navigation Pane (lower right). Alternatively, you can assign a plot to an R
 object, then call `print()`to view the plot in the Navigation Pane.
+
+
+## Creating your first plot
 
 Let's create a `booksPlot` and limit our visualization to only items in `subCollection` general collection, juvenile, and k-12, and filter out items with `NA` in `call_class`. We do this by using the <kbd>|</kbd> key on the keyboard to specify a boolean OR, and use the `!is.na()` function to keep only those items that are NOT `NA` in the `call_class` column.
 
@@ -164,22 +151,8 @@ booksPlot <- books2 %>%
          !is.na(call_class))
 ```
 
-**`ggplot2`**
-**`ggplot2`** functions like data in the 'long' format, i.e., a column for every
-dimension, and a row for every observation. Well-structured data will save you
-lots of time when making figures with **`ggplot2`**
-
-ggplot graphics are built step by step by adding new elements. Adding layers in
-this fashion allows for extensive flexibility and customization of plots.
-
-To build a ggplot, we will use the following basic template that can be used for different types of plots:
-
-```
-ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
-```
-
-Use the `ggplot()` function and bind the plot to a specific data frame using the
-`data` argument.
+To start with, we first bind our data to the `ggplot()` function using the `data` 
+argument.
 
 
 ``` r
@@ -188,14 +161,7 @@ ggplot(data = booksPlot)  # a blank canvas
 
 <img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
-Not very interesting. We need to add layers to it by defining a mapping
-aesthetic and adding `geoms`.
-
-## Define a mapping with `aes()` and display data with `geoms`
-
-Define a mapping (using the aesthetic (`aes()`) function), by selecting the
-variables to be plotted and specifying how to present them in the graph, e.g. as
-x/y positions or characteristics such as size, shape, color, etc.
+After running this code, a blank canvas is being created. Next, we define a mapping aesthetic with the `mapping` argument (using the aesthetic (`aes()`) function). This defines the variables to be plotted and specifies how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.
 
 
 ``` r
@@ -207,7 +173,10 @@ ggplot(data = booksPlot, mapping = aes(x = call_class)) # define the x axis aest
 Here we define the x axes, but because we have not yet added any `geoms`, we still
 do not see any data being visualized.
 
-Data is visualized in the canvas with "geometric shapes" such as bars and lines;
+
+## Defining the `geoms`
+
+Data is visualized with different "geometric shapes" such as bars and lines;
 what are called *geoms*. In your console, type `geom_` and press the tab key to
 see the geoms included–there are over 30. For example:
 
@@ -259,10 +228,52 @@ Library of Congress call number classification.
   beginning of the line containing the new layer, **`ggplot2`** will not add
   the new layer and will return an error message.
   
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Univariate geoms
+<br>
+
+
+## **Applying a different geom**
+
+This same exact data can be visualized in a couple different ways by replacing the geom\_histogram() function with either `geom_density()` (adding a logarithmic x scale) or `geom_freqpoly()`:
+
+
+``` r
+# create a density plot
+ggplot(data = booksPlot) +
+  geom_density(aes(x = tot_chkout)) +
+  scale_y_log10() +
+  scale_x_log10()
+```
+
+``` warning
+Warning in scale_x_log10(): log-10 transformation introduced infinite values.
+```
+
+``` warning
+Warning: Removed 2348 rows containing non-finite outside the scale range
+(`stat_density()`).
+```
+
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+
+``` r
+# create a frequency polygon
+ggplot(data = booksPlot) +
+  geom_freqpoly(aes(x = tot_chkout), binwidth = 30) +
+  scale_y_log10()
+```
+
+``` warning
+Warning in scale_y_log10(): log-10 transformation introduced infinite values.
+```
+
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
+
+
+## Univariate and bivariate geoms
+
+### **Univariate geoms**
 
 *"Univariate"* refers to a single variable. A histogram is a univariate plot: it
 shows the frequency counts of each value inside a single variable. Let's say we
@@ -280,7 +291,7 @@ ggplot(data = booksPlot, mapping = aes(x = tot_chkout)) +
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 As we have seen in previous lessons, the overwhelming majority of books have a
 small amount of usage, so the plot is heavily skewed. As anyone who has done
@@ -311,7 +322,7 @@ Warning: Removed 2 rows containing missing values or values outside the scale ra
 (`geom_bar()`).
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 Notice the scale y axis now goes from 0-10, 10-100, 100-1000, and 1000-10000.
 This is called "logarithmic scale" and is based on orders of magnitude. We can
@@ -343,49 +354,14 @@ ggplot has thus given us an easy way to visualize the distribution of checkouts.
 If you test this on your own print and ebook usage data, you will likely find
 something similar.
 
-### Changing the geom
+<br>
 
-This same exact data can be visualized in a couple different ways by replacing the geom\_histogram() function with either `geom_density()` (adding a logarithmic x scale) or `geom_freqpoly()`:
-
-
-``` r
-# create a density plot
-ggplot(data = booksPlot) +
-  geom_density(aes(x = tot_chkout)) +
-  scale_y_log10() +
-  scale_x_log10()
-```
-
-``` warning
-Warning in scale_x_log10(): log-10 transformation introduced infinite values.
-```
-
-``` warning
-Warning: Removed 2348 rows containing non-finite outside the scale range
-(`stat_density()`).
-```
-
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
-
-``` r
-# create a frequency polygon
-ggplot(data = booksPlot) +
-  geom_freqpoly(aes(x = tot_chkout), binwidth = 30) +
-  scale_y_log10()
-```
-
-``` warning
-Warning in scale_y_log10(): log-10 transformation introduced infinite values.
-```
-
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-10-2.png" style="display: block; margin: auto;" />
-
-## Bivariate geoms
+### **Bivariate geoms**
 
 Bivariate plots visualize two variables. Let's take a look at some higher usage
 items, but first eliminate the `NA` values and keep only items with more than 10
 checkouts, which we will do with `filter()` from the `dplyr` package and assign
-it to `booksHighUsage`
+it to `booksHighUsage`.
 
 
 ``` r
@@ -538,13 +514,12 @@ ggplot(data = booksHighUsage, aes(x = subCollection, y = tot_chkout)) +
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
 ## Add a third variable
 
 As we saw in that exercise, you can convey even more information in your
 visualization by adding a third variable, in addition to the first two on the x
 and y scales.
-
-### Add a third variable with `aes()`
 
 We can use arguments in `aes()` to map a visual aesthetic in the plot to a
 variable in the dataset. Specifically, we will map `color` to the
@@ -618,7 +593,8 @@ ggplot(data = booksHighUsage, aes(x = fct_rev(fct_infreq(call_class)))) +
 
 <img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" />
 
-### Plotting time series data
+
+## Plotting time series data
 
 Let's calculate number of counts per year for each format for items published
 after 1990 and before 2002 in the `booksHighUsage` data frame created above.
@@ -651,7 +627,7 @@ class(booksPlot$pubyear_ymd)  # Date
 [1] "Date"
 ```
 
-Next we can use `filter` to remove the `NA` values and get books published
+Next, we can use `filter` to remove the `NA` values and get books published
 between 1990 and 2003. Notice that we use the `&` as an AND operator to indicate
 that the date must fall between that range. We then need to group the data and
 count records within each group.
@@ -698,7 +674,8 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, color = subCo
 
 <img src="fig/04-data-viz-ggplot-rendered-time-series-with-colors-1.png" style="display: block; margin: auto;" />
 
-### Add a third variable with facets
+
+### Faceting
 
 Rather than creating a single plot with side-by-side bars for each
 sub-collection, we may want to create multiple plots, where each plot shows the
@@ -719,7 +696,7 @@ Both geometries allow to to specify faceting variables specified within `vars()`
 For example, `facet_wrap(facets = vars(facet_variable))` or
 `facet_grid(rows = vars(row_variable), cols = vars(col_variable))`.
 
-Here we use `facet_wrap()` to make a time series plot for each subCollection
+Here we use `facet_wrap()` to make a time series plot for each subCollection:
 
 
 ``` r
@@ -783,6 +760,7 @@ theme(axis.text.x = element_text(angle = 60, hjust = 1))
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
 ## **`ggplot2`** themes
 
 Usually plots with white background look more readable when printed.
@@ -818,10 +796,10 @@ The [**`ggplot2`** extensions website](https://exts.ggplot2.tidyverse.org/) prov
 of packages that extend the capabilities of **`ggplot2`**, including additional
 themes.
 
+
 ## Customization
 
-Take a look at the [**`ggplot2`** cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), and
-think of ways you could improve your plots.
+Take a look at the [**`ggplot2`** cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), and think of ways you could improve your plots.
 
 For example, by default, the axes labels on a plot are determined by the name of
 the variable being plotted. We can change names of axes to something more
@@ -909,6 +887,7 @@ ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Save and export
 
