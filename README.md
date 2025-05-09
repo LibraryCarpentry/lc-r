@@ -2,6 +2,7 @@
 
 - [Jia Qi Beh](https://github.com/jqbeh)
 - [Tim Dennis](https://github.com/jt14den)
+- [Nicky Garland](https://github.com/nickyjgarland)
 
 ## Past Maintainers 
 
