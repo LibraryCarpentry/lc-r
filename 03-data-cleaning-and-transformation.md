@@ -7,88 +7,27 @@ source: Rmd
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Describe the purpose of an R package and the **`dplyr`** and **`tidyr`** packages.
-- Select certain columns in a data frame with the **`dplyr`** function `select`.
-- Select certain rows in a data frame according to filtering conditions with the **`dplyr`**  function `filter`.
-- Link the output of one **`dplyr`** function to the input of another function with the 'pipe' operator `%>%`.
-- Add new columns to a data frame that are functions of existing columns with `mutate`.
+- Describe the functions available in the **`dplyr`** and **`tidyr`** packages.
+- Recognise and use the following functions: `select()`, `filter()`, `rename()`, 
+`recode()`, `mutate()` and `arrange()`.
+- Combine one or more functions using the 'pipe' operator `%>%`.
 - Use the split-apply-combine concept for data analysis.
-- Use `summarize`, `group_by`, and `count` to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results.
-- Describe the concept of a wide and a long table format and for which purpose those formats are useful.
-- Describe what key-value pairs are.
-- Reshape a data frame from long to wide format and back with the `pivot_wider` and `pivot_longer` commands from the **`tidyr`** package.
 - Export a data frame to a csv file.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How can I select specific rows and/or columns from a data frame?
+- How can I create new columns or remove exisitng columns from a data frame?
+- How can I rename variables or assign new values to a variable?
 - How can I combine multiple commands into a single command?
-- How can create new columns or remove existing columns from a data frame?
-- How can I reformat a dataframe to meet my needs?
+- How can I export my data frame to a csv file?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
-### Getting set up
-
-#### Open your R Project file
-
-If you have not already done so, open your R Project file (`library_carpentry.Rproj`) created in the `Before We Start` lesson.
-
-**If you did not complete that step** then do the following:
-
-- Under the `File` menu, click on `New project`, choose `New directory`, then
-  `New project`
-- Enter the name `library_carpentry` for this new folder (or "directory"). This
-  will be your **working directory** for the rest of the day.
-- Click on `Create project`
-- Create a new file where we will type our scripts. Go to File > New File > R
-  script. Click the save icon on your toolbar and save your script as
-  "`script.R`".
-- Copy and paste the below lines of code to create three new subdirectories and download the data:
-
-
-``` r
-library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R.
-dir_create("data")
-dir_create("data_output")
-dir_create("fig_output")
-download.file("https://ndownloader.figshare.com/files/22031487",
-              "data/books.csv", mode = "wb")
-```
-
-#### Load the `tidyverse` and data frame into your R session
-
-Load the `tidyverse`
-
-
-``` r
-library(tidyverse)
-```
-
-``` output
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ purrr     1.0.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-And the `books` data we saved in the previous lesson.
-
-
-``` r
-books <- read_csv("data/books.csv")  # load the data and assign it to books
-```
-
-### Transforming data with `dplyr`
+## Transforming data with `dplyr`
 
 We are now entering the data cleaning and transforming phase. While it is
 possible to do much of the following using Base R functions (in other words,
@@ -116,7 +55,56 @@ We're going to learn some of the most common **`dplyr`** functions:
 - `arrange()`: sort results
 - `count()`: count discrete values
 
-### Renaming variables
+<br>
+
+:::::::::::::::::::::::::::::::::::::::::  prereq
+
+### Getting set up
+
+Make sure you have your Rproj and directories set up from the previous episode.
+
+**If you have not completed that step**, run the following in your Rproj:
+
+
+``` r
+library(fs)   # https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R.
+dir_create("data")
+dir_create("data_output")
+dir_create("fig_output")
+download.file("https://ndownloader.figshare.com/files/22031487",
+              "data/books.csv", mode = "wb")
+```
+
+Then load the `tidyverse` package
+
+
+``` r
+library(tidyverse)
+```
+
+``` output
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ purrr     1.0.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
+
+and the `books` data we saved in the previous lesson.
+
+
+``` r
+books <- read_csv("data/books.csv")  # load the data and assign it to books
+```
+
+:::::::::::::::::::::::::::::::::::::::::  
+
+
+## Renaming variables
 
 It is often necessary to rename variables to make them more meaningful. If you
 print the names of the sample `books` dataset you can see that some of the
@@ -163,6 +151,15 @@ books <- rename(books,
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
+### Tip:
+
+When using the `rename()` function, the new variable name comes first.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
 ### Side note:
 
 Where does `X245.ab` come from? That is the MARC field 245|ab. However,
@@ -170,8 +167,10 @@ because R variables cannot start with a number, R automatically inserted an X,
 and because pipes | are not allowed in variable names, R replaced it with a
 period.
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+You can also rename multiple variables at once by running:
 
 
 ``` r
@@ -229,6 +228,7 @@ books <- rename(books,
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
 ### Recoding values
 
 It is often necessary to recode or reclassify values in your data. For example,
@@ -245,9 +245,9 @@ and `format` (formerly `BCODE2`) variables contain single characters.
 <p class="caption">Format (formerly BCODE2) export from Sierra</p>
 </div>
 
-You can do this easily using the `recode()` function, also in the `dplyr`
-package. Unlike `rename()`, the old value comes first here. Also notice that we
-are overwriting the `books$subCollection` variable.
+You can reassign names to the values easily using the `recode()` function 
+from the `dplyr` package. Unlike `rename()`, the old value comes first here. 
+Also notice that we are overwriting the `books$subCollection` variable.
 
 
 ``` r
@@ -323,9 +323,18 @@ books$format <- recode(books$format,
                               "4" = "online video")
 ```
 
-### Subsetting dataframes
+Once you have finished recoding the values for the two variables, examine 
+the dataset again and check to see if you have different values this time:
 
-#### Subsetting using `filter()` in the `dplyr` package
+
+``` r
+distinct(books, subCollection, format)
+```
+
+
+## Subsetting dataframes
+
+### **Subset rows with `filter()`**
 
 In the last lesson we learned how to subset a data frame using brackets. As with
 other R functions, the `dplyr` package makes it much more straightforward, using
@@ -383,7 +392,7 @@ serial_microform <- filter(books, format %in% c("serial", "microform"))
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-### Filtering with `filter()`
+### Exercise: Subsetting with `filter()`
 
 1. Use `filter()` to create a data frame called `booksJuv` consisting of `format` books and `subCollection` juvenile materials.
 
@@ -409,7 +418,10 @@ mean(booksJuv$tot_chkout)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### Selecting variables
+<br>
+
+
+### **Subset columns with `select()`**
 
 The `select()` function allows you to keep or remove specific columns It also
 provides a convenient way to reorder variables.
@@ -446,7 +458,25 @@ books <- select(books, -location)
 booksReordered <- select(books, title, tot_chkout, loutdate, everything())
 ```
 
-### Ordering data
+:::::::::::::::::::::::::::::::::::::::  callout
+
+### Tips:
+
+If your variable name has spaces, use `` to close the variable:
+
+
+``` r
+select(df, -`my variable`)
+```
+
+``` error
+Error in UseMethod("select"): no applicable method for 'select' applied to an object of class "function"
+```
+
+:::::::::::::::::::::::::::::::::::::::  
+
+
+## Ordering data with `arrange()`
 
 The `arrange()` function in the `dplyr` package allows you to sort your data by alphabetical or numerical order.
 
@@ -482,7 +512,8 @@ booksHighestChkout
 booksChkoutYear <- arrange(books, desc(tot_chkout), desc(pubyear))
 ```
 
-### Creating new variables
+
+## Creating new variables with `mutate()`
 
 The `mutate()` function allows you to create new variables. Here, we use the
 `str_sub()` function from the `stringr` package to extract the first character
@@ -514,7 +545,9 @@ Caused by warning:
 
 We see the error message `NAs introduced by coercion`. This is because non-numerical variables become `NA` and the remainder become integers.
 
-### Putting it all together with %>%
+
+
+## Putting it all together with %>%
 
 The [Pipe Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%` is
 loaded with the `tidyverse`. It takes the output of one statement and makes it
@@ -557,7 +590,7 @@ myBooks
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-### Playing with pipes `%>%`
+### Exercise: Playing with pipes `%>%`
 
 1. Create a new data frame `booksKids` with these conditions:
 
@@ -589,14 +622,18 @@ mean(booksKids$tot_chkout)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### Split-apply-combine data analysis and the `summarize()` function
+
+### Split-apply-combine and the `summarize()` function
 
 Many data analysis tasks can be approached using the *split-apply-combine*
 paradigm: split the data into groups, apply some analysis to each group, and
 then combine the results. **`dplyr`** makes this very easy through the use of
 the `group_by()` function.
 
-##### The `summarize()` function
+<br>
+
+
+#### The `summarize()` function
 
 `group_by()` is often used together with `summarize()`, which collapses each
 group into a single-row summary of that group.  `group_by()` takes as arguments
@@ -673,7 +710,10 @@ Let's break this down step by step:
 - Finally, we arrange `sum_tot_chkout` in descending order, so we can see the
   class with the most total checkouts. We can see it is the `E` class (History of America), followed by `NA` (items with no call number data), followed by `H` (Social Sciences) and `P` (Language and Literature).
 
-### Pattern matching
+<br>
+
+
+### **Pattern matching**
 
 Cleaning text with the `stringr` package is easier when you have a basic understanding of 'regex', or regular expression pattern matching. Regex is especially useful for manipulating strings (alphanumeric data), and is the backbone of search-and-replace operations in most applications.  Pattern matching is common to all programming languages but regex syntax is often code-language specific.  Below, find an example of using pattern matching to find and replace data in R:
 
@@ -709,7 +749,9 @@ books %>%
 # ℹ 9,990 more rows
 ```
 
-### Exporting data
+
+
+## Exporting data
 
 Now that you have learned how to use **`dplyr`** to extract information from
 or summarize your raw data, you may want to export these new data sets to share
@@ -718,14 +760,11 @@ them with your collaborators or for archival.
 Similar to the `read_csv()` function used for reading CSV files into R, there is
 a `write_csv()` function that generates CSV files from data frames.
 
-Before using `write_csv()`, we are going to create a new folder, `data_output`,
-in our working directory that will store this generated dataset. We don't want
-to write generated datasets in the same directory as our raw data. It's good
-practice to keep them separate. The `data` folder should only contain the raw,
+We have previously created the directory `data_output` which we will use to 
+store our generated dataset. It is good practice to keep your input and output 
+data in separate folders--the `data` folder should only contain the raw,
 unaltered data, and should be left alone to make sure we don't delete or modify
-it. In contrast, our script will generate the contents of the `data_output`
-directory, so even if the files it contains are deleted, we can always
-re-generate them.
+it.
 
 In preparation for our next lesson on plotting, we are going to create a
 version of the dataset with most of the changes we made above. We will first read in the original, then make all the changes with pipes.
@@ -784,6 +823,7 @@ We now write it to a CSV and put it in the `data/output` sub-directory:
 write_csv(books_reformatted, "./data_output/books_reformatted.csv")
 ```
 
+
 ## Help with dplyr
 
 - Read more about `dplyr` at [https://dplyr.tidyverse.org/](https://dplyr.tidyverse.org/).
@@ -791,15 +831,17 @@ write_csv(books_reformatted, "./data_output/books_reformatted.csv")
 - See the [http://r4ds.had.co.nz/transform.html]("Data Transformation" chapter) in Garrett Grolemund and Hadley Wickham's book *R for Data Science.*
 - Watch this Data School video: [https://www.youtube.com/watch?v=jWjqLW-u3hc](Hands-on dplyr tutorial for faster data manipulation in R.)
 
-## Wrangling dataframes with tidyr
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Use the `dplyr` package to manipulate dataframes.
-- Use `select()` to choose variables from a dataframe.
-- Use `filter()` to choose data based on values.
-- Use `group_by()` and `summarize()` to work with subsets of data.
+- Subset data frames using `select()` and `filter()`.
+- Rename variables in a data frame using `rename()`.
+- Recode values in a data frame using `recode()`.
 - Use `mutate()` to create new variables.
+- Sort data using `arrange()`.
+- Use `group_by()` and `summarize()` to work with subsets of data.
+- Use pipe (`%>%`) to combine multiple commands.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
