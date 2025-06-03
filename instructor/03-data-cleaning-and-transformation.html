@@ -243,8 +243,14 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#help-with-dplyr">Help with dplyr</a></li>
-<li><a href="#wrangling-dataframes-with-tidyr">Wrangling dataframes with tidyr</a></li>
+        <ul><li><a href="#transforming-data-with-dplyr">Transforming data with <code>dplyr</code></a></li>
+<li><a href="#renaming-variables">Renaming variables</a></li>
+<li><a href="#subsetting-dataframes">Subsetting dataframes</a></li>
+<li><a href="#ordering-data-with-arrange">Ordering data with <code>arrange()</code></a></li>
+<li><a href="#creating-new-variables-with-mutate">Creating new variables with <code>mutate()</code></a></li>
+<li><a href="#putting-it-all-together-with">Putting it all together with %&gt;%</a></li>
+<li><a href="#exporting-data">Exporting data</a></li>
+<li><a href="#help-with-dplyr">Help with dplyr</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -339,12 +345,11 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>How can I select specific rows and/or columns from a data
+<ul><li>How can I create new columns or remove exisitng columns from a data
 frame?</li>
+<li>How can I rename variables or assign new values to a variable?</li>
 <li>How can I combine multiple commands into a single command?</li>
-<li>How can create new columns or remove existing columns from a data
-frame?</li>
-<li>How can I reformat a dataframe to meet my needs?</li>
+<li>How can I export my data frame to a csv file?</li>
 </ul></div>
 </div>
 </div>
@@ -352,106 +357,24 @@ frame?</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Describe the purpose of an R package and the
+<ul><li>Describe the functions available in the
 <strong><code>dplyr</code></strong> and
 <strong><code>tidyr</code></strong> packages.</li>
-<li>Select certain columns in a data frame with the
-<strong><code>dplyr</code></strong> function <code>select</code>.</li>
-<li>Select certain rows in a data frame according to filtering
-conditions with the <strong><code>dplyr</code></strong> function
-<code>filter</code>.</li>
-<li>Link the output of one <strong><code>dplyr</code></strong> function
-to the input of another function with the ‘pipe’ operator
+<li>Recognise and use the following functions: <code>select()</code>,
+<code>filter()</code>, <code>rename()</code>, <code>recode()</code>,
+<code>mutate()</code> and <code>arrange()</code>.</li>
+<li>Combine one or more functions using the ‘pipe’ operator
 <code>%&gt;%</code>.</li>
-<li>Add new columns to a data frame that are functions of existing
-columns with <code>mutate</code>.</li>
 <li>Use the split-apply-combine concept for data analysis.</li>
-<li>Use <code>summarize</code>, <code>group_by</code>, and
-<code>count</code> to split a data frame into groups of observations,
-apply a summary statistics for each group, and then combine the
-results.</li>
-<li>Describe the concept of a wide and a long table format and for which
-purpose those formats are useful.</li>
-<li>Describe what key-value pairs are.</li>
-<li>Reshape a data frame from long to wide format and back with the
-<code>pivot_wider</code> and <code>pivot_longer</code> commands from the
-<strong><code>tidyr</code></strong> package.</li>
 <li>Export a data frame to a csv file.</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section level3">
-<h3 id="getting-set-up">Getting set up<a class="anchor" aria-label="anchor" href="#getting-set-up"></a></h3>
-<div class="section level4">
-<h4 id="open-your-r-project-file">Open your R Project file<a class="anchor" aria-label="anchor" href="#open-your-r-project-file"></a></h4>
-<p>If you have not already done so, open your R Project file
-(<code>library_carpentry.Rproj</code>) created in the
-<code>Before We Start</code> lesson.</p>
-<p><strong>If you did not complete that step</strong> then do the
-following:</p>
-<ul><li>Under the <code>File</code> menu, click on <code>New project</code>,
-choose <code>New directory</code>, then <code>New project</code>
-</li>
-<li>Enter the name <code>library_carpentry</code> for this new folder
-(or “directory”). This will be your <strong>working directory</strong>
-for the rest of the day.</li>
-<li>Click on <code>Create project</code>
-</li>
-<li>Create a new file where we will type our scripts. Go to File &gt;
-New File &gt; R script. Click the save icon on your toolbar and save
-your script as “<code>script.R</code>”.</li>
-<li>Copy and paste the below lines of code to create three new
-subdirectories and download the data:</li>
-</ul><div class="codewrapper sourceCode" id="cb1">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">fs</span><span class="op">)</span>   <span class="co"># https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R.</span></span>
-<span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span></span>
-<span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data_output"</span><span class="op">)</span></span>
-<span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"fig_output"</span><span class="op">)</span></span>
-<span><span class="fu">download.file</span><span class="op">(</span><span class="st">"https://ndownloader.figshare.com/files/22031487"</span>,</span>
-<span>              <span class="st">"data/books.csv"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre>
-</div>
-</div>
-<div class="section level4">
-<h4 id="load-the-tidyverse-and-data-frame-into-your-r-session">Load the <code>tidyverse</code> and data frame into your R
-session<a class="anchor" aria-label="anchor" href="#load-the-tidyverse-and-data-frame-into-your-r-session"></a></h4>
-<p>Load the <code>tidyverse</code></p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ purrr     1.0.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<p>And the <code>books</code> data we saved in the previous lesson.</p>
-<div class="codewrapper sourceCode" id="cb4">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">books</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/books.csv"</span><span class="op">)</span>  <span class="co"># load the data and assign it to books</span></span></code></pre>
-</div>
-</div>
-</div>
-<div class="section level3">
-<h3 id="transforming-data-with-dplyr">Transforming data with <code>dplyr</code>
-<a class="anchor" aria-label="anchor" href="#transforming-data-with-dplyr"></a></h3>
-<p>We are now entering the data cleaning and transforming phase. While
+<section><h2 class="section-heading" id="transforming-data-with-dplyr">Transforming data with <code>dplyr</code>
+<a class="anchor" aria-label="anchor" href="#transforming-data-with-dplyr"></a></h2>
+<hr class="half-width"><p>We are now entering the data cleaning and transforming phase. While
 it is possible to do much of the following using Base R functions (in
 other words, without loading an external package) <code>dplyr</code>
 makes it much easier. Like many of the most useful R packages,
@@ -486,10 +409,61 @@ statistics on grouped data</li>
 <code>arrange()</code>: sort results</li>
 <li>
 <code>count()</code>: count discrete values</li>
-</ul></div>
-<div class="section level3">
-<h3 id="renaming-variables">Renaming variables<a class="anchor" aria-label="anchor" href="#renaming-variables"></a></h3>
-<p>It is often necessary to rename variables to make them more
+</ul><p><br></p>
+<div id="getting-set-up" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div id="getting-set-up" class="callout-inner">
+<h3 class="callout-title">Getting set up</h3>
+<div class="callout-content">
+<p>Make sure you have your Rproj and directories set up from the
+previous episode.</p>
+<p><strong>If you have not completed that step</strong>, run the
+following in your Rproj:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">fs</span><span class="op">)</span>   <span class="co"># https://fs.r-lib.org/.  fs is a cross-platform, uniform interface to file system operations via R.</span></span>
+<span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span></span>
+<span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"data_output"</span><span class="op">)</span></span>
+<span><span class="fu">dir_create</span><span class="op">(</span><span class="st">"fig_output"</span><span class="op">)</span></span>
+<span><span class="fu">download.file</span><span class="op">(</span><span class="st">"https://ndownloader.figshare.com/files/22031487"</span>,</span>
+<span>              <span class="st">"data/books.csv"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre>
+</div>
+<p>Then load the <code>tidyverse</code> package</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ purrr     1.0.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<p>and the <code>books</code> data we saved in the previous lesson.</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">books</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/books.csv"</span><span class="op">)</span>  <span class="co"># load the data and assign it to books</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="renaming-variables">Renaming variables<a class="anchor" aria-label="anchor" href="#renaming-variables"></a></h2>
+<hr class="half-width"><p>It is often necessary to rename variables to make them more
 meaningful. If you print the names of the sample <code>books</code>
 dataset you can see that some of the vector names are not particularly
 helpful:</p>
@@ -535,6 +509,18 @@ renamed to <code>title</code>.</p>
 <span><span class="va">books</span> <span class="op">&lt;-</span> <span class="fu">rename</span><span class="op">(</span><span class="va">books</span>,</span>
 <span>                title <span class="op">=</span> <span class="va">X245.ab</span><span class="op">)</span></span></code></pre>
 </div>
+<div id="tip" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="tip" class="callout-inner">
+<h3 class="callout-title">Tip:</h3>
+<div class="callout-content">
+<p>When using the <code>rename()</code> function, the new variable name
+comes first.</p>
+</div>
+</div>
+</div>
 <div id="side-note" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -549,6 +535,7 @@ variable names, R replaced it with a period.</p>
 </div>
 </div>
 </div>
+<p>You can also rename multiple variables at once by running:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -619,7 +606,6 @@ end of the <code>CALL...ITEM.</code> value</li>
 </div>
 </div>
 </div>
-</div>
 <div class="section level3">
 <h3 id="recoding-values">Recoding values<a class="anchor" aria-label="anchor" href="#recoding-values"></a></h3>
 <p>It is often necessary to recode or reclassify values in your data.
@@ -631,10 +617,11 @@ single characters.</p>
 Sub-Collection (formerly BCODE1) export from Sierra
 </figcaption></figure><figure style="text-align: center"><img src="../fig/BCODE2.png" alt="Screen capture of window that says 'Select Me' with items like 'Archives' and 'E-Book'" class="figure mx-auto d-block"><figcaption>
 Format (formerly BCODE2) export from Sierra
-</figcaption></figure><p>You can do this easily using the <code>recode()</code> function, also
-in the <code>dplyr</code> package. Unlike <code>rename()</code>, the old
-value comes first here. Also notice that we are overwriting the
-<code>books$subCollection</code> variable.</p>
+</figcaption></figure><p>You can reassign names to the values easily using the
+<code>recode()</code> function from the <code>dplyr</code> package.
+Unlike <code>rename()</code>, the old value comes first here. Also
+notice that we are overwriting the <code>books$subCollection</code>
+variable.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -715,12 +702,19 @@ function to operate correctly.</p>
 <span>                              <span class="st">"5"</span> <span class="op">=</span> <span class="st">"kit/object"</span>,</span>
 <span>                              <span class="st">"4"</span> <span class="op">=</span> <span class="st">"online video"</span><span class="op">)</span></span></code></pre>
 </div>
+<p>Once you have finished recoding the values for the two variables,
+examine the dataset again and check to see if you have different values
+this time:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">distinct</span><span class="op">(</span><span class="va">books</span>, <span class="va">subCollection</span>, <span class="va">format</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="subsetting-dataframes">Subsetting dataframes<a class="anchor" aria-label="anchor" href="#subsetting-dataframes"></a></h3>
-<div class="section level4">
-<h4 id="subsetting-using-filter-in-the-dplyr-package">Subsetting using <code>filter()</code> in the <code>dplyr</code>
-package<a class="anchor" aria-label="anchor" href="#subsetting-using-filter-in-the-dplyr-package"></a></h4>
+</div>
+</section><section><h2 class="section-heading" id="subsetting-dataframes">Subsetting dataframes<a class="anchor" aria-label="anchor" href="#subsetting-dataframes"></a></h2>
+<hr class="half-width"><div class="section level3">
+<h3 id="subset-rows-with-filter"><strong>Subset rows with <code>filter()</code></strong><a class="anchor" aria-label="anchor" href="#subset-rows-with-filter"></a></h3>
 <p>In the last lesson we learned how to subset a data frame using
 brackets. As with other R functions, the <code>dplyr</code> package
 makes it much more straightforward, using the <code>filter()</code>
@@ -729,7 +723,7 @@ function.</p>
 <code>booksOnly</code>, which includes only those items where the format
 is books. Notice that we use two equal signs <code>==</code> as the
 logical operator:</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -738,7 +732,7 @@ logical operator:</p>
 <p>You can also use multiple filter conditions. Here, the order matters:
 first we filter to include only books, then of the results, we include
 only items that have more than zero checkouts.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -747,7 +741,7 @@ only items that have more than zero checkouts.</p>
 <span>                        <span class="va">tot_chkout</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span></code></pre>
 </div>
 <p>How many items were removed? You can find out functionally with:</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -762,7 +756,7 @@ only items that have more than zero checkouts.</p>
 more than zero checkouts. Notice how different these numbers are from
 the previous lesson, when we kept zero in. The median is now 3 and the
 mean is 5.</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -779,18 +773,19 @@ variable, use the <code>%in%</code> operator combined with a vector of
 all the values you wish to include within <code>c()</code>. For example,
 you may want to include only items in the format <code>serial</code> and
 <code>microform</code>:</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">serial_microform</span> <span class="op">&lt;-</span> <span class="fu">filter</span><span class="op">(</span><span class="va">books</span>, <span class="va">format</span> <span class="op">%in%</span> <span class="fu">c</span><span class="op">(</span><span class="st">"serial"</span>, <span class="st">"microform"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<div id="filtering-with-filter" class="callout challenge">
+<div id="exercise-subsetting-with-filter" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="filtering-with-filter" class="callout-inner">
-<h3 class="callout-title">Filtering with <code>filter()</code>
+<div id="exercise-subsetting-with-filter" class="callout-inner">
+<h3 class="callout-title">Exercise: Subsetting with
+<code>filter()</code>
 </h3>
 <div class="callout-content">
 <ol style="list-style-type: decimal"><li><p>Use <code>filter()</code> to create a data frame called
@@ -808,7 +803,7 @@ for the <code>booksJuv</code> data frame.</p></li>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -826,14 +821,14 @@ for the <code>booksJuv</code> data frame.</p></li>
 </div>
 </div>
 </div>
-</div>
+<p><br></p>
 </div>
 <div class="section level3">
-<h3 id="selecting-variables">Selecting variables<a class="anchor" aria-label="anchor" href="#selecting-variables"></a></h3>
+<h3 id="subset-columns-with-select"><strong>Subset columns with <code>select()</code></strong><a class="anchor" aria-label="anchor" href="#subset-columns-with-select"></a></h3>
 <p>The <code>select()</code> function allows you to keep or remove
 specific columns It also provides a convenient way to reorder
 variables.</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -859,7 +854,7 @@ variables.</p>
 10 Greek gods and goddesses /                                                 13
 # ℹ 9,990 more rows</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -869,12 +864,34 @@ variables.</p>
 <span><span class="co"># reorder columns, combined with everything()</span></span>
 <span><span class="va">booksReordered</span> <span class="op">&lt;-</span> <span class="fu">select</span><span class="op">(</span><span class="va">books</span>, <span class="va">title</span>, <span class="va">tot_chkout</span>, <span class="va">loutdate</span>, <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
+<div id="tips" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3">
-<h3 id="ordering-data">Ordering data<a class="anchor" aria-label="anchor" href="#ordering-data"></a></h3>
-<p>The <code>arrange()</code> function in the <code>dplyr</code> package
+<div id="tips" class="callout-inner">
+<h3 class="callout-title">Tips:</h3>
+<div class="callout-content">
+<p>If your variable name has spaces, use `` to close the variable:</p>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">select</span><span class="op">(</span><span class="va">df</span>, <span class="op">-</span><span class="va">`my variable`</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in UseMethod("select"): no applicable method for 'select' applied to an object of class "function"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="ordering-data-with-arrange">Ordering data with <code>arrange()</code>
+<a class="anchor" aria-label="anchor" href="#ordering-data-with-arrange"></a></h2>
+<hr class="half-width"><p>The <code>arrange()</code> function in the <code>dplyr</code> package
 allows you to sort your data by alphabetical or numerical order.</p>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -903,22 +920,21 @@ allows you to sort your data by alphabetical or numerical order.</p>
 # ℹ 9,990 more rows
 # ℹ 2 more variables: format &lt;chr&gt;, subCollection &lt;chr&gt;</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># order data based on multiple variables (e.g. sort first by checkout, then by publication year)</span></span>
 <span><span class="va">booksChkoutYear</span> <span class="op">&lt;-</span> <span class="fu">arrange</span><span class="op">(</span><span class="va">books</span>, <span class="fu">desc</span><span class="op">(</span><span class="va">tot_chkout</span><span class="op">)</span>, <span class="fu">desc</span><span class="op">(</span><span class="va">pubyear</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-</div>
-<div class="section level3">
-<h3 id="creating-new-variables">Creating new variables<a class="anchor" aria-label="anchor" href="#creating-new-variables"></a></h3>
-<p>The <code>mutate()</code> function allows you to create new
+</section><section><h2 class="section-heading" id="creating-new-variables-with-mutate">Creating new variables with <code>mutate()</code>
+<a class="anchor" aria-label="anchor" href="#creating-new-variables-with-mutate"></a></h2>
+<hr class="half-width"><p>The <code>mutate()</code> function allows you to create new
 variables. Here, we use the <code>str_sub()</code> function from the
 <code>stringr</code> package to extract the first character of the
 <code>callnumber</code> variable (the call number class) and put it into
 a new column called <code>call_class</code>.</p>
-<div class="codewrapper sourceCode" id="cb31">
+<div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -933,7 +949,7 @@ data type to another. For example, we can see there are some errors in
 the <code>pubyear</code> variable–some dates are <code>19zz</code> or
 <code>uuuu</code>. As a result, this variable was read in as a
 <code>character</code> rather than an <code>integer</code>.</p>
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -950,10 +966,8 @@ Caused by warning:
 <p>We see the error message <code>NAs introduced by coercion</code>.
 This is because non-numerical variables become <code>NA</code> and the
 remainder become integers.</p>
-</div>
-<div class="section level3">
-<h3 id="putting-it-all-together-with">Putting it all together with %&gt;%<a class="anchor" aria-label="anchor" href="#putting-it-all-together-with"></a></h3>
-<p>The <a href="https://www.datacamp.com/community/tutorials/pipe-r-tutorial" class="external-link">Pipe
+</section><section><h2 class="section-heading" id="putting-it-all-together-with">Putting it all together with %&gt;%<a class="anchor" aria-label="anchor" href="#putting-it-all-together-with"></a></h2>
+<hr class="half-width"><p>The <a href="https://www.datacamp.com/community/tutorials/pipe-r-tutorial" class="external-link">Pipe
 Operator</a> <code>%&gt;%</code> is loaded with the
 <code>tidyverse</code>. It takes the output of one statement and makes
 it the input of the next statement. You can think of it as “then” in
@@ -967,7 +981,7 @@ called, then the <code>format</code> is filtered to include only
 <code>book</code>, then only the <code>title</code> and
 <code>tot_chkout</code> columns are selected, and finally the data is
 rearranged from most to least checkouts.</p>
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -995,12 +1009,13 @@ rearranged from most to least checkouts.</p>
 10 Wemberly worried /                                 43
 # ℹ 6,973 more rows</code></pre>
 </div>
-<div id="playing-with-pipes" class="callout challenge">
+<div id="exercise-playing-with-pipes" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="playing-with-pipes" class="callout-inner">
-<h3 class="callout-title">Playing with pipes <code>%&gt;%</code>
+<div id="exercise-playing-with-pipes" class="callout-inner">
+<h3 class="callout-title">Exercise: Playing with pipes
+<code>%&gt;%</code>
 </h3>
 <div class="callout-content">
 <ol style="list-style-type: decimal"><li>Create a new data frame <code>booksKids</code> with these
@@ -1025,7 +1040,7 @@ the <code>booksKids</code> data frame.</li>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb36">
+<div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1045,24 +1060,23 @@ the <code>booksKids</code> data frame.</li>
 </div>
 </div>
 </div>
-</div>
 <div class="section level3">
-<h3 id="split-apply-combine-data-analysis-and-the-summarize-function">Split-apply-combine data analysis and the <code>summarize()</code>
-function<a class="anchor" aria-label="anchor" href="#split-apply-combine-data-analysis-and-the-summarize-function"></a></h3>
+<h3 id="split-apply-combine-and-the-summarize-function">Split-apply-combine and the <code>summarize()</code> function<a class="anchor" aria-label="anchor" href="#split-apply-combine-and-the-summarize-function"></a></h3>
 <p>Many data analysis tasks can be approached using the
 <em>split-apply-combine</em> paradigm: split the data into groups, apply
 some analysis to each group, and then combine the results.
 <strong><code>dplyr</code></strong> makes this very easy through the use
 of the <code>group_by()</code> function.</p>
-<div class="section level5">
-<h5 id="the-summarize-function">The <code>summarize()</code> function<a class="anchor" aria-label="anchor" href="#the-summarize-function"></a></h5>
+<p><br></p>
+<div class="section level4">
+<h4 id="the-summarize-function">The <code>summarize()</code> function<a class="anchor" aria-label="anchor" href="#the-summarize-function"></a></h4>
 <p><code>group_by()</code> is often used together with
 <code>summarize()</code>, which collapses each group into a single-row
 summary of that group. <code>group_by()</code> takes as arguments the
 column names that contain the <strong>categorical</strong> variables for
 which you want to calculate the summary statistics.</p>
 <p>So to compute the average checkouts by format:</p>
-<div class="codewrapper sourceCode" id="cb38">
+<div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1090,7 +1104,7 @@ which you want to calculate the summary statistics.</p>
 <p>Books and maps have the highest, and as we would expect, databases,
 online videos, and serials have zero checkouts.</p>
 <p>Here is a more complex example:</p>
-<div class="codewrapper sourceCode" id="cb40">
+<div class="codewrapper sourceCode" id="cb43">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1145,10 +1159,11 @@ the <code>E</code> class (History of America), followed by
 <code>NA</code> (items with no call number data), followed by
 <code>H</code> (Social Sciences) and <code>P</code> (Language and
 Literature).</li>
-</ul></div>
+</ul><p><br></p>
+</div>
 </div>
 <div class="section level3">
-<h3 id="pattern-matching">Pattern matching<a class="anchor" aria-label="anchor" href="#pattern-matching"></a></h3>
+<h3 id="pattern-matching"><strong>Pattern matching</strong><a class="anchor" aria-label="anchor" href="#pattern-matching"></a></h3>
 <p>Cleaning text with the <code>stringr</code> package is easier when
 you have a basic understanding of ‘regex’, or regular expression pattern
 matching. Regex is especially useful for manipulating strings
@@ -1164,7 +1179,7 @@ you may not want to alter the MARC specific punctuation. All other
 audiences will appreciate the text normalizing steps.</p>
 <p>Read more about <a href="https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions" class="external-link">matching
 patterns with regular expressions</a>.</p>
-<div class="codewrapper sourceCode" id="cb42">
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1192,29 +1207,24 @@ patterns with regular expressions</a>.</p>
 # ℹ 9,990 more rows</code></pre>
 </div>
 </div>
-<div class="section level3">
-<h3 id="exporting-data">Exporting data<a class="anchor" aria-label="anchor" href="#exporting-data"></a></h3>
-<p>Now that you have learned how to use
+</section><section><h2 class="section-heading" id="exporting-data">Exporting data<a class="anchor" aria-label="anchor" href="#exporting-data"></a></h2>
+<hr class="half-width"><p>Now that you have learned how to use
 <strong><code>dplyr</code></strong> to extract information from or
 summarize your raw data, you may want to export these new data sets to
 share them with your collaborators or for archival.</p>
 <p>Similar to the <code>read_csv()</code> function used for reading CSV
 files into R, there is a <code>write_csv()</code> function that
 generates CSV files from data frames.</p>
-<p>Before using <code>write_csv()</code>, we are going to create a new
-folder, <code>data_output</code>, in our working directory that will
-store this generated dataset. We don’t want to write generated datasets
-in the same directory as our raw data. It’s good practice to keep them
-separate. The <code>data</code> folder should only contain the raw,
-unaltered data, and should be left alone to make sure we don’t delete or
-modify it. In contrast, our script will generate the contents of the
-<code>data_output</code> directory, so even if the files it contains are
-deleted, we can always re-generate them.</p>
+<p>We have previously created the directory <code>data_output</code>
+which we will use to store our generated dataset. It is good practice to
+keep your input and output data in separate folders–the
+<code>data</code> folder should only contain the raw, unaltered data,
+and should be left alone to make sure we don’t delete or modify it.</p>
 <p>In preparation for our next lesson on plotting, we are going to
 create a version of the dataset with most of the changes we made above.
 We will first read in the original, then make all the changes with
 pipes.</p>
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1265,14 +1275,13 @@ to coerce <code>pubyear</code> to integer, and used
 the new varable <code>call_class</code>.</p>
 <p>We now write it to a CSV and put it in the <code>data/output</code>
 sub-directory:</p>
-<div class="codewrapper sourceCode" id="cb45">
+<div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">write_csv</span><span class="op">(</span><span class="va">books_reformatted</span>, <span class="st">"./data_output/books_reformatted.csv"</span><span class="op">)</span></span></code></pre>
 </div>
-</div>
-<section><h2 class="section-heading" id="help-with-dplyr">Help with dplyr<a class="anchor" aria-label="anchor" href="#help-with-dplyr"></a></h2>
+</section><section><h2 class="section-heading" id="help-with-dplyr">Help with dplyr<a class="anchor" aria-label="anchor" href="#help-with-dplyr"></a></h2>
 <hr class="half-width"><ul><li>Read more about <code>dplyr</code> at <a href="https://dplyr.tidyverse.org/" class="external-link">https://dplyr.tidyverse.org/</a>.</li>
 <li>In your console, after loading <code><a href="https://dplyr.tidyverse.org" class="external-link">library(dplyr)</a></code>, run
 <code><a href="https://dplyr.tidyverse.org/articles/dplyr.html" class="external-link">vignette("dplyr")</a></code> to read an extremely helpful explanation
@@ -1283,8 +1292,7 @@ Science.</em>
 </li>
 <li>Watch this Data School video: <a href="Hands-on%20dplyr%20tutorial%20for%20faster%20data%20manipulation%20in%20R.">https://www.youtube.com/watch?v=jWjqLW-u3hc</a>
 </li>
-</ul></section><section><h2 class="section-heading" id="wrangling-dataframes-with-tidyr">Wrangling dataframes with tidyr<a class="anchor" aria-label="anchor" href="#wrangling-dataframes-with-tidyr"></a></h2>
-<hr class="half-width"><div id="keypoints1" class="callout keypoints">
+</ul><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -1292,11 +1300,15 @@ Science.</em>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Use the <code>dplyr</code> package to manipulate dataframes.</li>
-<li>Use <code>select()</code> to choose variables from a dataframe.</li>
-<li>Use <code>filter()</code> to choose data based on values.</li>
+<li>Subset data frames using <code>select()</code> and
+<code>filter()</code>.</li>
+<li>Rename variables in a data frame using <code>rename()</code>.</li>
+<li>Recode values in a data frame using <code>recode()</code>.</li>
+<li>Use <code>mutate()</code> to create new variables.</li>
+<li>Sort data using <code>arrange()</code>.</li>
 <li>Use <code>group_by()</code> and <code>summarize()</code> to work
 with subsets of data.</li>
-<li>Use <code>mutate()</code> to create new variables.</li>
+<li>Use pipe (<code>%&gt;%</code>) to combine multiple commands.</li>
 </ul></div>
 </div>
 </div>

@@ -254,11 +254,13 @@
       <div class="accordion-body">
         <ul><li><a href="#getting-set-up">Getting set up</a></li>
 <li><a href="#plotting-with-ggplot2">Plotting with <strong><code>ggplot2</code></strong></a></li>
-<li><a href="#define-a-mapping-with-aes-and-display-data-with-geoms">Define a mapping with <code>aes()</code> and display data with
-<code>geoms</code></a></li>
-<li><a href="#univariate-geoms">Univariate geoms</a></li>
-<li><a href="#bivariate-geoms">Bivariate geoms</a></li>
+<li><a href="#ggplot2-versus-ggplot"><code>ggplot2</code> versus <code>ggplot</code></a></li>
+<li><a href="#creating-your-first-plot">Creating your first plot</a></li>
+<li><a href="#defining-the-geoms">Defining the <code>geoms</code></a></li>
+<li><a href="#applying-a-different-geom"><strong>Applying a different geom</strong></a></li>
+<li><a href="#univariate-and-bivariate-geoms">Univariate and bivariate geoms</a></li>
 <li><a href="#add-a-third-variable">Add a third variable</a></li>
+<li><a href="#plotting-time-series-data">Plotting time series data</a></li>
 <li><a href="#ggplot2-themes"><strong><code>ggplot2</code></strong> themes</a></li>
 <li><a href="#customization">Customization</a></li>
 <li><a href="#save-and-export">Save and export</a></li>
@@ -359,7 +361,9 @@ plot?</li>
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Produce scatter plots, boxplots, and time series plots using
+<ul><li>Understand the basic syntax of the <code>ggplot</code>
+function.</li>
+<li>Produce scatter plots, boxplots, and time series plots using
 ggplot.</li>
 <li>Set universal plot settings.</li>
 <li>Describe what faceting is and apply faceting in ggplot.</li>
@@ -373,28 +377,15 @@ labels and color).</li>
 </div>
 <section><h2 class="section-heading" id="getting-set-up">Getting set up<a class="anchor" aria-label="anchor" href="#getting-set-up"></a></h2>
 <hr class="half-width"><div class="section level3">
-<h3 id="set-up-your-directories-and-data">Set up your directories and data<a class="anchor" aria-label="anchor" href="#set-up-your-directories-and-data"></a></h3>
+<h3 id="set-up-your-directories-and-data"><strong>Set up your directories and data</strong><a class="anchor" aria-label="anchor" href="#set-up-your-directories-and-data"></a></h3>
 <p>If you have not already done so, open your R Project file
 (<code>library_carpentry.Rproj</code>) created in the
-<code>Before We Start</code> lesson.</p>
-<p><strong>If you did not complete that step</strong> then do the
-following. Only do this if you didn’t complete it in previous
-lessons.</p>
-<ul><li>Under the <code>File</code> menu, click on <code>New project</code>,
-choose <code>New directory</code>, then <code>New project</code>
-</li>
-<li>Enter the name <code>library_carpentry</code> for this new folder
-(or “directory”). This will be your <strong>working directory</strong>
-for the rest of the day.</li>
-<li>Click on <code>Create project</code>
-</li>
-<li>Create a new file where we will type our scripts. Go to File &gt;
-New File &gt; R script. Click the save icon on your toolbar and save
-your script as “<code>script.R</code>”.</li>
-<li>Copy and paste the below lines of code to create three new
-subdirectories and download the original and the reformatted
-<code>books</code> data:</li>
-</ul><div class="codewrapper sourceCode" id="cb1">
+<code>Before We Start</code> lesson. Ensure that you have the following
+sub-directories in your Rproj: <code>data\</code>,
+<code>data_output\</code> and <code>fig_output\</code>.</p>
+<p>Run the following code chunk to create the sub-directories and
+download the dataset.</p>
+<div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -407,16 +398,7 @@ subdirectories and download the original and the reformatted
 <span><span class="fu">download.file</span><span class="op">(</span><span class="st">"https://ndownloader.figshare.com/files/22051506"</span>,</span>
 <span>              <span class="st">"data_output/books_reformatted.csv"</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre>
 </div>
-</div>
-<div class="section level3">
-<h3 id="load-the-tidyverse-and-data-frame-into-your-r-session">Load the <code>tidyverse</code> and data frame into your R
-session<a class="anchor" aria-label="anchor" href="#load-the-tidyverse-and-data-frame-into-your-r-session"></a></h3>
-<p>Load the <code>tidyverse</code> and the <code>lubridate</code>
-packages. <code>lubridate</code> is installed with the tidyverse, but is
-not one of the core tidyverse packages loaded with
-<code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code>, so it needs to be explicitly called.
-<code>lubridate</code> makes working with dates and times easier in
-R.</p>
+<p>Then load the packages required for this lesson.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -442,8 +424,15 @@ R.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">lubridate</span><span class="op">)</span>  <span class="co"># load lubridate</span></span></code></pre>
 </div>
+<p>The<code>lubridate</code> package is installed with the tidyverse,
+but is not one of the core tidyverse packages loaded with
+<code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code>, so it needs to be explicitly called.
+<code>lubridate</code> makes working with dates and times easier in
+R.</p>
 <p>We also load the <code>books_reformatted</code> data we saved in the
-previous lesson. We’ll assign it to <code>books2</code>.</p>
+previous lesson. Here, we’ll assign it to <code>books2</code>. You can
+create the reformatted data by running the codes from <a href="https://librarycarpentry.github.io/lc-r/03-data-cleaning-and-transformation.html#exporting-data" class="external-link">here</a>
+or by loading the saved CSV file from previous episode.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -469,6 +458,13 @@ are displayed, and general visual properties. Therefore, we only need
 minimal changes if the underlying data change or if we decide to change
 from a bar plot to a scatterplot. This helps in creating publication
 quality plots with minimal amounts of adjustments and tweaking.</p>
+<div id="tips-on-plotting-with-ggplot2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="tips-on-plotting-with-ggplot2" class="callout-inner">
+<h3 class="callout-title">Tips on plotting with ggplot2:</h3>
+<div class="callout-content">
 <p><code>ggplot2</code> functions like data in the ‘long’ format, i.e.,
 a column for every dimension, and a row for every observation.
 Well-structured data will save you lots of time when making figures with
@@ -476,50 +472,39 @@ Well-structured data will save you lots of time when making figures with
 <p>ggplot graphics are built step by step by adding new elements. Adding
 layers in this fashion allows for extensive flexibility and
 customization of plots.</p>
+</div>
+</div>
+</div>
 <p>To build a ggplot, we will use the following basic template that can
 be used for different types of plots:</p>
 <pre><code>ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +  &lt;GEOM_FUNCTION&gt;()</code></pre>
-<ul><li>use the <code>ggplot()</code> function and bind the plot to a
-specific data frame using the <code>data</code> argument</li>
+<ul><li>The <code>data</code> argument is used to bind the plot to a
+specific data frame in <code>ggplot2</code>.</li>
+<li>The <code>mapping</code> argument defines the variables mapped to
+various aesthetics of the plot, e.g. the x and y axis.</li>
+<li>The <code>geom_function</code> argument defines the type of plot,
+e.g. barplot, scatter plot, boxplot.</li>
 </ul><p>::::::::::::::::::::::::::::::::::::::::::::; callout</p>
-<p><strong>Note on Aesthetic Mappings:</strong><br>
-In our basic template the <code>aes()</code> function is used inside
-<code>ggplot()</code>.</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>)) <span class="sc">+</span> <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>()</span></code></pre>
-</div>
-<p>This sets <strong>global</strong> aesthetics that apply to all layers
-you add later, such as, geoms and scales. You might sometimes see the
-aesthetics defined inside a specific geom function like so:</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">tot_chkout</span><span class="op">)</span>, binwidth <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<p>In this case, the aesthetic mapping is <strong>local</strong> to
-<code>geom_histogram()</code>. This approach lets you specify or
-override settings for that particular layer without affecting others. In
-short, using <code>aes()</code> globally means every layer inherits the
-same settings, while using it locally gives you the flexibility to
-tailor individual layers as needed.</p>
-<p>::::::::::</p>
+</section><section><h2 class="section-heading" id="ggplot2-versus-ggplot">
+<code>ggplot2</code> versus <code>ggplot</code>
+<a class="anchor" aria-label="anchor" href="#ggplot2-versus-ggplot"></a></h2>
+<hr class="half-width"><p>People are sometimes confused between <code>ggplot2</code> and
+<code>ggplot</code>. The former refers to the name of the package, while
+the latter refers to the function that you run.</p>
+<p>:::::::::::::::::::::::::::::::::::::::::</p>
 <p>When you run the <code>ggplot()</code> function, it plots directly to
 the Plots tab in the Navigation Pane (lower right). Alternatively, you
 can assign a plot to an R object, then call <code>print()</code>to view
 the plot in the Navigation Pane.</p>
-<p>Let’s create a <code>booksPlot</code> and limit our visualization to
+</section><section><h2 class="section-heading" id="creating-your-first-plot">Creating your first plot<a class="anchor" aria-label="anchor" href="#creating-your-first-plot"></a></h2>
+<hr class="half-width"><p>Let’s create a <code>booksPlot</code> and limit our visualization to
 only items in <code>subCollection</code> general collection, juvenile,
 and k-12, and filter out items with <code>NA</code> in
 <code>call_class</code>. We do this by using the <kbd>|</kbd> key on the
 keyboard to specify a boolean OR, and use the <code>!is.na()</code>
 function to keep only those items that are NOT <code>NA</code> in the
 <code>call_class</code> column.</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -530,35 +515,20 @@ function to keep only those items that are NOT <code>NA</code> in the
 <span>           <span class="va">subCollection</span> <span class="op">==</span> <span class="st">"k-12 materials"</span>,</span>
 <span>         <span class="op">!</span><span class="fu">is.na</span><span class="op">(</span><span class="va">call_class</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<p><strong><code>ggplot2</code></strong>
-<strong><code>ggplot2</code></strong> functions like data in the ‘long’
-format, i.e., a column for every dimension, and a row for every
-observation. Well-structured data will save you lots of time when making
-figures with <strong><code>ggplot2</code></strong></p>
-<p>ggplot graphics are built step by step by adding new elements. Adding
-layers in this fashion allows for extensive flexibility and
-customization of plots.</p>
-<p>To build a ggplot, we will use the following basic template that can
-be used for different types of plots:</p>
-<pre><code>ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +  &lt;GEOM_FUNCTION&gt;()</code></pre>
-<p>Use the <code>ggplot()</code> function and bind the plot to a
-specific data frame using the <code>data</code> argument.</p>
-<div class="codewrapper sourceCode" id="cb11">
+<p>To start with, we first bind our data to the <code>ggplot()</code>
+function using the <code>data</code> argument.</p>
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span><span class="op">)</span>  <span class="co"># a blank canvas</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Not very interesting. We need to add layers to it by defining a
-mapping aesthetic and adding <code>geoms</code>.</p>
-</section><section><h2 class="section-heading" id="define-a-mapping-with-aes-and-display-data-with-geoms">Define a mapping with <code>aes()</code> and display data with
-<code>geoms</code>
-<a class="anchor" aria-label="anchor" href="#define-a-mapping-with-aes-and-display-data-with-geoms"></a></h2>
-<hr class="half-width"><p>Define a mapping (using the aesthetic (<code>aes()</code>) function),
-by selecting the variables to be plotted and specifying how to present
-them in the graph, e.g. as x/y positions or characteristics such as
-size, shape, color, etc.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>After running this code, a blank canvas is being created. Next, we
+define a mapping aesthetic with the <code>mapping</code> argument (using
+the aesthetic (<code>aes()</code>) function). This defines the variables
+to be plotted and specifies how to present them in the graph, e.g. as
+x/y positions or characteristics such as size, shape, color, etc.</p>
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -566,8 +536,10 @@ size, shape, color, etc.</p>
 </div>
 <figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Here we define the x axes, but because we have not yet added any
 <code>geoms</code>, we still do not see any data being visualized.</p>
-<p>Data is visualized in the canvas with “geometric shapes” such as bars
-and lines; what are called <em>geoms</em>. In your console, type
+</section><section><h2 class="section-heading" id="defining-the-geoms">Defining the <code>geoms</code>
+<a class="anchor" aria-label="anchor" href="#defining-the-geoms"></a></h2>
+<hr class="half-width"><p>Data is visualized with different “geometric shapes” such as bars and
+lines; what are called <em>geoms</em>. In your console, type
 <code>geom_</code> and press the tab key to see the geoms included–there
 are over 30. For example:</p>
 <ul><li>
@@ -592,7 +564,7 @@ nor is it a variable in the original dataset, but is the result of
 geom_bar() <em>binning</em> your data inside each call number class and
 plotting the bin counts (the number of items falling into each bin).</p>
 <p>To add a geom to the plot use the <code>+</code> operator.</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -628,13 +600,56 @@ layer and will return an error message.</li>
 </ul></div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="univariate-geoms">Univariate geoms<a class="anchor" aria-label="anchor" href="#univariate-geoms"></a></h2>
-<hr class="half-width"><p><em>“Univariate”</em> refers to a single variable. A histogram is a
+<p><br></p>
+</section><section><h2 class="section-heading" id="applying-a-different-geom"><strong>Applying a different geom</strong><a class="anchor" aria-label="anchor" href="#applying-a-different-geom"></a></h2>
+<hr class="half-width"><p>This same exact data can be visualized in a couple different ways by
+replacing the geom_histogram() function with either
+<code>geom_density()</code> (adding a logarithmic x scale) or
+<code>geom_freqpoly()</code>:</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create a density plot</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_density</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">tot_chkout</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_x_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning in scale_x_log10(): log-10 transformation introduced infinite values.</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning: Removed 2348 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create a frequency polygon</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_freqpoly</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">tot_chkout</span><span class="op">)</span>, binwidth <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning in scale_y_log10(): log-10 transformation introduced infinite values.</code></pre>
+</div>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="univariate-and-bivariate-geoms">Univariate and bivariate geoms<a class="anchor" aria-label="anchor" href="#univariate-and-bivariate-geoms"></a></h2>
+<hr class="half-width"><div class="section level3">
+<h3 id="univariate-geoms"><strong>Univariate geoms</strong><a class="anchor" aria-label="anchor" href="#univariate-geoms"></a></h3>
+<p><em>“Univariate”</em> refers to a single variable. A histogram is a
 univariate plot: it shows the frequency counts of each value inside a
 single variable. Let’s say we want to visualize a frequency distibution
 of checkouts in the <code>booksPlot</code> data. In other words, how
 many items have 1 checkout? How many have 2 checkouts? And so on.</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -646,7 +661,7 @@ many items have 1 checkout? How many have 2 checkouts? And so on.</p>
 </h3>
 <pre class="output" tabindex="0"><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>As we have seen in previous lessons, the overwhelming majority of
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>As we have seen in previous lessons, the overwhelming majority of
 books have a small amount of usage, so the plot is heavily skewed. As
 anyone who has done collection analysis has encountered, this is a very
 common issue. It can be addressed in two ways:</p>
@@ -658,7 +673,7 @@ override this value, exploring multiple widths to find the best to
 illustrate the stories in your data.”</p>
 <p>Second, change the scales of the <code>y</code> axes by adding
 another argument to ggplot:</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -677,14 +692,14 @@ another argument to ggplot:</p>
 <pre class="warning" tabindex="0"><code>Warning: Removed 2 rows containing missing values or values outside the scale range
 (`geom_bar()`).</code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Notice the scale y axis now goes from 0-10, 10-100, 100-1000, and
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Notice the scale y axis now goes from 0-10, 10-100, 100-1000, and
 1000-10000. This is called “logarithmic scale” and is based on orders of
 magnitude. We can therefore see that over 5,000 books (on the y axis)
 have between 0-10 checkouts (on the x axis), 1,000 books have 10-20
 checkouts, and further down on the x axis, a handful of books have 60-70
 checkouts, and a handful more have around 100 checkouts.</p>
 <p>We can check this with <code>table()</code>:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -706,55 +721,16 @@ checkouts, and a handful more have around 100 checkouts.</p>
 <p>ggplot has thus given us an easy way to visualize the distribution of
 checkouts. If you test this on your own print and ebook usage data, you
 will likely find something similar.</p>
+<p><br></p>
+</div>
 <div class="section level3">
-<h3 id="changing-the-geom">Changing the geom<a class="anchor" aria-label="anchor" href="#changing-the-geom"></a></h3>
-<p>This same exact data can be visualized in a couple different ways by
-replacing the geom_histogram() function with either
-<code>geom_density()</code> (adding a logarithmic x scale) or
-<code>geom_freqpoly()</code>:</p>
-<div class="codewrapper sourceCode" id="cb21">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># create a density plot</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_density</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">tot_chkout</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning in scale_x_log10(): log-10 transformation introduced infinite values.</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning: Removed 2348 rows containing non-finite outside the scale range
-(`stat_density()`).</code></pre>
-</div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb24">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># create a frequency polygon</span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_freqpoly</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">tot_chkout</span><span class="op">)</span>, binwidth <span class="op">=</span> <span class="fl">30</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning in scale_y_log10(): log-10 transformation introduced infinite values.</code></pre>
-</div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-10-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
-</section><section><h2 class="section-heading" id="bivariate-geoms">Bivariate geoms<a class="anchor" aria-label="anchor" href="#bivariate-geoms"></a></h2>
-<hr class="half-width"><p>Bivariate plots visualize two variables. Let’s take a look at some
+<h3 id="bivariate-geoms"><strong>Bivariate geoms</strong><a class="anchor" aria-label="anchor" href="#bivariate-geoms"></a></h3>
+<p>Bivariate plots visualize two variables. Let’s take a look at some
 higher usage items, but first eliminate the <code>NA</code> values and
 keep only items with more than 10 checkouts, which we will do with
 <code>filter()</code> from the <code>dplyr</code> package and assign it
-to <code>booksHighUsage</code></p>
-<div class="codewrapper sourceCode" id="cb26">
+to <code>booksHighUsage</code>.</p>
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -766,7 +742,7 @@ to <code>booksHighUsage</code></p>
 <p>We then visualize checkouts by call number with a scatter plot. There
 is still so much skew that I retain the logarithmic scale on the y axis
 with <code>scale_y_log10()</code>.</p>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -786,7 +762,7 @@ down.</p>
 <p>Just as with univariate plots, we can use different geoms to view
 various aspects of the data, which in turn reveal different
 patterns.</p>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -803,7 +779,7 @@ see-through. We also add another layer of geom to the plot called
 <code>geom_jitter()</code>, which will introduce a little bit of
 randomness into the position of our points. We set the
 <code>color</code> of these points to <code>"tomato"</code>.</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -838,7 +814,7 @@ where the shape (of the density of points) is drawn.</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -887,7 +863,7 @@ get the error <code>object 'subCollection' not found</code> or
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -939,7 +915,7 @@ the <code>scale_y_log10</code> argument.</li>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -952,13 +928,11 @@ the <code>scale_y_log10</code> argument.</li>
 </div>
 </div>
 </div>
+</div>
 </section><section><h2 class="section-heading" id="add-a-third-variable">Add a third variable<a class="anchor" aria-label="anchor" href="#add-a-third-variable"></a></h2>
 <hr class="half-width"><p>As we saw in that exercise, you can convey even more information in
 your visualization by adding a third variable, in addition to the first
 two on the x and y scales.</p>
-<div class="section level3">
-<h3 id="add-a-third-variable-with-aes">Add a third variable with <code>aes()</code>
-<a class="anchor" aria-label="anchor" href="#add-a-third-variable-with-aes"></a></h3>
 <p>We can use arguments in <code>aes()</code> to map a visual aesthetic
 in the plot to a variable in the dataset. Specifically, we will map
 <code>color</code> to the <code>subCollection</code> variable. Because
@@ -969,7 +943,7 @@ the <strong><code>aes</code></strong> function.
 corresponding to different values in the vector. In other words,
 associate the name of the aesthetic (<code>color</code>) to the name of
 the variable (<code>subCollection</code>) inside <code>aes()</code>:</p>
-<div class="codewrapper sourceCode" id="cb35">
+<div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -988,7 +962,7 @@ large number of high usage items in both the E and the P class.</p>
 stacked bar plot to visualize frequency. Again, this reinforced the fact
 that most of the <code>E</code> and <code>P</code> classification are
 youth materials.</p>
-<div class="codewrapper sourceCode" id="cb36">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1000,7 +974,7 @@ side-by-side bars. We can separate the portions of the stacked bar that
 correspond to each village and put them side-by-side by using the
 <code>position</code> argument for <code>geom_bar()</code> and setting
 it to “dodge”.</p>
-<div class="codewrapper sourceCode" id="cb37">
+<div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1014,7 +988,7 @@ Categorical data are easier to read when the bars are sorted by
 frequency. An easy way to sort by frequency is to use the
 <code>fct_infreq()</code> function from the <code>forcats</code>
 library.</p>
-<div class="codewrapper sourceCode" id="cb38">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1028,7 +1002,7 @@ accomplish this, flip the axis coordinates with the
 <code>coord_flip()</code> function. When we flip the axes it’s important
 to reverse the sorted categorical order. Do this with
 <code>forcats::fct_rev()</code>.</p>
-<div class="codewrapper sourceCode" id="cb39">
+<div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1036,10 +1010,8 @@ to reverse the sorted categorical order. Do this with
 <span>  <span class="fu">geom_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
-<div class="section level3">
-<h3 id="plotting-time-series-data">Plotting time series data<a class="anchor" aria-label="anchor" href="#plotting-time-series-data"></a></h3>
-<p>Let’s calculate number of counts per year for each format for items
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="plotting-time-series-data">Plotting time series data<a class="anchor" aria-label="anchor" href="#plotting-time-series-data"></a></h2>
+<hr class="half-width"><p>Let’s calculate number of counts per year for each format for items
 published after 1990 and before 2002 in the <code>booksHighUsage</code>
 data frame created above.</p>
 <p>First, we use the <code>ymd()</code> function from the
@@ -1051,7 +1023,7 @@ month or day. This means <code>1990</code> becomes
 per year.</p>
 <p>We will do this by calling <code>mutate()</code> to create a new
 variable <code>pubyear_ymd</code>.</p>
-<div class="codewrapper sourceCode" id="cb40">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1065,7 +1037,7 @@ variable <code>pubyear_ymd</code>.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] "numeric"</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb42">
+<div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1076,12 +1048,12 @@ variable <code>pubyear_ymd</code>.</p>
 </h3>
 <pre class="output" tabindex="0"><code>[1] "Date"</code></pre>
 </div>
-<p>Next we can use <code>filter</code> to remove the <code>NA</code>
+<p>Next, we can use <code>filter</code> to remove the <code>NA</code>
 values and get books published between 1990 and 2003. Notice that we use
 the <code>&amp;</code> as an AND operator to indicate that the date must
 fall between that range. We then need to group the data and count
 records within each group.</p>
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1092,7 +1064,7 @@ records within each group.</p>
 </div>
 <p>Time series data can be visualized as a line plot with years on the x
 axis and counts on the y axis:</p>
-<div class="codewrapper sourceCode" id="cb45">
+<div class="codewrapper sourceCode" id="cb42">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1103,7 +1075,7 @@ axis and counts on the y axis:</p>
 sub-collections together. We need to tell ggplot to draw a line for each
 sub-collection by modifying the aesthetic function to include
 <code>group = subCollection</code>:</p>
-<div class="codewrapper sourceCode" id="cb46">
+<div class="codewrapper sourceCode" id="cb43">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1113,16 +1085,15 @@ sub-collection by modifying the aesthetic function to include
 <figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We will be able to distinguish sub-collections in the plot if we add
 colors (using <code>color</code> also automatically groups the
 data):</p>
-<div class="codewrapper sourceCode" id="cb47">
+<div class="codewrapper sourceCode" id="cb44">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">yearly_counts</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">pubyear_ymd</span>, y <span class="op">=</span> <span class="va">n</span>, color <span class="op">=</span> <span class="va">subCollection</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-time-series-with-colors-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
-<div class="section level3">
-<h3 id="add-a-third-variable-with-facets">Add a third variable with facets<a class="anchor" aria-label="anchor" href="#add-a-third-variable-with-facets"></a></h3>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-time-series-with-colors-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="section level3">
+<h3 id="faceting">Faceting<a class="anchor" aria-label="anchor" href="#faceting"></a></h3>
 <p>Rather than creating a single plot with side-by-side bars for each
 sub-collection, we may want to create multiple plots, where each plot
 shows the data for a single sub-collection. This would be especially
@@ -1144,8 +1115,8 @@ within <code>vars()</code>. For example,
 <code>facet_wrap(facets = vars(facet_variable))</code> or
 <code>facet_grid(rows = vars(row_variable), cols = vars(col_variable))</code>.</p>
 <p>Here we use <code>facet_wrap()</code> to make a time series plot for
-each subCollection</p>
-<div class="codewrapper sourceCode" id="cb48">
+each subCollection:</p>
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1156,7 +1127,7 @@ each subCollection</p>
 <figure><img src="../fig/04-data-viz-ggplot-rendered-first-facet-1.png" alt="Three line plots, one each for general collection, juvenile, and K-12 sub-collection materials, showing the relationship of count of books to publication year" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We can use <code>facet_wrap()</code> as a way of seeing the
 categories within a variables. Look at the number of formats per
 sub-collection.</p>
-<div class="codewrapper sourceCode" id="cb49">
+<div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1198,7 +1169,7 @@ diagonal:
 </button>
 <div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb50">
+<div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1222,7 +1193,7 @@ pre-loaded themes available that change the overall appearance of the
 graph without much effort.</p>
 <p>For example, we can change our graph to have a simpler white
 background using the <code>theme_bw()</code> function:</p>
-<div class="codewrapper sourceCode" id="cb51">
+<div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1251,7 +1222,7 @@ cheat sheet</a>, and think of ways you could improve your plots.</p>
 the name of the variable being plotted. We can change names of axes to
 something more informative than ‘pubyear_ymd’ and ‘n’ and add a title to
 the figure:</p>
-<div class="codewrapper sourceCode" id="cb52">
+<div class="codewrapper sourceCode" id="cb49">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1272,7 +1243,7 @@ package.</p>
 environment, and pass that theme to your plot. This can be helpful to
 keep your <code>ggplot()</code> calls less cluttered. Here we create a
 <code>gray_theme</code> :</p>
-<div class="codewrapper sourceCode" id="cb53">
+<div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1326,7 +1297,7 @@ above.</p>
 </button>
 <div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb54">
+<div class="codewrapper sourceCode" id="cb51">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1358,7 +1329,7 @@ variable in your R environment, such as
 <code>yearly_counts_plot</code>.</p>
 <p>Make sure you have the <code>fig_output/</code> folder in your
 working directory.</p>
-<div class="codewrapper sourceCode" id="cb55">
+<div class="codewrapper sourceCode" id="cb52">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
