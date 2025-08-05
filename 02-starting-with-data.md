@@ -203,7 +203,7 @@ library(tidyverse)  # loads the core tidyverse, including dplyr, readr, ggplot2,
 
 ``` output
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ purrr     1.0.4
+✔ dplyr     1.1.4     ✔ purrr     1.1.0
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
