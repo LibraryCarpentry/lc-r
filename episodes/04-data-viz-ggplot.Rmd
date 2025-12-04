@@ -630,7 +630,7 @@ themes.
 
 ## Customization
 
-Take a look at the [**`ggplot2`** cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), and think of ways you could improve your plots.
+Take a look at the [**`ggplot2`** cheat sheet](https://rstudio.github.io/cheatsheets/html/data-visualization.html), and think of ways you could improve your plots.
 
 For example, by default, the axes labels on a plot are determined by the name of
 the variable being plotted. We can change names of axes to something more
