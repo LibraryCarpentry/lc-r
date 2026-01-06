@@ -329,7 +329,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data Visualisation with ggplot2</h1>
-        <p>Last updated on 2025-12-04 |
+        <p>Last updated on 2026-01-06 |
 
         <a href="https://github.com/librarycarpentry/lc-r/edit/main/episodes/04-data-viz-ggplot.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -410,10 +410,10 @@ download the dataset.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ purrr     1.1.0
-✔ forcats   1.0.1     ✔ stringr   1.5.2
-✔ ggplot2   4.0.0     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ dplyr     1.1.4     ✔ purrr     1.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -525,7 +525,7 @@ function using the <code>data</code> argument.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span><span class="op">)</span>  <span class="co"># a blank canvas</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>After running this code, a blank canvas is being created. Next, we
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-4-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>After running this code, a blank canvas is being created. Next, we
 define a mapping aesthetic with the <code>mapping</code> argument (using
 the aesthetic (<code>aes()</code>) function). This defines the variables
 to be plotted and specifies how to present them in the graph, e.g. as
@@ -536,7 +536,7 @@ x/y positions or characteristics such as size, shape, color, etc.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">call_class</span><span class="op">)</span><span class="op">)</span> <span class="co"># define the x axis aesthetic</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Here we define the x axes, but because we have not yet added any
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-5-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Here we define the x axes, but because we have not yet added any
 <code>geoms</code>, we still do not see any data being visualized.</p>
 </section><section><h2 class="section-heading" id="defining-the-geoms">Defining the <code>geoms</code>
 <a class="anchor" aria-label="anchor" href="#defining-the-geoms"></a></h2>
@@ -574,7 +574,7 @@ plotting the bin counts (the number of items falling into each bin).</p>
 <span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksPlot</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">call_class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We can see that there are about 1,500 books in the H class, 1,000
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-6-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We can see that there are about 1,500 books in the H class, 1,000
 books in the P class, 700 books in the E class, etc. As we shall see,
 the number of E and F books are deceptively large, as easy books and
 fiction books both begin with E and are thus lumped into that category,
@@ -630,7 +630,7 @@ replacing the geom_histogram() function with either
 <pre class="warning" tabindex="0"><code>Warning: Removed 2348 rows containing non-finite outside the scale range
 (`stat_density()`).</code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb14">
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -644,7 +644,7 @@ replacing the geom_histogram() function with either
 </h3>
 <pre class="warning" tabindex="0"><code>Warning in scale_y_log10(): log-10 transformation introduced infinite values.</code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-2.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="univariate-and-bivariate-geoms">Univariate and bivariate geoms<a class="anchor" aria-label="anchor" href="#univariate-and-bivariate-geoms"></a></h2>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-2.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="univariate-and-bivariate-geoms">Univariate and bivariate geoms<a class="anchor" aria-label="anchor" href="#univariate-and-bivariate-geoms"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="univariate-geoms"><strong>Univariate geoms</strong><a class="anchor" aria-label="anchor" href="#univariate-geoms"></a></h3>
 <p><em>“Univariate”</em> refers to a single variable. A histogram is a
@@ -664,7 +664,7 @@ many items have 1 checkout? How many have 2 checkouts? And so on.</p>
 </h3>
 <pre class="output" tabindex="0"><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>As we have seen in previous lessons, the overwhelming majority of
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>As we have seen in previous lessons, the overwhelming majority of
 books have a small amount of usage, so the plot is heavily skewed. As
 anyone who has done collection analysis has encountered, this is a very
 common issue. It can be addressed in two ways:</p>
@@ -689,7 +689,7 @@ another argument to ggplot:</p>
 </h3>
 <pre class="warning" tabindex="0"><code>Warning in scale_y_log10(): log-10 transformation introduced infinite values.</code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Notice the scale y axis now goes from 0-10, 10-100, 100-1000, and
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Notice the scale y axis now goes from 0-10, 10-100, 100-1000, and
 1000-10000. This is called “logarithmic scale” and is based on orders of
 magnitude. We can therefore see that over 5,000 books (on the y axis)
 have between 0-10 checkouts (on the x axis), 1,000 books have 10-20
@@ -749,7 +749,7 @@ with <code>scale_y_log10()</code>.</p>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Again, notice the scale on the y axis. We can obseve a few items of
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-12-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Again, notice the scale on the y axis. We can obseve a few items of
 interest here: No items in the D, J, M, and Z class have more than 30
 checkouts. An item in the E class has the most checkouts with over 100,
 but, as noted above, this includes Easy books classified with
@@ -769,7 +769,7 @@ patterns.</p>
 <span>  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>By adding points to a boxplot, we can have a better idea of the
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-13-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>By adding points to a boxplot, we can have a better idea of the
 number of measurements and of their distribution. Here we set the
 boxplot <code>alpha</code> to <code>0</code>, which will make it
 see-through. We also add another layer of geom to the plot called
@@ -785,7 +785,7 @@ randomness into the position of our points. We set the
 <span>  <span class="fu">geom_jitter</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">"tomato"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-boxplot-with-points-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Notice how the boxplot layer is behind the jitter layer? What do you
+<figure><img src="../fig/04-data-viz-ggplot-rendered-boxplot-with-points-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Notice how the boxplot layer is behind the jitter layer? What do you
 need to change in the code to put the boxplot in front of the points
 such that it’s not hidden?</p>
 <div id="plotting-exercise" class="callout challenge">
@@ -810,7 +810,7 @@ where the shape (of the density of points) is drawn.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -834,7 +834,7 @@ Groups with fewer than two datapoints have been dropped.
 Groups with fewer than two datapoints have been dropped.
 ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.</code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-violin-plot-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-violin-plot-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -860,7 +860,7 @@ get the error <code>object 'subCollection' not found</code> or
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -885,7 +885,7 @@ Groups with fewer than two datapoints have been dropped.
 Groups with fewer than two datapoints have been dropped.
 ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.</code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-boxplot-exercise-subcollection-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-boxplot-exercise-subcollection-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -913,7 +913,7 @@ the <code>scale_y_log10</code> argument.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -924,7 +924,7 @@ the <code>scale_y_log10</code> argument.</li>
 <span> <span class="fu">geom_jitter</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">"tomato"</span><span class="op">)</span> <span class="op">+</span></span>
 <span> <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-14-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-14-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -954,7 +954,7 @@ the variable (<code>subCollection</code>) inside <code>aes()</code>:</p>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-15-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p><code>ggplot()</code> automatically assigns a unique level of the
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-15-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p><code>ggplot()</code> automatically assigns a unique level of the
 aesthetic to each unique value of the variable (this is called
 <em>scaling</em>). Now we reveal indeed that youth materials make up a
 large number of high usage items in both the E and the P class.</p>
@@ -969,7 +969,7 @@ youth materials.</p>
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksHighUsage</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">call_class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">subCollection</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-16-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Stacked bar charts are generally more difficult to read than
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-16-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Stacked bar charts are generally more difficult to read than
 side-by-side bars. We can separate the portions of the stacked bar that
 correspond to each village and put them side-by-side by using the
 <code>position</code> argument for <code>geom_bar()</code> and setting
@@ -981,7 +981,7 @@ it to “dodge”.</p>
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksHighUsage</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">call_class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">subCollection</span><span class="op">)</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-barplot-dodge-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>The order of the classification scale is sorted for “library order.”
+<figure><img src="../fig/04-data-viz-ggplot-rendered-barplot-dodge-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>The order of the classification scale is sorted for “library order.”
 The audience of library professionals typically prefer an alphabetical
 arrangement. However, the x-axis variable is actually categorical.
 Categorical data are easier to read when the bars are sorted by
@@ -995,7 +995,7 @@ library.</p>
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">booksHighUsage</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu">fct_infreq</span><span class="op">(</span><span class="va">call_class</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Another visualization issue is labeling. In many cultures, long
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-17-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Another visualization issue is labeling. In many cultures, long
 labels are easier to read horizontally. Our goal is to flip the x-axis
 and reorient the x-axis labels into a horizontal presentation. To
 accomplish this, flip the axis coordinates with the
@@ -1010,7 +1010,7 @@ to reverse the sorted categorical order. Do this with
 <span>  <span class="fu">geom_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="plotting-time-series-data">Plotting time series data<a class="anchor" aria-label="anchor" href="#plotting-time-series-data"></a></h2>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-18-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="plotting-time-series-data">Plotting time series data<a class="anchor" aria-label="anchor" href="#plotting-time-series-data"></a></h2>
 <hr class="half-width"><p>Let’s calculate number of counts per year for each format for items
 published after 1990 and before 2002 in the <code>booksHighUsage</code>
 data frame created above.</p>
@@ -1071,7 +1071,7 @@ axis and counts on the y axis:</p>
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">yearly_counts</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">pubyear_ymd</span>, y <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>     <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-first-time-series-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Unfortunately, this does not work because we plotted data for all the
+<figure><img src="../fig/04-data-viz-ggplot-rendered-first-time-series-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Unfortunately, this does not work because we plotted data for all the
 sub-collections together. We need to tell ggplot to draw a line for each
 sub-collection by modifying the aesthetic function to include
 <code>group = subCollection</code>:</p>
@@ -1082,7 +1082,7 @@ sub-collection by modifying the aesthetic function to include
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">yearly_counts</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">pubyear_ymd</span>, y <span class="op">=</span> <span class="va">n</span>, group <span class="op">=</span> <span class="va">subCollection</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We will be able to distinguish sub-collections in the plot if we add
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-21-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>We will be able to distinguish sub-collections in the plot if we add
 colors (using <code>color</code> also automatically groups the
 data):</p>
 <div class="codewrapper sourceCode" id="cb43">
@@ -1092,7 +1092,7 @@ data):</p>
 <code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">yearly_counts</span>, mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">pubyear_ymd</span>, y <span class="op">=</span> <span class="va">n</span>, color <span class="op">=</span> <span class="va">subCollection</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-time-series-with-colors-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="section level3">
+<figure><img src="../fig/04-data-viz-ggplot-rendered-time-series-with-colors-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="section level3">
 <h3 id="faceting">Faceting<a class="anchor" aria-label="anchor" href="#faceting"></a></h3>
 <p>Rather than creating a single plot with side-by-side bars for each
 sub-collection, we may want to create multiple plots, where each plot
@@ -1138,7 +1138,7 @@ sub-collection.</p>
 <span>  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Library subcollection"</span>, y <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-22-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>While this may not be the most beautiful plot, these kinds of
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-22-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>While this may not be the most beautiful plot, these kinds of
 exercises can be helpful for data exploration. We learn that there are
 books in all sub-collections; there are CD-ROMS, serials, images, and
 microforms in government documents, and so on. Exploratory plots
@@ -1168,7 +1168,7 @@ diagonal:
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1180,7 +1180,7 @@ diagonal:
 <span><span class="fu">scale_y_log10</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">60</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-average-weight-time-series-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-average-weight-time-series-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -1204,7 +1204,7 @@ background using the <code>theme_bw()</code> function:</p>
 <span>  <span class="fu">facet_wrap</span><span class="op">(</span>facets <span class="op">=</span> <span class="fu">vars</span><span class="op">(</span><span class="va">subCollection</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-23-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In addition to <code>theme_bw()</code>, which changes the plot
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-23-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>In addition to <code>theme_bw()</code>, which changes the plot
 background to white, <strong><code>ggplot2</code></strong> comes with
 several other themes which can be useful to quickly change the look of
 your visualization. The complete list of themes is available at <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">https://ggplot2.tidyverse.org/reference/ggtheme.html</a>.
@@ -1236,7 +1236,7 @@ the figure:</p>
 <span>        x <span class="op">=</span> <span class="st">"Year of publication"</span>,</span>
 <span>        y <span class="op">=</span> <span class="st">"Number of books"</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-24-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that it is also possible to change the fonts of your plots. If
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-24-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that it is also possible to change the fonts of your plots. If
 you are on Windows, you may have to install the <a href="https://github.com/wch/extrafont" class="external-link"><strong><code>extrafont</code></strong>
 package</a>, and follow the instructions included in the README for this
 package.</p>
@@ -1263,7 +1263,7 @@ keep your <code>ggplot()</code> calls less cluttered. Here we create a
 <span>        x <span class="op">=</span> <span class="st">"Year of publication"</span>,</span>
 <span>        y <span class="op">=</span> <span class="st">"Number of books"</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-25-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge-1" class="callout challenge">
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-25-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge-1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -1297,7 +1297,7 @@ above.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1313,7 +1313,7 @@ above.</p>
 <span> <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span> <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="../fig/04-data-viz-ggplot-rendered-unnamed-chunk-26-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -1444,7 +1444,7 @@ categorical variable.</li>
   "url": "https://librarycarpentry.github.io/lc-r/instructor/04-data-viz-ggplot.html",
   "identifier": "https://librarycarpentry.github.io/lc-r/instructor/04-data-viz-ggplot.html",
   "dateCreated": "2019-05-30",
-  "dateModified": "2025-12-04",
+  "dateModified": "2026-01-06",
   "datePublished": "2026-01-06"
 }
 
