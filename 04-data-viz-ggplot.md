@@ -56,10 +56,10 @@ library(tidyverse)  # load the core tidyverse
 
 ``` output
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ purrr     1.1.0
-✔ forcats   1.0.1     ✔ stringr   1.5.2
-✔ ggplot2   4.0.0     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ dplyr     1.1.4     ✔ purrr     1.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -159,7 +159,7 @@ argument.
 ggplot(data = booksPlot)  # a blank canvas
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-4-1.png" alt="" style="display: block; margin: auto;" />
 
 After running this code, a blank canvas is being created. Next, we define a mapping aesthetic with the `mapping` argument (using the aesthetic (`aes()`) function). This defines the variables to be plotted and specifies how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.
 
@@ -168,7 +168,7 @@ After running this code, a blank canvas is being created. Next, we define a mapp
 ggplot(data = booksPlot, mapping = aes(x = call_class)) # define the x axis aesthetic
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-5-1.png" alt="" style="display: block; margin: auto;" />
 
 Here we define the x axes, but because we have not yet added any `geoms`, we still
 do not see any data being visualized.
@@ -206,7 +206,7 @@ ggplot(data = booksPlot, mapping = aes(x = call_class)) +
   geom_bar()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-6-1.png" alt="" style="display: block; margin: auto;" />
 
 We can see that there are about 1,500 books in the H class, 1,000 books in the P
 class, 700 books in the E class, etc. As we shall see, the number of E and F
@@ -255,7 +255,7 @@ Warning: Removed 2348 rows containing non-finite outside the scale range
 (`stat_density()`).
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` r
 # create a frequency polygon
@@ -268,7 +268,7 @@ ggplot(data = booksPlot) +
 Warning in scale_y_log10(): log-10 transformation introduced infinite values.
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-2.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-7-2.png" alt="" style="display: block; margin: auto;" />
 
 
 ## Univariate and bivariate geoms
@@ -291,7 +291,7 @@ ggplot(data = booksPlot, mapping = aes(x = tot_chkout)) +
 `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" />
 
 As we have seen in previous lessons, the overwhelming majority of books have a
 small amount of usage, so the plot is heavily skewed. As anyone who has done
@@ -317,7 +317,7 @@ ggplot(data = booksPlot) +
 Warning in scale_y_log10(): log-10 transformation introduced infinite values.
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" />
 
 Notice the scale y axis now goes from 0-10, 10-100, 100-1000, and 1000-10000.
 This is called "logarithmic scale" and is based on orders of magnitude. We can
@@ -379,7 +379,7 @@ ggplot(data = booksHighUsage,
   scale_y_log10()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-12-1.png" alt="" style="display: block; margin: auto;" />
 
 Again, notice the scale on the y axis. We can obseve a few items of interest here: No items in the D, J, M, and Z class have more than 30 checkouts. An item in the E class has the most checkouts with over 100, but, as noted above, this includes Easy books classified with `E`, not just items with Library of Congress `E` classification (United States history) an issue we'll look at further down.
 
@@ -394,7 +394,7 @@ ggplot(data = booksHighUsage,
   scale_y_log10()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-13-1.png" alt="" style="display: block; margin: auto;" />
 
 By adding points to a boxplot, we can have a better idea of the number of
 measurements and of their distribution. Here we set the boxplot `alpha` to `0`,
@@ -410,7 +410,7 @@ ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
   scale_y_log10()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-boxplot-with-points-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-boxplot-with-points-1.png" alt="" style="display: block; margin: auto;" />
 
 Notice how the boxplot layer is behind the jitter layer? What do you need to
 change in the code to put the boxplot in front of the points such that it's not
@@ -451,7 +451,7 @@ Groups with fewer than two datapoints have been dropped.
 ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-violin-plot-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-violin-plot-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -482,7 +482,7 @@ Groups with fewer than two datapoints have been dropped.
 ℹ Set `drop = FALSE` to consider such groups for position adjustment purposes.
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-boxplot-exercise-subcollection-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-boxplot-exercise-subcollection-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -503,7 +503,7 @@ ggplot(data = booksHighUsage, aes(x = subCollection, y = tot_chkout)) +
  scale_y_log10()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-14-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -535,7 +535,7 @@ ggplot(data = booksHighUsage,
   scale_y_log10()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-15-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-15-1.png" alt="" style="display: block; margin: auto;" />
 
 `ggplot()` automatically assigns a unique level of the aesthetic to each unique
 value of the variable (this is called *scaling*). Now we reveal indeed that
@@ -552,7 +552,7 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection))
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-16-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-16-1.png" alt="" style="display: block; margin: auto;" />
 
 Stacked bar charts are generally more difficult to read
 than side-by-side bars. We can separate the portions of the stacked bar that
@@ -565,7 +565,7 @@ ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection), position = "dodge")
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-barplot-dodge-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-barplot-dodge-1.png" alt="" style="display: block; margin: auto;" />
 
 The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.
 
@@ -575,7 +575,7 @@ ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
   geom_bar()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-17-1.png" alt="" style="display: block; margin: auto;" />
 
 Another visualization issue is labeling.  In many cultures, long labels are easier to read horizontally.  Our goal is to flip the x-axis and reorient the x-axis labels into a horizontal presentation.  To accomplish this, flip the axis coordinates with the `coord_flip()` function.  When we flip the axes it's important to reverse the sorted categorical order.  Do this with `forcats::fct_rev()`.
 
@@ -586,7 +586,7 @@ ggplot(data = booksHighUsage, aes(x = fct_rev(fct_infreq(call_class)))) +
   coord_flip()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-18-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-18-1.png" alt="" style="display: block; margin: auto;" />
 
 
 ## Plotting time series data
@@ -644,7 +644,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
      geom_line()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-first-time-series-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-first-time-series-1.png" alt="" style="display: block; margin: auto;" />
 
 Unfortunately, this does not work because we plotted data for all the sub-collections
 together. We need to tell ggplot to draw a line for each sub-collection by modifying
@@ -656,7 +656,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, group = subCo
     geom_line()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-21-1.png" alt="" style="display: block; margin: auto;" />
 
 We will be able to distinguish sub-collections in the plot if we add colors
 (using `color` also automatically groups the data):
@@ -667,7 +667,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, color = subCo
   geom_line()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-time-series-with-colors-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-time-series-with-colors-1.png" alt="" style="display: block; margin: auto;" />
 
 
 ### Faceting
@@ -715,7 +715,7 @@ ggplot(data = books2, aes(x = fct_rev(fct_infreq(subCollection)))) +
   labs(x = "Library subcollection", y = "")
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-22-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-22-1.png" alt="" style="display: block; margin: auto;" />
 
 While this may not be the most beautiful plot, these kinds of exercises can be
 helpful for data exploration. We learn that there are books in all
@@ -749,7 +749,7 @@ scale_y_log10() +
 theme(axis.text.x = element_text(angle = 60, hjust = 1))
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-average-weight-time-series-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-average-weight-time-series-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 
@@ -775,7 +775,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   theme_bw()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-23-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-23-1.png" alt="" style="display: block; margin: auto;" />
 
 In addition to `theme_bw()`, which changes the plot background to white, **`ggplot2`**
 comes with several other themes which can be useful to quickly change the look
@@ -812,7 +812,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
         y = "Number of books")
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-24-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-24-1.png" alt="" style="display: block; margin: auto;" />
 
 Note that it is also possible to change the fonts of your plots. If you are on
 Windows, you may have to install
@@ -841,7 +841,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
         y = "Number of books")
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-25-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-25-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -877,7 +877,7 @@ ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum
  theme_bw()
 ```
 
-<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-26-1.png" style="display: block; margin: auto;" />
+<img src="fig/04-data-viz-ggplot-rendered-unnamed-chunk-26-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::::
 

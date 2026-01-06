@@ -296,7 +296,8 @@ area
 ```
 
 ``` error
-Error: object 'area' not found
+Error:
+! object 'area' not found
 ```
 
 ``` r
@@ -473,8 +474,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
-[1] compiler_4.5.2 tools_4.5.2    yaml_2.3.10    knitr_1.50     xfun_0.54     
-[6] renv_1.1.5     evaluate_1.0.5
+ [1] compiler_4.5.2  cli_3.6.5       tools_4.5.2     pillar_1.11.1  
+ [5] glue_1.8.0      yaml_2.3.12     vctrs_0.6.5     knitr_1.51     
+ [9] xfun_0.55       lifecycle_1.0.4 rlang_1.1.6     renv_1.1.5     
+[13] evaluate_1.0.5 
 ```
 
 ```
