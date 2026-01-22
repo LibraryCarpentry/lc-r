@@ -52,35 +52,6 @@ to this episode and follow the instructions on creating an R project folder.
 Once you have created the project, open the project in RStudio.
 
 
-## Getting data into R
-
-We will be using a demo dataset from the University of Houston--Clear Lake 
-Integrated Library System in 2018. It contains a relatively random sample of books 
-from the catalog.
-
-In order to use your data in R, you must import it and turn it into an R *object*. There are many ways to get data into R.
-
-- **Manually**: You can manually create it using the `data.frame()` function in Base R, or the `tibble()` function in the tidyverse.
-
-- **Import it from a file** Below is a very incomplete list
-  - Text: TXT (`readLines()` function)
-  - Tabular data: CSV, TSV (`read.table()` function or `readr` package)
-  - Excel: XLSX (`xlsx` package)
-  - Google sheets: (`googlesheets` package)
-  - Statistics program: SPSS, SAS (`haven` package)
-  - Databases: MySQL (`RMySQL` package)
-
-- **Gather it from the web**: You can connect to webpages, servers, or APIs
-  directly from within R, or you can create a data scraped from HTML webpages
-  using the `rvest` package. For example
-  - the Twitter API with
-    [`twitteR`](https://sites.google.com/site/miningtwitter/questions/talking-about/wordclouds/wordcloud1)
-  - Crossref data with
-    [`rcrossref`](https://cran.r-project.org/web/packages/rcrossref/rcrossref.pdf)
-  - World Bank's World Development Indicators with
-    [`WDI`](https://cran.r-project.org/web/packages/WDI/WDI.pdf).
-
-
 ### Set up your working directory
 
 The working directory is an important concept to understand. It is the place
@@ -157,6 +128,9 @@ you have a folder in your directory called `data`, you can use
 read.csv("./data") to represent that sub-directory.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Getting data into R
 
 
 ## Downloading the data
