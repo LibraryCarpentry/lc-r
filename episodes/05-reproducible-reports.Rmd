@@ -26,7 +26,49 @@ source: Rmd
 ```{r, include=FALSE}
 source("files/download_data.R")
 library(tidyverse)
-books2 <- read_csv("data_output/books_reformatted.csv")
+# Read raw data and apply cleaning steps from previous episodes
+books2 <- read_csv("data/books.csv") %>%
+  rename(
+    title = X245.ab,
+    author = X245.c,
+    callnumber = CALL...BIBLIO.,
+    isbn = ISN,
+    pubyear = X008.Date.One,
+    subCollection = BCODE1,
+    format = BCODE2,
+    location = LOCATION,
+    tot_chkout = TOT.CHKOUT,
+    loutdate = LOUTDATE,
+    subject = SUBJECT,
+    callnumber2 = CALL...ITEM.
+  ) %>%
+  mutate(
+    pubyear = as.integer(pubyear),
+    subCollection = recode(subCollection,
+      "-" = "general collection",
+      u = "government documents",
+      r = "reference",
+      b = "k-12 materials",
+      j = "juvenile",
+      s = "special collections",
+      c = "computer files",
+      t = "theses",
+      a = "archives",
+      z = "reserves"
+    ),
+    format = recode(format,
+      a = "book",
+      e = "serial",
+      w = "microform",
+      s = "e-gov doc",
+      o = "map",
+      n = "database",
+      k = "cd-rom",
+      m = "image",
+      "5" = "kit/object",
+      "4" = "online video"
+    )
+  )
 ```
 
 ## Introduction to Reproducible Reporting
@@ -87,10 +129,12 @@ The white space is where you write your narrative. You use **Markdown** syntax t
 
 Code chunks are where your R code lives. They start with ` ```{r} ` and end with ` ``` `.
 
-```{{r}}
+````
+```{r}
 # This is a code chunk
 summary(cars)
 ```
+````
 
 You can insert a new chunk by clicking the **+C** button in the editor toolbar, or by pressing <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>I</kbd> (Windows/Linux) or <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd> (Mac).
 
@@ -99,15 +143,28 @@ You can insert a new chunk by clicking the **+C** button in the editor toolbar, 
 Let's clean up the example file and create a report using our `books` data.
 
 1.  Delete everything in the file *below* the YAML header.
-2.  Add a new **setup** code chunk to load our libraries and data. It is good practice to label this chunk `setup`.
+2.  Add a new **setup** code chunk to load our libraries and prepare the data.
 
 ```{{r}}
 #| label: setup
 #| include: false
 
 library(tidyverse)
-# Load the data we saved in the previous episode
-books2 <- read_csv("data_output/books_reformatted.csv")
+
+# Load data and rename columns for clarity
+books2 <- read_csv("data/books.csv") %>%
+  rename(
+    subCollection = BCODE1,
+    tot_chkout = TOT.CHKOUT,
+    format = BCODE2
+  ) %>%
+  mutate(
+    subCollection = recode(subCollection, 
+      "-" = "general collection", 
+      j = "juvenile", 
+      b = "k-12 materials"
+    )
+  )
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -132,7 +189,8 @@ We are analyzing items with more than 10 checkouts to understand circulation pat
 
 Next, insert a new code chunk and paste the plotting code we developed in the previous episode (ggplot2).
 
-```{{r}}
+````
+```{r}
 #| label: plot-high-usage
 #| echo: false
 
@@ -153,6 +211,7 @@ ggplot(data = booksHighUsage,
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+````
 
 Setting `#| echo: false` will display the *plot* in the report, but hide the R *code* that generated it. This is often preferred for reports intended for non-coders.
 
@@ -188,7 +247,8 @@ Add this to your document:
 The table below shows the average checkouts for each item format.
 ```
 
-```{{r}}
+````
+```{r}
 #| label: summary-table
 
 books2 %>%
@@ -196,6 +256,7 @@ books2 %>%
   summarize(mean_checkouts = mean(tot_chkout, na.rm = TRUE)) %>%
   arrange(desc(mean_checkouts))
 ```
+````
 
 Render the document to see the updated report.
 
