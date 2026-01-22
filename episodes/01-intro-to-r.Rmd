@@ -308,7 +308,7 @@ square root of the number provided in the function call. Therefore you can run
 `sum(sqrt(9), 4)` to take the sum of the square root of 9 and add it to 4.
 
 Typing a question mark before a function will pull the help page up in the
-Navigation Pane in the lower right. Type `?sum` to view the help page for the
+Files, Plots, Packages, and Help pane in the lower right. Type `?sum` to view the help page for the
 `sum` function. You can also call `help(sum)`. This will provide the description
 of the function, how it is to be used, and the arguments.
 
