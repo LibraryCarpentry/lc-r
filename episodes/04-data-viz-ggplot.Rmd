@@ -60,7 +60,7 @@ library(lubridate)  # load lubridate
 The`lubridate` package is installed with the tidyverse, but is not one of the core tidyverse packages loaded with `library(tidyverse)`, so it needs to be explicitly called. `lubridate` makes working with dates and times easier in R.
 
 We also load the `books_reformatted` data we saved in the previous
-lesson. Here, we'll assign it to `books2`. You can create the reformatted data by running the codes from [here](https://librarycarpentry.github.io/lc-r/03-data-cleaning-and-transformation.html#exporting-data) or by loading the saved CSV file from previous episode.
+lesson. Here, we'll assign it to `books2`. You can create the reformatted data by running the [codes for exporting data](https://librarycarpentry.github.io/lc-r/03-data-cleaning-and-transformation.html#exporting-data) or by loading the saved CSV file from previous episode.
 
 ```{r, purl=FALSE, eval=FALSE}
 books2 <- read_csv("data_output/books_reformatted.csv")  # load the data and assign it to books
@@ -109,7 +109,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 - The `mapping` argument defines the variables mapped to various aesthetics of the plot, e.g. the x and y axis.
 - The `geom_function` argument defines the type of plot, e.g. barplot, scatter plot, boxplot.
 
-::::::::::::::::::::::::::::::::::::::::::::; callout
+::::::::::::::::::::::::::::::::::::::::::::  callout
 
 ## `ggplot2` versus `ggplot`
 
