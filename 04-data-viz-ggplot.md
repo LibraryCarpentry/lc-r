@@ -133,8 +133,8 @@ People are sometimes confused between `ggplot2` and `ggplot`. The former refers 
 
 
 When you run the `ggplot()` function, it plots directly to the Plots tab in the
-Navigation Pane (lower right). Alternatively, you can assign a plot to an R
-object, then call `print()`to view the plot in the Navigation Pane.
+Files, Plots, Packages, and Help pane (lower right). Alternatively, you can assign a plot to an R
+object, then call `print()`to view the plot in the Files, Plots, Packages, and Help pane.
 
 
 ## Creating your first plot

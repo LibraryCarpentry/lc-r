@@ -235,7 +235,7 @@ The Default Layout is:
   enters into the computer's working memory. The History tab displays all commands 
   that have been executed in the console.
 
-- **Navigation Pane**
+- **Files, Plots, Packages, and Help pane**
   This pane has multiple functions:
   
   - **Files:** Navigate to files saved on your computer and in your working directory
@@ -404,12 +404,11 @@ bioinformatics).
 
 ### **Installing packages using the Packages tab**
 
-Installing CRAN packages can be done from the <kbd>Packages</kbd> tab in the Navigation 
-Pane. Click `Install` and type in the name of the package you're looking for.
+Installing CRAN packages can be done from the <kbd>Packages</kbd> tab in the Files, Plots, Packages, and Help pane. Click `Install` and type in the name of the package you're looking for.
 
 <div class="figure" style="text-align: center">
 <img src="fig/R_00_Rstudio_03.png" alt="install packages pane showing an entry for installing the 'tidyverse' package"  />
-<p class="caption">Click on the Packages tab in the Navigation Pane to download packages from CRAN.</p>
+<p class="caption">Click on the Packages tab in the Files, Plots, Packages, and Help pane to download packages from CRAN.</p>
 </div>
 
 At the bottom of the Install Packages window is a check box to

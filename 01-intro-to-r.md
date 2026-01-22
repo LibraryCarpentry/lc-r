@@ -378,7 +378,7 @@ square root of the number provided in the function call. Therefore you can run
 `sum(sqrt(9), 4)` to take the sum of the square root of 9 and add it to 4.
 
 Typing a question mark before a function will pull the help page up in the
-Navigation Pane in the lower right. Type `?sum` to view the help page for the
+Files, Plots, Packages, and Help pane in the lower right. Type `?sum` to view the help page for the
 `sum` function. You can also call `help(sum)`. This will provide the description
 of the function, how it is to be used, and the arguments.
 
@@ -476,7 +476,7 @@ attached base packages:
 loaded via a namespace (and not attached):
  [1] compiler_4.5.2  cli_3.6.5       tools_4.5.2     pillar_1.11.1  
  [5] glue_1.8.0      yaml_2.3.12     vctrs_0.6.5     knitr_1.51     
- [9] xfun_0.55       lifecycle_1.0.4 rlang_1.1.6     renv_1.1.5     
+ [9] xfun_0.55       lifecycle_1.0.4 rlang_1.1.6     renv_1.1.6     
 [13] evaluate_1.0.5 
 ```
 
