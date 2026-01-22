@@ -326,7 +326,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Starting with Data</h1>
-        <p>Last updated on 2026-01-06 |
+        <p>Last updated on 2026-01-22 |
 
         <a href="https://github.com/librarycarpentry/lc-r/edit/main/episodes/02-starting-with-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -389,38 +389,7 @@ episode and follow the instructions on creating an R project folder.</p>
 </div>
 </div>
 <p>Once you have created the project, open the project in RStudio.</p>
-</section><section><h2 class="section-heading" id="getting-data-into-r">Getting data into R<a class="anchor" aria-label="anchor" href="#getting-data-into-r"></a></h2>
-<hr class="half-width"><p>We will be using a demo dataset from the University of Houston–Clear
-Lake Integrated Library System in 2018. It contains a relatively random
-sample of books from the catalog.</p>
-<p>In order to use your data in R, you must import it and turn it into
-an R <em>object</em>. There are many ways to get data into R.</p>
-<ul><li><p><strong>Manually</strong>: You can manually create it using the
-<code>data.frame()</code> function in Base R, or the
-<code>tibble()</code> function in the tidyverse.</p></li>
-<li>
-<p><strong>Import it from a file</strong> Below is a very incomplete
-list</p>
-<ul><li>Text: TXT (<code>readLines()</code> function)</li>
-<li>Tabular data: CSV, TSV (<code>read.table()</code> function or
-<code>readr</code> package)</li>
-<li>Excel: XLSX (<code>xlsx</code> package)</li>
-<li>Google sheets: (<code>googlesheets</code> package)</li>
-<li>Statistics program: SPSS, SAS (<code>haven</code> package)</li>
-<li>Databases: MySQL (<code>RMySQL</code> package)</li>
-</ul></li>
-<li>
-<p><strong>Gather it from the web</strong>: You can connect to
-webpages, servers, or APIs directly from within R, or you can create a
-data scraped from HTML webpages using the <code>rvest</code> package.
-For example</p>
-<ul><li>the Twitter API with <a href="https://sites.google.com/site/miningtwitter/questions/talking-about/wordclouds/wordcloud1" class="external-link"><code>twitteR</code></a>
-</li>
-<li>Crossref data with <a href="https://cran.r-project.org/web/packages/rcrossref/rcrossref.pdf" class="external-link"><code>rcrossref</code></a>
-</li>
-<li>World Bank’s World Development Indicators with <a href="https://cran.r-project.org/web/packages/WDI/WDI.pdf" class="external-link"><code>WDI</code></a>.</li>
-</ul></li>
-</ul><div class="section level3">
+<div class="section level3">
 <h3 id="set-up-your-working-directory">Set up your working directory<a class="anchor" aria-label="anchor" href="#set-up-your-working-directory"></a></h3>
 <p>The working directory is an important concept to understand. It is
 the place on your computer where R will look for and save files. When
@@ -511,7 +480,8 @@ sub-directory.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="downloading-the-data">Downloading the data<a class="anchor" aria-label="anchor" href="#downloading-the-data"></a></h2>
+</section><section><h2 class="section-heading" id="getting-data-into-r">Getting data into R<a class="anchor" aria-label="anchor" href="#getting-data-into-r"></a></h2>
+<hr class="half-width"></section><section><h2 class="section-heading" id="downloading-the-data">Downloading the data<a class="anchor" aria-label="anchor" href="#downloading-the-data"></a></h2>
 <hr class="half-width"><p>Once you have set your working directory, we will create our folder
 structure using the <code>dir.create()</code> function.</p>
 <p>For this lesson we will use the following folders in our working
@@ -647,7 +617,7 @@ are there?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The data contains 10,000 observations and 11 variables.</p>
 <ul><li>
@@ -996,7 +966,7 @@ What is this telling us?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li><p>Highest checkouts:
 <code>Click, clack, moo : cows that type.</code></p></li>
@@ -1198,7 +1168,7 @@ subset data frames.</li>
   "url": "https://librarycarpentry.github.io/lc-r/02-starting-with-data.html",
   "identifier": "https://librarycarpentry.github.io/lc-r/02-starting-with-data.html",
   "dateCreated": "2019-05-30",
-  "dateModified": "2026-01-06",
+  "dateModified": "2026-01-22",
   "datePublished": "2026-01-22"
 }
 
