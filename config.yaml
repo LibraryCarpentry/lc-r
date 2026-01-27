@@ -64,6 +64,7 @@ episodes:
 - 02-starting-with-data.Rmd
 - 03-data-cleaning-and-transformation.Rmd
 - 04-data-viz-ggplot.Rmd
+- 05-reproducible-reports.Rmd
 
 # Information for Learners
 learners: 
