@@ -302,6 +302,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="05-reproducible-reports.html">6. Reproducible Reports with Quarto</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -560,7 +572,7 @@ librarians.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ul>
 <li>Clean messy data from the ILS &amp; vendors
@@ -872,7 +884,7 @@ that this happens.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>From the packages tab, click ‘Install’ from the toolbar and type
 ‘tidyverse’ into the textbox, then click ‘install’. The ‘tidyverse’
@@ -1070,7 +1082,7 @@ R Bootcamp</a>
 </div>
 </section></section><section id="aio-01-intro-to-r"><p>Content from <a href="01-intro-to-r.html">Introduction to R</a></p>
 <hr>
-<p>Last updated on 2026-02-03 |
+<p>Last updated on 2026-02-19 |
 
         <a href="https://github.com/librarycarpentry/lc-r/edit/main/episodes/01-intro-to-r.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1222,14 +1234,13 @@ a new object, <code>time_minutes</code>.</p>
 <ul>
 <li>
 <strong>Do not use names of functions that already exist in
-R:</strong> There are some names that cannot be used because they are
-the names of fundamental functions in R (e.g., <code>if</code>,
-<code>else</code>, <code>for</code>, see <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html" class="external-link">here</a>
-for a complete list. In general, even if it’s allowed, it’s best to not
-use other function names (e.g., <code>c</code>, <code>T</code>,
-<code>mean</code>, <code>data</code>, <code>df</code>,
-<code>weights</code>). If in doubt, check the help to see if the name is
-already in use.</li>
+R:</strong> There are some fundamental functions in R (e.g.,
+<code>if</code>, <code>else</code>, <code>for</code>, see the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html" class="external-link">list
+of reserved words</a> for a complete list. In general, even if it’s
+allowed, it’s best to not use other function names (e.g.,
+<code>c</code>, <code>T</code>, <code>mean</code>, <code>data</code>,
+<code>df</code>, <code>weights</code>). If in doubt, check the help to
+see if the name is already in use.</li>
 <li>
 <strong>R is case sensitive</strong>: <code>age</code> is different
 from <code>Age</code> and <code>y</code> is different from
@@ -3060,7 +3071,7 @@ are there?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The data contains 10,000 observations and 11 variables.</p>
 <ul>
@@ -3433,7 +3444,7 @@ What is this telling us?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><p>Highest checkouts:
@@ -4666,7 +4677,7 @@ with subsets of data.</li>
 </div>
 </section></section><section id="aio-04-data-viz-ggplot"><p>Content from <a href="04-data-viz-ggplot.html">Data Visualisation with ggplot2</a></p>
 <hr>
-<p>Last updated on 2026-02-03 |
+<p>Last updated on 2026-02-19 |
 
         <a href="https://github.com/librarycarpentry/lc-r/edit/main/episodes/04-data-viz-ggplot.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4769,8 +4780,9 @@ but is not one of the core tidyverse packages loaded with
 R.</p>
 <p>We also load the <code>books_reformatted</code> data we saved in the
 previous lesson. Here, we’ll assign it to <code>books2</code>. You can
-create the reformatted data by running the codes from <a href="https://librarycarpentry.github.io/lc-r/03-data-cleaning-and-transformation.html#exporting-data" class="external-link">here</a>
-or by loading the saved CSV file from previous episode.</p>
+create the reformatted data by running the <a href="https://librarycarpentry.github.io/lc-r/03-data-cleaning-and-transformation.html#exporting-data" class="external-link">codes
+for exporting data</a> or by loading the saved CSV file from previous
+episode.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -4827,16 +4839,23 @@ various aesthetics of the plot, e.g. the x and y axis.</li>
 <li>The <code>geom_function</code> argument defines the type of plot,
 e.g. barplot, scatter plot, boxplot.</li>
 </ul>
-<p>::::::::::::::::::::::::::::::::::::::::::::; callout</p>
-</section><section><h2 class="section-heading" id="ggplot2-versus-ggplot">
-<code>ggplot2</code> versus <code>ggplot</code>
-<a class="anchor" aria-label="anchor" href="#ggplot2-versus-ggplot"></a>
-</h2>
-<hr class="half-width">
+<div id="ggplot2-versus-ggplot" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="ggplot2-versus-ggplot" class="callout-inner">
+<h3 class="callout-title">
+<code>ggplot2</code> versus
+<code>ggplot</code>
+</h3>
+<div class="callout-content">
 <p>People are sometimes confused between <code>ggplot2</code> and
 <code>ggplot</code>. The former refers to the name of the package, while
 the latter refers to the function that you run.</p>
-<p>:::::::::::::::::::::::::::::::::::::::::</p>
+</div>
+</div>
+</div>
 <p>When you run the <code>ggplot()</code> function, it plots directly to
 the Plots tab in the Files, Plots, Packages, and Help pane (lower
 right). Alternatively, you can assign a plot to an R object, then call
@@ -5173,7 +5192,7 @@ where the shape (of the density of points) is drawn.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5226,7 +5245,7 @@ get the error <code>object 'subCollection' not found</code> or
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5282,7 +5301,7 @@ the <code>scale_y_log10</code> argument.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5545,7 +5564,7 @@ diagonal:
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5681,7 +5700,7 @@ above.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5775,7 +5794,314 @@ categorical variable.</li>
 </div>
 </div>
 </div>
-</section></section>
+</section></section><section id="aio-05-reproducible-reports"><p>Content from <a href="05-reproducible-reports.html">Reproducible Reports with Quarto</a></p>
+<hr>
+<p>Last updated on 2026-02-19 |
+
+        <a href="https://github.com/librarycarpentry/lc-r/edit/main/episodes/05-reproducible-reports.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How can I combine my code, results, and narrative into a single
+document?</li>
+<li>How can I automatically update my reports when my data changes?</li>
+<li>What is Quarto and how does it differ from a standard R script?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Describe the value of reproducible reporting.</li>
+<li>Create a new Quarto document (<code>.qmd</code>) in RStudio.</li>
+<li>Use Markdown syntax to format text.</li>
+<li>Create and run code chunks within a Quarto document.</li>
+<li>Render a Quarto document to an HTML report.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="introduction-to-reproducible-reporting">Introduction to Reproducible Reporting<a class="anchor" aria-label="anchor" href="#introduction-to-reproducible-reporting"></a>
+</h2>
+<hr class="half-width">
+<p>So far, we have been writing code in <code>.R</code> scripts. This is
+excellent for data analysis, but what happens when you need to share
+your findings with a colleague or a library director? You might copy a
+plot into a Word document or an email, then type out your
+interpretation.</p>
+<p>But what if the data changes next month? You would have to re-run
+your script, re-save the plot, copy it back into Word, and update your
+text. This manual process is prone to errors and tedious.</p>
+<p><strong>Quarto</strong> allows you to combine your code, its output
+(plots, tables), and your narrative text into a single document. When
+you “render” the document, R runs the code and produces a polished
+report (HTML, PDF, or Word) automatically.</p>
+</section><section><h2 class="section-heading" id="creating-a-quarto-document">Creating a Quarto Document<a class="anchor" aria-label="anchor" href="#creating-a-quarto-document"></a>
+</h2>
+<hr class="half-width">
+<p>To create a new Quarto document in RStudio:</p>
+<ol style="list-style-type: decimal">
+<li>Click the <strong>File</strong> menu.</li>
+<li>Select <strong>New File</strong> &gt; <strong>Quarto
+Document…</strong>
+</li>
+<li>In the dialog box, give your document a <strong>Title</strong>
+(e.g., “Library Usage Report”) and enter your name as
+<strong>Author</strong>.</li>
+<li>Ensure <strong>HTML</strong> is selected as the output format.</li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+<p>RStudio will open a new file with some example content. Notice the
+file extension is <code>.qmd</code>.</p>
+<div id="quarto-vs.-rmarkdown" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="quarto-vs.-rmarkdown" class="callout-inner">
+<h3 class="callout-title">Quarto vs. RMarkdown</h3>
+<div class="callout-content">
+<p>If you have used R before, you might be familiar with RMarkdown
+(<code>.Rmd</code>). Quarto (<code>.qmd</code>) is the next-generation
+version of RMarkdown. It works very similarly but supports more
+languages (like Python and Julia) and has better features for scientific
+publishing.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="anatomy-of-a-quarto-document">Anatomy of a Quarto Document<a class="anchor" aria-label="anchor" href="#anatomy-of-a-quarto-document"></a>
+</h2>
+<hr class="half-width">
+<p>A Quarto document has three main parts:</p>
+<div class="section level3">
+<h3 id="the-yaml-header">1. The YAML Header<a class="anchor" aria-label="anchor" href="#the-yaml-header"></a>
+</h3>
+<p>At the very top, enclosed between two lines of <code>---</code>, is
+the <strong>YAML Header</strong>. This contains metadata about the
+document.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Library Usage Report"</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Your Name"</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="pp">---</span></span></code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="markdown-text">2. Markdown Text<a class="anchor" aria-label="anchor" href="#markdown-text"></a>
+</h3>
+<p>The white space is where you write your narrative. You use
+<strong>Markdown</strong> syntax to format text.</p>
+<ul>
+<li>
+<code>**Bold**</code> for <strong>bold text</strong>
+</li>
+<li>
+<code>*Italics*</code> for <em>italics</em>
+</li>
+<li>
+<code># Heading 1</code> for a main title</li>
+<li>
+<code>## Heading 2</code> for a section title</li>
+<li>
+<code>- List item</code> for bullet points</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="code-chunks">3. Code Chunks<a class="anchor" aria-label="anchor" href="#code-chunks"></a>
+</h3>
+<p>Code chunks are where your R code lives. They start with
+<code>```{r}</code> and end with <code>```</code>.</p>
+<pre><code>
+``` r
+# This is a code chunk
+summary(cars)
+```
+
+``` output
+     speed           dist
+ Min.   : 4.0   Min.   :  2.00
+ 1st Qu.:12.0   1st Qu.: 26.00
+ Median :15.0   Median : 36.00
+ Mean   :15.4   Mean   : 42.98
+ 3rd Qu.:19.0   3rd Qu.: 56.00
+ Max.   :25.0   Max.   :120.00
+```</code></pre>
+<p>You can insert a new chunk by clicking the <strong>+C</strong> button
+in the editor toolbar, or by pressing
+<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>I</kbd> (Windows/Linux) or
+<kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd> (Mac).</p>
+</div>
+</section><section><h2 class="section-heading" id="your-first-report">Your First Report<a class="anchor" aria-label="anchor" href="#your-first-report"></a>
+</h2>
+<hr class="half-width">
+<p>Let’s clean up the example file and create a report using our
+<code>books</code> data.</p>
+<ol style="list-style-type: decimal">
+<li>Delete everything in the file <em>below</em> the YAML header.</li>
+<li>Add a new <strong>setup</strong> code chunk to load our libraries
+and prepare the data.</li>
+</ol>
+<p>```{{r}} #| label: setup #| include: false</p>
+<p>library(tidyverse)</p>
+</section><div class="section level1">
+<h1 id="load-data-and-rename-columns-for-clarity">Load data and rename columns for clarity<a class="anchor" aria-label="anchor" href="#load-data-and-rename-columns-for-clarity"></a>
+</h1>
+<p>books2 &lt;- read_csv(“data/books.csv”) %&gt;% rename( subCollection
+= BCODE1, tot_chkout = TOT.CHKOUT, format = BCODE2 ) %&gt;% mutate(
+subCollection = recode(subCollection, “-” = “general collection”, j =
+“juvenile”, b = “k-12 materials” ) )</p>
+<pre><code>
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Chunk Options
+
+Notice the lines starting with `#|`. These are **chunk options**.
+- `#| label: setup` gives the chunk a name.
+- `#| include: false` runs the code but hides the code and output from the final report. This is great for loading data silently.
+
+:::::::::::::::::::::::::::::::::::::::::
+
+### Adding Analysis
+
+Now, let's add a section header and some text.
+
+```markdown
+## High Usage Items
+
+We are analyzing items with more than 10 checkouts to understand circulation patterns across sub-collections.</code></pre>
+<p>Next, insert a new code chunk and paste the plotting code we
+developed in the previous episode (ggplot2).</p>
+<pre><code>&lt;img src="fig/05-reproducible-reports-rendered-plot-high-usage-1.png" alt="" style="display: block; margin: auto;" /&gt;</code></pre>
+<p>Setting <code>#| echo: false</code> will display the <em>plot</em> in
+the report, but hide the R <em>code</em> that generated it. This is
+often preferred for reports intended for non-coders.</p>
+<div class="section level2">
+<h2 id="rendering-the-document">Rendering the Document<a class="anchor" aria-label="anchor" href="#rendering-the-document"></a>
+</h2>
+<p>Now comes the magic. Click the <strong>Render</strong> button (blue
+arrow icon) at the top of the editor pane.</p>
+<p>RStudio will: 1. Run all your code chunks from scratch. 2. Generate
+the plots and results. 3. Combine them with your text. 4. Create a new
+file named <code>library_usage_report.html</code> in your project
+folder. 5. Open a preview of the report.</p>
+<div id="challenge-add-a-summary-table" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-add-a-summary-table" class="callout-inner">
+<h3 class="callout-title">Challenge: Add a Summary Table</h3>
+<div class="callout-content">
+<ol style="list-style-type: decimal">
+<li>Add a new header <code>## Summary Statistics</code> to your Quarto
+document.</li>
+<li>Insert a new code chunk.</li>
+<li>Write code to calculate the mean checkouts per format (Hint: use
+<code>group_by(format)</code> and <code>summarize()</code>).</li>
+<li>Render the document again to see your new table included in the
+report.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>Add this to your document:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">## Summary Statistics</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>The table below shows the average checkouts for each item format.</span></code></pre>
+</div>
+<pre><code>
+``` r
+books2 %&gt;%
+  group_by(format) %&gt;%
+  summarize(mean_checkouts = mean(tot_chkout, na.rm = TRUE)) %&gt;%
+  arrange(desc(mean_checkouts))
+```
+
+``` output
+# A tibble: 10 × 2
+   format       mean_checkouts
+   &lt;chr&gt;                 &lt;dbl&gt;
+ 1 map                10.6
+ 2 book                3.23
+ 3 kit/object          1.33
+ 4 cd-rom              0.333
+ 5 e-gov doc           0.0402
+ 6 image               0.0275
+ 7 microform           0.00122
+ 8 database            0
+ 9 online video        0
+10 serial              0
+```</code></pre>
+<p>Render the document to see the updated report.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="why-this-matters">Why This Matters<a class="anchor" aria-label="anchor" href="#why-this-matters"></a>
+</h2>
+<p>By using Quarto, your report is now
+<strong>reproducible</strong>.</p>
+<p>If you download a new version of <code>books.csv</code> next month:
+1. Save it to your <code>data/</code> folder. 2. Open your Quarto
+document. 3. Click <strong>Render</strong>.</p>
+<p>Your report will automatically update with the new data, creating a
+fresh plot and table without you having to copy-paste a single
+thing.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>
+<strong>Quarto</strong> allows you to mix code and text to create
+reproducible reports.</li>
+<li>Use the <strong>YAML header</strong> to configure document metadata
+like title and output format.</li>
+<li>
+<strong>Code chunks</strong> run R code and can display or hide
+input/output using options like <code>#| echo: false</code>.</li>
+<li>
+<strong>Rendering</strong> the document executes the code and
+produces the final output (HTML, PDF, etc.).</li>
+<li>This workflow saves time and reduces errors when reporting on data
+that changes over time.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></section>
 </div>
     </main>
 </div>
@@ -5825,8 +6151,8 @@ categorical variable.</li>
   "url": "https://librarycarpentry.github.io/lc-r/aio.html",
   "identifier": "https://librarycarpentry.github.io/lc-r/aio.html",
   "dateCreated": "2019-05-30",
-  "dateModified": "2026-02-17",
-  "datePublished": "2026-02-17"
+  "dateModified": "2026-02-19",
+  "datePublished": "2026-02-19"
 }
 
   </script><script>
