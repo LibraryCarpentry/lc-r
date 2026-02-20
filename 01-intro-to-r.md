@@ -1,0 +1,1360 @@
+---
+title: Introduction to R
+source: Rmd
+teaching: 50
+exercises: 30
+---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Assign values to objects in R.
+- Learn how to name objects.
+- Use comments to inform script.
+- Solve simple arithmetic operations in R.
+- Call functions and use arguments to change their default options.
+- Where to get help with R functions and packages.
+- Recognise the different data types in R.
+- Create, inspect and manipulate the contents of a vector.
+- Subset and extract values from vectors.
+- Analyze vectors with missing data.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- What is an object?
+- What is a function and how can we pass arguments to functions?
+- How can values be initially assigned to variables of different data types?
+- What are the different data types in R?
+- How can a vector be created What are the available data types?
+- How can subsets be extracted from vectors?
+- How does R treat missing values?
+- How can we deal with missing values in R?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+## Creating objects in R
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Objects vs. variables
+
+What are known as `objects` in `R` are known as `variables` in many other
+programming languages. Depending on the context, `object` and `variable` can
+have drastically different meanings. However, in this lesson, the two words
+are used synonymously. For more information see:
+[https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+We will start by typing a simple mathematical operation in the console:
+
+
+``` r
+3 + 5
+```
+
+``` output
+[1] 8
+```
+
+``` r
+7 * 2   # multiply 7 by 2
+```
+
+``` output
+[1] 14
+```
+
+``` r
+sqrt(36) # take the square root of 36
+```
+
+``` output
+[1] 6
+```
+
+However, to do useful and interesting things, we need to assign *values* to
+*objects*. 
+
+To create an object, we need to provide:
+- a name (e.g. 'first_number')
+- a value (e.g. '1')
+- the assignment operator ('\<-')
+
+
+``` r
+time_minutes <- 5        # assign the number 5 to the object time_minutes
+```
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## The assignment operator `<-`
+
+`<-` is the assignment operator. It assigns values on the right to objects on
+the left. Here we are creating a symbol called `time_minutes` and assigning it
+the numeric value 5. Some R users would say "`time_minutes` *gets* 5."
+`time_minutes` is now a *numeric vector* with one element.
+
+The ‘=’ works too, but is most commonly used in passing arguments to functions 
+(more on functions later). There are shortcuts for the R assignment operator:
+- Windows shortcut: <KBD>Alt</KBD>\+<KBD>\-</KBD>
+- Mac shortcut: <KBD>Option</KBD>\+<KBD>\-</KBD>
+
+:::::::::::::::::::::::::::::::::::::::::  
+
+
+When you assign something to a symbol, nothing happens in the console, but in
+the Environment pane in the upper right, you will notice a new object,
+`time_minutes`.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Tips on naming objects
+
+Here are some tips for naming objects in R:
+
+- **Do not use names of functions that already exist in R:** There are some
+  fundamental functions in R (e.g., `if`, `else`, `for`, see the
+  [list of reserved words](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
+  for a complete list. In general, even if it's allowed, it's best to not use
+  other function names (e.g., `c`, `T`, `mean`, `data`, `df`, `weights`). If in
+  doubt, check the help to see if the name is already in use.
+- **R is case sensitive**: `age` is different from `Age` and `y` is different
+  from `Y`.
+- **No blank spaces or symbols other than underscores**: R users get around this
+  in a couple of ways, either through capitalization (e.g. `myData`) or
+  underscores (e.g. `my_data`). It's also best to avoid dots (`.`) within an
+  object name as in `my.dataset`. There are many functions in R with dots in their
+  names for historical reasons, but dots have a special meaning in R (for methods)
+  and other programming languages.
+- **Do not begin with numbers or symbols**: `2x` is not valid, but `x2` is.
+- **Be descriptive, but make your variable names short**: It's good practice to
+  be descriptive with your variable names. If you're loading in a lot of data,
+  choosing `myData` or `x` as a name may not be as helpful as, say, `ebookUsage`.
+  Finally, keep your variable names short, since you will likely be typing them in
+  frequently.
+
+::::::::::::::::::::::::::::::::::::::::: 
+
+
+## Evaluating Expressions
+
+If you now type `time_minutes` into the console, and press Enter on your keyboard, R will
+*evaluate* the expression. In this case, R will *print* the elements that are
+assigned to `time_minutes` (the number 5). We can do this easily since y only has one
+element, but if you do this with a large dataset loaded into R, it will overload
+your console because it will print the entire thing. The `[1]` indicates that
+the number 5 is the first element of this vector.
+
+When assigning a value to an object, R does not print anything to the console. You
+can force R to print the value by using parentheses or by typing
+the object name:
+
+
+``` r
+time_minutes <- 5    # doesn't print anything
+(time_minutes <- 5)  # putting parenthesis around the call prints the value of y
+```
+
+``` output
+[1] 5
+```
+
+``` r
+time_minutes         # so does typing the name of the object
+```
+
+``` output
+[1] 5
+```
+
+``` r
+print(time_minutes)  # so does using the print() function.
+```
+
+``` output
+[1] 5
+```
+
+Now that R has `time_minutes` in memory, we can do arithmetic with it. For
+instance, we may want to convert it into seconds (60 seconds in 1 minute):
+
+
+``` r
+60 * time_minutes
+```
+
+``` output
+[1] 300
+```
+
+We can also change an object's value by assigning it a new one:
+
+
+``` r
+time_minutes <- 10
+60 * time_minutes
+```
+
+``` output
+[1] 600
+```
+
+This overwrites the previous value without prompting you, so be careful! Also,
+assigning a value to one object does not change the values of other objects  For
+example, let's store the time in seconds in a new object, `time_seconds`:
+
+
+``` r
+time_seconds <- 60 * time_minutes
+```
+
+Then change `time_minutes` to 30:
+
+
+``` r
+time_minutes <- 30
+```
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+What do you think is the current content of the object `time_seconds`? 600 or
+1800?
+
+:::::::::::::::  solution
+
+## Solution
+
+The value of `time_seconds` is still 600 because you have not
+re-run the line `time_seconds <- 60 * time_minutes` since
+changing the value of `time_minutes`.
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Removing objects from the environment
+
+To remove an object from your R environment, use the `rm()` function. Remove
+multiple objects with `rm(list = c("add", "objects", "here))`, adding the
+objects in `c()` using quotation marks. 
+
+To remove all objects, use `rm(list = ls())` or click the broom icon in the 
+Environment Pane, next to "Import Dataset."
+
+
+``` r
+x <- 5
+y <- 10
+z <- 15
+rm(x)  # remove x
+rm(list =c("y", "z"))  # remove y and z
+rm(list = ls())  # remove all objects
+```
+
+:::::::::::::::::::::::::::::::::::::::  callout
+
+## Tip: Use whitespace for readability
+
+The white spaces surrounding the assignment operator `<-` are unnecessary. 
+However, including them does make your code easier to read. There are several 
+style guides you can follow, and choosing one is up to you, but consistency is key!
+
+A style guide we recommend is the [Tidyverse style guide](https://style.tidyverse.org/).
+
+:::::::::::::::::::::::::::::::::::::::  
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+Create two variables `my_length` and `my_width` and assign them any numeric values you want.
+Create a third variable `my_area` and give it a value based on the the multiplication of `my_length` and `my_width`.
+Show that changing the values of either `my_length` and `my_width` does not affect the value of `my_area`.
+
+:::::::::::::::  solution
+
+## Solution
+
+
+``` r
+my_length <- 2.5
+my_width <- 3.2
+my_area <- my_length * my_width
+area
+```
+
+``` error
+Error:
+! object 'area' not found
+```
+
+``` r
+# change the values of my_length and my_width
+my_length <- 7.0
+my_width <- 6.5
+# the value of my_area isn't changed
+my_area
+```
+
+``` output
+[1] 8
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Comments
+
+All programming languages allow the programmer to include comments in their
+code. To do this in R we use the `#` character. Anything to the right of the `#`
+sign and up to the end of the line is treated as a comment and will not be
+evaluated by R. You can start lines with comments or include them after any code
+on the line.
+
+Comments are essential to helping you remember what your code does, and
+explaining it to others. Commenting code, along with documenting how data is
+collected and explaining what each variable represents, is essential to
+reproducible research. See the Software Carpentry lesson on [R for Reproducible
+Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/).
+
+
+``` r
+time_minutes <- 5    # time in minutes
+time_seconds <- 60 * time_minutes	# convert to seconds
+time_seconds				# print time in seconds
+```
+
+``` output
+[1] 300
+```
+
+RStudio makes it easy to comment or uncomment a paragraph: after selecting the
+lines you  want to comment, press at the same time on your keyboard
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd>. If you only want to comment
+out one line, you can put the cursor at any location of that line (i.e. no need
+to select the whole line), then press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
+<kbd>C</kbd>.
+
+
+## Functions and their arguments
+
+R is a "functional programming language," meaning it contains a number of
+*functions* you use to do something with your data. Functions are "canned
+scripts" that automate more complicated sets of commands. Many functions are
+predefined, or can be made available by importing R *packages* as we saw in the
+"Before We Start" lesson.
+
+*Call* a function on a variable by entering the function into the console,
+followed by parentheses and the variables. A function usually gets one or more
+inputs called *arguments*. For example, if you want to take the sum of 3 and 4,
+you can type in `sum(3, 4)`. In this case, the arguments must be a number, and
+the return value (the output) is the sum of those numbers. An example of a
+function call is:
+
+
+``` r
+sum(3, 4)
+```
+
+The function `is.function()` will check if an argument is a function in R. If it
+is a function, it will print `TRUE` to the console.
+
+Functions can be nested within each other. For example, `sqrt()` takes the
+square root of the number provided in the function call. Therefore you can run
+`sum(sqrt(9), 4)` to take the sum of the square root of 9 and add it to 4.
+
+Typing a question mark before a function will pull the help page up in the
+Files, Plots, Packages, and Help pane in the lower right. Type `?sum` to view the help page for the
+`sum` function. You can also call `help(sum)`. This will provide the description
+of the function, how it is to be used, and the arguments.
+
+In the case of `sum()`, the ellipses `. . .` represent an unlimited number of
+numeric elements.
+
+
+``` r
+is.function(sum)        # check to see if sum() is a function
+sum(3, 4, 5, 6, 7)      # sum takes an unlimited number (. . .) of numeric elements
+```
+
+<br>
+
+### Arguments
+
+Some functions take arguments which may either be specified by the user, or, if
+left out, take on a *default* value. However, if you want something specific,
+you can specify a value of your choice which will be used instead of the
+default. This is called *passing* an argument to the function.
+
+For example, `sum()` takes the argument option `na.rm`. If you check the help
+page for sum (call `?sum`), you can see that `na.rm` requires a logical
+(`TRUE/FALSE`) value specifying whether `NA` values (missing data) should be
+removed when the argument is evaluated.
+
+By default, `na.rm` is set to `FALSE`, so evaluating a sum with missing
+values will return `NA`:
+
+
+``` r
+sum(3, 4, NA)                # 
+```
+
+``` output
+[1] NA
+```
+
+Even though we do not see the argument here, it is operating in the background,
+as the `NA` value remains. 3 + 4 + `NA` is `NA`.
+
+But setting the argument `na.rm` to `TRUE` will remove the `NA`:
+
+
+``` r
+sum(3, 4, NA, na.rm = TRUE)
+```
+
+``` output
+[1] 7
+```
+
+It is very important to understand the different arguments that functions take,
+the values that can be added to those functions, and the default arguments.
+Arguments can be anything, not only `TRUE` or `FALSE`, but also other objects.
+Exactly what each argument means differs per function, and must be looked up in
+the documentation.
+
+It's good practice to put the non-optional arguments first in your function
+call, and to specify the names of all optional arguments.  If you don't, someone
+reading your code might have to look up the definition of a function with
+unfamiliar arguments to understand what you're doing.
+
+
+## Getting help
+
+You can check the current version of R by running:
+
+
+``` r
+sessionInfo()
+```
+
+``` output
+R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 24.04.3 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+time zone: Etc/UTC
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] compiler_4.5.2  cli_3.6.5       tools_4.5.2     pillar_1.11.1  
+ [5] otel_0.2.0      glue_1.8.0      yaml_2.3.12     vctrs_0.7.0    
+ [9] knitr_1.51      xfun_0.56       lifecycle_1.0.5 rlang_1.1.7    
+[13] renv_1.1.6      evaluate_1.0.5 
+```
+
+```
+R version 3.2.3 (2015-12-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 14.04.3 LTS
+
+locale:
+[1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8
+[4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8
+[7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base
+
+loaded via a namespace (and not attached):
+[1] tools_3.2.3     packrat_0.4.9-1
+```
+
+<br>
+
+### **Using the ? for Help files**
+
+R provide help files for functions. The general syntax to search for help 
+on any function is the ? or help() command:
+
+
+``` r
+?function_name
+```
+
+``` output
+No documentation for 'function_name' in specified packages and libraries:
+you could try '??function_name'
+```
+
+``` r
+help(function_name)
+```
+
+``` output
+No documentation for 'function_name' in specified packages and libraries:
+you could try '??function_name'
+```
+
+For example, take a look at the ?summary() function.
+
+
+``` r
+?summary()
+```
+
+This will load up a Help page on the bottom right panel in RStudio.
+
+Each help page is broken down into sections:
+
+- **Description**: An extended description of what the function does.
+- **Usage**: The arguments of the function and their default values (which can be changed).
+- **Arguments**: An explanation of the data each argument is expecting.
+- **Details**: Any important details to be aware of.
+- **Value**: The data the function returns.
+- **See Also**: Any related functions you might find useful.
+- **Examples**: Some examples for how to use the function.
+
+You can also call out the Help file for `special operators`.
+
+
+``` r
+?"<-"
+?`<-`
+```
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Tip: Use TAB to see a list of arguments
+
+After typing out a function, you can call out a list of available arguments 
+for that particular function by pressing the <kbd>TAB<kbd> key within the function 
+brackets.
+
+:::::::::::::::::::::::::::::::::::::::: 
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+### Tip: Package vignettes
+
+Many packages come with “vignettes”--these are tutorials and extended 
+documentation. Without any arguments, vignette() will list all vignettes 
+for all installed packages; vignette(package="package-name") will list all 
+available vignettes for package-name, and vignette("vignette-name") will 
+open the specified vignette.
+
+:::::::::::::::::::::::::::::::::::::::: 
+
+<br>
+
+### **Using the ?? for a fuzzy search**
+
+If you’re not sure what package a function is in or how it’s specifically spelled, you can do a fuzzy search. 
+
+
+``` r
+??function_name
+```
+
+``` output
+No vignettes or demos or help files found with alias or concept or
+title matching 'function_name' using regular expression matching.
+```
+
+A fuzzy search is when you search for an approximate string match. For example, you may want to look for a function that performs the chi-squared test:
+
+
+``` r
+??chisquare
+```
+
+:::::::::::::::::::::::::::::::::::::::  discussion
+
+## Discussion
+
+Type in `?round` at the console and then look at the output in the Help pane.
+What other functions exist that are similar to `round`?
+How do you use the `digits` parameter in the round function?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+## Other ways to get help
+
+As mentioned above, you can use a question mark `?` to know more about a function (for example, typing `?round`). However, there are several other ways that people often get help when they are stuck with their R code.
+
+* Search the internet: paste the last line of your error message or “R” and a short description of what you want to do into your favourite search engine and you will usually find several examples where other people have encountered the same problem and came looking for help.
+  * Stack Overflow can be particularly helpful for this: answers to questions are presented as a ranked thread ordered according to how useful other users found them to be. You can search using the `[r]` tag. 
+  * **Take care**: copying and pasting code written by somebody else is risky unless you understand exactly what it is doing!
+* Ask somebody “in the real world”. If you have a colleague or friend with more expertise in R than you have, show them the problem you are having and ask them for help.
+* Sometimes, the act of articulating your question can help you to identify what is going wrong. This is known as [“rubber duck debugging”](https://en.wikipedia.org/wiki/Rubber_duck_debugging) among programmers.
+
+### Generative AI
+
+::::::::::::::::::::::::::::: instructor
+
+### Choose how to teach this section
+The section on generative AI is intended to be concise but Instructors may choose to devote more time to the topic in a workshop.
+Depending on your own level of experience and comfort with talking about and using these tools, you could choose to do any of the following:
+
+* Explain how large language models work and are trained, and/or the difference between generative AI, other forms of AI that currently exist, and the limits of what LLMs can do (e.g., they can't "reason").
+* Demonstrate how you recommend that learners use generative AI.
+* Discuss the ethical concerns listed below, as well as others that you are aware of, to help learners make an informed choice about whether or not to use generative AI tools.
+
+This is a fast-moving technology. 
+If you are preparing to teach this section and you feel it has become outdated, please open an issue on the lesson repository to let the Maintainers know and/or a pull request to suggest updates and improvements.
+
+::::::::::::::::::::::::::::::::::::::::
+
+It is increasingly common for people to use _generative AI_ chatbots such as ChatGPT to get help while coding.
+You will probably receive some useful guidance by presenting your error message to the chatbot and asking it what went wrong.
+
+However, the way this help is provided by the chatbot is different.
+Answers on Stack Overflow have (probably) been given by a human as a direct response to the question asked.
+But generative AI chatbots, which are based on advanced statistical models called Large Language Models (or LLMs), respond by generating the _most likely_ sequence of text that would follow the prompt they are given.
+
+While responses from generative AI tools can often be helpful, they are not always reliable. 
+These tools sometimes generate plausible but incorrect or misleading information, so (just as with an answer found on the internet) it is essential to verify their accuracy.
+You need the knowledge and skills to be able to understand these responses, to judge whether or not they are accurate, and to fix any errors in the code it offers you.
+
+In addition to asking for help, programmers can use generative AI tools to generate code from scratch; extend, improve and reorganize existing code; translate code between programming languages; figure out what terms to use in a search of the internet; and more.
+However, there are drawbacks that you should be aware of.
+
+The models used by these tools have been "trained" on very large volumes of data, much of it taken from the internet, and the responses they produce reflect that training data, and may recapitulate its inaccuracies or biases.
+The environmental costs (energy and water use) of LLMs are a lot higher than other technologies, both during development (known as training) and when an individual user uses one (also called inference). For more information see the [AI Environmental Impact Primer](https://huggingface.co/blog/sasha/ai-environment-primer) developed by researchers at HuggingFace, an AI hosting platform. 
+Concerns also exist about the way the data for this training was obtained, with questions raised about whether the people developing the LLMs had permission to use it.
+Other ethical concerns have also been raised, such as reports that workers were exploited during the training process.
+
+**We recommend that you avoid getting help from generative AI during the workshop** for several reasons:
+
+1. For most problems you will encounter at this stage, help and answers can be found among the first results returned by searching the internet.
+2. The foundational knowledge and skills you will learn in this lesson by writing and fixing your own programs  are essential to be able to evaluate the correctness and safety of any code you receive from online help or a generative AI chatbot. 
+   If you choose to use these tools in the future, the expertise you gain from learning and practicing these fundamentals on your own will help you use them more effectively.
+3. As you start out with programming, the mistakes you make will be the kinds that have also been made -- and overcome! -- by everybody else who learned to program before you. 
+  Since these mistakes and the questions you are likely to have at this stage are common, they are also better represented than other, more specialized problems and tasks in the data that was used to train generative AI tools.
+  This means that a generative AI chatbot is _more likely to produce accurate responses_ to questions that novices ask, which could give you a false impression of how reliable they will be when you are ready to do things that are more advanced.
+  
+
+## Vectors and data types
+
+
+
+A vector is the most common and basic data type in R, and is pretty much the
+workhorse of R. A vector is a sequence of elements of the same *type*. Vectors
+can only contain "homogenous" data--in other words, all data must be of the same
+type. The type of a vector determines what kind of analysis you can do on it.
+For example, you can perform mathematical operations on `numeric` objects, but
+not on `character` objects.
+
+We can assign a series of values to a vector using the `c()` function. `c()`
+stands for combine. If you read the help files for `c()` by calling `help(c)`,
+you can see that it takes an unlimited `. . .` number of arguments.
+
+For example we can create a vector of checkouts for a collection of books and
+assign it to a new object `checkouts`:
+
+
+``` r
+checkouts <- c(25, 15, 18)
+checkouts
+```
+
+``` output
+[1] 25 15 18
+```
+
+A vector can also contain characters. For example, we can have
+a vector of the book titles (`title`) and authors (`author`):
+
+
+``` r
+title <- c("Macbeth","Dracula","1984")
+```
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Tip: Using quotes
+
+The quotes around "Macbeth", etc. are essential here. Without the quotes R will
+assume there are objects called `Macbeth` and `Dracula` in the environment. As
+these objects don't yet exist in R's memory, there will be an error message.
+
+::::::::::::::::::::::::::::::::::::::::
+
+<br>
+
+### **Inspecting a vector**
+
+There are many functions that allow you to inspect the content of a vector.
+
+For instance, `length()` tells you how many elements are in a particular vector:
+
+
+``` r
+length(checkouts)  # print the number of values in the checkouts vector
+```
+
+``` output
+[1] 3
+```
+
+An important feature of a vector, is that all of the elements are the same type
+of data. The function `class()` indicates the class (the type of element) of an
+object:
+
+
+``` r
+class(checkouts)
+```
+
+``` output
+[1] "numeric"
+```
+
+``` r
+class(title)
+```
+
+``` output
+[1] "character"
+```
+
+Type `?str` into the console to read the description of the `str` function. You
+can call `str()` on an R object to compactly display information about it,
+including the data type, the number of elements, and a printout of the first few
+elements.
+
+
+``` r
+str(checkouts)
+```
+
+``` output
+ num [1:3] 25 15 18
+```
+
+``` r
+str(title)
+```
+
+``` output
+ chr [1:3] "Macbeth" "Dracula" "1984"
+```
+
+You can use the `c()` function to add other elements to your vector:
+
+
+``` r
+author <- "Stoker"
+author <- c(author, "Orwell") # add to the end of the vector
+author <- c("Shakespeare", author)
+author
+```
+
+``` output
+[1] "Shakespeare" "Stoker"      "Orwell"     
+```
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Reminder
+
+To know what a function does, type `?function_name` into the console. 
+For example, you can type `?str` to read the description for the `str()` function.
+
+::::::::::::::::::::::::::::::::::::::::
+
+
+In the first line, we create a character vector `author` with a single value
+`"Stoker"`. In the second line, we add the value `"Orwell"` to it, and save the
+result back into `author`. Then we add the value `"Shakespeare"` to the
+beginning, again saving the result back into `author`.
+
+We can do this over and over again to grow a vector, or assemble a dataset.
+As we program, this may be useful to add results that we are collecting or
+calculating.
+
+Vectors are one of the many **data structures** that R uses. Other important
+ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`),
+factors (`factor`) and arrays (`array`).
+
+:::::::::::::::::::::::::::::::::::::::: callout
+
+## Atomic vectors
+
+An **atomic vector** is the simplest R **data type** and is a linear vector of a
+single type. Above, we saw 2 of the 6 main **atomic vector** types  that R uses:
+`"character"` and `"numeric"` (or `"double"`). These are the basic building
+blocks that all R objects are built from. The other 4 **atomic vector** types
+are:
+
+- `"logical"` for `TRUE` and `FALSE` (the boolean data type)
+- `"integer"` for integer numbers (e.g., `2L`, the `L` indicates to R that it's an integer)
+- `"complex"` to represent complex numbers with real and imaginary parts (e.g.,
+  `1 + 4i`) and that's all we're going to say about them
+- `"raw"` for bitstreams that we won't discuss further
+
+You can check the type of your vector using the `typeof()` function and
+inputting your vector as the argument.
+
+::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+We've seen that atomic vectors can be of type character, numeric (or double),
+integer, and logical. But what happens if we try to mix these types in a
+single vector?
+
+:::::::::::::::  solution
+
+## Solution
+
+R implicitly converts them to all be the same type.
+
+
+:::::::::::::::::::::::::
+
+What will happen in each of these examples? (hint: use `typeof()`
+to check the data type of your objects):
+
+
+``` r
+num_char <- c(1, 2, 3, "a")
+num_logical <- c(1, 2, 3, TRUE)
+char_logical <- c("a", "b", "c", TRUE)
+tricky <- c(1, 2, 3, "4")
+```
+
+Why do you think it happens?
+
+:::::::::::::::  solution
+
+## Solution
+
+Vectors can be of only one data type. R tries to
+convert (coerce) the content of this vector to find a "common
+denominator" that doesn't lose any information.
+
+
+:::::::::::::::::::::::::
+
+How many values in `combined_logical` are `"TRUE"` (as a character) in the
+following example:
+
+
+``` r
+num_logical <- c(1, 2, 3, TRUE)
+char_logical <- c("a", "b", "c", TRUE)
+combined_logical <- c(num_logical, char_logical)
+```
+
+ 
+
+:::::::::::::::  solution
+
+## Solution
+
+Only one. There is no memory of past data types, and the coercion
+happens the
+first time the vector is evaluated. Therefore, the `TRUE` in
+`num_logical`
+gets converted into a `1` before it gets converted into `"1"` in
+`combined_logical`.
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+<br>
+
+### **Coercion**
+
+You've probably noticed that objects of different types get converted into a
+single, shared type within a vector. In R, we call converting objects from one
+class into another class *coercion*. These conversions happen according to a
+hierarchy, whereby some types get preferentially coerced into other types. This
+hierarchy is: logical \< integer \< numeric \< complex \< character \< list.
+
+You can also *coerce* a vector to be a specific data type with `as.character()`,
+`as.logical()`, `as.numeric()`, etc. For example, to coerce a number to a
+character:
+
+
+``` r
+x <- as.character(200)
+```
+
+We can test this in a few ways: if we print `x` to the console, we see quotation
+marks around it, letting us know it is a character:
+
+
+``` r
+x
+```
+
+``` output
+[1] "200"
+```
+
+We can also call `class()`
+
+
+``` r
+class(x)
+```
+
+``` output
+[1] "character"
+```
+
+And if we try to add a number to `x`, we will get an error message `non-numeric argument to binary operator`\--in other words, x is `non-numeric` and cannot be
+added to a number.
+
+
+``` r
+x + 5
+```
+
+
+## Subsetting vectors
+
+If we want to subset (or extract) one or several values from a vector, we must
+provide one or several indices in square brackets. For this example, we will use
+the `state` data, which is built into R and includes data related to the 50
+states of the U.S.A. Type `?state` to see the included datasets. `state.name` is
+a built in vector in R of all U.S. states:
+
+
+``` r
+state.name
+```
+
+``` output
+ [1] "Alabama"        "Alaska"         "Arizona"        "Arkansas"      
+ [5] "California"     "Colorado"       "Connecticut"    "Delaware"      
+ [9] "Florida"        "Georgia"        "Hawaii"         "Idaho"         
+[13] "Illinois"       "Indiana"        "Iowa"           "Kansas"        
+[17] "Kentucky"       "Louisiana"      "Maine"          "Maryland"      
+[21] "Massachusetts"  "Michigan"       "Minnesota"      "Mississippi"   
+[25] "Missouri"       "Montana"        "Nebraska"       "Nevada"        
+[29] "New Hampshire"  "New Jersey"     "New Mexico"     "New York"      
+[33] "North Carolina" "North Dakota"   "Ohio"           "Oklahoma"      
+[37] "Oregon"         "Pennsylvania"   "Rhode Island"   "South Carolina"
+[41] "South Dakota"   "Tennessee"      "Texas"          "Utah"          
+[45] "Vermont"        "Virginia"       "Washington"     "West Virginia" 
+[49] "Wisconsin"      "Wyoming"       
+```
+
+``` r
+state.name[1]
+```
+
+``` output
+[1] "Alabama"
+```
+
+You can use the `:` colon to create a vector of consecutive numbers.
+
+
+``` r
+state.name[1:5] 
+```
+
+``` output
+[1] "Alabama"    "Alaska"     "Arizona"    "Arkansas"   "California"
+```
+
+If the numbers are not consecutive, you must use the `c()` function:
+
+
+``` r
+state.name[c(1, 10, 20)]
+```
+
+``` output
+[1] "Alabama"  "Georgia"  "Maryland"
+```
+
+We can also repeat the indices to create an object with more elements than the
+original one:
+
+
+``` r
+state.name[c(1, 2, 3, 2, 1, 3)]
+```
+
+``` output
+[1] "Alabama" "Alaska"  "Arizona" "Alaska"  "Alabama" "Arizona"
+```
+
+R indices start at 1. Programming languages like Fortran, MATLAB, Julia, and R
+start counting at 1, because that's what human beings typically do. Languages in
+the C family (including C++, Java, Perl, and Python) count from 0 because that's
+simpler for computers to do.
+
+<br>
+
+### **Conditional subsetting**
+
+Another common way of subsetting is by using a logical vector. `TRUE` will
+select the element with the same index, while `FALSE` will not:
+
+
+``` r
+five_states <- state.name[1:5]
+five_states[c(TRUE, FALSE, TRUE, FALSE, TRUE)]
+```
+
+``` output
+[1] "Alabama"    "Arizona"    "California"
+```
+
+Typically, these logical vectors are not typed by hand, but are the output of
+other functions or logical tests. `state.area` is a vector of state areas in
+square miles. We can use the `<` operator to return a logical vector with TRUE
+for the indices that meet the condition:
+
+
+``` r
+state.area < 10000
+```
+
+``` output
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+[37] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+[49] FALSE FALSE
+```
+
+``` r
+state.area[state.area < 10000]
+```
+
+``` output
+[1] 5009 2057 6450 8257 9304 7836 1214 9609
+```
+
+The first expression gives us a logical vector of length 50, where `TRUE`
+represents those states with areas less than 10,000 square miles. The second
+expression subsets `state.name` to include only those names where the value is
+`TRUE`.
+
+You can also specify character values. `state.region` gives the region that each
+state belongs to:
+
+
+``` r
+state.region == "Northeast"
+```
+
+``` output
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
+[37] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+[49] FALSE FALSE
+```
+
+``` r
+state.name[state.region == "Northeast"]
+```
+
+``` output
+[1] "Connecticut"   "Maine"         "Massachusetts" "New Hampshire"
+[5] "New Jersey"    "New York"      "Pennsylvania"  "Rhode Island" 
+[9] "Vermont"      
+```
+
+Again, a `TRUE/FALSE` index of all 50 states where the region is the Northeast,
+followed by a subset of `state.name` to return only those `TRUE` values.
+
+Sometimes you need to do multiple logical tests (think Boolean logic). You can
+combine multiple tests using `|` (at least one of the conditions is true, OR) or
+`&` (both conditions are true, AND). Use `help(Logic)` to read the help file.
+
+
+
+
+``` r
+state.name[state.area < 10000 | state.region == "Northeast"]
+```
+
+``` output
+ [1] "Connecticut"   "Delaware"      "Hawaii"        "Maine"        
+ [5] "Massachusetts" "New Hampshire" "New Jersey"    "New York"     
+ [9] "Pennsylvania"  "Rhode Island"  "Vermont"      
+```
+
+``` r
+state.name[state.area < 10000 & state.region == "Northeast"]
+```
+
+``` output
+[1] "Connecticut"   "Massachusetts" "New Hampshire" "New Jersey"   
+[5] "Rhode Island"  "Vermont"      
+```
+
+The first result includes both states with fewer than 10,000 sq. mi. and all
+states in the Northeast. New York, Pennsylvania, Delaware and Maine have areas
+with greater than 10,000 square miles, but are in the Northeastern U.S. Hawaii
+is not in the Northeast, but it has fewer than 10,000 square miles. The second
+result includes only states that are in the Northeast and have fewer than 10,000
+sq. mi.
+
+R contains a number of operators you can use to compare values. Use
+`help(Comparison)` to read the R help file. Note that **two equal signs** (`==`)
+are used for evaluating equality (because one equals sign (`=`) is used for
+assigning variables).
+
+
+
+A common task is to search for certain strings in a vector.  One could use the
+"or" operator `|` to test for equality to multiple values, but this can quickly
+become tedious. The function `%in%` allows you to test if any of the elements of
+a search vector are found:
+
+
+``` r
+west_coast <- c("California", "Oregon", "Washington")
+state.name[state.name == "California" | state.name == "Oregon" | state.name == "Washington"]
+```
+
+``` output
+[1] "California" "Oregon"     "Washington"
+```
+
+``` r
+state.name %in% west_coast
+```
+
+``` output
+ [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[37]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+[49] FALSE FALSE
+```
+
+``` r
+state.name[state.name %in% west_coast]
+```
+
+``` output
+[1] "California" "Oregon"     "Washington"
+```
+
+
+## Missing data
+
+As R was designed to analyze datasets, it includes the concept of missing data
+(which is uncommon in other programming languages). Missing data are represented
+in vectors as `NA`. R functions have special actions when they encounter `NA.`
+
+When doing operations on numbers, most functions will return `NA` if the data
+you are working with include missing values. This feature makes it harder to
+overlook the cases where you are dealing with missing data. As we saw above, you
+can add the argument `na.rm=TRUE` to calculate the result while ignoring the
+missing values.
+
+
+``` r
+rooms <- c(2, 1, 1, NA, 4)
+mean(rooms)
+```
+
+``` output
+[1] NA
+```
+
+``` r
+max(rooms)
+```
+
+``` output
+[1] NA
+```
+
+``` r
+mean(rooms, na.rm = TRUE)
+```
+
+``` output
+[1] 2
+```
+
+``` r
+max(rooms, na.rm = TRUE)
+```
+
+``` output
+[1] 4
+```
+
+If your data include missing values, you may want to become familiar with the
+functions `is.na()`, `na.omit()`, and `complete.cases()`. See below for
+examples.
+
+
+``` r
+## Use any() to check if any values are missing
+any(is.na(rooms))
+```
+
+``` output
+[1] TRUE
+```
+
+``` r
+## Use table() to tell you how many are missing vs. not missing
+table(is.na(rooms))
+```
+
+``` output
+
+FALSE  TRUE 
+    4     1 
+```
+
+``` r
+## Identify those elements that are not missing values.
+complete.cases(rooms)
+```
+
+``` output
+[1]  TRUE  TRUE  TRUE FALSE  TRUE
+```
+
+``` r
+## Identify those elements that are missing values.
+is.na(rooms)
+```
+
+``` output
+[1] FALSE FALSE FALSE  TRUE FALSE
+```
+
+``` r
+## Extract those elements that are not missing values.
+rooms[complete.cases(rooms)]
+```
+
+``` output
+[1] 2 1 1 4
+```
+
+You can also use `!is.na(rooms)`, which is exactly the same as
+`complete.cases(rooms)`. The exclamation mark indicates logical negation.
+
+
+``` r
+!c(TRUE, FALSE)
+```
+
+``` output
+[1] FALSE  TRUE
+```
+
+How you deal with missing data in your analysis is a decision you will have to
+make--do you remove it entirely? Do you replace it with zeros? That will depend
+on your own methodological questions.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+1. Using this vector of rooms, create a new vector with the NAs removed.
+  
+  ```r
+  rooms <- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)
+  ```
+
+2. Use the function `median()` to calculate the median of the `rooms` vector.
+
+3. Use R to figure out how many households in the room variable have more than 2 rooms.
+
+:::::::::::::::  solution
+
+## Solution
+
+
+``` r
+rooms <- c(1, 2, 1, 1, NA, 3, 1, 3, 2, 1, 1, 8, 3, 1, NA, 1)
+rooms_no_na <- rooms[!is.na(rooms)]
+# or
+rooms_no_na <- na.omit(rooms)
+# 2.
+median(rooms, na.rm = TRUE)
+```
+
+``` output
+[1] 1
+```
+
+``` r
+# 3.
+rooms_above_2 <- rooms_no_na[rooms_no_na > 2]
+length(rooms_above_2)
+```
+
+``` output
+[1] 4
+```
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now that we have learned how to write scripts, and the basics of R's data
+structures, we are ready to start working with the library catalog dataset and learn about data frames.
+
+
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Assign values to object using the assignment operator \<-. Remove existing objects using the `rm()` function.
+- Add comments in R scripts using the `#` operator.
+- Define and use R functions and arguments.
+- Getting help with the `?`, `??` and `help()` functions.
+- Define the following terms as they relate to R: object, vector, assign, call, function.
+- Create or add new objects to a vector using the c() function. Subset vectors using `[]`.
+- Deal with missing data in vectors using the is.na(), na.omit(), and complete.cases() functions.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
