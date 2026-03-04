@@ -476,9 +476,9 @@ attached base packages:
 
 loaded via a namespace (and not attached):
  [1] compiler_4.5.2  cli_3.6.5       tools_4.5.2     pillar_1.11.1  
- [5] otel_0.2.0      glue_1.8.0      yaml_2.3.12     vctrs_0.7.0    
+ [5] otel_0.2.0      glue_1.8.0      yaml_2.3.12     vctrs_0.7.1    
  [9] knitr_1.51      xfun_0.56       lifecycle_1.0.5 rlang_1.1.7    
-[13] renv_1.1.6      evaluate_1.0.5 
+[13] renv_1.1.7      evaluate_1.0.5 
 ```
 
 ```
