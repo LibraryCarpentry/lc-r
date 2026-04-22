@@ -262,6 +262,8 @@
 <li><a href="#creating-a-quarto-document">Creating a Quarto Document</a></li>
 <li><a href="#anatomy-of-a-quarto-document">Anatomy of a Quarto Document</a></li>
 <li><a href="#your-first-report">Your First Report</a></li>
+<li><a href="#rendering-the-document">Rendering the Document</a></li>
+<li><a href="#why-this-matters">Why This Matters</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -326,7 +328,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Reproducible Reports with Quarto</h1>
-        <p>Last updated on 2026-04-21 |
+        <p>Last updated on 2026-04-22 |
 
         <a href="https://github.com/librarycarpentry/lc-r/edit/main/episodes/05-reproducible-reports.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -446,21 +448,24 @@ document.</p>
 <h3 id="code-chunks">3. Code Chunks<a class="anchor" aria-label="anchor" href="#code-chunks"></a></h3>
 <p>Code chunks are where your R code lives. They start with
 <code>```{r}</code> and end with <code>```</code>.</p>
-<pre><code>
-``` r
-# This is a code chunk
-summary(cars)
-```
-
-``` output
-     speed           dist
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># This is a code chunk</span></span>
+<span><span class="fu">summary</span><span class="op">(</span><span class="va">cars</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>     speed           dist
  Min.   : 4.0   Min.   :  2.00
  1st Qu.:12.0   1st Qu.: 26.00
  Median :15.0   Median : 36.00
  Mean   :15.4   Mean   : 42.98
  3rd Qu.:19.0   3rd Qu.: 56.00
- Max.   :25.0   Max.   :120.00
-```</code></pre>
+ Max.   :25.0   Max.   :120.00  </code></pre>
+</div>
 <p>You can insert a new chunk by clicking the <strong>+C</strong> button
 in the editor toolbar, or by pressing
 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>I</kbd> (Windows/Linux) or
@@ -472,48 +477,49 @@ in the editor toolbar, or by pressing
 <ol style="list-style-type: decimal"><li>Delete everything in the file <em>below</em> the YAML header.</li>
 <li>Add a new <strong>setup</strong> code chunk to load our libraries
 and prepare the data.</li>
-</ol><p>```{{r}} #| label: setup #| include: false</p>
-<p>library(tidyverse)</p>
-</section><div class="section level1">
-<h1 id="load-data-and-rename-columns-for-clarity">Load data and rename columns for clarity<a class="anchor" aria-label="anchor" href="#load-data-and-rename-columns-for-clarity"></a></h1>
-<p>books2 &lt;- read_csv(“data/books.csv”) %&gt;% rename( subCollection
-= BCODE1, tot_chkout = TOT.CHKOUT, format = BCODE2 ) %&gt;% mutate(
-subCollection = recode(subCollection, “-” = “general collection”, j =
-“juvenile”, b = “k-12 materials” ) )</p>
-<pre><code>
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## Chunk Options
-
-Notice the lines starting with `#|`. These are **chunk options**.
-- `#| label: setup` gives the chunk a name.
-- `#| include: false` runs the code but hides the code and output from the final report. This is great for loading data silently.
-
-:::::::::::::::::::::::::::::::::::::::::
-
-### Adding Analysis
-
-Now, let's add a section header and some text.
-
-```markdown
-## High Usage Items
-
-We are analyzing items with more than 10 checkouts to understand circulation patterns across sub-collections.</code></pre>
+</ol><div id="chunk-options" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="chunk-options" class="callout-inner">
+<h3 class="callout-title">Chunk Options</h3>
+<div class="callout-content">
+<p>Notice the lines starting with <code>#|</code>. These are
+<strong>chunk options</strong>. - <code>#| label: setup</code> gives the
+chunk a name. - <code>#| include: false</code> runs the code but hides
+the code and output from the final report. This is great for loading
+data silently.</p>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="adding-analysis">Adding Analysis<a class="anchor" aria-label="anchor" href="#adding-analysis"></a></h3>
+<p>Now, let’s add a section header and some text.</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="fu">## High Usage Items</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a>We are analyzing items with more than 10 checkouts to understand circulation patterns across sub-collections.</span></code></pre>
+</div>
 <p>Next, insert a new code chunk and paste the plotting code we
 developed in the previous episode (ggplot2).</p>
-<pre><code>&lt;img src="fig/05-reproducible-reports-rendered-plot-high-usage-1.png" alt="" style="display: block; margin: auto;" /&gt;</code></pre>
-<p>Setting <code>#| echo: false</code> will display the <em>plot</em> in
+<figure><img src="fig/05-reproducible-reports-rendered-plot-high-usage-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Setting <code>#| echo: false</code> will display the <em>plot</em> in
 the report, but hide the R <em>code</em> that generated it. This is
 often preferred for reports intended for non-coders.</p>
-<div class="section level2">
-<h2 id="rendering-the-document">Rendering the Document<a class="anchor" aria-label="anchor" href="#rendering-the-document"></a></h2>
-<p>Now comes the magic. Click the <strong>Render</strong> button (blue
+</div>
+</section><section><h2 class="section-heading" id="rendering-the-document">Rendering the Document<a class="anchor" aria-label="anchor" href="#rendering-the-document"></a></h2>
+<hr class="half-width"><p>Now comes the magic. Click the <strong>Render</strong> button (blue
 arrow icon) at the top of the editor pane.</p>
-<p>RStudio will: 1. Run all your code chunks from scratch. 2. Generate
-the plots and results. 3. Combine them with your text. 4. Create a new
-file named <code>library_usage_report.html</code> in your project
-folder. 5. Open a preview of the report.</p>
-<div id="challenge-add-a-summary-table" class="callout challenge">
+<p>RStudio will:</p>
+<ol style="list-style-type: decimal"><li>Run all your code chunks from scratch.</li>
+<li>Generate the plots and results.</li>
+<li>Combine them with your text.</li>
+<li>Create a new file named <code>library_usage_report.html</code> in
+your project folder.</li>
+<li>Open a preview of the report.</li>
+</ol><div id="challenge-add-a-summary-table" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -546,43 +552,24 @@ report.</li>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a>The table below shows the average checkouts for each item format.</span></code></pre>
 </div>
-<pre><code>
-``` r
-books2 %&gt;%
-  group_by(format) %&gt;%
-  summarize(mean_checkouts = mean(tot_chkout, na.rm = TRUE)) %&gt;%
-  arrange(desc(mean_checkouts))
-```
-
-``` output
-# A tibble: 10 × 2
-   format       mean_checkouts
-   &lt;chr&gt;                 &lt;dbl&gt;
- 1 map                10.6
- 2 book                3.23
- 3 kit/object          1.33
- 4 cd-rom              0.333
- 5 e-gov doc           0.0402
- 6 image               0.0275
- 7 microform           0.00122
- 8 database            0
- 9 online video        0
-10 serial              0
-```</code></pre>
+<p>```{{r}} #| label: summary-table</p>
+<p>books2 %&gt;% group_by(format) %&gt;% summarize(mean_checkouts =
+mean(tot_chkout, na.rm = TRUE)) %&gt;% arrange(desc(mean_checkouts))
+```</p>
 <p>Render the document to see the updated report.</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="section level2">
-<h2 id="why-this-matters">Why This Matters<a class="anchor" aria-label="anchor" href="#why-this-matters"></a></h2>
-<p>By using Quarto, your report is now
+</section><section><h2 class="section-heading" id="why-this-matters">Why This Matters<a class="anchor" aria-label="anchor" href="#why-this-matters"></a></h2>
+<hr class="half-width"><p>By using Quarto, your report is now
 <strong>reproducible</strong>.</p>
-<p>If you download a new version of <code>books.csv</code> next month:
-1. Save it to your <code>data/</code> folder. 2. Open your Quarto
-document. 3. Click <strong>Render</strong>.</p>
-<p>Your report will automatically update with the new data, creating a
+<p>If you download a new version of <code>books.csv</code> next
+month:</p>
+<ol style="list-style-type: decimal"><li>Save it to your <code>data/</code> folder.</li>
+<li>Open your Quarto document.</li>
+<li>Click <strong>Render</strong>.</li>
+</ol><p>Your report will automatically update with the new data, creating a
 fresh plot and table without you having to copy-paste a single
 thing.</p>
 <div id="keypoints1" class="callout keypoints">
@@ -608,12 +595,7 @@ that changes over time.</li>
 </ul></div>
 </div>
 </div>
-</div>
-</div>
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="04-data-viz-ggplot.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -673,8 +655,8 @@ that changes over time.</li>
   "url": "https://librarycarpentry.github.io/lc-r/05-reproducible-reports.html",
   "identifier": "https://librarycarpentry.github.io/lc-r/05-reproducible-reports.html",
   "dateCreated": "2019-05-30",
-  "dateModified": "2026-04-21",
-  "datePublished": "2026-04-21"
+  "dateModified": "2026-04-22",
+  "datePublished": "2026-04-22"
 }
 
   </script><script>
