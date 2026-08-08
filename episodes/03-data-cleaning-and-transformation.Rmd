@@ -9,8 +9,8 @@ source: Rmd
 
 - Describe the functions available in the **`dplyr`** and **`tidyr`** packages.
 - Recognise and use the following functions: `select()`, `filter()`, `rename()`, 
-`recode()`, `mutate()` and `arrange()`.
-- Combine one or more functions using the 'pipe' operator `%>%`.
+`case_match()`, `mutate()` and `arrange()`.
+- Combine one or more functions using the 'pipe' operator `|>`.
 - Use the split-apply-combine concept for data analysis.
 - Export a data frame to a csv file.
 
@@ -51,7 +51,7 @@ page by loading the `tidyverse` and the `books` dataset we downloaded earlier.
 We're going to learn some of the most common **`dplyr`** functions:
 
 - `rename()`: rename columns
-- `recode()`: recode values in a column
+- `case_match()`: recode values in a column
 - `select()`: subset columns
 - `filter()`: subset rows on conditions
 - `mutate()`: create new columns by using information from other columns
@@ -192,43 +192,49 @@ knitr::include_graphics("fig/BCODE1.png")
 knitr::include_graphics("fig/BCODE2.png")
 ```
 
-You can reassign names to the values easily using the `recode()` function 
-from the `dplyr` package. Unlike `rename()`, the old value comes first here. 
-Also notice that we are overwriting the `books$subCollection` variable.
+You can reassign names to the values easily using the `case_match()` function
+from the `dplyr` package. Unlike `rename()`, the old value comes first here,
+followed by `~` and the new value. Also notice that we are overwriting the
+`books$subCollection` variable, and that we set `.default` to the original
+column: without it, any value not listed below would silently become `NA`
+instead of staying as-is.
 
 ```{r, comment=FALSE}
 # first print to the console all of the unique values you will need to recode
 distinct(books, subCollection)
 
-books$subCollection <- recode(books$subCollection,
-                                      "-" = "general collection",
-                                      u = "government documents",
-                                      r = "reference",
-                                      b = "k-12 materials",
-                                      j = "juvenile",
-                                      s = "special collections",
-                                      c = "computer files",
-                                      t = "theses",
-                                      a = "archives",
-                                      z = "reserves")
+books$subCollection <- case_match(books$subCollection,
+                                      "-" ~ "general collection",
+                                      "u" ~ "government documents",
+                                      "r" ~ "reference",
+                                      "b" ~ "k-12 materials",
+                                      "j" ~ "juvenile",
+                                      "s" ~ "special collections",
+                                      "c" ~ "computer files",
+                                      "t" ~ "theses",
+                                      "a" ~ "archives",
+                                      "z" ~ "reserves",
+                                      .default = books$subCollection)
 books
 ```
 
-Do the same for the `format` column. Note that you must put `"5"` and `"4"` into
-quotation marks for the function to operate correctly.
+Do the same for the `format` column. Note that every value on the left of `~`
+needs to be in quotation marks, including single letters like `a` or `e`, for
+the function to operate correctly.
 
 ```{r, comment=FALSE, purl=FALSE}
-books$format <- recode(books$format,
-                              a = "book",
-                              e = "serial",
-                              w = "microform",
-                              s = "e-gov doc",
-                              o = "map",
-                              n = "database",
-                              k = "cd-rom",
-                              m = "image",
-                              "5" = "kit/object",
-                              "4" = "online video")
+books$format <- case_match(books$format,
+                              "a" ~ "book",
+                              "e" ~ "serial",
+                              "w" ~ "microform",
+                              "s" ~ "e-gov doc",
+                              "o" ~ "map",
+                              "n" ~ "database",
+                              "k" ~ "cd-rom",
+                              "m" ~ "image",
+                              "5" ~ "kit/object",
+                              "4" ~ "online video",
+                              .default = books$format)
 ```
 
 Once you have finished recoding the values for the two variables, examine 
@@ -380,9 +386,9 @@ We see the error message `NAs introduced by coercion`. This is because non-numer
 
 
 
-## Putting it all together with %>%
+## Putting it all together with |>
 
-The [Pipe Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%` is
+The [Pipe Operator](https://style.tidyverse.org/pipes.html) `|>` is
 loaded with the `tidyverse`. It takes the output of one statement and makes it
 the input of the next statement. You can think of it as "then" in natural
 language. So instead of making a bunch of intermediate data frames and
@@ -396,16 +402,16 @@ columns are selected, and finally the data is rearranged from most to least
 checkouts.
 
 ```{r pipe, comment=NA}
-myBooks <- books %>%
-  filter(format == "book") %>%
-  select(title, tot_chkout) %>%
+myBooks <- books |>
+  filter(format == "book") |>
+  select(title, tot_chkout) |>
   arrange(desc(tot_chkout))
 myBooks
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-### Exercise: Playing with pipes `%>%`
+### Exercise: Playing with pipes `|>`
 
 1. Create a new data frame `booksKids` with these conditions:
 
@@ -420,10 +426,10 @@ myBooks
 ### Solution
 
 ```{r, answer=TRUE}
-booksKids <- books %>%
+booksKids <- books |>
   filter(subCollection %in% c("juvenile", "k-12 materials"),
-  format == "book") %>%
-select(title, callnumber, tot_chkout, pubyear) %>%
+  format == "book") |>
+select(title, callnumber, tot_chkout, pubyear) |>
 arrange(desc(tot_chkout))
 mean(booksKids$tot_chkout)
 ```
@@ -453,8 +459,8 @@ to calculate the summary statistics.
 So to compute the average checkouts by format:
 
 ```{r, comment=NA}
-books %>%
-  group_by(format) %>%
+books |>
+  group_by(format) |>
   summarize(mean_checkouts = mean(tot_chkout))
 ```
 
@@ -463,12 +469,12 @@ Books and maps have the highest, and as we would expect, databases, online video
 Here is a more complex example:
 
 ```{r, comment=NA}
-books %>%
-  filter(format == "book") %>%
-  mutate(call_class = str_sub(callnumber, 1, 1)) %>%
-  group_by(call_class) %>%
+books |>
+  filter(format == "book") |>
+  mutate(call_class = str_sub(callnumber, 1, 1)) |>
+  group_by(call_class) |>
   summarize(count = n(),
-            sum_tot_chkout = sum(tot_chkout)) %>%
+            sum_tot_chkout = sum(tot_chkout)) |>
   arrange(desc(sum_tot_chkout))
 ```
 
@@ -500,9 +506,9 @@ Note:  If the final product of this data will be imported into an ILS, you may n
 Read more about [matching patterns with regular expressions](https://r4ds.had.co.nz/strings.html#matching-patterns-with-regular-expressions).
 
 ```{r}
-books %>%
-  mutate(title_modified = str_remove(title, "/$")) %>%     # remove the trailing slash
-  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) %>%   # replace ' :|' with ': '
+books |>
+  mutate(title_modified = str_remove(title, "/$")) |>     # remove the trailing slash
+  mutate(title_modified = str_replace(title_modified, "\\s:\\|", ": ")) |>   # replace ' :|' with ': '
   select(title_modified, title)
 ```
 
@@ -527,7 +533,7 @@ In preparation for our next lesson on plotting, we are going to create a
 version of the dataset with most of the changes we made above. We will first read in the original, then make all the changes with pipes.
 
 ```{r, comment=NA, eval=FALSE}
-books_reformatted <- read_csv("./data/books.csv") %>%
+books_reformatted <- read_csv("./data/books.csv") |>
   rename(title = X245.ab,
          author = X245.c,
          callnumber = CALL...BIBLIO.,
@@ -539,35 +545,37 @@ books_reformatted <- read_csv("./data/books.csv") %>%
          tot_chkout = TOT.CHKOUT,
          loutdate = LOUTDATE,
          subject = SUBJECT,
-         callnumber2 = CALL...ITEM.) %>%
+         callnumber2 = CALL...ITEM.) |>
   mutate(pubyear = as.integer(pubyear),
          call_class = str_sub(callnumber, 1, 1),
-         subCollection = recode(subCollection,
-                                "-" = "general collection",
-                                u = "government documents",
-                                r = "reference",
-                                b = "k-12 materials",
-                                j = "juvenile",
-                                s = "special collections",
-                                c = "computer files",
-                                t = "theses",
-                                a = "archives",
-                                z = "reserves"),
-         format = recode(format,
-                         a = "book",
-                         e = "serial",
-                         w = "microform",
-                         s = "e-gov doc",
-                         o = "map",
-                         n = "database",
-                         k = "cd-rom",
-                         m = "image",
-                         "5" = "kit/object",
-                         "4" = "online video"))
+         subCollection = case_match(subCollection,
+                                "-" ~ "general collection",
+                                "u" ~ "government documents",
+                                "r" ~ "reference",
+                                "b" ~ "k-12 materials",
+                                "j" ~ "juvenile",
+                                "s" ~ "special collections",
+                                "c" ~ "computer files",
+                                "t" ~ "theses",
+                                "a" ~ "archives",
+                                "z" ~ "reserves",
+                                .default = subCollection),
+         format = case_match(format,
+                         "a" ~ "book",
+                         "e" ~ "serial",
+                         "w" ~ "microform",
+                         "s" ~ "e-gov doc",
+                         "o" ~ "map",
+                         "n" ~ "database",
+                         "k" ~ "cd-rom",
+                         "m" ~ "image",
+                         "5" ~ "kit/object",
+                         "4" ~ "online video",
+                         .default = format))
 ```
 
 This chunk of code read the CSV, renamed the variables, used `mutate()` in
-combination with `recode()` to recode the `format` and `subCollection` values,
+combination with `case_match()` to recode the `format` and `subCollection` values,
 used `mutate()` in combination with `as.integer()` to coerce `pubyear` to
 integer, and used `mutate()` in combination with `str_sub` to create the new
 varable `call_class`.
@@ -592,11 +600,11 @@ write_csv(books_reformatted, "./data_output/books_reformatted.csv")
 - Use the `dplyr` package to manipulate dataframes.
 - Subset data frames using `select()` and `filter()`.
 - Rename variables in a data frame using `rename()`.
-- Recode values in a data frame using `recode()`.
+- Recode values in a data frame using `case_match`.
 - Use `mutate()` to create new variables.
 - Sort data using `arrange()`.
 - Use `group_by()` and `summarize()` to work with subsets of data.
-- Use pipe (`%>%`) to combine multiple commands.
+- Use pipe (`|>`) to combine multiple commands.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

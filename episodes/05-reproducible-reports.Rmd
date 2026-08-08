@@ -23,7 +23,7 @@ source: Rmd
 source("files/download_data.R")
 library(tidyverse)
 # Read raw data and apply cleaning steps from previous episodes
-books2 <- read_csv("data/books.csv") %>%
+books2 <- read_csv("data/books.csv") |>
   rename(
     title = X245.ab,
     author = X245.c,
@@ -37,32 +37,34 @@ books2 <- read_csv("data/books.csv") %>%
     loutdate = LOUTDATE,
     subject = SUBJECT,
     callnumber2 = CALL...ITEM.
-  ) %>%
+  ) |>
   mutate(
     pubyear = as.integer(pubyear),
-    subCollection = recode(subCollection,
-      "-" = "general collection",
-      u = "government documents",
-      r = "reference",
-      b = "k-12 materials",
-      j = "juvenile",
-      s = "special collections",
-      c = "computer files",
-      t = "theses",
-      a = "archives",
-      z = "reserves"
+    subCollection = case_match(subCollection,
+      "-" ~ "general collection",
+      "u" ~ "government documents",
+      "r" ~ "reference",
+      "b" ~ "k-12 materials",
+      "j" ~ "juvenile",
+      "s" ~ "special collections",
+      "c" ~ "computer files",
+      "t" ~ "theses",
+      "a" ~ "archives",
+      "z" ~ "reserves",
+      .default = subCollection
     ),
-    format = recode(format,
-      a = "book",
-      e = "serial",
-      w = "microform",
-      s = "e-gov doc",
-      o = "map",
-      n = "database",
-      k = "cd-rom",
-      m = "image",
-      "5" = "kit/object",
-      "4" = "online video"
+    format = case_match(format,
+      "a" ~ "book",
+      "e" ~ "serial",
+      "w" ~ "microform",
+      "s" ~ "e-gov doc",
+      "o" ~ "map",
+      "n" ~ "database",
+      "k" ~ "cd-rom",
+      "m" ~ "image",
+      "5" ~ "kit/object",
+      "4" ~ "online video",
+      .default = format
     )
   )
 ```
@@ -144,17 +146,18 @@ Let's clean up the example file and create a report using our `books` data.
 library(tidyverse)
 
 # Load data and rename columns for clarity
-books2 <- read_csv("data/books.csv") %>%
+books2 <- read_csv("data/books.csv") |>
   rename(
     subCollection = BCODE1,
     tot_chkout = TOT.CHKOUT,
     format = BCODE2
-  ) %>%
+  ) |>
   mutate(
-    subCollection = recode(subCollection, 
-      "-" = "general collection", 
-      j = "juvenile", 
-      b = "k-12 materials"
+    subCollection = case_match(subCollection,
+      "-" ~ "general collection",
+      "j" ~ "juvenile",
+      "b" ~ "k-12 materials",
+      .default = subCollection
     )
   )
 ```
@@ -182,7 +185,7 @@ Next, insert a new code chunk and paste the plotting code we developed in the pr
 #| echo: false
 
 # Filter for high usage
-booksHighUsage <- books2 %>%
+booksHighUsage <- books2 |>
   filter(!is.na(tot_chkout),
          tot_chkout > 10)
 
@@ -235,9 +238,9 @@ The table below shows the average checkouts for each item format.
 ```{{r}}
 #| label: summary-table
 
-books2 %>%
-  group_by(format) %>%
-  summarize(mean_checkouts = mean(tot_chkout, na.rm = TRUE)) %>%
+books2 |>
+  group_by(format) |>
+  summarize(mean_checkouts = mean(tot_chkout, na.rm = TRUE)) |>
   arrange(desc(mean_checkouts))
 ```
 

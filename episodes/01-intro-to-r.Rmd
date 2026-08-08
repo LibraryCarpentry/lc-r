@@ -848,7 +848,7 @@ multiple <- data.frame("operator" = c("&", "|", "!", "any", "all")
                        , "function" = c("boolean AND", "boolean OR", "boolean NOT", "ANY true", "ALL true")
                        , stringsAsFactors = F)
 
-kable(multiple) %>%
+kable(multiple) |>
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
@@ -873,7 +873,7 @@ assigning variables).
 operators <- tibble("operator" = c("<", ">", "==", "<=", ">=", "!=", "%in%", "is.na", "!is.na"),
                     "function" = c("Less Than", "Greater Than", "Equal To", "Less Than or Equal To", "Greater Than or Equal To", "Not Equal To", "Has A Match In", "Is NA", "Is Not NA"))
 
-kable(operators) %>%
+kable(operators) |>
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 

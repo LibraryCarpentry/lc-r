@@ -129,7 +129,7 @@ Let's create a `booksPlot` and limit our visualization to only items in `subColl
 
 ```{r, purl=FALSE}
 # create a new data frame
-booksPlot <- books2 %>%
+booksPlot <- books2 |>
   filter(subCollection == "general collection" | 
            subCollection == "juvenile" | 
            subCollection == "k-12 materials",
@@ -289,7 +289,7 @@ it to `booksHighUsage`.
 
 ```{r}
 # filter booksPlot to include only items with over 10 checkouts
-booksHighUsage <- booksPlot %>%
+booksHighUsage <- booksPlot |>
   filter(!is.na(tot_chkout),
                 tot_chkout > 10)
 ```
@@ -472,7 +472,7 @@ books per year.
 We will do this by calling `mutate()` to create a new variable `pubyear_ymd`.
 
 ```{r, purl=FALSE}
-booksPlot <- booksPlot %>%
+booksPlot <- booksPlot |>
   mutate(pubyear_ymd = ymd(pubyear, truncated = 2))  # convert pubyear to a Date object with ymd()
 
 class(booksPlot$pubyear)  # integer
@@ -486,9 +486,9 @@ that the date must fall between that range. We then need to group the data and
 count records within each group.
 
 ```{r, purl=FALSE}
-yearly_counts <- booksPlot %>%
+yearly_counts <- booksPlot |>
   filter(!is.na(pubyear_ymd),
-         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
+         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") |>
   count(pubyear_ymd, subCollection)
 ```
 
@@ -695,10 +695,10 @@ publication. Add one of the themes listed above.
 ## Solution
 
 ```{r}
-yearly_checkouts <- booksPlot %>%
+yearly_checkouts <- booksPlot |>
  filter(!is.na(pubyear_ymd),
-        pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
- group_by(pubyear_ymd) %>%
+        pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") |>
+ group_by(pubyear_ymd) |>
  summarize(checkouts_sum = sum(tot_chkout))
 
 ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum)) +
