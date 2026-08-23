@@ -8,8 +8,8 @@ source: Rmd
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Describe the functions available in the **`dplyr`** and **`tidyr`** packages.
-- Recognise and use the following functions: `select()`, `filter()`, `rename()`, 
-`case_match()`, `mutate()` and `arrange()`.
+- Recognise and use the following functions: `select()`, `filter()`, `rename()`,
+`replace_values()`, `mutate()` and `arrange()`.
 - Combine one or more functions using the 'pipe' operator `|>`.
 - Use the split-apply-combine concept for data analysis.
 - Export a data frame to a csv file.
@@ -51,7 +51,7 @@ page by loading the `tidyverse` and the `books` dataset we downloaded earlier.
 We're going to learn some of the most common **`dplyr`** functions:
 
 - `rename()`: rename columns
-- `case_match()`: recode values in a column
+- `replace_values()`: recode values in a column
 - `select()`: subset columns
 - `filter()`: subset rows on conditions
 - `mutate()`: create new columns by using information from other columns
@@ -192,18 +192,18 @@ knitr::include_graphics("fig/BCODE1.png")
 knitr::include_graphics("fig/BCODE2.png")
 ```
 
-You can reassign names to the values easily using the `case_match()` function
-from the `dplyr` package. Unlike `rename()`, the old value comes first here,
-followed by `~` and the new value. Also notice that we are overwriting the
-`books$subCollection` variable, and that we set `.default` to the original
-column: without it, any value not listed below would silently become `NA`
-instead of staying as-is.
+You can reassign names to the values easily using the `replace_values()`
+function from the `dplyr` package. Unlike `rename()`, the old value comes
+first here, followed by `~` and the new value. Also notice that we are
+overwriting the `books$subCollection` variable. Unlike `case_match()`,
+`replace_values()` automatically keeps any value not listed below as-is,
+so there's no need to add a default case yourself.
 
 ```{r, comment=FALSE}
 # first print to the console all of the unique values you will need to recode
 distinct(books, subCollection)
 
-books$subCollection <- case_match(books$subCollection,
+books$subCollection <- replace_values(books$subCollection,
                                       "-" ~ "general collection",
                                       "u" ~ "government documents",
                                       "r" ~ "reference",
@@ -213,8 +213,7 @@ books$subCollection <- case_match(books$subCollection,
                                       "c" ~ "computer files",
                                       "t" ~ "theses",
                                       "a" ~ "archives",
-                                      "z" ~ "reserves",
-                                      .default = books$subCollection)
+                                      "z" ~ "reserves")
 books
 ```
 
@@ -223,7 +222,7 @@ needs to be in quotation marks, including single letters like `a` or `e`, for
 the function to operate correctly.
 
 ```{r, comment=FALSE, purl=FALSE}
-books$format <- case_match(books$format,
+books$format <- replace_values(books$format,
                               "a" ~ "book",
                               "e" ~ "serial",
                               "w" ~ "microform",
@@ -233,8 +232,7 @@ books$format <- case_match(books$format,
                               "k" ~ "cd-rom",
                               "m" ~ "image",
                               "5" ~ "kit/object",
-                              "4" ~ "online video",
-                              .default = books$format)
+                              "4" ~ "online video")
 ```
 
 Once you have finished recoding the values for the two variables, examine 
@@ -548,7 +546,7 @@ books_reformatted <- read_csv("./data/books.csv") |>
          callnumber2 = CALL...ITEM.) |>
   mutate(pubyear = as.integer(pubyear),
          call_class = str_sub(callnumber, 1, 1),
-         subCollection = case_match(subCollection,
+         subCollection = replace_values(subCollection,
                                 "-" ~ "general collection",
                                 "u" ~ "government documents",
                                 "r" ~ "reference",
@@ -558,9 +556,8 @@ books_reformatted <- read_csv("./data/books.csv") |>
                                 "c" ~ "computer files",
                                 "t" ~ "theses",
                                 "a" ~ "archives",
-                                "z" ~ "reserves",
-                                .default = subCollection),
-         format = case_match(format,
+                                "z" ~ "reserves"),
+         format = replace_values(format,
                          "a" ~ "book",
                          "e" ~ "serial",
                          "w" ~ "microform",
@@ -570,12 +567,11 @@ books_reformatted <- read_csv("./data/books.csv") |>
                          "k" ~ "cd-rom",
                          "m" ~ "image",
                          "5" ~ "kit/object",
-                         "4" ~ "online video",
-                         .default = format))
+                         "4" ~ "online video"))
 ```
 
 This chunk of code read the CSV, renamed the variables, used `mutate()` in
-combination with `case_match()` to recode the `format` and `subCollection` values,
+combination with `replace_values()` to recode the `format` and `subCollection` values,
 used `mutate()` in combination with `as.integer()` to coerce `pubyear` to
 integer, and used `mutate()` in combination with `str_sub` to create the new
 varable `call_class`.
@@ -600,7 +596,7 @@ write_csv(books_reformatted, "./data_output/books_reformatted.csv")
 - Use the `dplyr` package to manipulate dataframes.
 - Subset data frames using `select()` and `filter()`.
 - Rename variables in a data frame using `rename()`.
-- Recode values in a data frame using `case_match`.
+- Recode values in a data frame using `replace_values()`.
 - Use `mutate()` to create new variables.
 - Sort data using `arrange()`.
 - Use `group_by()` and `summarize()` to work with subsets of data.
