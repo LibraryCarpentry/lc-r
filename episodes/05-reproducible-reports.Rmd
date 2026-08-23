@@ -40,7 +40,7 @@ books2 <- read_csv("data/books.csv") |>
   ) |>
   mutate(
     pubyear = as.integer(pubyear),
-    subCollection = case_match(subCollection,
+    subCollection = replace_values(subCollection,
       "-" ~ "general collection",
       "u" ~ "government documents",
       "r" ~ "reference",
@@ -50,10 +50,9 @@ books2 <- read_csv("data/books.csv") |>
       "c" ~ "computer files",
       "t" ~ "theses",
       "a" ~ "archives",
-      "z" ~ "reserves",
-      .default = subCollection
+      "z" ~ "reserves"
     ),
-    format = case_match(format,
+    format = replace_values(format,
       "a" ~ "book",
       "e" ~ "serial",
       "w" ~ "microform",
@@ -63,8 +62,7 @@ books2 <- read_csv("data/books.csv") |>
       "k" ~ "cd-rom",
       "m" ~ "image",
       "5" ~ "kit/object",
-      "4" ~ "online video",
-      .default = format
+      "4" ~ "online video"
     )
   )
 ```
@@ -153,11 +151,10 @@ books2 <- read_csv("data/books.csv") |>
     format = BCODE2
   ) |>
   mutate(
-    subCollection = case_match(subCollection,
+    subCollection = replace_values(subCollection,
       "-" ~ "general collection",
       "j" ~ "juvenile",
-      "b" ~ "k-12 materials",
-      .default = subCollection
+      "b" ~ "k-12 materials"
     )
   )
 ```
