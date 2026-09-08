@@ -160,9 +160,9 @@ The table below shows the average checkouts for each item format.
 ```{{r}}
 #| label: summary-table
 
-books2 %>%
-  group_by(format) %>%
-  summarize(mean_checkouts = mean(tot_chkout, na.rm = TRUE)) %>%
+books2 |>
+  group_by(format) |>
+  summarize(mean_checkouts = mean(tot_chkout, na.rm = TRUE)) |>
   arrange(desc(mean_checkouts))
 ```
 

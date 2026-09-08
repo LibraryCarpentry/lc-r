@@ -56,9 +56,9 @@ library(tidyverse)  # load the core tidyverse
 
 ``` output
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.2.1     ✔ purrr     1.2.1
+✔ dplyr     1.2.1     ✔ purrr     1.2.2
 ✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
 ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
@@ -144,7 +144,7 @@ Let's create a `booksPlot` and limit our visualization to only items in `subColl
 
 ``` r
 # create a new data frame
-booksPlot <- books2 %>%
+booksPlot <- books2 |>
   filter(subCollection == "general collection" | 
            subCollection == "juvenile" | 
            subCollection == "k-12 materials",
@@ -361,7 +361,7 @@ it to `booksHighUsage`.
 
 ``` r
 # filter booksPlot to include only items with over 10 checkouts
-booksHighUsage <- booksPlot %>%
+booksHighUsage <- booksPlot |>
   filter(!is.na(tot_chkout),
                 tot_chkout > 10)
 ```
@@ -604,7 +604,7 @@ We will do this by calling `mutate()` to create a new variable `pubyear_ymd`.
 
 
 ``` r
-booksPlot <- booksPlot %>%
+booksPlot <- booksPlot |>
   mutate(pubyear_ymd = ymd(pubyear, truncated = 2))  # convert pubyear to a Date object with ymd()
 
 class(booksPlot$pubyear)  # integer
@@ -629,9 +629,9 @@ count records within each group.
 
 
 ``` r
-yearly_counts <- booksPlot %>%
+yearly_counts <- booksPlot |>
   filter(!is.na(pubyear_ymd),
-         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
+         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") |>
   count(pubyear_ymd, subCollection)
 ```
 
@@ -866,10 +866,10 @@ publication. Add one of the themes listed above.
 
 
 ``` r
-yearly_checkouts <- booksPlot %>%
+yearly_checkouts <- booksPlot |>
  filter(!is.na(pubyear_ymd),
-        pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") %>%
- group_by(pubyear_ymd) %>%
+        pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") |>
+ group_by(pubyear_ymd) |>
  summarize(checkouts_sum = sum(tot_chkout))
 
 ggplot(data = yearly_checkouts, mapping = aes(x = pubyear_ymd, y = checkouts_sum)) +
