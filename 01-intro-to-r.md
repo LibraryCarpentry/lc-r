@@ -475,10 +475,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
- [1] compiler_4.6.1  cli_3.6.6       tools_4.6.1     pillar_1.11.1  
- [5] otel_0.2.0      glue_1.8.1      yaml_2.3.12     vctrs_0.7.3    
- [9] knitr_1.52      xfun_0.61       lifecycle_1.0.5 rlang_1.3.0    
-[13] renv_1.3.0      evaluate_1.0.5 
+ [1] compiler_4.6.1   cli_3.6.6        tools_4.6.1      pillar_1.11.1   
+ [5] otel_0.2.0       glue_1.8.1       yaml_2.3.11.9000 vctrs_0.7.3     
+ [9] knitr_1.52       xfun_0.61        lifecycle_1.0.5  rlang_1.3.0     
+[13] renv_1.3.0       evaluate_1.0.5  
 ```
 
 ```
