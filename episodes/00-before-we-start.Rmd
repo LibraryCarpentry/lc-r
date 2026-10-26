@@ -470,8 +470,8 @@ or the local file system, but we won't be looking at these options in this lesso
   interactively. Just type `install.packages("swirl")` into your R console, load
   the package by typing `library("swirl")`, and then type `swirl()`. Read more at [swirl](https://swirlstats.com/).
 
-2. [Try R](https://tryr.codeschool.com/) is a browser-based interactive tutorial
-  developed by Code School.
+2. [Coddy's R course](https://coddy.tech/landing/r) is a free browser-based
+  interactive tutorial.
 
 3. Anthony Damico's
   [twotorials](https://www.youtube.com/playlist?list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC)
