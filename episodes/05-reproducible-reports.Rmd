@@ -180,6 +180,7 @@ Next, insert a new code chunk and paste the plotting code we developed in the pr
 ```{r}
 #| label: plot-high-usage
 #| echo: false
+#| fig-alt: "Box plot of total checkouts on a log scale for each sub-collection of high usage items, with jittered tomato-coloured points for individual items, titled Distribution of Checkouts by Sub-Collection."
 
 # Filter for high usage
 booksHighUsage <- books2 |>
