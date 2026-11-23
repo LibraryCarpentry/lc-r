@@ -139,13 +139,13 @@ booksPlot <- books2 |>
 To start with, we first bind our data to the `ggplot()` function using the `data` 
 argument.
 
-```{r, purl=FALSE}
+```{r, fig.alt="Blank grey plotting canvas with no axes or data, since only the data has been bound to ggplot.", purl=FALSE}
 ggplot(data = booksPlot)  # a blank canvas
 ```
 
 After running this code, a blank canvas is being created. Next, we define a mapping aesthetic with the `mapping` argument (using the aesthetic (`aes()`) function). This defines the variables to be plotted and specifies how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.
 
-```{r, purl=FALSE}
+```{r, fig.alt="Blank plotting canvas with call number classes labelled along the x axis but no data drawn yet.", purl=FALSE}
 ggplot(data = booksPlot, mapping = aes(x = call_class)) # define the x axis aesthetic
 ```
 
@@ -178,7 +178,7 @@ plotting the bin counts (the number of items falling into each bin).
 
 To add a geom to the plot use the `+` operator.
 
-```{r, purl=FALSE}
+```{r, fig.alt="Bar chart of item counts by call number class, with the H class tallest at about 1,500 books, followed by P and E.", purl=FALSE}
 # add a bar geom and set call_class as the x axis
 ggplot(data = booksPlot, mapping = aes(x = call_class)) +
   geom_bar()
@@ -213,7 +213,7 @@ Library of Congress call number classification.
 
 This same exact data can be visualized in a couple different ways by replacing the geom\_histogram() function with either `geom_density()` (adding a logarithmic x scale) or `geom_freqpoly()`:
 
-```{r, purl=FALSE}
+```{r, fig.alt=c("Density plot of total checkouts with both axes on a log scale, showing most items concentrated at low checkout counts.", "Frequency polygon of total checkouts with a log-scaled y axis, showing counts dropping sharply as checkouts increase."), purl=FALSE}
 # create a density plot
 ggplot(data = booksPlot) +
   geom_density(aes(x = tot_chkout)) +
@@ -237,7 +237,7 @@ want to visualize a frequency distibution of checkouts in the `booksPlot` data. 
 other words, how many items have 1 checkout? How many have 2 checkouts? And so
 on.
 
-```{r, purl=FALSE}
+```{r, fig.alt="Histogram of total checkouts, heavily right-skewed with nearly all items in the lowest bin near zero checkouts.", purl=FALSE}
 ggplot(data = booksPlot, mapping = aes(x = tot_chkout)) +
   geom_histogram()
 ```
@@ -255,7 +255,7 @@ illustrate the stories in your data."
 
 Second, change the scales of the `y` axes by adding another argument to ggplot:
 
-```{r, purl=FALSE}
+```{r, fig.alt="Histogram of total checkouts with bins of width 10 and a log-scaled y axis, showing over 5,000 items with 0 to 10 checkouts and counts falling off steeply, with a handful of items near 100 checkouts.", purl=FALSE}
 ggplot(data = booksPlot) +
   geom_histogram(aes(x = tot_chkout), binwidth = 10) +
   scale_y_log10()
@@ -298,7 +298,7 @@ We then visualize checkouts by call number with a scatter plot. There is
 still so much skew that I retain the logarithmic scale on the y axis with
 `scale_y_log10()`.
 
-```{r}
+```{r, fig.alt="Scatter plot of total checkouts on a log-scaled y axis by call number class for high usage items, showing most classes below 30 checkouts and one E class item above 100."}
 # scatter plot high usage books by call number class
 ggplot(data = booksHighUsage,
        aes(x = call_class, y = tot_chkout)) +
@@ -310,7 +310,7 @@ Again, notice the scale on the y axis. We can obseve a few items of interest her
 
 Just as with univariate plots, we can use different geoms to view various aspects of the data, which in turn reveal different patterns.
 
-```{r}
+```{r, fig.alt="Box plot of total checkouts on a log-scaled y axis by call number class for high usage items."}
 # boxplot plot high usage books by call number class
 ggplot(data = booksHighUsage,
        aes(x = call_class, y = tot_chkout)) +
@@ -324,7 +324,7 @@ which will make it see-through. We also add another layer of geom to the plot
 called `geom_jitter()`, which will introduce a little bit of randomness into the
 position of our points. We set the `color` of these points to `"tomato"`.
 
-```{r boxplot-with-points, purl=FALSE}
+```{r boxplot-with-points, fig.alt="Same box plot of checkouts by call number class, now with transparent boxes and jittered tomato-coloured points showing the individual items behind them.", purl=FALSE}
 ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
   geom_boxplot(alpha = 0) +
   geom_jitter(alpha = 0.5, color = "tomato") +
@@ -350,7 +350,7 @@ boxplot. An alternative to the boxplot is the violin plot, where the shape
 
 ## Solution
 
-```{r violin-plot}
+```{r violin-plot, fig.alt="Violin plot of total checkouts by call number class with jittered tomato-coloured points overlaid, showing the shape of each class distribution."}
 ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
   geom_violin(alpha = 0) +
   geom_jitter(alpha = 0.5, color = "tomato")
@@ -364,7 +364,7 @@ ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
 
 ## Solution
 
-```{r boxplot-exercise-subcollection}
+```{r boxplot-exercise-subcollection, fig.alt="Violin plot of total checkouts on a log-scaled y axis by call number class, with jittered points coloured by sub-collection."}
 ggplot(data = booksHighUsage, aes(x = call_class, y = tot_chkout)) +
 geom_violin(alpha = 0) +
 geom_jitter(alpha = 0.5, aes(color = subCollection)) +
@@ -382,7 +382,7 @@ making a new plot to explore the distribution of checkouts within another variab
 
 ## Solution
 
-```{r}
+```{r, fig.alt="Box plot of total checkouts on a log-scaled y axis for each sub-collection, with jittered tomato-coloured points showing individual high usage items."}
 ggplot(data = booksHighUsage, aes(x = subCollection, y = tot_chkout)) +
  geom_boxplot(alpha = 0) +
  geom_jitter(alpha = 0.5, color = "tomato") +
@@ -409,7 +409,7 @@ different color corresponding to different values in the vector. In other words,
 associate the name of the aesthetic (`color`) to the name of the variable
 (`subCollection`) inside `aes()`:
 
-```{r, purl=FALSE}
+```{r, fig.alt="Scatter plot of total checkouts on a log-scaled y axis by call number class, with points coloured by sub-collection, showing that youth materials make up many of the high usage items in the E and P classes.", purl=FALSE}
 ggplot(data = booksHighUsage,
        aes(x = call_class,
            y = tot_chkout,
@@ -427,7 +427,7 @@ Use `fill()` with `geom_bar()` to create a stacked bar plot to visualize
 frequency. Again, this reinforced the fact that most of the `E` and `P`
 classification are youth materials.
 
-```{r, purl=FALSE}
+```{r, fig.alt="Stacked bar chart of high usage item counts by call number class, with bars filled by sub-collection, showing most E and P items are youth materials.", purl=FALSE}
 ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection))
 ```
@@ -437,21 +437,21 @@ than side-by-side bars. We can separate the portions of the stacked bar that
 correspond to each village and put them side-by-side by using the `position`
 argument for `geom_bar()` and setting it to "dodge".
 
-```{r barplot-dodge}
+```{r barplot-dodge, fig.alt="Side-by-side bar chart of high usage item counts by call number class, with a separate bar for each sub-collection within each class."}
 ggplot(data = booksHighUsage, aes(x = call_class)) +
   geom_bar(aes(fill = subCollection), position = "dodge")
 ```
 
 The order of the classification scale is sorted for "library order."  The audience of library professionals typically prefer an alphabetical arrangement.  However, the x-axis variable is actually categorical.  Categorical data are easier to read when the bars are sorted by frequency.  An easy way to sort by frequency is to use the `fct_infreq()` function from the `forcats` library.
 
-```{r}
+```{r, fig.alt="Bar chart of high usage item counts by call number class, with bars sorted from most to least frequent."}
 ggplot(data = booksHighUsage, aes(x = fct_infreq(call_class))) +
   geom_bar()
 ```
 
 Another visualization issue is labeling.  In many cultures, long labels are easier to read horizontally.  Our goal is to flip the x-axis and reorient the x-axis labels into a horizontal presentation.  To accomplish this, flip the axis coordinates with the `coord_flip()` function.  When we flip the axes it's important to reverse the sorted categorical order.  Do this with `forcats::fct_rev()`.
 
-```{r}
+```{r, fig.alt="Horizontal bar chart of high usage item counts by call number class, sorted so the most frequent class is at the top."}
 ggplot(data = booksHighUsage, aes(x = fct_rev(fct_infreq(call_class)))) +
   geom_bar() +
   coord_flip()
@@ -495,7 +495,7 @@ yearly_counts <- booksPlot |>
 Time series data can be visualized as a line plot with years on the x axis and counts
 on the y axis:
 
-```{r first-time-series, purl=FALSE}
+```{r first-time-series, fig.alt="Line plot of book counts by publication year from 1990 to 2001, drawn as a single jagged zig-zag line because all sub-collections are plotted together.", purl=FALSE}
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
      geom_line()
 ```
@@ -504,7 +504,7 @@ Unfortunately, this does not work because we plotted data for all the sub-collec
 together. We need to tell ggplot to draw a line for each sub-collection by modifying
 the aesthetic function to include `group = subCollection`:
 
-```{r, purl=FALSE}
+```{r, fig.alt="Line plot of book counts by publication year from 1990 to 2001, now with one separate line per sub-collection, all in the same colour.", purl=FALSE}
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, group = subCollection)) +
     geom_line()
 ```
@@ -512,7 +512,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, group = subCo
 We will be able to distinguish sub-collections in the plot if we add colors
 (using `color` also automatically groups the data):
 
-```{r time-series-with-colors, purl=FALSE}
+```{r time-series-with-colors, fig.alt="Line plot of book counts by publication year from 1990 to 2001, with one line per sub-collection coloured by sub-collection.", purl=FALSE}
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n, color = subCollection)) +
   geom_line()
 ```
@@ -550,7 +550,7 @@ ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
 We can use `facet_wrap()` as a way of seeing the categories within a variables. Look at the number of formats per
 sub-collection.
 
-```{r, purl=FALSE}
+```{r, fig.alt="Horizontal bar charts of item counts by library sub-collection on a log scale, faceted into panels by format, showing that books appear in all sub-collections while other formats appear in only a few.", purl=FALSE}
 ggplot(data = books2, aes(x = fct_rev(fct_infreq(subCollection)))) +
   geom_bar() +
   facet_wrap(~ format, nrow = 2) +
@@ -582,7 +582,7 @@ argument to tilt the axis text diagonal: `theme(axis.text.x = element_text(angle
 
 ## Solution
 
-```{r average-weight-time-series, answer=TRUE, purl=FALSE}
+```{r average-weight-time-series, fig.alt="Bar charts of item counts by sub-collection on a log-scaled y axis, faceted into panels by format, with diagonal x axis labels.", answer=TRUE, purl=FALSE}
 ggplot(data = books2, aes(x = subCollection)) +
 geom_bar() +
 facet_wrap(vars(format)) +
@@ -605,7 +605,7 @@ available that change the overall appearance of the graph without much effort.
 For example, we can change our graph to have a simpler white background
 using the `theme_bw()` function:
 
-```{r, purl=FALSE}
+```{r, fig.alt="Three line plots of book counts by publication year, one panel per sub-collection, drawn with a white background theme.", purl=FALSE}
 #
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
@@ -636,7 +636,7 @@ For example, by default, the axes labels on a plot are determined by the name of
 the variable being plotted. We can change names of axes to something more
 informative than 'pubyear\_ymd' and 'n' and add a title to the figure:
 
-```{r, purl=FALSE}
+```{r, fig.alt="Same three faceted line plots of book counts by publication year per sub-collection on a white background, now with the title Number of High Usage Books per Year of Publication, by Sub-Collection and axis labels Year of publication and Number of books.", purl=FALSE}
 # add labels
 ggplot(data = yearly_counts, mapping = aes(x = pubyear_ymd, y = n)) +
   geom_line() +
@@ -656,7 +656,7 @@ You can also assign a `theme` to an object in your environment, and pass that
 theme to your plot. This can be helpful to keep your `ggplot()` calls less
 cluttered. Here we create a `gray_theme` :
 
-```{r}
+```{r, fig.alt="Same three faceted line plots of book counts by publication year per sub-collection with title and axis labels, now styled with a custom gray theme with larger text and angled x axis labels."}
 # create the gray theme
 gray_theme <- theme(axis.text.x = element_text(color = "gray20", size = 12, angle = 45, hjust = 0.5, vjust = 0.5),
                     axis.text.y = element_text(color = "gray20", size = 12),
@@ -694,7 +694,7 @@ publication. Add one of the themes listed above.
 
 ## Solution
 
-```{r}
+```{r, fig.alt="Line plot of the sum of total checkouts by publication year from 1990 to 2001 on a white background theme."}
 yearly_checkouts <- booksPlot |>
  filter(!is.na(pubyear_ymd),
         pubyear_ymd > "1989-01-01" & pubyear_ymd < "2002-01-01") |>
